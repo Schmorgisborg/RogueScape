@@ -1,0 +1,136 @@
+<h2>Crafting recipes:</h2><br>
+<h4>Structure:</h4>
+Anvil- 1 iron bar<br>
+Barrel- 1 small log<br>
+Bed- 1 fiber, 1 small log<br>
+Campfire- 2 sticks<br>
+Cookpit- 1 stick, 3 stones<br>
+Chest- 1 small log<br>
+Closet- 2 small logs<br>
+Drying Rack- 3 sticks<br>
+Forge- 1 coal, 4 stone<br>
+Great Smelter- 1 coal, 2 iron bar, 1 riddle of steel<br>
+Greater Campfire- 2 sticks, 2 stones<br>
+Handcart- 1 rope, 3 small logs<br>
+Lever- 1 gear<br>
+Millstone- 3 stones<br>
+Nice Bed- 1 cloth, 1 small log (needle)<br>
+Oven- 1 small log, 1 stone<br>
+Palisade (sticks)- 2 stakes<br>
+Palisade (logs)- 1 small log<br>
+Passage- 1 gear, 1 iron bar<br>
+Sherpening Wheel- 1 iron bar, 1 stone<br>
+Smelter- 1 coal, 4 stones<br>
+Training Dummy- 1 small log<br>
+Trapdoor- 1 gear<br>
+Wall Ladder- 1 small log<br>
+Wooden Bin- 2 small logs<br>
+Wooden Chair- 1 small log<br>
+Wooden Door- 2 small logs<br>
+Wooden Psycross- 1 small log, 3 stakes<br>
+Wooden Sign- 1 small log<br>
+Wooden Stairs- 1 small log<br>
+Wooden Stool- 1 small log<br>
+Wooden Table- 1 small log
+<br><br>
+<h4>Buildings:</h4>
+Stone Floor- 1 stone<br>
+Stone Wall- 2 stones<br>
+Stone Window- 2 stones<br>
+Tent Door- 1 cloth, 1 stick<br>
+Tent Wall- 1 cloth, 1 stick<br>
+Twig Floor- 2 sticks<br>
+Wood Floor- 1 small log<br>
+Wood Wall- 2 small logs<br>
+Wood Window- 2 small logs
+<br><br>
+<h4>Crafting:</h4>
+Bait- 1 bag, 2 grain<br>
+Bait(s)- 1 bag, 2 apples OR berries<br>
+Bait(b)- 1 bag, 2 meat<br>
+Bag- 1 cloth, 1 fiber (needle)<br>
+Cloth- 2 fibers (needle)<br>
+Cloth Belt- 1 cloth<br>
+Fishing Rod- 2 fibers, 1 small log<br>
+Needle- 1 fiber, 1 thorn<br>
+Saddle- 2 hides (needle & drying rack)<br>
+Scroll- 3 fibers<br>
+Stone Arrow- 1 stick, 1 stone<br>
+Stone Axe- 1 small log, 1 stone<br>
+Stone Knife- 1 stick, 1 stone<br>
+Stone Spear - 1 wood staff, 1 stone<br>
+Torch- 1 fiber, 1 stick<br>
+Wooden Bucket- 1 small log<br>
+Wooden Club- 1 small log<br>
+Wooden Cups- 1 small log<br>
+Wooden Pipe- 1 small log<br>
+Wooden Prosthetics- 1 gear, 1 small log<br>
+Wooden Shield- 1 hide, 1 small log<br>
+Wooden Spade- 1 small log, 1 stick<br>
+Wooden Staff- 1 log<br>
+Wooden Sword- 1 fiber, 1 small log
+<br><br>
+<h4>Clothing:</h4>
+Items require a drying rack and needle, unless otherwise specificed.<br>
+Backpack- 1 fiber, 2 hides<br>
+Boots- 1 hide<br>
+Bracers- 1 hide<br>
+Fur Cloak- 1 fur, 2 hides<br>
+Gloves- 1 hide<br>
+Hide Armor- 1 fur, 1 hide<br>
+Jupon- 4 cloth, 1 fiber (needle)<br>
+Leather Armor- 2 hides<br>
+Leather Cloak- 2 hides<br>
+Leather Helmet- 1 hide<br>
+Leather Hood- 1 hide<br>
+Leather Pants- 1 hide<br>
+Pouch- 1 fiber, 1 hide<br>
+Satchel- 1 fiber, 1 hide<br>
+Shoes- 1 hide<br>
+Surcoat- 3 cloth, 1 fiber (needle)<br>
+Tabard- 3 cloth, 1 fiber (needle)
+<br><br>
+<h2>Cooking:</h2><br>
+Biscuit- 1 butter slice, 1 dough slice<br>
+Butter- 15oz milk, 1 salt<br>
+Buttered toast- 1 butter slice, 1 toast<br>
+Coppiette- 1 salt, 1 steak<br>
+Combine dough- 2 smalldough<br>
+Cheese- 5oz, 1 salt<br>
+Cheese Wheel- 6 fresh cheese<br>
+Cheesecake- 2 fresh cheese, 1 dough, 1 egg<br>
+Cheeseegg- 3 cheese slices, 1 dough slice, 1 egg<br>
+Crackers- 1 doughslice, 1 salt<br>
+Dogroll- 1 bun, 1 cooked sausage<br>
+Dough- 2 flour, 10oz water<br>
+Eggcheese- 2 cheese slices, 2 fried eggs<br>
+Eggtoast- 1 fried egg, 1 toast<br>
+Honey bun- 1 bun, 1 honey<br>
+Peppersteak- 1 cooked steak, 1 peppermill<br>
+Pie (apple)- 3 apples, 1 pie dough<br>
+Pie (berry)- 3 berries, 1 pie dough<br>
+Pie (egg)- 3 eggs, 1 pie dough<br>
+Pie (fish)- 3 mince fish, 1 pie dough<br>
+Pie (meat)- 3 mince beef, 1 pie dough<br>
+Pie (chicken)- 3 mince chicken, 1 pie dough<br>
+Pie dough- 1 butter slice, 2 flour, 10oz water<br>
+Salo- 1 fat, 1 salt<br>
+Saltfish- 1 fish, 1 salt<br>
+Salumoi- 1 salt, 1 sausage<br>
+Sandwich- 2 bread slice, 1 cheese slice, 2 salumoi slice<br>
+Sausage(bb)- 2 bacon<br>
+Sausage(fb)- 1 bacon, 1 fat<br>
+Sausage(mf)- 1 fat, 1 mince<br>
+Sausage(mm)- 2 mince<br>
+Smalldough- 1 flour, 5oz water<br>
+Spiced Eggs- 2 fried egg, 1 peppermill<br>
+Split dough- 1 dough<br>
+Raisins- 1 berries (drying rack)<br>
+Raisin loaf- 1 dough, 2 raisins
+<br><br>
+<h4>Drugs:</h4>
+Alcohol- grain, apples, or berries in a barrel<br>
+Dry plants at a drying rack<br>
+Swampweed and Westleach Leaf can be ground into Moondust and Ozium at a millstone<br>
+Spice is Moondust and Ozium mixed<br>
+Pure Moondust can be made from 3 piles of Moondust<br>
