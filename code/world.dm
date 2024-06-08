@@ -1,5 +1,5 @@
 //This file is just for the necessary /world definition
-//Try looking in game/world.dm This is a test
+//Try looking in game/world.dm
 
 /**
   * # WorldR
