@@ -358,7 +358,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["skin_tone"]			>> skin_tone
 	S["detail"]				>> detail
 	S["joblessrole"]		>> joblessrole
-
+	S["anonymize"] 			>> anonymize
 	S["feature_human_tail"]				>> features["tail_human"]
 	S["feature_human_ears"]				>> features["ears"]
 
@@ -480,6 +480,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["skin_tone"]			, skin_tone)
 	WRITE_FILE(S["detail"]				, detail)
 	WRITE_FILE(S["joblessrole"]			, joblessrole)
+	WRITE_FILE(S["anonymize"] 			, anonymize)
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
