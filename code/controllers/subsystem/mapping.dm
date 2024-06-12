@@ -245,9 +245,9 @@ SUBSYSTEM_DEF(mapping)
 	otherZ += load_map_config("_maps/map_files/roguetown/otherz/smalldecap.json")
 	otherZ += load_map_config("_maps/map_files/roguetown/otherz/smallswamp.json")
 	otherZ += load_map_config("_maps/map_files/roguetown/otherz/underworld.json")
+	otherZ += load_map_config("_maps/map_files/roguetown/otherz/rogueworld.json")
 	#endif
 	#ifdef ROGUEWORLD
-	otherZ += load_map_config("_maps/map_files/roguetown/otherz/rogueworld.json")
 	#endif
 //	otherZ += load_map_config("_maps/map_files/roguetown/otherz/special.json")
 	if(otherZ.len)
