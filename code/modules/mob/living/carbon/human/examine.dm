@@ -305,9 +305,9 @@
 				msg += "[m1] a little stressed.\n"
 			if(7 to 12)
 				msg += "[m1] not stressed.\n"
-			if(1 to 6)
+			if(2 to 6)
 				msg += "[m1] somewhat at peace.\n"
-			if(-30 to 0)
+			if(-30 to 1)
 				msg += "[m1] at peace inside.\n"
 
 
