@@ -2,25 +2,25 @@
 	appro_skill = /datum/skill/craft/armorsmithing
 
 /datum/anvil_recipe/armor/ichainmail
-	name = "chainmail"
+	name = "2x chainmail"
 	req_bar = /obj/item/ingot/iron
 	created_item = list(/obj/item/clothing/suit/roguetown/armor/chainmail/iron,
 						/obj/item/clothing/suit/roguetown/armor/chainmail/iron)
 
 /datum/anvil_recipe/armor/ichaincoif
-	name = "chain coif"
+	name = "2x chain coif"
 	req_bar = /obj/item/ingot/iron
 	created_item = list(/obj/item/clothing/neck/roguetown/chaincoif/iron,
-	/obj/item/clothing/neck/roguetown/chaincoif/iron)
+						/obj/item/clothing/neck/roguetown/chaincoif/iron)
 
 /datum/anvil_recipe/armor/gorget
-	name = "iron gorget"
+	name = "2x iron gorget"
 	req_bar = /obj/item/ingot/iron
 	created_item = list(/obj/item/clothing/neck/roguetown/gorget,
 						/obj/item/clothing/neck/roguetown/gorget)
 
 /datum/anvil_recipe/armor/ichainglove
-	name = "chain gauntlets"
+	name = "2x chain gauntlets"
 	req_bar = /obj/item/ingot/iron
 	created_item = list(/obj/item/clothing/gloves/roguetown/chain/iron,
 						/obj/item/clothing/gloves/roguetown/chain/iron)
@@ -31,13 +31,13 @@
 	created_item = /obj/item/clothing/under/roguetown/chainlegs/iron
 
 /datum/anvil_recipe/armor/platemask
-	name = "iron mask"
+	name = "x2 iron mask"
 	req_bar = /obj/item/ingot/iron
 	created_item = list(/obj/item/clothing/mask/rogue/facemask,
-					/obj/item/clothing/mask/rogue/facemask)
+						/obj/item/clothing/mask/rogue/facemask)
 
 /datum/anvil_recipe/armor/skullcap
-	name = "iron skullcap"
+	name = "2x iron skullcap"
 	req_bar = /obj/item/ingot/iron
 	created_item = list(/obj/item/clothing/head/roguetown/helmet/skullcap,
 						/obj/item/clothing/head/roguetown/helmet/skullcap)
@@ -56,26 +56,26 @@
 	created_item = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
 
 /datum/anvil_recipe/armor/chaincoif
-	name = "chain coif"
+	name = "2x chain coif"
 	req_bar = /obj/item/ingot/steel
 	created_item = list(/obj/item/clothing/neck/roguetown/chaincoif,
 						/obj/item/clothing/neck/roguetown/chaincoif)
 
 /datum/anvil_recipe/armor/chainglove
-	name = "chain gauntlets"
+	name = "3x chain gauntlets"
 	req_bar = /obj/item/ingot/steel
 	created_item = list(/obj/item/clothing/gloves/roguetown/chain,
 						/obj/item/clothing/gloves/roguetown/chain,
 						/obj/item/clothing/gloves/roguetown/chain)
 
 /datum/anvil_recipe/armor/plateglove
-	name = "plate gauntlets"
+	name = "2x plate gauntlets"
 	req_bar = /obj/item/ingot/steel
 	created_item = list(/obj/item/clothing/gloves/roguetown/plate,
 						/obj/item/clothing/gloves/roguetown/plate)
 
 /datum/anvil_recipe/armor/chainleg
-	name = "chain chausses"
+	name = "2x chain chausses"
 	req_bar = /obj/item/ingot/steel
 	created_item = list(/obj/item/clothing/under/roguetown/chainlegs,
 						/obj/item/clothing/under/roguetown/chainlegs)
@@ -104,13 +104,13 @@
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate/scale
 
 /datum/anvil_recipe/armor/platebracer
-	name = "plate bracers"
+	name = "2x plate bracers"
 	req_bar = /obj/item/ingot/steel
 	created_item = list(/obj/item/clothing/wrists/roguetown/bracers,
-					/obj/item/clothing/wrists/roguetown/bracers)
+						/obj/item/clothing/wrists/roguetown/bracers)
 
 /datum/anvil_recipe/armor/helmetnasal
-	name = "steel helmet"
+	name = "2x steel helmet"
 	req_bar = /obj/item/ingot/steel
 	created_item = list(/obj/item/clothing/head/roguetown/helmet,
 						/obj/item/clothing/head/roguetown/helmet)

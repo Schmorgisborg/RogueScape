@@ -355,8 +355,13 @@
 		brokenstate = TRUE
 	..()
 
+/obj/structure/mineral_door/OnCrafted(dirin, user)
+	. = ..()
+	keylock = FALSE
+	GLOB.lockhashes.Remove(lockhash)
+	lockhash = 0
+	
 /////////////////////// TOOL OVERRIDES ///////////////////////
-
 
 /obj/structure/mineral_door/proc/pickaxe_door(mob/living/user, obj/item/I) //override if the door isn't supposed to be a minable mineral.
 	return/*
