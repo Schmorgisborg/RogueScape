@@ -81,6 +81,7 @@
 
 /obj/item/book/rune/granter/spell
 	name = "rune"
+	dropshrink = 0.5
 	var/spell
 	var/spellname = "conjure bugs"
 
