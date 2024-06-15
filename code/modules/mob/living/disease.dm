@@ -4,6 +4,7 @@
 /mob/living
 	var/list/is_diseased = list()
 
+//Check wounds for disease rate; add it to newdr
 /mob/living/proc/update_disease_rate()
 	var/newdr = 0
 	for(var/datum/wound/W in is_diseased)
@@ -11,6 +12,7 @@
 		to_chat(src, "<span class='danger'>wound specific rate [W.disease_rate]</span>")
 	return newdr
 
+//Main proc
 /mob/living/proc/handle_disease()
 	disease_rate = update_disease_rate()
 	disease_threshhold -= max(disease_rate, 0)
@@ -22,9 +24,9 @@
 		to_chat(src, "<span class='warning'>It BREATHES!</span>")
 		if(prob(disease_rate*10) & (disease_holder < world.time))*/
 	var/rtd = rand(1,4)
-	if(contracted_diseases[rtd])
+	if(disease_max >= 3)
 		return
-	contracted_diseases[rtd] += 1
+	disease_max++
 	switch(rtd)
 		if(1)
 			apply_status_effect(/datum/status_effect/debuff/rattles)

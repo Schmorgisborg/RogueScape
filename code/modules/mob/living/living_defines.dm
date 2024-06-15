@@ -148,7 +148,7 @@
 
 	var/disease_rate = 0 //Speed of wound infection
 	var/disease_threshhold = DISEASE_THRESHHOLD //Threshold before disease rolls begin
-	var/list/contracted_diseases[4]
+	var/list/disease_max = 0 //Counts the amount of diseases contracted
 
 	var/list/next_attack_msg = list()
 

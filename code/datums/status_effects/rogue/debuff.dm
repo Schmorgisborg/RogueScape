@@ -170,7 +170,7 @@
 	desc = ""
 	icon_state = "muscles"
 
-//Disease additions
+//Disease module additions
 /datum/status_effect/debuff/rattles
 	id = "rattles"
 	alert_type = /obj/screen/alert/status_effect/debuff/rattles
@@ -184,7 +184,7 @@
 /datum/status_effect/debuff/bonefever
 	id = "bonefever"
 	alert_type = /obj/screen/alert/status_effect/debuff/bonefever
-	effectedstats = list("speed" = -1, "strength" = -2)
+	effectedstats = list("speed" = -1, "strength" = -1, "constituion" = -2)
 
 /obj/screen/alert/status_effect/debuff/bonefever
 	name = "Bone Break Fever"
