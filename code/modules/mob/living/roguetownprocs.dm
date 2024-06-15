@@ -147,7 +147,7 @@
 			var/obj/item/offhand = get_inactive_held_item()
 			var/used_index = active_hand_index
 			var/weapon_parry = FALSE
-			if(mainhand)
+			if(mainhand & !istype(offhand, /obj/item/rogueweapon/shield))
 				if(mainhand.can_parry)
 					weapon_parry = TRUE
 			else
