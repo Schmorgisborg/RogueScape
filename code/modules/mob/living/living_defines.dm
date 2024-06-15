@@ -146,6 +146,10 @@
 	var/bleed_rate = 0 //how much are we bleeding
 	var/bleedsuppress = 0 //for stopping bloodloss, eventually this will be limb-based like bleeding
 
+	var/disease_rate = 0 //Speed of wound infection
+	var/disease_threshhold = DISEASE_THRESHHOLD //Threshold before disease rolls begin
+	var/list/contracted_diseases[4]
+
 	var/list/next_attack_msg = list()
 
 	var/datum/component/personal_crafting/craftingthing
@@ -154,8 +158,6 @@
 	var/obj/item/grabbing/l_grab = null
 
 	var/list/simple_embedded_objects = list()
-
-	var/datum/sex_controller/sexcon
 
 	var/slowdown
 

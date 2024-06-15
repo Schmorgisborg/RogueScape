@@ -38,9 +38,9 @@
 			return
 
 		handle_blood()
-
 		handle_roguebreath()
 		handle_wounds()
+		handle_disease()
 		var/bprv = handle_bodyparts()
 		if(bprv & BODYPART_LIFE_UPDATE_HEALTH)
 			update_stamina() //needs to go before updatehealth to remove stamcrit

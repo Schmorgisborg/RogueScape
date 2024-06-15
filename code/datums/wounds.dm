@@ -18,6 +18,8 @@
 //	if((simple_wounds.len < 13) || !skipcheck)
 	var/datum/wound/NW = new W(src)
 	simple_wounds += NW
+	if(NW.disease_rate)
+		is_diseased += NW
 
 /mob/living/proc/has_wound(path)
 	if(!path)
@@ -154,10 +156,11 @@
 	var/smaller_wound
 	var/progress
 	var/passive_heal = FALSE
-
+	var/disease_rate
 
 /datum/wound/proc/sewn()
 	bleed_rate = -0.1
+	disease_rate *= 0.5
 	woundpain = max(woundpain-10, 0)
 	can_sew = FALSE
 	return
@@ -177,6 +180,7 @@
 /datum/wound/cut/large
 	name = "gruesome cut"
 	bleed_rate = 0.6
+	disease_rate = 0.5
 
 /datum/wound/bruise
 	name = "hematoma"
@@ -216,14 +220,17 @@
 	whp = 35
 	woundpain = 0
 	mob_overlay = "cut"
+	disease_rate = 1
 
 /datum/wound/stab/small
 	name = "small puncture wound"
 	bleed_rate = 0.2
+	disease_rate = 0.5
 
 /datum/wound/stab/large
 	name = "gaping wound"
 	bleed_rate = 0.5
+	disease_rate = 1.5
 
 /datum/wound/dismemberment
 	name = "bleeding stump"
@@ -249,6 +256,7 @@
 	can_sew = TRUE
 	whp = 15
 	woundpain = 5
+	disease_rate = 1
 
 /datum/wound/fracture
 	name = "fracture"
@@ -279,3 +287,4 @@
 	whp = 15
 	woundpain = 5
 	passive_heal = FALSE
+	disease_rate = 10
