@@ -1,4 +1,41 @@
+#define JOB_AVAILABLE 0
+#define JOB_UNAVAILABLE_GENERIC 1
+#define JOB_UNAVAILABLE_BANNED 2
+#define JOB_UNAVAILABLE_PLAYTIME 3
+#define JOB_UNAVAILABLE_ACCOUNTAGE 4
+#define JOB_UNAVAILABLE_SLOTFULL 5
+#define JOB_UNAVAILABLE_RACE 6
+#define JOB_UNAVAILABLE_SEX 7
+#define JOB_UNAVAILABLE_WTEAM 8
+#define JOB_UNAVAILABLE_LASTCLASS 9
+#define JOB_UNAVAILABLE_PATRON 10
 
+#define JCOLOR_NOBLE "#9c40bf"
+#define JCOLOR_MERCHANT "#c2b449"
+#define JCOLOR_SOLDIER "#b64949"
+#define JCOLOR_SERF "#669968"
+#define JCOLOR_PEASANT "#936d6c"
+
+
+// job display orders //
+#define JDO_GRANDWIZARD 1
+#define JDO_GUARD 1.1
+#define JDO_MONK 1.2
+#define JDO_ARTIFICER 1.3
+
+#define JDO_ADVENTURER 2
+#define JDO_PILGRIM 2.1
+
+#define JDO_NIGHTMAN 3
+#define JDO_GRABBER 3.1
+#define JDO_YOUNKER 3.2
+
+#define JDO_SKELETON 4
+
+
+#define JDO_UNUSED 10
+
+//To be removed.
 #define ENGSEC			(1<<0)
 
 #define CAPTAIN			(1<<0)
@@ -41,21 +78,8 @@
 #define CLOWN			(1<<11)
 #define MIME			(1<<12)
 #define ASSISTANT		(1<<13)
-
-#define JOB_AVAILABLE 0
-#define JOB_UNAVAILABLE_GENERIC 1
-#define JOB_UNAVAILABLE_BANNED 2
-#define JOB_UNAVAILABLE_PLAYTIME 3
-#define JOB_UNAVAILABLE_ACCOUNTAGE 4
-#define JOB_UNAVAILABLE_SLOTFULL 5
-#define JOB_UNAVAILABLE_RACE 6
-#define JOB_UNAVAILABLE_SEX 7
-#define JOB_UNAVAILABLE_WTEAM 8
-#define JOB_UNAVAILABLE_LASTCLASS 9
-#define JOB_UNAVAILABLE_PATRON 10
-
-#define DEFAULT_RELIGION "Christianity"
-#define DEFAULT_DEITY "Space Jesus"
+#define DEFAULT_RELIGION "text"
+#define DEFAULT_DEITY "text"
 
 #define JOB_DISPLAY_ORDER_DEFAULT 0
 
@@ -147,28 +171,3 @@
 #define SERVANT		(1<<2)
 #define ORPHAN		(1<<3)
 #define PRINCE		(1<<4)
-
-#define JCOLOR_NOBLE "#9c40bf"
-#define JCOLOR_MERCHANT "#c2b449"
-#define JCOLOR_SOLDIER "#b64949"
-#define JCOLOR_SERF "#669968"
-#define JCOLOR_PEASANT "#936d6c"
-
-
-// job display orders //
-#define JDO_GRANDWIZARD 1
-#define JDO_GUARD 1.1
-#define JDO_MONK 1.2
-#define JDO_ARTIFICER 1.3
-
-#define JDO_ADVENTURER 2
-#define JDO_PILGRIM 2.1
-
-#define JDO_NIGHTMAN 3
-#define JDO_GRABBER 3.1
-#define JDO_YOUNKER 3.2
-
-#define JDO_SKELETON 4
-
-
-#define JDO_UNUSED 10
