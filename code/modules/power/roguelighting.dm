@@ -749,9 +749,7 @@
 
 			if(do_after(H, 100, target = src))
 				var/obj/item/bodypart/affecting = H.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
-				to_chat(H, "<span class='warning'>HOT!</span>")
-				if(affecting && affecting.receive_damage( 0, 5 ))		// 5 burn damage
-					H.update_damage_overlays()
+				to_chat(H, "<span class='info'>The heat from the fire comforts you.</span>")
 		return TRUE //fires that are on always have this interaction with lmb unless its a torch
 
 /obj/machinery/light/rogue/campfire/densefire

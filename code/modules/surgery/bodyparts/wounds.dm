@@ -300,8 +300,6 @@
 						if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 							dam += 30
 			if(prob(round(max(dam / 3, 1), 1)))
-				for(var/datum/wound/artery/A in wounds)
-
 				playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
 				owner.emote("paincrit", TRUE)
 				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
@@ -321,7 +319,7 @@
 			if(prob(used) || (dam >= 30 ))
 				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] is knocked out!</span>"
 				owner.flash_fullscreen("whiteflash3")
-				owner.Unconscious(400)
+				owner.Unconscious(300)
 				if(owner.client)
 					winset(owner.client, "outputwindow.output", "max-lines=1")
 					winset(owner.client, "outputwindow.output", "max-lines=100")
@@ -380,6 +378,21 @@
 				add_wound(/datum/wound/bite/bleeding, skipcheck = FALSE)
 			else
 				add_wound(/datum/wound/bite, skipcheck = FALSE)
+
+/obj/item/bodypart/proc/get_diseaserate()
+	var/current_dr = 0
+	for(var/datum/wound/W in wounds)
+		if(W.disease_rate)
+			current_dr =+ W.disease_rate
+	if(bandage)
+		if(!HAS_BLOOD_DNA(bandage))
+			current_dr *= 0.1
+	return current_dr
+
+/obj/item/bodypart/proc/treat_diseaserate()
+	for(var/datum/wound/W in wounds)
+		if(W.disease_rate)
+			W.disease_rate = 0
 
 /obj/item/bodypart/proc/get_bleedrate()
 	var/BR = 0

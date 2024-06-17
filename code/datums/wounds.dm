@@ -160,8 +160,8 @@
 
 /datum/wound/proc/sewn()
 	bleed_rate = -0.1
-	disease_rate *= 0.5
-	woundpain = max(woundpain-10, 0)
+	disease_rate = disease_rate*0.5
+	woundpain = max(woundpain*0.5, 0)
 	can_sew = FALSE
 	return
 
@@ -204,7 +204,7 @@
 	bleed_rate = 6
 	can_sew = TRUE
 	whp = 40
-	woundpain = 75
+	woundpain = 65
 	mob_overlay = "s1"
 	time = 10
 
