@@ -2026,7 +2026,7 @@ Slots: [job.spawn_positions]</span>
 					to_chat(user, "<font color='red'>[pick(loly)]</font>")
 					return
 				if("faith")
-					to_chat(user, "<font color='teal'>While it's only recently been formed, the Divine Pantheon is the only religion that ever held any real prominence. Founded by Psydon, after his ascension through miracles, three elders and the prophet are worshipped for saving humanity from destruction yils ago.</font>")
+					to_chat(user, "<font color='teal'>While it's only recently been formed, the Divine Pantheon is the only religion that ever held any real prominence. Founded by Psydon, after his ascension through miracles, he and the other Gods have brought humanity into a new realm.</font>")
 					return
 				if("alignment")
 ///					to_chat(user, "<font color='puple'>Alignment is how you communicate to the Game Masters if your character follows a certain set of behavior restrictions. This allows you to </font>")

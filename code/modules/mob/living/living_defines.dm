@@ -147,9 +147,9 @@
 	var/bleedsuppress = 0 //for stopping bloodloss, eventually this will be limb-based like bleeding
 
 	var/disease_rate = 0 //Speed of wound infection
+	var/disease_tracker = 0
 	var/disease_threshhold = DISEASE_THRESHHOLD //Threshold before disease rolls begin
 	var/disease_max = DISEASE_MAX //Max amount of diseases contracted
-	var/last_disease_time = 0 //Last time a disease was contracted
 
 	var/list/next_attack_msg = list()
 

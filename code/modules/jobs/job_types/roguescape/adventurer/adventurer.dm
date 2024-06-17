@@ -24,11 +24,13 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 	outfit = /datum/outfit/job/roguetown/adventurer/genadventurer
 	outfit_female = /datum/outfit/job/roguetown/adventurer/genadventurer
 
+	bypass_lastclass = TRUE
 	var/isvillager = FALSE
 	var/ispilgrim = FALSE
 	display_order = JDO_ADVENTURER
 	show_in_credits = TRUE
-	min_pq = -1
+	min_pq = 0
+
 /datum/outfit/job/roguetown/adventurer/genadventurer/pre_equip(mob/living/carbon/human/H)
 	pants = /obj/item/clothing/under/roguetown/tights/black
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/random

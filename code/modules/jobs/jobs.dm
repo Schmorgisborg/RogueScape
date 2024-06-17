@@ -1,3 +1,23 @@
+GLOBAL_LIST_INIT(good_positions, list(
+	"Grand Wizard",
+	"Artificer",
+	"Guard",
+	"Monk",
+	"Pilgrim",
+	"Adventurer"
+	))
+
+GLOBAL_LIST_INIT(bad_positions, list(
+	"Nightman",
+	"Grabber",
+	"Younker"
+	))
+
+GLOBAL_LIST_INIT(evil_positions, list(
+	"Skeleton"
+	))
+
+
 GLOBAL_LIST_INIT(command_positions, list(
 	"Captain",
 	"Head of Personnel",
@@ -89,25 +109,6 @@ GLOBAL_LIST_INIT(peasant_positions, list(
 	))
 
 GLOBAL_LIST_INIT(serf_positions, list(
-	))
-
-GLOBAL_LIST_INIT(good_positions, list(
-	"Grand Wizard",
-	"Pilgrim",
-	"Adventurer",
-	"Artificer",
-	"Guard",
-	"Monk"
-	))
-
-GLOBAL_LIST_INIT(bad_positions, list(
-	"Nightman",
-	"Grabber",
-	"Younker"
-	))
-
-GLOBAL_LIST_INIT(evil_positions, list(
-	"Skeleton"
 	))
 
 GLOBAL_LIST_INIT(youngfolk_positions, list(

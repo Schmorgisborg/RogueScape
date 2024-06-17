@@ -41,7 +41,7 @@
 		H.change_stat("endurance", 3)
 		H.change_stat("speed", 2)
 		H.change_stat("perception", 2)
-		H.change_stat("fortune", 25)
+		H.change_stat("fortune", 1)
 
 	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_NOSEGRAB, TRAIT_GENERIC)

@@ -86,9 +86,10 @@
 		return
 	if(do_after(user, 20))
 		playsound(loc, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
-		var/moveup = 25
+		var/moveup = 30
 		if(user.mind)
-			moveup += ((user.mind.get_skill_level(/datum/skill/misc/medicine)) * 25)
+			moveup += ((user.mind.get_skill_level(/datum/skill/misc/medicine)) * 10)
+			user.mind.adjust_experience(/datum/skill/misc/medicine, 200, FALSE)
 		W.progress = min(W.progress + moveup, 100)
 		if(W.progress == 100)
 			W.sewn()
@@ -99,7 +100,7 @@
 			user.visible_message("<span class='notice'>[user] sews \a [W.name] on [user.p_them()]self.</span>", "<span class='notice'>I stitch \a [W.name] on my [affecting].</span>")
 		else
 			user.visible_message("<span class='notice'>[user] sews \a [W.name] on [M]'s [affecting].</span>", "<span class='notice'>I stitch \a [W.name] on [M]'s [affecting].</span>")
-		user.visible_message("<span class='notice'>%[W.progress]</span>")
+		user.visible_message("<span class='notice'>[W.progress]%</span>")
 		log_combat(user, H, "sew", "needle")
 		if(prob(50))
 			use(1)

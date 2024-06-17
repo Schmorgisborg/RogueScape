@@ -104,8 +104,7 @@
 		var/obj/effect/proc_holder/spell/S = new spell
 		user.mind.AddSpell(S)
 	if(user.mind.get_skill_level(/datum/skill/magic/arcane) <= 5)
-		var/xpGain = 275
-		user.mind.adjust_experience(/datum/skill/magic/arcane, xpGain, FALSE)
+		user.mind.adjust_experience(/datum/skill/magic/arcane, 250, FALSE)
  	onlearned(user)
 
 /obj/item/book/rune/granter/spell/recoil(mob/user)

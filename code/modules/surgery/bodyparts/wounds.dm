@@ -79,10 +79,7 @@
 			var/list/phrases = list("The bone shatters!", "The bone is broken!", "The [src.name] is mauled!", "The bone snaps through the skin!")
 			owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
 			add_wound(/datum/wound/fracture)
-			if(prob(3))
-				playsound(owner, pick('sound/combat/tf2crit.ogg'), 100, FALSE)
-			else
-				playsound(owner, "wetbreak", 100, FALSE)
+			playsound(owner, "wetbreak", 100, FALSE)
 			owner.emote("paincrit", TRUE)
 			owner.Slowdown(20)
 			shake_camera(owner, 2, 2)
@@ -138,10 +135,7 @@
 			owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
 			add_wound(/datum/wound/fracture)
 			owner.emote("paincrit", TRUE)
-			if(prob(3))
-				playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
-			else
-				playsound(owner, "wetbreak", 100, FALSE)
+			playsound(owner, "wetbreak", 100, FALSE)
 			set_disabled(BODYPART_DISABLED_CRIT)
 			owner.Slowdown(20)
 			shake_camera(owner, 2, 2)
@@ -163,10 +157,7 @@
 			for(var/datum/wound/artery/A in wounds)
 				foundy= TRUE
 			if(!foundy)
-				if(prob(3))
-					playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
-				else
-					playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
+				playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
 				add_wound(/datum/wound/artery)
 				owner.emote("paincrit", TRUE)
 				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
@@ -255,10 +246,7 @@
 			var/list/phrases = list("The skull cracks loudly!", "The head is visibly crushed!", "Blood trickles down their brow!", "The head is mangled!")
 			owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
 			add_wound(/datum/wound/fracture)
-			if(prob(3))
-				playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
-			else
-				playsound(owner, "headcrush", 100, FALSE)
+			playsound(owner, "headcrush", 100, FALSE)
 			set_disabled(BODYPART_DISABLED_CRIT)
 			owner.Unconscious(120)
 			shake_camera(owner, 2, 2)
