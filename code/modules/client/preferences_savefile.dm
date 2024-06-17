@@ -465,7 +465,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["pref_species"]	, pref_species.name)
 	WRITE_FILE(S["charflaw"]			, charflaw.name)
 	WRITE_FILE(S["selected_patron"]		, selected_patron)
-	WRITE_FILE(S["bdetail"]				, detail)
+	WRITE_FILE(S["bdetail"]				, bdetail)
 
 	WRITE_FILE(S["real_name"]			, real_name)
 	WRITE_FILE(S["gender"]				, gender)

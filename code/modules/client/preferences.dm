@@ -400,7 +400,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 					dat += "<br>"
 				dat += "<b>Face Detail:</b> <a href='?_src_=prefs;preference=detail;task=input'>[detail]</a>"
 				dat += "<br>"
-				dat += "<b>Body Detail:</b> <a href='?_src_=prefs;preference=bdetail;task=input'>[bdetail]</a>"
+				dat += "<b>Stat Boon:</b> <a href='?_src_=prefs;preference=bdetail;task=input'>[bdetail]</a>"
 				if(gender == FEMALE)
 					dat += "<br>"
 				dat += "<br></td>"
@@ -1168,7 +1168,7 @@ Slots: [job.spawn_positions]</span>
 	if(user.client?.prefs)
 		if(!user.client.prefs.lastclass)
 			return
-	var/choice = tgalert(user, "Use a triumph to play as this class again?", "Reset Previous Role", "Do It", "Cancel")
+	var/choice = tgalert(user, "Use two triumphs to play as this class again?", "Reset Previous Role", "Do It", "Cancel")
 	if(choice == "Cancel")
 		return
 	if(!choice)
