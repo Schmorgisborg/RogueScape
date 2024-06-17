@@ -95,12 +95,16 @@
 			W.sewn()
 
 		H.update_damage_overlays()
+		var/fix = replacetext(affecting,"the ","")
 
 		if(M == user)
-			user.visible_message("<span class='notice'>[user] sews \a [W.name] on [user.p_them()]self.</span>", "<span class='notice'>I stitch \a [W.name] on my [affecting].</span>")
+			user.visible_message("<span class='notice'>[user] sews \a [W.name] on [user.p_them()]self.</span>", "<span class='notice'>I stitch \a [W.name] on my [fix].</span>")
 		else
-			user.visible_message("<span class='notice'>[user] sews \a [W.name] on [M]'s [affecting].</span>", "<span class='notice'>I stitch \a [W.name] on [M]'s [affecting].</span>")
-		user.visible_message("<span class='notice'>[W.progress]%</span>")
+			user.visible_message("<span class='notice'>[user] sews \a [W.name] on [M]'s [fix].</span>", "<span class='notice'>I stitch \a [W.name] on [M]'s [fix].</span>")
+		if(W.progress < 100)
+			user.visible_message("<span class='notice'>[W.progress]%</span>")
+		else
+			user.visible_message("<span class='notice'>[user] finishing sewing \a [W.name] on [user.p_them()]self.</span>", "<span class='notice'>I finish stitching \a [W.name] on my [fix].</span>")
 		log_combat(user, H, "sew", "needle")
 		if(prob(50))
 			use(1)

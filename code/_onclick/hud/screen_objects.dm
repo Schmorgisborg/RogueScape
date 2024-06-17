@@ -1755,8 +1755,6 @@
 			already_printed = list()
 			to_chat(M, "*--------*")
 		if(modifiers["right"])
-			//
-			to_chat(M, "<span class='info'>[M.stress]</span>")
 			if(M.get_triumphs() <= 0)
 				to_chat(M, "<span class='warning'>I haven't TRIUMPHED.</span>")
 				return

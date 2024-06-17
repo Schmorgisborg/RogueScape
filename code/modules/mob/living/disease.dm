@@ -14,7 +14,7 @@
 		disease_max--
 
 		var/rtd = rand(1,4)
-		if(prob(30))
+		if(prob(60))
 			rtd = 0
 		if(disease_tracker == rtd)//No duplicate diseases
 			rtd = 0

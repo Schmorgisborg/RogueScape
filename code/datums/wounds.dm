@@ -158,7 +158,7 @@
 
 /datum/wound/proc/sewn()
 	bleed_rate = -0.1
-	disease_rate = disease_rate*0.5
+	disease_rate = max((disease_rate-1.5)*0.5, 0)
 	woundpain = max(woundpain*0.5, 0)
 	can_sew = FALSE
 	return
@@ -166,6 +166,7 @@
 /datum/wound/cut
 	name = "cut"
 	bleed_rate = 0.4
+	disease_rate = 1
 	can_sew = TRUE
 	whp = 50
 	woundpain = 0
@@ -178,7 +179,7 @@
 /datum/wound/cut/large
 	name = "gruesome cut"
 	bleed_rate = 0.6
-	disease_rate = 0.5
+	disease_rate = 3
 
 /datum/wound/bruise
 	name = "hematoma"
@@ -200,6 +201,7 @@
 /datum/wound/artery
 	name = "severed blood tunnel"
 	bleed_rate = 6
+	disease_rate = 5
 	can_sew = TRUE
 	whp = 40
 	woundpain = 65
@@ -214,21 +216,20 @@
 /datum/wound/stab
 	name = "puncture wound"
 	bleed_rate = 0.4
+	disease_rate = 5
 	can_sew = TRUE
 	whp = 35
 	woundpain = 0
 	mob_overlay = "cut"
-	disease_rate = 1
 
 /datum/wound/stab/small
 	name = "small puncture wound"
 	bleed_rate = 0.2
-	disease_rate = 0.5
 
 /datum/wound/stab/large
 	name = "gaping wound"
 	bleed_rate = 0.5
-	disease_rate = 1.5
+	disease_rate = 10
 
 /datum/wound/dismemberment
 	name = "bleeding stump"
@@ -254,7 +255,7 @@
 	can_sew = TRUE
 	whp = 15
 	woundpain = 5
-	disease_rate = 1
+	disease_rate = 5
 
 /datum/wound/fracture
 	name = "fracture"
@@ -281,8 +282,8 @@
 /datum/wound/bite/bleeding
 	name = "bleeding bite mark"
 	bleed_rate = 0.1
+	disease_rate = 10
 	can_sew = 1
 	whp = 15
 	woundpain = 5
 	passive_heal = FALSE
-	disease_rate = 10

@@ -113,8 +113,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 				/turf/open/floor/rogue/grass)
 	ambush_mobs = list(
 				/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 30,
-				/mob/living/carbon/human/species/skeleton/npc/ambush = 50,
-				/mob/living/carbon/human/species/goblin/npc/ambush/moon = 30)
+				/mob/living/carbon/human/species/skeleton/npc/ambush = 50)
 	first_time_text = "ROCKHILL BASIN"
 	droning_sound = 'sound/music/area/field.ogg'
 	droning_sound_dusk = 'sound/music/area/septimus.ogg'
@@ -142,8 +141,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 				/turf/open/floor/rogue/grass)
 	ambush_mobs = list(
 				/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 40,
-				/mob/living/carbon/human/species/skeleton/npc/ambush = 10,
-				/mob/living/carbon/human/species/goblin/npc/ambush/moon = 30)
+				/mob/living/carbon/human/species/skeleton/npc/ambush = 10)
 	first_time_text = "THE MURDERWOOD"
 	converted_type = /area/rogue/indoors/shelter/woods
 /area/rogue/indoors/shelter/woods
@@ -179,8 +177,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 				/turf/open/water)
 	ambush_mobs = list(
 				/mob/living/simple_animal/hostile/retaliate/rogue/bigrat = 60,
-				/mob/living/simple_animal/hostile/retaliate/rogue/spider = 40,
-				/mob/living/carbon/human/species/goblin/npc/ambush/moon = 30)
+				/mob/living/simple_animal/hostile/retaliate/rogue/spider = 40)
 	first_time_text = "THE TERRORBOG"
 	converted_type = /area/rogue/indoors/shelter/bog
 /area/rogue/indoors/shelter/bog

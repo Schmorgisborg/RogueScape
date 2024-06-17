@@ -1167,6 +1167,13 @@ Slots: [job.spawn_positions]</span>
 	if(user.client?.prefs)
 		if(!user.client.prefs.lastclass)
 			return
+	if(M.get_triumphs() <= 0)
+		to_chat(M, "<span class='warning'>I haven't TRIUMPHED.</span>")
+		return
+	if(alert("Do you want to remember a TRIUMPH?", "", "Yes", "No") == "Yes")
+		if(M.add_stress(/datum/stressevent/triumph))
+			M.adjust_triumphs(-1)
+			M.playsound_local(M, 'sound/misc/notice (2).ogg', 100, FALSE)
 	var/choice = tgalert(user, "Play as this class again?", "Reset last played", "Do It", "Cancel")
 	if(!choice)
 		return
