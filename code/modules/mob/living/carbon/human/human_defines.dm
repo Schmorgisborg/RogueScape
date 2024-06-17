@@ -49,6 +49,7 @@
 
 	var/accessory = "None"
 	var/detail = "None"
+	var/bdetail = "Strength"
 	var/marking = "None"
 
 	var/shavelevel = 0

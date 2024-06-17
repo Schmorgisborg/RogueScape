@@ -328,22 +328,21 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	var/species_name
 	S["pref_species"]		>> species_name
 	if(species_name)
-		var/newRace = GLOB.species_list[species_name]
-		if(newRace)
-			pref_species = new newRace
-
+		var/new_race = GLOB.species_list[species_name]
+		if(new_race)
+			pref_species = new new_race
 	var/vice_name
 	S["charflaw"]			>> vice_name
 	if(vice_name)
-		var/newvice = GLOB.character_flaws[vice_name]
-		if(newvice)
-			charflaw = new newvice
-
+		var/new_vice = GLOB.character_flaws[vice_name]
+		if(new_vice)
+			charflaw = new new_vice
 	S["selected_patron"]	>> selected_patron
 	if(selected_patron)
 		var/newgod = GLOB.patronlist[selected_patron]
 		if(newgod)
 			selected_patron = new newgod
+	S["bdetail"]			>> bdetail
 
 	S["real_name"]			>> real_name
 	S["gender"]				>> gender
@@ -466,6 +465,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["pref_species"]	, pref_species.name)
 	WRITE_FILE(S["charflaw"]			, charflaw.name)
 	WRITE_FILE(S["selected_patron"]		, selected_patron)
+	WRITE_FILE(S["bdetail"]				, detail)
 
 	WRITE_FILE(S["real_name"]			, real_name)
 	WRITE_FILE(S["gender"]				, gender)

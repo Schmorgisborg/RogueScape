@@ -81,6 +81,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/eye_color = "000"				//Eye color
 	var/voice_color = "a0a0a0"
 	var/detail_color = "000"
+	var/bdetail = "Strength"
 	var/datum/species/pref_species = new /datum/species/human/northern()	//Mutant race
 	var/datum/patrongods/selected_patron = new /datum/patrongods/psydon()
 	var/datum/charflaw/charflaw = new /datum/charflaw/addiction/alcoholic()
@@ -399,7 +400,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 					dat += "<br>"
 				dat += "<b>Face Detail:</b> <a href='?_src_=prefs;preference=detail;task=input'>[detail]</a>"
 				dat += "<br>"
-				dat += "<b>Body Detail:</b> <a href='?_src_=prefs;preference=bdetail;task=input'>None</a>"
+				dat += "<b>Body Detail:</b> <a href='?_src_=prefs;preference=bdetail;task=input'>[bdetail]</a>"
 				if(gender == FEMALE)
 					dat += "<br>"
 				dat += "<br></td>"
@@ -1167,19 +1168,20 @@ Slots: [job.spawn_positions]</span>
 	if(user.client?.prefs)
 		if(!user.client.prefs.lastclass)
 			return
-	if(M.get_triumphs() <= 0)
-		to_chat(M, "<span class='warning'>I haven't TRIUMPHED.</span>")
+	var/choice = tgalert(user, "Use a triumph to play as this class again?", "Reset Previous Role", "Do It", "Cancel")
+	if(choice == "Cancel")
 		return
-	if(alert("Do you want to remember a TRIUMPH?", "", "Yes", "No") == "Yes")
-		if(M.add_stress(/datum/stressevent/triumph))
-			M.adjust_triumphs(-1)
-			M.playsound_local(M, 'sound/misc/notice (2).ogg', 100, FALSE)
-	var/choice = tgalert(user, "Play as this class again?", "Reset last played", "Do It", "Cancel")
 	if(!choice)
 		return
 	if(user.client?.prefs)
-		user.client.prefs.lastclass = null
-		user.client.prefs.save_preferences()
+		if(user.client.prefs.lastclass)
+			if(user.get_triumphs() < 2)
+				to_chat(user, "<span class='warning'>I haven't TRIUMPHED enough.</span>")
+				return
+			user.adjust_triumphs(-2)
+			user.client.prefs.lastclass = null
+			to_chat(user, "<span class='notice'>My class has been reset.</span>")
+			user.client.prefs.save_preferences()
 
 /datum/preferences/proc/SetQuirks(mob/user)
 	if(!SSquirks)
@@ -1773,9 +1775,11 @@ Slots: [job.spawn_positions]</span>
 						detail = new_detail
 
 				if("bdetail")
-					var/list/loly = list("Not yet.","Work in progress.","Don't click me.","Stop clicking this.","Nope.","Be patient.","Sooner or later.")
-					to_chat(user, "<font color='red'>[pick(loly)]</font>")
-					return
+					var/list/bdetaillist = list("Strength","Perception","Intelligence","Constitution","Endurance","Speed")
+					var/new_bdetail
+					new_bdetail = input(user, "Choose your character's boon:", "+1 to your stat roll")  as null|anything in bdetaillist
+					if(new_bdetail)
+						bdetail = new_bdetail
 
 				if("socks")
 					var/new_socks
@@ -2337,6 +2341,7 @@ Slots: [job.spawn_positions]</span>
 	character.undershirt = undershirt
 //	character.accessory = accessory
 	character.detail = detail
+	character.bdetail = bdetail
 	character.socks = socks
 	character.PATRON = selected_patron
 	character.backpack = backpack
