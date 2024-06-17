@@ -32,7 +32,7 @@
 #define BLOOD_VOLUME_SURVIVE		100
 
 //Disease defines
-#define DISEASE_THRESHHOLD 250
+#define DISEASE_THRESHHOLD 1000
 #define DISEASE_MAX 2
 
 //Sizes of mobs, used by mob/living/var/mob_size

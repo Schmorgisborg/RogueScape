@@ -6,10 +6,7 @@
 		return
 
 	disease_rate = get_disease_rate()
-	to_chat(src, "<span class='warning'>dis rate [disease_rate]</span>")
-
 	disease_threshhold -= max(disease_rate, 0)
-	to_chat(src, "<span class='warning'>dis thresh [disease_threshhold]</span>")
 	if((disease_threshhold <= 0))//Once infection builds up
 		disease_max--
 
@@ -48,6 +45,7 @@
 	for(var/x in bodyparts)
 		var/obj/item/bodypart/limb = x
 		dr += limb.get_diseaserate()
+	dr = clamp(dr, 0, 20)
 	return dr
 
 /obj/item/bodypart/proc/get_diseaserate()//Sum disease rate from wounds
