@@ -18,8 +18,6 @@
 //	if((simple_wounds.len < 13) || !skipcheck)
 	var/datum/wound/NW = new W(src)
 	simple_wounds += NW
-	if(NW.disease_rate)
-		is_diseased += NW
 
 /mob/living/proc/has_wound(path)
 	if(!path)

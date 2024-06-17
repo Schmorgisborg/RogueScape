@@ -379,21 +379,6 @@
 			else
 				add_wound(/datum/wound/bite, skipcheck = FALSE)
 
-/obj/item/bodypart/proc/get_diseaserate()
-	var/current_dr = 0
-	for(var/datum/wound/W in wounds)
-		if(W.disease_rate)
-			current_dr =+ W.disease_rate
-	if(bandage)
-		if(!HAS_BLOOD_DNA(bandage))
-			current_dr *= 0.1
-	return current_dr
-
-/obj/item/bodypart/proc/treat_diseaserate()
-	for(var/datum/wound/W in wounds)
-		if(W.disease_rate)
-			W.disease_rate = 0
-
 /obj/item/bodypart/proc/get_bleedrate()
 	var/BR = 0
 	var/highest_BR = 0
