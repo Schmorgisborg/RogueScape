@@ -4,10 +4,11 @@
 /mob/living/carbon/proc/handle_disease()
 	if(disease_max <= 0)
 		return
-	if(last_disease_time > (world.time - 2 MINUTES))
+	if(last_disease_time > (world.time + 30 SECONDS))//Timer between checks
 		return
+	last_disease_time = world.time
 
-	disease_rate = get_disease_rate()
+	disease_rate = get_disease_rate()//
 	to_chat(src, "<span class='warning'>dis rate [disease_rate]</span>")
 	if(disease_rate <= 0)
 		return
@@ -30,7 +31,6 @@
 			if(4)
 				apply_status_effect(/datum/status_effect/debuff/collywobbles)
 				to_chat(src, "<span class='warning'>I've contracted collywobbles!</span>")
-	last_disease_time = world.time
 	disease_rate = 0
 
 /mob/living/carbon/proc/get_disease_rate()//Copy disease rate from body parts
