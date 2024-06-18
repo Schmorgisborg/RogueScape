@@ -4,11 +4,8 @@
 	var/tutorial = "Choose me!"
 	var/list/allowed_sexes = list("male","female")
 	var/list/allowed_races = list("Humen",
-	"Humen",
-	"Elf",
 	"Elf",
 	"Dark Elf",
-	"Dwarf",
 	"Dwarf"
 	)
 	var/list/allowed_patrons = ALL_PATRON_NAMES_LIST
