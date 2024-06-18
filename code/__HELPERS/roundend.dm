@@ -2,162 +2,6 @@
 #define POPCOUNT_ESCAPEES "escapees"					//Not dead and on centcom/shuttles marked as escaped
 #define POPCOUNT_SHUTTLE_ESCAPEES "shuttle_escapees" 	//Emergency shuttle only.
 
-/datum/controller/subsystem/ticker/proc/gather_roundend_feedback()
-	gather_antag_data()
-	record_nuke_disk_location()
-	var/json_file = file("[GLOB.log_directory]/round_end_data.json")
-	var/list/file_data = list("escapees" = list("humans" = list(), "silicons" = list(), "others" = list(), "npcs" = list()), "abandoned" = list("humans" = list(), "silicons" = list(), "others" = list(), "npcs" = list()), "ghosts" = list(), "additional data" = list())
-	var/num_survivors = 0
-	var/num_escapees = 0
-	var/num_shuttle_escapees = 0
-	var/list/area/shuttle_areas
-	if(SSshuttle && SSshuttle.emergency)
-		shuttle_areas = SSshuttle.emergency.shuttle_areas
-	for(var/mob/m in GLOB.mob_list)
-		var/escaped
-		var/category
-		var/list/mob_data = list()
-		if(isnewplayer(m))
-			continue
-		if(m.mind)
-			if(m.stat != DEAD && !isbrain(m) && !iscameramob(m))
-				num_survivors++
-			mob_data += list("name" = m.name, "ckey" = ckey(m.mind.key))
-			if(isobserver(m))
-				escaped = "ghosts"
-			else if(isliving(m))
-				var/mob/living/L = m
-				mob_data += list("location" = get_area(L), "health" = L.health)
-				if(ishuman(L))
-					var/mob/living/carbon/human/H = L
-					category = "humans"
-					mob_data += list("job" = H.mind.assigned_role, "species" = H.dna.species.name)
-				else if(issilicon(L))
-					category = "silicons"
-					if(isAI(L))
-						mob_data += list("module" = "AI")
-					if(isAI(L))
-						mob_data += list("module" = "pAI")
-					if(iscyborg(L))
-						var/mob/living/silicon/robot/R = L
-						mob_data += list("module" = R.module)
-			else
-				category = "others"
-				mob_data += list("typepath" = m.type)
-		if(!escaped)
-			if(EMERGENCY_ESCAPED_OR_ENDGAMED && (m.onCentCom() || m.onSyndieBase()))
-				escaped = "escapees"
-				num_escapees++
-				if(shuttle_areas[get_area(m)])
-					num_shuttle_escapees++
-			else
-				escaped = "abandoned"
-		if(!m.mind && (!ishuman(m) || !issilicon(m)))
-			var/list/npc_nest = file_data["[escaped]"]["npcs"]
-			if(npc_nest.Find(initial(m.name)))
-				file_data["[escaped]"]["npcs"]["[initial(m.name)]"] += 1
-			else
-				file_data["[escaped]"]["npcs"]["[initial(m.name)]"] = 1
-		else
-			if(isobserver(m))
-				var/pos = length(file_data["[escaped]"]) + 1
-				file_data["[escaped]"]["[pos]"] = mob_data
-			else
-				if(!category)
-					category = "others"
-					mob_data += list("name" = m.name, "typepath" = m.type)
-				var/pos = length(file_data["[escaped]"]["[category]"]) + 1
-				file_data["[escaped]"]["[category]"]["[pos]"] = mob_data
-	var/datum/station_state/end_state = new /datum/station_state()
-	end_state.count()
-	var/station_integrity = min(PERCENT(GLOB.start_state.score(end_state)), 100)
-	file_data["additional data"]["station integrity"] = station_integrity
-	WRITE_FILE(json_file, json_encode(file_data))
-	SSblackbox.record_feedback("nested tally", "round_end_stats", num_survivors, list("survivors", "total"))
-	SSblackbox.record_feedback("nested tally", "round_end_stats", num_escapees, list("escapees", "total"))
-	SSblackbox.record_feedback("nested tally", "round_end_stats", GLOB.joined_player_list.len, list("players", "total"))
-	SSblackbox.record_feedback("nested tally", "round_end_stats", GLOB.joined_player_list.len - num_survivors, list("players", "dead"))
-	. = list()
-	.[POPCOUNT_SURVIVORS] = num_survivors
-	.[POPCOUNT_ESCAPEES] = num_escapees
-	.[POPCOUNT_SHUTTLE_ESCAPEES] = num_shuttle_escapees
-	.["station_integrity"] = station_integrity
-
-/datum/controller/subsystem/ticker/proc/gather_antag_data()
-	var/team_gid = 1
-	var/list/team_ids = list()
-
-	for(var/datum/antagonist/A in GLOB.antagonists)
-		if(!A.owner)
-			continue
-
-		var/list/antag_info = list()
-		antag_info["key"] = A.owner.key
-		antag_info["name"] = A.owner.name
-		antag_info["antagonist_type"] = A.type
-		antag_info["antagonist_name"] = A.name //For auto and custom roles
-		antag_info["objectives"] = list()
-		antag_info["team"] = list()
-		var/datum/team/T = A.get_team()
-		if(T)
-			antag_info["team"]["type"] = T.type
-			antag_info["team"]["name"] = T.name
-			if(!team_ids[T])
-				team_ids[T] = team_gid++
-			antag_info["team"]["id"] = team_ids[T]
-
-		if(A.objectives.len)
-			for(var/datum/objective/O in A.objectives)
-				var/result = O.check_completion() ? "SUCCESS" : "FAIL"
-				antag_info["objectives"] += list(list("objective_type"=O.type,"text"=O.explanation_text,"result"=result))
-		SSblackbox.record_feedback("associative", "antagonists", 1, antag_info)
-
-/datum/controller/subsystem/ticker/proc/record_nuke_disk_location()
-	var/obj/item/disk/nuclear/N = locate() in GLOB.poi_list
-	if(N)
-		var/list/data = list()
-		var/turf/T = get_turf(N)
-		if(T)
-			data["x"] = T.x
-			data["y"] = T.y
-			data["z"] = T.z
-		var/atom/outer = get_atom_on_turf(N,/mob/living)
-		if(outer != N)
-			if(isliving(outer))
-				var/mob/living/L = outer
-				data["holder"] = L.real_name
-			else
-				data["holder"] = outer.name
-
-		SSblackbox.record_feedback("associative", "roundend_nukedisk", 1 , data)
-
-/datum/controller/subsystem/ticker/proc/gather_newscaster()
-	var/json_file = file("[GLOB.log_directory]/newscaster.json")
-	var/list/file_data = list()
-	var/pos = 1
-	for(var/V in GLOB.news_network.network_channels)
-		var/datum/newscaster/feed_channel/channel = V
-		if(!istype(channel))
-			stack_trace("Non-channel in newscaster channel list")
-			continue
-		file_data["[pos]"] = list("channel name" = "[channel.channel_name]", "author" = "[channel.author]", "censored" = channel.censored ? 1 : 0, "author censored" = channel.authorCensor ? 1 : 0, "messages" = list())
-		for(var/M in channel.messages)
-			var/datum/newscaster/feed_message/message = M
-			if(!istype(message))
-				stack_trace("Non-message in newscaster channel messages list")
-				continue
-			var/list/comment_data = list()
-			for(var/C in message.comments)
-				var/datum/newscaster/feed_comment/comment = C
-				if(!istype(comment))
-					stack_trace("Non-message in newscaster message comments list")
-					continue
-				comment_data += list(list("author" = "[comment.author]", "time stamp" = "[comment.time_stamp]", "body" = "[comment.body]"))
-			file_data["[pos]"]["messages"] += list(list("author" = "[message.author]", "time stamp" = "[message.time_stamp]", "censored" = message.bodyCensor ? 1 : 0, "author censored" = message.authorCensor ? 1 : 0, "photo file" = "[message.photo_file]", "photo caption" = "[message.caption]", "body" = "[message.body]", "comments" = comment_data))
-		pos++
-	if(GLOB.news_network.wanted_issue.active)
-		file_data["wanted"] = list("author" = "[GLOB.news_network.wanted_issue.scannedUser]", "criminal" = "[GLOB.news_network.wanted_issue.criminal]", "description" = "[GLOB.news_network.wanted_issue.body]", "photo file" = "[GLOB.news_network.wanted_issue.photo_file]")
-	WRITE_FILE(json_file, json_encode(file_data))
 
 /mob/proc/do_game_over()
 	if(SSticker.current_state != GAME_STATE_FINISHED)
@@ -258,14 +102,6 @@
 
 	stats_report()
 
-//	for(var/client/C in GLOB.clients)
-//		if(!C.credits)
-//			C.RollCredits()
-//		C.playtitlemusic(40)
-
-//	var/popcount = gather_roundend_feedback()
-//	display_report(popcount)
-
 	CHECK_TICK
 
 //	// Add AntagHUD to everyone, see who was really evil the whole time!
@@ -275,14 +111,6 @@
 //			H.add_hud_to(M)
 
 	CHECK_TICK
-
-	//Set news report and mode result
-//	mode.set_round_result()
-
-//	send2irc("Server", "Round just ended.")
-
-//	if(length(CONFIG_GET(keyed_list/cross_server)))
-//		send_news_report()
 
 	CHECK_TICK
 
@@ -317,20 +145,6 @@
 	sleep(10 SECONDS)
 	ready_for_reboot = TRUE
 	standard_reboot()
-
-/datum/controller/subsystem/ticker/proc/get_end_reason()
-	var/end_reason
-	var/datum/game_mode/extended/C = SSticker.mode
-
-	if(C.undeadratio() == "undead")
-		end_reason = "The undead roam the new lands in troves, humanity's last foothold is lost."
-	if(C.undeadratio() == "living")
-		end_reason = "Psydon's flock stems the flow of evil in their new home, humanity will see another dae."
-
-	if(end_reason)
-		to_chat(world, "<span class='big bold'>[end_reason].</span>")
-	else
-		to_chat(world, "<span class='big bold'>The Wyrld is in chaos, as things should be.</span>")
 
 /datum/controller/subsystem/ticker/proc/gamemode_report()
 	var/list/all_teams = list()
@@ -376,27 +190,95 @@
 		if(last.show_in_roundend)
 			last.roundend_report_footer()
 
-
 	return
+
+/datum/controller/subsystem/ticker/proc/get_end_reason()
+	var/end_reason
+	var/datum/game_mode/extended/C = SSticker.mode
+
+	if(C.undeadratio() == "undead")
+		end_reason = "The undead roam the new lands in troves, humanity's last foothold is lost."
+	if(C.undeadratio() == "living")
+		end_reason = "Psydon's flock stems the flow of evil in their new home, humanity will see another dae."
+
+	if(end_reason)
+		to_chat(world, "<span class='big bold'>[end_reason].</span>")
+	else
+		to_chat(world, "<span class='big bold'>The Wyrld is in chaos, as things should be.</span>")
 
 /datum/controller/subsystem/ticker/proc/stats_report()
-	var/list/shit = list()
-	shit += "<br><span class='bold'>Δ--------------------Δ</span><br>"
-	shit += "<br><font color='#9b6937'><span class='bold'>Deaths:</span></font> [deaths]"
-	shit += "<br><font color='#af2323'><span class='bold'>Blood spilt:</span></font> [round(blood_lost / 100, 1)]L"
-	shit += "<br><font color='#36959c'><span class='bold'>TRIUMPH(s) Awarded:</span></font> [tri_gained]"
-	shit += "<br><font color='#a02fa4'><span class='bold'>TRIUMPH(s) Stolen:</span></font> [tri_lost * -1]"
-//	if(cuckers.len)
-//		shit += "<br><font color='#4e488a'><span class='bold'>Adulterers:</span></font> "
-//		for(var/x in cuckers.len)
-//			shit += "[x]"
+	var/list/finalreport = list()
+	finalreport += "<br><span class='bold'>Δ--------------------Δ</span><br>"
+	finalreport += "<br><font color='#9b6937'><span class='bold'>Deaths:</span></font> [deaths]"
+	finalreport += "<br><font color='#af2323'><span class='bold'>Blood spilt:</span></font> [round(blood_lost / 100, 1)]L"
+	finalreport += "<br><font color='#36959c'><span class='bold'>TRIUMPH(s) Awarded:</span></font> [tri_gained]"
+	finalreport += "<br><font color='#a02fa4'><span class='bold'>TRIUMPH(s) Stolen:</span></font> [tri_lost * -1]"
+
 	if(GLOB.confessors.len)
-		shit += "<br><font color='#93cac7'><span class='bold'>Confessors:</span></font> "
+		finalreport += "<br><font color='#93cac7'><span class='bold'>Confessors:</span></font> "
 		for(var/x in GLOB.confessors)
-			shit += "[x]"
-	shit += "<br><br><span class='bold'>∇--------------------∇</span>"
-	to_chat(world, "[shit.Join()]")
+			finalreport += "[x]"
+	finalreport += "<br><br><span class='bold'>∇--------------------∇</span>"
+	to_chat(world, "[finalreport.Join()]")
 	return
+
+//Bloat below
+
+
+/datum/controller/subsystem/ticker/proc/update_everything_flag_in_db()
+	for(var/datum/admin_rank/R in GLOB.admin_ranks)
+		var/list/flags = list()
+		if(R.include_rights == R_EVERYTHING)
+			flags += "flags"
+		if(R.exclude_rights == R_EVERYTHING)
+			flags += "exclude_flags"
+		if(R.can_edit_rights == R_EVERYTHING)
+			flags += "can_edit_flags"
+		if(!flags.len)
+			continue
+		var/sql_rank = sanitizeSQL(R.name)
+		var/flags_to_check = flags.Join(" != [R_EVERYTHING] AND ") + " != [R_EVERYTHING]"
+		var/datum/DBQuery/query_check_everything_ranks = SSdbcore.NewQuery("SELECT flags, exclude_flags, can_edit_flags FROM [format_table_name("admin_ranks")] WHERE rank = '[sql_rank]' AND ([flags_to_check])")
+		if(!query_check_everything_ranks.Execute())
+			qdel(query_check_everything_ranks)
+			return
+		if(query_check_everything_ranks.NextRow()) //no row is returned if the rank already has the correct flag value
+			var/flags_to_update = flags.Join(" = [R_EVERYTHING], ") + " = [R_EVERYTHING]"
+			var/datum/DBQuery/query_update_everything_ranks = SSdbcore.NewQuery("UPDATE [format_table_name("admin_ranks")] SET [flags_to_update] WHERE rank = '[sql_rank]'")
+			if(!query_update_everything_ranks.Execute())
+				qdel(query_update_everything_ranks)
+				return
+			qdel(query_update_everything_ranks)
+		qdel(query_check_everything_ranks)
+
+
+/datum/controller/subsystem/ticker/proc/gather_newscaster()
+	var/json_file = file("[GLOB.log_directory]/newscaster.json")
+	var/list/file_data = list()
+	var/pos = 1
+	for(var/V in GLOB.news_network.network_channels)
+		var/datum/newscaster/feed_channel/channel = V
+		if(!istype(channel))
+			stack_trace("Non-channel in newscaster channel list")
+			continue
+		file_data["[pos]"] = list("channel name" = "[channel.channel_name]", "author" = "[channel.author]", "censored" = channel.censored ? 1 : 0, "author censored" = channel.authorCensor ? 1 : 0, "messages" = list())
+		for(var/M in channel.messages)
+			var/datum/newscaster/feed_message/message = M
+			if(!istype(message))
+				stack_trace("Non-message in newscaster channel messages list")
+				continue
+			var/list/comment_data = list()
+			for(var/C in message.comments)
+				var/datum/newscaster/feed_comment/comment = C
+				if(!istype(comment))
+					stack_trace("Non-message in newscaster message comments list")
+					continue
+				comment_data += list(list("author" = "[comment.author]", "time stamp" = "[comment.time_stamp]", "body" = "[comment.body]"))
+			file_data["[pos]"]["messages"] += list(list("author" = "[message.author]", "time stamp" = "[message.time_stamp]", "censored" = message.bodyCensor ? 1 : 0, "author censored" = message.authorCensor ? 1 : 0, "photo file" = "[message.photo_file]", "photo caption" = "[message.caption]", "body" = "[message.body]", "comments" = comment_data))
+		pos++
+	if(GLOB.news_network.wanted_issue.active)
+		file_data["wanted"] = list("author" = "[GLOB.news_network.wanted_issue.scannedUser]", "criminal" = "[GLOB.news_network.wanted_issue.criminal]", "description" = "[GLOB.news_network.wanted_issue.body]", "photo file" = "[GLOB.news_network.wanted_issue.photo_file]")
+	WRITE_FILE(json_file, json_encode(file_data))
 
 /datum/controller/subsystem/ticker/proc/standard_reboot()
 	if(ready_for_reboot)
@@ -406,66 +288,6 @@
 			Reboot("Round ended.", "proper completion")
 	else
 		CRASH("Attempted standard reboot without ticker roundend completion")
-
-//Common part of the report
-/datum/controller/subsystem/ticker/proc/build_roundend_report()
-	var/list/parts = list()
-
-	//Gamemode specific things. Should be empty most of the time.
-	parts += mode.special_report()
-
-	CHECK_TICK
-
-	//AI laws
-	parts += law_report()
-
-	CHECK_TICK
-
-	//Antagonists
-	parts += antag_report()
-
-	CHECK_TICK
-	//Medals
-	parts += medal_report()
-	//Station Goals
-	parts += goal_report()
-
-	listclearnulls(parts)
-
-	return parts.Join()
-
-/datum/controller/subsystem/ticker/proc/survivor_report(popcount)
-	var/list/parts = list()
-	var/station_evacuated = EMERGENCY_ESCAPED_OR_ENDGAMED
-
-	if(GLOB.round_id)
-		var/statspage = CONFIG_GET(string/roundstatsurl)
-		var/info = statspage ? "<a href='?action=openLink&link=[url_encode(statspage)][GLOB.round_id]'>[GLOB.round_id]</a>" : GLOB.round_id
-		parts += "[FOURSPACES]Round ID: <b>[info]</b>"
-	parts += "[FOURSPACES]Shift Duration: <B>[DisplayTimeText(world.time - SSticker.round_start_time)]</B>"
-	parts += "[FOURSPACES]Station Integrity: <B>[mode.station_was_nuked ? "<span class='redtext'>Destroyed</span>" : "[popcount["station_integrity"]]%"]</B>"
-	var/total_players = GLOB.joined_player_list.len
-	if(total_players)
-		parts+= "[FOURSPACES]Total Population: <B>[total_players]</B>"
-		if(station_evacuated)
-			parts += "<BR>[FOURSPACES]Evacuation Rate: <B>[popcount[POPCOUNT_ESCAPEES]] ([PERCENT(popcount[POPCOUNT_ESCAPEES]/total_players)]%)</B>"
-			parts += "[FOURSPACES](on emergency shuttle): <B>[popcount[POPCOUNT_SHUTTLE_ESCAPEES]] ([PERCENT(popcount[POPCOUNT_SHUTTLE_ESCAPEES]/total_players)]%)</B>"
-		parts += "[FOURSPACES]Survival Rate: <B>[popcount[POPCOUNT_SURVIVORS]] ([PERCENT(popcount[POPCOUNT_SURVIVORS]/total_players)]%)</B>"
-		if(SSblackbox.first_death)
-			var/list/ded = SSblackbox.first_death
-			if(ded.len)
-				parts += "[FOURSPACES]First Death: <b>[ded["name"]], [ded["role"]], at [ded["area"]]. Damage taken: [ded["damage"]].[ded["last_words"] ? " Their last words were: \"[ded["last_words"]]\"" : ""]</b>"
-			//ignore this comment, it fixes the broken sytax parsing caused by the " above
-			else
-				parts += "[FOURSPACES]<i>Nobody died this shift!</i>"
-	if(istype(SSticker.mode, /datum/game_mode/dynamic))
-		var/datum/game_mode/dynamic/mode = SSticker.mode
-		parts += "[FOURSPACES]Threat level: [mode.threat_level]"
-		parts += "[FOURSPACES]Threat left: [mode.threat]"
-		parts += "[FOURSPACES]Executed rules:"
-		for(var/datum/dynamic_ruleset/rule in mode.executed_rules)
-			parts += "[FOURSPACES][FOURSPACES][rule.ruletype] - <b>[rule.name]</b>: -[rule.cost + rule.scaled_times * rule.scaling_cost] threat"
-	return parts.Join("<br>")
 
 /client/proc/roundend_report_file()
 	return "data/roundend_reports/[ckey].html"
@@ -520,14 +342,6 @@
 /datum/controller/subsystem/ticker/proc/players_report()
 	for(var/client/C in GLOB.clients)
 		give_show_playerlist_button(C)
-
-/datum/controller/subsystem/ticker/proc/display_report(popcount)
-	GLOB.common_report = build_roundend_report()
-	GLOB.survivor_report = survivor_report(popcount)
-	for(var/client/C in GLOB.clients)
-		show_roundend_report(C, FALSE)
-		give_show_report_button(C)
-		CHECK_TICK
 
 /datum/controller/subsystem/ticker/proc/law_report()
 	var/list/parts = list()
@@ -752,29 +566,3 @@
 		file_data["admins"]["[i]"] = A.rank.name
 	fdel(json_file)
 	WRITE_FILE(json_file, json_encode(file_data))
-
-/datum/controller/subsystem/ticker/proc/update_everything_flag_in_db()
-	for(var/datum/admin_rank/R in GLOB.admin_ranks)
-		var/list/flags = list()
-		if(R.include_rights == R_EVERYTHING)
-			flags += "flags"
-		if(R.exclude_rights == R_EVERYTHING)
-			flags += "exclude_flags"
-		if(R.can_edit_rights == R_EVERYTHING)
-			flags += "can_edit_flags"
-		if(!flags.len)
-			continue
-		var/sql_rank = sanitizeSQL(R.name)
-		var/flags_to_check = flags.Join(" != [R_EVERYTHING] AND ") + " != [R_EVERYTHING]"
-		var/datum/DBQuery/query_check_everything_ranks = SSdbcore.NewQuery("SELECT flags, exclude_flags, can_edit_flags FROM [format_table_name("admin_ranks")] WHERE rank = '[sql_rank]' AND ([flags_to_check])")
-		if(!query_check_everything_ranks.Execute())
-			qdel(query_check_everything_ranks)
-			return
-		if(query_check_everything_ranks.NextRow()) //no row is returned if the rank already has the correct flag value
-			var/flags_to_update = flags.Join(" = [R_EVERYTHING], ") + " = [R_EVERYTHING]"
-			var/datum/DBQuery/query_update_everything_ranks = SSdbcore.NewQuery("UPDATE [format_table_name("admin_ranks")] SET [flags_to_update] WHERE rank = '[sql_rank]'")
-			if(!query_update_everything_ranks.Execute())
-				qdel(query_update_everything_ranks)
-				return
-			qdel(query_update_everything_ranks)
-		qdel(query_check_everything_ranks)
