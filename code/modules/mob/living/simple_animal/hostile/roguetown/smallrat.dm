@@ -102,6 +102,12 @@
 					return
 	..()
 
+GLOBAL_LIST_INIT(RATS_DONT_EAT, typecacheof(list(
+	/obj/item/reagent_containers/food/snacks/smallrat,
+	/obj/item/reagent_containers/food/snacks/grown/onion/rogue,
+	/obj/item/reagent_containers/food/snacks/grown/berries/rogue/poison
+	)))
+
 /obj/item/reagent_containers/food/snacks/smallrat/process()
 	..()
 	if(dead)
@@ -114,6 +120,8 @@
 		dir = pick(GLOB.cardinals)
 		step(src, dir)
 		for(var/obj/item/reagent_containers/food/snacks/S in loc)
+			if(is_type_in_typecache(S, GLOB.RATS_DONT_EAT))
+				return
 			if(S != src)
 				qdel(S)
 				playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
