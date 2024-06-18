@@ -35,10 +35,11 @@
 	qdel(src)
 	affecting.treat_diseaserate()
 
+	var/bodypart_name = replacetext("[affecting]", "the ", "")
 	if(M == user)
-		user.visible_message("<span class='notice'>[user] treats [user.p_their()] [affecting].</span>", "<span class='notice'>I treat my [affecting].</span>")
+		user.visible_message("<span class='notice'>[user] treats [user.p_their()] [bodypart_name].</span>", "<span class='notice'>I treat my [bodypart_name].</span>")
 	else
-		user.visible_message("<span class='notice'>[user] treats [M]'s [affecting].</span>", "<span class='notice'>I treat [M]'s [affecting].</span>")
+		user.visible_message("<span class='notice'>[user] treats [M]'s [bodypart_name].</span>", "<span class='notice'>I treat [M]'s [bodypart_name].</span>")
 
 /obj/item/ash/Crossed(mob/living/L)
 	. = ..()
