@@ -20,11 +20,11 @@
 // job display orders //
 #define JDO_GRANDWIZARD 1
 #define JDO_GUARD 1.1
-#define JDO_MONK 1.2
-#define JDO_ARTIFICER 1.3
+#define JDO_ARTIFICER 1.2
 
-#define JDO_ADVENTURER 2
-#define JDO_PILGRIM 2.1
+#define JDO_MONK 2
+#define JDO_ADVENTURER 2.1
+#define JDO_PILGRIM 2.2
 
 #define JDO_NIGHTMAN 3
 #define JDO_GRABBER 3.1

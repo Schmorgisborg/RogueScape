@@ -2,7 +2,7 @@
 	title = "Grand Wizard"
 	flag = ADVENTURER
 	department_flag = SERFS
-	faction = "Station"
+	faction = "Syndicate"
 	total_positions = 3
 	spawn_positions = 3
 
@@ -20,7 +20,6 @@
 
 /datum/outfit/job/roguetown/magician/pre_equip(mob/living/carbon/human/H)
 	..()
-	ADD_TRAIT(H, RTRAIT_SEEPRICES, type)
 	shoes = /obj/item/clothing/shoes/roguetown/shortboots
 	armor = /obj/item/clothing/suit/roguetown/shirt/robe/black
 	cloak = /obj/item/clothing/cloak/black_cloak

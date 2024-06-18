@@ -35,11 +35,10 @@
 	qdel(src)
 	affecting.treat_diseaserate()
 
-	var/fix = replacetext(affecting,"the ","")
 	if(M == user)
-		user.visible_message("<span class='notice'>[user] treats [user.p_their()] [fix].</span>", "<span class='notice'>I treat my [fix].</span>")
+		user.visible_message("<span class='notice'>[user] treats [user.p_their()] [affecting].</span>", "<span class='notice'>I treat my [affecting].</span>")
 	else
-		user.visible_message("<span class='notice'>[user] treats [M]'s [fix].</span>", "<span class='notice'>I treat [M]'s [fix].</span>")
+		user.visible_message("<span class='notice'>[user] treats [M]'s [affecting].</span>", "<span class='notice'>I treat [M]'s [affecting].</span>")
 
 /obj/item/ash/Crossed(mob/living/L)
 	. = ..()

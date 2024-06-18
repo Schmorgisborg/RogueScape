@@ -18,6 +18,7 @@ GLOBAL_LIST_INIT(evil_positions, list(
 	))
 
 
+//to be removed
 GLOBAL_LIST_INIT(command_positions, list(
 	"Captain",
 	"Head of Personnel",
