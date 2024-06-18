@@ -2,7 +2,7 @@
 	title = "Monk"
 	flag = MONK
 	department_flag = SERFS
-	faction = "Station"
+	faction = "None"
 	total_positions = 10
 	spawn_positions = 10
 

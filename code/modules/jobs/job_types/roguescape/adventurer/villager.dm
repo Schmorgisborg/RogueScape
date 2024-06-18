@@ -2,7 +2,7 @@
 	title = "Towner"
 	flag = ADVENTURER
 	department_flag = PEASANTS
-	faction = "Station"
+	faction = "None"
 	total_positions = 0
 	spawn_positions = 0
 	allowed_races = list("Humen",

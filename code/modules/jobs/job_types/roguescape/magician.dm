@@ -2,7 +2,7 @@
 	title = "Grand Wizard"
 	flag = ADVENTURER
 	department_flag = SERFS
-	faction = "Syndicate"
+	faction = "Kingdom"
 	total_positions = 3
 	spawn_positions = 3
 

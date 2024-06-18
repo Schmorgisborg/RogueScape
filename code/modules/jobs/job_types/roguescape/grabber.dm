@@ -2,7 +2,7 @@
 	title = "Grabber"
 	flag = GRABBER
 	department_flag = PEASANTS
-	faction = "Station"
+	faction = "Mansion"
 	total_positions = 2
 	spawn_positions = 2
 

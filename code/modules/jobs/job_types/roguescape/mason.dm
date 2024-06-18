@@ -2,7 +2,7 @@
 	title = "Artificer"
 	flag = MASON
 	department_flag = SERFS
-	faction = "Station"
+	faction = "Kingdom"
 	total_positions = 6
 	spawn_positions = 6
 	allowed_races = list("Humen",

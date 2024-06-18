@@ -7,7 +7,7 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 	title = "Adventurer"
 	flag = ADVENTURER
 	department_flag = SERFS
-	faction = "Station"
+	faction = "None"
 	total_positions = 9999
 	spawn_positions = 128
 	allowed_races = list("Humen",

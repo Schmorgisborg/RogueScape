@@ -2,7 +2,7 @@
 	title = "Younker"
 	flag = BUTLER
 	department_flag = PEASANTS
-	faction = "Station"
+	faction = "Mansion"
 	total_positions = 1
 	spawn_positions = 1
 

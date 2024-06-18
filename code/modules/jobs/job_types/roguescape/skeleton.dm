@@ -2,7 +2,7 @@
 	title = "Skeleton"
 	flag = GRAVEDIGGER
 	department_flag = PEASANTS
-	faction = "Station"
+	faction = "Undead"
 	total_positions = 12
 	spawn_positions = 12
 
