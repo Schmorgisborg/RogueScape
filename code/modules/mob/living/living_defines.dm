@@ -146,11 +146,6 @@
 	var/bleed_rate = 0 //how much are we bleeding
 	var/bleedsuppress = 0 //for stopping bloodloss, eventually this will be limb-based like bleeding
 
-	var/disease_rate = 0 //Speed of wound infection
-	var/disease_tracker = 0
-	var/disease_threshhold = DISEASE_THRESHHOLD //Threshold before disease rolls begin
-	var/disease_max = DISEASE_MAX //Max amount of diseases contracted
-
 	var/list/next_attack_msg = list()
 
 	var/datum/component/personal_crafting/craftingthing
