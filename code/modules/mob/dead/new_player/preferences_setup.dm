@@ -74,6 +74,9 @@
 			features["tail_human"] = X
 			break
 	accessory = "Nothing"
+	charflaw = new /datum/charflaw/addiction/alcoholic()
+	selected_patron = new /datum/patrongods/psydon()
+	bdetail = "Strength"
 
 /datum/preferences/proc/random_species()
 	var/random_species_type = GLOB.species_list[pick(GLOB.roundstart_races)]
