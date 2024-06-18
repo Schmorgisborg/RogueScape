@@ -176,10 +176,11 @@
 	affecting.try_bandage(src)
 	H.update_damage_overlays()
 
+	var/bodypart_name = replacetext("[affecting]", "the ", "")
 	if(M == user)
-		user.visible_message("<span class='notice'>[user] bandages [user.p_their()] [affecting].</span>", "<span class='notice'>I bandage my [affecting].</span>")
+		user.visible_message("<span class='notice'>[user] bandages [user.p_their()] [bodypart_name].</span>", "<span class='notice'>I bandage my [bodypart_name].</span>")
 	else
-		user.visible_message("<span class='notice'>[user] bandages [M]'s [affecting].</span>", "<span class='notice'>I bandage [M]'s [affecting].</span>")
+		user.visible_message("<span class='notice'>[user] bandages [M]'s [bodypart_name].</span>", "<span class='notice'>I bandage [M]'s [bodypart_name].</span>")
 
 /obj/item/natural/thorn
 	name = "thorn"
