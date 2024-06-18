@@ -35,6 +35,7 @@
 	qdel(src)
 	affecting.treat_diseaserate()
 
+	affecting -= "the "
 	if(M == user)
 		user.visible_message("<span class='notice'>[user] treats [user.p_their()] [affecting].</span>", "<span class='notice'>I treat my [affecting].</span>")
 	else

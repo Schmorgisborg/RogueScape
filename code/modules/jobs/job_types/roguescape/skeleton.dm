@@ -65,7 +65,6 @@
 		ADD_TRAIT(H, TRAIT_NOBREATH, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_NOPAIN, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
-		ADD_TRAIT(H, TRAIT_NOSLEEP, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_SHOCKIMMUNE, TRAIT_GENERIC)
 		var/datum/antagonist/new_antag = new /datum/antagonist/skeleton()
 		H.mind.add_antag_datum(new_antag)

@@ -71,7 +71,7 @@
 					adjustToxLoss(-buckled.sleepy)
 					if(eyesclosed && !HAS_TRAIT(src, TRAIT_NOSLEEP))
 						Sleeping(300)
-		if(!IsSleeping() && !HAS_TRAIT(src, TRAIT_NOSLEEP))
+		if(!IsSleeping())
 			if(buckled?.sleepy)
 				if(eyesclosed)
 					if(!fallingas)
