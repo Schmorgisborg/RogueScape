@@ -4,8 +4,9 @@
 /mob/living/carbon
 	var/disease_rate = 0 //Speed of wound infection
 	var/disease_tracker = 0
-	var/list/diseases = list()
-	var/list/master_disease_list = list("rattles","bonefever","witbane","collywobbles","ataxia","blackheart","dampworm","greenspore","rustchancre","swampfever","witlesspox")
+	var/list/master_disease_list = list("rattles","bonefever",
+	"witbane","collywobbles","ataxia","blackheart","dampworm",
+	"greenspore","rustchancre","swampfever","witlesspox")
 	var/disease_threshhold = DISEASE_THRESHHOLD //Threshold before disease rolls begin
 	var/disease_max = DISEASE_MAX //Max amount of diseases contracted
 
@@ -24,6 +25,7 @@
 		if(disease_tracker == rtd)//No duplicate diseases
 			rtd = 0
 		disease_tracker = rtd
+
 		switch(rtd)//Pick a disease
 			if(1)
 				apply_status_effect(/datum/status_effect/debuff/disease/rattles)
@@ -58,7 +60,7 @@
 			if(11)
 				apply_status_effect(/datum/status_effect/debuff/disease/witlesspox)
 				to_chat(src, "<span class='warning'>I've contracted witless pox!</span>")
-			
+
 			else//Lucky dog
 				to_chat(src, "<span class='warning'>My wound burns!</span>")
 				disease_threshhold = DISEASE_THRESHHOLD
@@ -102,9 +104,17 @@
 	for(var/x in bodyparts)
 		var/obj/item/bodypart/limb = x
 		limb.treat_diseaserate()
-	for(var/x in diseases)
-		var/datum/status_effect/debuff/disease/cure = x
-		remove_status_effect(cure)
+	remove_status_effect(/datum/status_effect/debuff/disease/rattles)
+	remove_status_effect(/datum/status_effect/debuff/disease/witbane)
+	remove_status_effect(/datum/status_effect/debuff/disease/bonefever)
+	remove_status_effect(/datum/status_effect/debuff/disease/collywobbles)
+	remove_status_effect(/datum/status_effect/debuff/disease/ataxia)
+	remove_status_effect(/datum/status_effect/debuff/disease/blackheart)
+	remove_status_effect(/datum/status_effect/debuff/disease/dampworm)
+	remove_status_effect(/datum/status_effect/debuff/disease/greenspore)
+	remove_status_effect(/datum/status_effect/debuff/disease/rustchancre)
+	remove_status_effect(/datum/status_effect/debuff/disease/swampfever)
+	remove_status_effect(/datum/status_effect/debuff/disease/witlesspox)
 
 //Debuffs
 /obj/screen/alert/status_effect/debuff/disease/

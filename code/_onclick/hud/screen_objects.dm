@@ -1715,8 +1715,9 @@
 		var/mob/living/carbon/human/M = usr
 		if(modifiers["left"])
 			update_icon()
+			to_chat(M, "*stress: [M.stress]*")
 			if(M.charflaw)
-				to_chat(M, "*----*")
+				to_chat(M, "*--------*")
 				to_chat(M, "<span class='info'>[M.charflaw.desc]</span>")
 			to_chat(M, "*--------*")
 			var/list/already_printed = list()

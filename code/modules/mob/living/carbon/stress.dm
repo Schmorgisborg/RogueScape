@@ -24,8 +24,9 @@
 /mob/living/carbon/adjust_stress(amt)
 	stress += amt
 	if(stress > 32)
-		stress = 30
+		stress = 32
 	if(stress < 0)
+		stressbuffer = stress
 		stress = 0
 
 /mob/living/carbon/update_stress()
@@ -33,7 +34,7 @@
 		stress = 0
 		if(hud_used)
 			if(hud_used.stressies)
-				hud_used.stressies.update_icon(stress)
+				hud_used.stressies.update_icon()
 		return
 	for(var/datum/stressevent/D in negative_stressors)
 		if(D.timer)
@@ -56,10 +57,17 @@
 	if(hud_used)
 		if(hud_used.stressies)
 			hud_used.stressies.update_icon()
-	if(stress > 15)
-		change_stat("fortune", -1*round((stress-16)/2), "stress")
-	else
-		change_stat("fortune", 0, "stress")
+
+	src.remove_status_effect(/datum/status_effect/moodgood)
+	src.remove_status_effect(/datum/status_effect/moodbad)
+	src.remove_status_effect(/datum/status_effect/moodvbad)
+	if(!stress)
+		src.apply_status_effect(/datum/status_effect/moodgood)
+	switch(stress)
+		if(21 to 27)
+			src.apply_status_effect(/datum/status_effect/moodbad)
+		if(28 to 32)
+			src.apply_status_effect(/datum/status_effect/moodvbad)
 
 /mob/living/carbon/has_stress(event)
 	var/amount
@@ -233,41 +241,41 @@
 */
 /datum/stressevent/miasmagas
 	timer = 10 SECONDS
-	stressadd = 2
+	stressadd = 6
 	desc = "<span class='red'>Smells like death here.</span>"
 
 /datum/stressevent/peckish
-	timer = 10 MINUTES
+	timer = 20 MINUTES
 	stressadd = 4
 	desc = "<span class='red'>I'm peckish.</span>"
 
 /datum/stressevent/hungry
-	timer = 10 MINUTES
+	timer = 20 MINUTES
 	stressadd = 8
 	desc = "<span class='red'>I'm hungry.</span>"
 
 /datum/stressevent/starving
-	timer = 10 MINUTES
+	timer = 20 MINUTES
 	stressadd = 16
 	desc = "<span class='red'>I'm starving.</span>"
 
 /datum/stressevent/drym
-	timer = 10 MINUTES
-	stressadd = 1
+	timer = 20 MINUTES
+	stressadd = 3
 	desc = "<span class='red'>I'm a little thirsty.</span>"
 
 /datum/stressevent/thirst
-	timer = 10 MINUTES
-	stressadd = 6
+	timer = 20 MINUTES
+	stressadd = 9
 	desc = "<span class='red'>I'm thirsty.</span>"
 
 /datum/stressevent/parched
-	timer = 10 MINUTES
-	stressadd = 12
+	timer = 20 MINUTES
+	stressadd = 15
 	desc = "<span class='red'>I'm going to die of thirst.</span>"
 
 /datum/stressevent/dismembered
-	timer = 40 MINUTES
+	timer = 30 MINUTES
 	stressadd = 16
 	desc = "<span class='red'>My limb was severed!.</span>"
 
@@ -277,7 +285,7 @@
 	desc = "<span class='red'>I'd rather cut my own throat than my beard.</span>"
 
 /datum/stressevent/viewdeath
-	timer = 1 MINUTES
+	timer = 3 MINUTES
 	stressadd = 4
 	desc = "<span class='red'>Death...</span>"
 
@@ -309,13 +317,13 @@
 	desc = "<span class='red'>I saw something ghastly.</span>"
 
 /datum/stressevent/bleeding
-	timer = 2 MINUTES
-	stressadd = 2
+	timer = 5 MINUTES
+	stressadd = 6
 	desc = list("<span class='red'>I think I'm bleeding.</span>","<span class='red'>I'm bleeding.</span>")
 
 /datum/stressevent/painmax
 	timer = 10 MINUTES
-	stressadd = 4
+	stressadd = 10
 	desc = "<span class='red'>THE PAIN!</span>"
 
 /datum/stressevent/freakout
@@ -329,28 +337,28 @@
 	desc = "<span class='grey'>I fell. I'm a fool.</span>"
 
 /datum/stressevent/burntmeal
-	timer = 5 MINUTES
-	stressadd = 6
+	timer = 15 MINUTES
+	stressadd = 12
 	desc = "<span class='red'>YUCK!</span>"
 
 /datum/stressevent/rotfood
-	timer = 5 MINUTES
-	stressadd = 8
+	timer = 15 MINUTES
+	stressadd = 12
 	desc = "<span class='red'>YUCK!</span>"
 
 /datum/stressevent/psycurse
 	timer = 10 MINUTES
-	stressadd = 12
+	stressadd = 18
 	desc = "<span class='red'>Oh no! I've received divine punishment!</span>"
 
 /datum/stressevent/badmeal
-	timer = 5 MINUTES
-	stressadd = 8
+	timer = 15 MINUTES
+	stressadd = 12
 	desc = "<span class='red'>It tastes VILE!</span>"
 
 /datum/stressevent/vomit
-	timer = 5 MINUTES
-	stressadd = 2
+	timer = 10 MINUTES
+	stressadd = 4
 	max_stacks = 2
 	desc = "<span class='red'>I puked!</span>"
 
@@ -396,7 +404,6 @@
 	desc = "<span class='red'>My head is cold and ugly.</span>"
 
 /datum/stressevent/sleeptime
-	timer = 0
 	stressadd = 4
 	desc = "<span class='red'>I'm tired.</span>"
 
@@ -456,22 +463,22 @@
 
 /datum/stressevent/psyprayer
 	timer = 20 MINUTES
-	stressadd = -2
+	stressadd = -6
 	desc = "<span class='green'>The Gods smiles upon me.</span>"
 
 /datum/stressevent/joke
 	timer = 30 MINUTES
-	stressadd = -5
+	stressadd = -8
 	desc = "<span class='green'>I heard a good joke.</span>"
 
 /datum/stressevent/tragedy
 	timer = 30 MINUTES
-	stressadd = -5
+	stressadd = -8
 	desc = "<span class='green'>Life isn't so bad after all.</span>"
 
 /datum/stressevent/blessed
 	timer = 15 MINUTES
-	stressadd = -5
+	stressadd = -6
 	desc = "<span class='green'>Psydon's light shines brightly.</span>"
 
 /datum/stressevent/triumph
@@ -481,32 +488,32 @@
 
 /datum/stressevent/drunk
 	timer = 10 MINUTES
-	stressadd = -3
+	stressadd = -6
 	desc = list("<span class='green'>Alcohol eases the pain.</span>","<span class='green'>Alcohol, my true friend.</span>")
 
 /datum/stressevent/pweed
 	timer = 15 MINUTES
-	stressadd = -2
+	stressadd = -6
 	desc = list("<span class='green'>A relaxing smoke.</span>","<span class='green'>A flavorful smoke.</span>")
 
 /datum/stressevent/weed
 	timer = 5 MINUTES
-	stressadd = -6
+	stressadd = -10
 	desc = "<span class='blue'>I love you sweet leaf.</span>"
 
 /datum/stressevent/high
 	timer = 5 MINUTES
-	stressadd = -4
+	stressadd = -14
 	desc = "<span class='blue'>I'm so high, don't take away my sky.</span>"
 
 /datum/stressevent/hug
 	timer = 30 MINUTES
-	stressadd = -1
+	stressadd = -3
 //	desc = "<span class='green'>Somebody gave me a nice hug.</span>"
 
 /datum/stressevent/stuffed
 	timer = 10 MINUTES
-	stressadd = -3
+	stressadd = -10
 	desc = "<span class='green'>I'm stuffed! Feels good.</span>"
 
 /datum/stressevent/goodfood
@@ -521,24 +528,24 @@
 
 /datum/stressevent/music
 	timer = 5 MINUTES
-	stressadd = -2
+	stressadd = -4
 	desc = "<span class='green'>The music is relaxing.</span>"
 /datum/stressevent/music/two
-	stressadd = -3
+	stressadd = -6
 	desc = "<span class='green'>The music is very relaxing.</span>"
 /datum/stressevent/music/three
-	stressadd = -4
+	stressadd = -8
 	desc = "<span class='green'>The music saps my stress.</span>"
 /datum/stressevent/music/four
-	stressadd = -6
+	stressadd = -10
 	desc = "<span class='green'>The music is heavenly.</span>"
 	timer = 10 MINUTES
 /datum/stressevent/music/five
-	stressadd = -8
+	stressadd = -12
 	timer = 10 MINUTES
 	desc = "<span class='green'>The music is strummed by an angel.</span>"
 /datum/stressevent/music/six
-	stressadd = -10
+	stressadd = -14
 	timer = 10 MINUTES
 	desc = "<span class='green'>The music is a blessing from Psydon.</span>"
 

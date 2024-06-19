@@ -45,7 +45,7 @@
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
 	if(!playing)
-		var/curfile = input(user, "Which song?", "Roguetown", name) as null|anything in song_list
+		var/curfile = input(user, "Which song?", "RogueScape", name) as null|anything in song_list
 		if(!user)
 			return
 		if(user.mind)

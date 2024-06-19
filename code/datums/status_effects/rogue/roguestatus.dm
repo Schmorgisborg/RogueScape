@@ -26,7 +26,7 @@
 /obj/screen/alert/status_effect/moodgood
 	name = "Inner Peace"
 	desc = ""
-	icon_state = "stressg"
+	icon_state = "stressvg"
 
 /datum/status_effect/moodvgood
 	id = "moodvgood"
