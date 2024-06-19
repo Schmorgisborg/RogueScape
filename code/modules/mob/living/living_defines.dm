@@ -155,8 +155,6 @@
 
 	var/list/simple_embedded_objects = list()
 
-	var/datum/sex_controller/sexcon
-
 	var/slowdown
 
 	var/last_dir_change = 0

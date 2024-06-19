@@ -8,14 +8,14 @@
 	created_item = /obj/item/rogueweapon/sword/iron
 
 /datum/anvil_recipe/weapons/idagger
-	name = "iron dagger"
+	name = "2x iron dagger"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	req_bar = /obj/item/ingot/iron
 	created_item = list(/obj/item/rogueweapon/huntingknife/idagger,
 	/obj/item/rogueweapon/huntingknife/idagger)
 
 /datum/anvil_recipe/weapons/sdagger
-	name = "steel dagger"
+	name = "2x steel dagger"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	req_bar = /obj/item/ingot/steel
 	created_item = list(/obj/item/rogueweapon/huntingknife/idagger/steel,

@@ -11,6 +11,7 @@
 /datum/reagent/medicine/healthpot/on_mob_life(mob/living/carbon/M)
 	if(M.bleed_rate < 0.3)
 		M.blood_volume = min(M.blood_volume+2, BLOOD_VOLUME_MAXIMUM)
+	M.cure_disease()
 	M.adjustBruteLoss(-3*REM, 0)
 	M.adjustFireLoss(-3*REM, 0)
 	M.adjustOxyLoss(-3, 0)

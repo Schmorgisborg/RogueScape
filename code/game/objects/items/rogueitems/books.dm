@@ -199,11 +199,12 @@
 		if(m)
 			user.say(m)
 
-/obj/item/book/rogue/bibble/attack(mob/living/M, mob/user)
+/obj/item/book/rogue/bibble/attack(mob/living/carbon/M, mob/user)
 	if(user.mind && user.mind.assigned_role == "Priest"||"Monk")
 		if(!user.can_read(src))
 			to_chat(user, "<span class='warning'>I don't understand these scribbly black lines.</span>")
 			return
+		M.cure_disease()
 		M.apply_status_effect(/datum/status_effect/buff/blessed)
 		M.add_stress(/datum/stressevent/blessed)
 		user.visible_message("<span class='notice'>[user] blesses [M].</span>")

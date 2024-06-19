@@ -1,4 +1,41 @@
+#define JOB_AVAILABLE 0
+#define JOB_UNAVAILABLE_GENERIC 1
+#define JOB_UNAVAILABLE_BANNED 2
+#define JOB_UNAVAILABLE_PLAYTIME 3
+#define JOB_UNAVAILABLE_ACCOUNTAGE 4
+#define JOB_UNAVAILABLE_SLOTFULL 5
+#define JOB_UNAVAILABLE_RACE 6
+#define JOB_UNAVAILABLE_SEX 7
+#define JOB_UNAVAILABLE_WTEAM 8
+#define JOB_UNAVAILABLE_LASTCLASS 9
+#define JOB_UNAVAILABLE_PATRON 10
 
+#define JCOLOR_NOBLE "#9c40bf"
+#define JCOLOR_MERCHANT "#c2b449"
+#define JCOLOR_SOLDIER "#b64949"
+#define JCOLOR_SERF "#669968"
+#define JCOLOR_PEASANT "#936d6c"
+
+
+// job display orders //
+#define JDO_GRANDWIZARD 1
+#define JDO_GUARD 1.1
+#define JDO_ARTIFICER 1.2
+
+#define JDO_MONK 2
+#define JDO_ADVENTURER 2.1
+#define JDO_PILGRIM 2.2
+
+#define JDO_NIGHTMAN 3
+#define JDO_GRABBER 3.1
+#define JDO_YOUNKER 3.2
+
+#define JDO_SKELETON 4
+
+
+#define JDO_UNUSED 10
+
+//To be removed.
 #define ENGSEC			(1<<0)
 
 #define CAPTAIN			(1<<0)
@@ -41,21 +78,8 @@
 #define CLOWN			(1<<11)
 #define MIME			(1<<12)
 #define ASSISTANT		(1<<13)
-
-#define JOB_AVAILABLE 0
-#define JOB_UNAVAILABLE_GENERIC 1
-#define JOB_UNAVAILABLE_BANNED 2
-#define JOB_UNAVAILABLE_PLAYTIME 3
-#define JOB_UNAVAILABLE_ACCOUNTAGE 4
-#define JOB_UNAVAILABLE_SLOTFULL 5
-#define JOB_UNAVAILABLE_RACE 6
-#define JOB_UNAVAILABLE_SEX 7
-#define JOB_UNAVAILABLE_WTEAM 8
-#define JOB_UNAVAILABLE_LASTCLASS 9
-#define JOB_UNAVAILABLE_PATRON 10
-
-#define DEFAULT_RELIGION "Christianity"
-#define DEFAULT_DEITY "Space Jesus"
+#define DEFAULT_RELIGION "text"
+#define DEFAULT_DEITY "text"
 
 #define JOB_DISPLAY_ORDER_DEFAULT 0
 
@@ -147,60 +171,3 @@
 #define SERVANT		(1<<2)
 #define ORPHAN		(1<<3)
 #define PRINCE		(1<<4)
-
-#define JCOLOR_NOBLE "#9c40bf"
-#define JCOLOR_MERCHANT "#c2b449"
-#define JCOLOR_SOLDIER "#b64949"
-#define JCOLOR_SERF "#669968"
-#define JCOLOR_PEASANT "#936d6c"
-
-
-// job display orders //
-#define JDO_MAGICIAN 1
-#define JDO_CASTLEGUARD 1.1
-#define JDO_MONK 1.2
-#define JDO_MASON 1.3
-#define JDO_GRAVEMAN 1.4
-#define JDO_PILGRIM 1.5
-#define JDO_ADVENTURER 1.6
-
-#define JDO_NIGHTMAN 2
-#define JDO_GRABBER 2.1
-#define JDO_BUTLER 2.2
-
-#define JDO_SKELETON 3
-
-#define JDO_LORD 5
-#define JDO_LADY 1.1
-#define JDO_PRINCE 1.2
-#define JDO_HAND 1.3
-#define JDO_STEWARD 1.4
-#define JDO_WAPP 1.5
-#define JDO_SHERIFF 7
-#define JDO_TOWNGUARD 8
-#define JDO_GATEMASTER 9
-#define JDO_DUNGEONEER 10
-#define JDO_SQUIRE 11
-#define JDO_VET 11.1
-#define JDO_PRIEST 12
-#define JDO_CLERIC 13
-#define JDO_CHURCHLING 15
-#define JDO_PURITAN 16
-#define JDO_SHEPHERD 17
-#define JDO_MERCHANT 18
-#define JDO_ARMORER 20
-#define JDO_WSMITH 21
-#define JDO_BAPP 22
-#define JDO_SERVANT 25
-#define JDO_BARKEEP 26
-#define JDO_COOK 27
-#define JDO_BUTCHER 27.1
-#define JDO_SOILSON 27.2
-#define JDO_NIGHTMAIDEN 28.2
-#define JDO_JESTER 29
-#define JDO_PRISONER 30
-#define JDO_CHIEF 31
-#define JDO_VILLAGER 32
-#define JDO_MERCENARY 33
-#define JDO_VAGRANT 34
-#define JDO_ORPHAN 35

@@ -74,14 +74,14 @@
 		for(var/obj/structure/fluff/psycross/S in oview(5, L))
 			found = S
 		if(!found)
-			to_chat(L, "<span class='warning'>I need a holy cross.</span>")
+			to_chat(L, "<span class='warning'>I need a psycross.</span>")
 			return FALSE
 		else
 			L.playsound_local(L, 'sound/misc/notice (2).ogg', 100, FALSE)
 			to_chat(L, "<font color='yellow'>I have faith my Lord hears me.</font>")
 			L.add_stress(/datum/stressevent/psyprayer)
 			return TRUE
-	else to_chat(L, "<span class='danger'>My prayer was kinda short...</span>")
+	else to_chat(L, "<span class='danger'>My prayer was short...</span>")
 
 /mob/living/proc/check_prayer_underworld(mob/living/L,message)
 	if(!L || !message)

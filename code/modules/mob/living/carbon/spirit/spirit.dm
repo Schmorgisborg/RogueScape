@@ -44,6 +44,7 @@
 	verbs += /mob/living/proc/lay_down
 	name = pick("Wanderer", "Traveler", "Pilgrim", "Mourner", "Sorrowful", "Forlorn", "Regretful", "Piteous", "Rueful", "Dejected")
 	//initialize limbs
+	setup_dna()
 	create_bodyparts()
 	create_internal_organs()
 	. = ..()
@@ -61,6 +62,12 @@
 	internal_organs += new /obj/item/organ/liver
 	internal_organs += new /obj/item/organ/stomach
 	..()
+
+/mob/living/carbon/spirit/proc/setup_dna()
+	//initialize dna. for spawned humans; overwritten by other code
+	create_dna(src)
+	randomize_human(src)
+	dna.initialize_dna()
 
 /mob/living/carbon/spirit/Destroy()
 	return ..()

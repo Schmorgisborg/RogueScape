@@ -38,9 +38,9 @@
 			return
 
 		handle_blood()
-
 		handle_roguebreath()
 		handle_wounds()
+		handle_disease()
 		var/bprv = handle_bodyparts()
 		if(bprv & BODYPART_LIFE_UPDATE_HEALTH)
 			update_stamina() //needs to go before updatehealth to remove stamcrit
@@ -71,7 +71,7 @@
 					adjustToxLoss(-buckled.sleepy)
 					if(eyesclosed && !HAS_TRAIT(src, TRAIT_NOSLEEP))
 						Sleeping(300)
-		if(!IsSleeping() && !HAS_TRAIT(src, TRAIT_NOSLEEP))
+		if(!IsSleeping())
 			if(buckled?.sleepy)
 				if(eyesclosed)
 					if(!fallingas)

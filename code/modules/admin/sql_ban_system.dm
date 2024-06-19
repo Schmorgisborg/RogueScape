@@ -215,11 +215,9 @@
 			break_counter++
 		output += "</div></div>"
 		//standard departments all have identical handling
-		var/list/job_lists = list("Youngfolk" = GLOB.youngfolk_positions,
-							"Garrison" = GLOB.garrison_positions,
-							"Church" = GLOB.church_positions,
-							"Merchants" = GLOB.serf_positions,
-							"Peasants" = GLOB.peasant_positions)
+		var/list/job_lists = list("Good" = GLOB.good_positions,
+							"Bad" = GLOB.bad_positions,
+							"Evil" = GLOB.evil_positions)
 		for(var/department in job_lists)
 			//the first element is the department head so they need the same javascript call as above
 			output += "<div class='column'><label class='rolegroup [ckey(department)]'><input type='checkbox' name='[department]' class='hidden' [usr.client.prefs.tgui_fancy ? " onClick='toggle_checkboxes(this, \"_com\")'" : ""]>[department]</label><div class='content'>"

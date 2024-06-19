@@ -81,6 +81,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/eye_color = "000"				//Eye color
 	var/voice_color = "a0a0a0"
 	var/detail_color = "000"
+	var/bdetail = "Strength"
 	var/datum/species/pref_species = new /datum/species/human/northern()	//Mutant race
 	var/datum/patrongods/selected_patron = new /datum/patrongods/psydon()
 	var/datum/charflaw/charflaw = new /datum/charflaw/addiction/alcoholic()
@@ -399,7 +400,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 					dat += "<br>"
 				dat += "<b>Face Detail:</b> <a href='?_src_=prefs;preference=detail;task=input'>[detail]</a>"
 				dat += "<br>"
-				dat += "<b>Body Detail:</b> <a href='?_src_=prefs;preference=bdetail;task=input'>None</a>"
+				dat += "<b>Stat Boon:</b> <a href='?_src_=prefs;preference=bdetail;task=input'>[bdetail]</a>"
 				if(gender == FEMALE)
 					dat += "<br>"
 				dat += "<br></td>"
@@ -899,7 +900,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	popup.open(FALSE)
 	onclose(user, "capturekeypress", src)
 
-/datum/preferences/proc/SetChoices(mob/user, limit = 15, list/splitJobs = list("Sheriff", "Priest", "Merchant", "Butler", "Village Elder"), widthPerColumn = 295, height = 620) //295 620
+/datum/preferences/proc/SetChoices(mob/user, limit = 15, list/splitJobs = list("Grand Wizard", "Monk", "Nightman", "Skeleton"), widthPerColumn = 295, height = 620) //295 620
 	if(!SSjob)
 		return
 
@@ -1167,12 +1168,20 @@ Slots: [job.spawn_positions]</span>
 	if(user.client?.prefs)
 		if(!user.client.prefs.lastclass)
 			return
-	var/choice = tgalert(user, "Play as this class again?", "Reset last played", "Do It", "Cancel")
+	var/choice = tgalert(user, "Use two triumphs to play as this class again?", "Reset Previous Role", "Do It", "Cancel")
+	if(choice == "Cancel")
+		return
 	if(!choice)
 		return
 	if(user.client?.prefs)
-		user.client.prefs.lastclass = null
-		user.client.prefs.save_preferences()
+		if(user.client.prefs.lastclass)
+			if(user.get_triumphs() < 2)
+				to_chat(user, "<span class='warning'>I haven't TRIUMPHED enough.</span>")
+				return
+			user.adjust_triumphs(-2)
+			user.client.prefs.lastclass = null
+			to_chat(user, "<span class='notice'>My class has been reset.</span>")
+			user.client.prefs.save_preferences()
 
 /datum/preferences/proc/SetQuirks(mob/user)
 	if(!SSquirks)
@@ -1766,9 +1775,11 @@ Slots: [job.spawn_positions]</span>
 						detail = new_detail
 
 				if("bdetail")
-					var/list/loly = list("Not yet.","Work in progress.","Don't click me.","Stop clicking this.","Nope.","Be patient.","Sooner or later.")
-					to_chat(user, "<font color='red'>[pick(loly)]</font>")
-					return
+					var/list/bdetaillist = list("Strength","Perception","Intelligence","Constitution","Endurance","Speed")
+					var/new_bdetail
+					new_bdetail = input(user, "Choose your character's boon:", "+1 to your stat roll")  as null|anything in bdetaillist
+					if(new_bdetail)
+						bdetail = new_bdetail
 
 				if("socks")
 					var/new_socks
@@ -2026,7 +2037,7 @@ Slots: [job.spawn_positions]</span>
 					to_chat(user, "<font color='red'>[pick(loly)]</font>")
 					return
 				if("faith")
-					to_chat(user, "<font color='teal'>While it's only recently been formed, the Divine Pantheon is the only religion that ever held any real prominence. Founded by Psydon, after his ascension through miracles, three elders and the prophet are worshipped for saving humanity from destruction yils ago.</font>")
+					to_chat(user, "<font color='teal'>While it's only recently been formed, the Divine Pantheon is the only religion that ever held any real prominence. Founded by Psydon, after his ascension through miracles, he and the other Gods have brought humanity into a new realm.</font>")
 					return
 				if("alignment")
 ///					to_chat(user, "<font color='puple'>Alignment is how you communicate to the Game Masters if your character follows a certain set of behavior restrictions. This allows you to </font>")
@@ -2330,6 +2341,7 @@ Slots: [job.spawn_positions]</span>
 	character.undershirt = undershirt
 //	character.accessory = accessory
 	character.detail = detail
+	character.bdetail = bdetail
 	character.socks = socks
 	character.PATRON = selected_patron
 	character.backpack = backpack

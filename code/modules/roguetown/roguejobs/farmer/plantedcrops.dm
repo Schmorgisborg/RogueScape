@@ -254,7 +254,7 @@
 			if(do_after(M,harvtime, target = src))
 				myseed.yield -= 1
 				playsound(src,"plantcross", 100, FALSE)
-				var/probbi = 10
+				var/probbi = 40
 				if(M.mind.get_skill_level(/datum/skill/labor/farming))
 					probbi = 100
 				if(prob(probbi))

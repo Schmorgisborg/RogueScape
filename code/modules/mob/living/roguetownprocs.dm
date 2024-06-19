@@ -34,15 +34,15 @@
 			chance2hit += 10
 
 	if(user.STAPER > 10)
-		chance2hit += ((20-user.STAPER)*3)
+		chance2hit += ((user.STAPER-10)*3)
 
 	if(user.STAPER < 10)
-		chance2hit -= ((10-user.STAPER)*3)
+		chance2hit += ((user.STAPER-5)*3)
 
 	if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 		chance2hit += 20
 	if(istype(user.rmb_intent, /datum/rmb_intent/swift))
-		chance2hit -= 20
+		chance2hit -= 10
 
 	chance2hit = CLAMP(chance2hit, 5, 99)
 
@@ -64,7 +64,7 @@
 
 
 /mob/proc/get_generic_parry_drain()
-	return 30
+	return 20
 
 /mob/living/proc/checkmiss(mob/living/user)
 	if(user == src)
@@ -147,7 +147,7 @@
 			var/obj/item/offhand = get_inactive_held_item()
 			var/used_index = active_hand_index
 			var/weapon_parry = FALSE
-			if(mainhand)
+			if(mainhand & !istype(offhand, /obj/item/rogueweapon/shield))
 				if(mainhand.can_parry)
 					weapon_parry = TRUE
 			else

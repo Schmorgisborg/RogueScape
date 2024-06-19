@@ -1342,6 +1342,8 @@
 			. += limby
 			if(BP.get_bleedrate())
 				. += mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[BP.body_zone]-bleed") //apply healthy limb
+			else
+				. -= mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[BP.body_zone]-bleed") //apply healthy limb
 		for(var/X in H.get_missing_limbs())
 			var/mutable_appearance/limby = mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[X]") //missing limb
 			limby.color = "#2f002f"
@@ -1713,8 +1715,9 @@
 		var/mob/living/carbon/human/M = usr
 		if(modifiers["left"])
 			update_icon()
+			to_chat(M, "*stress: [M.stress]*")
 			if(M.charflaw)
-				to_chat(M, "*----*")
+				to_chat(M, "*--------*")
 				to_chat(M, "<span class='info'>[M.charflaw.desc]</span>")
 			to_chat(M, "*--------*")
 			var/list/already_printed = list()
@@ -1755,8 +1758,6 @@
 			already_printed = list()
 			to_chat(M, "*--------*")
 		if(modifiers["right"])
-			//
-			to_chat(M, "<span class='info'>[M.stress]</span>")
 			if(M.get_triumphs() <= 0)
 				to_chat(M, "<span class='warning'>I haven't TRIUMPHED.</span>")
 				return

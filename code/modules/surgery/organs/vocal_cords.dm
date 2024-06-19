@@ -173,9 +173,6 @@
 	var/list/specific_listeners = list()
 	var/found_string = null
 
-	//Get the proper job titles
-	message = get_full_job_name(message)
-
 	for(var/V in listeners)
 		var/mob/living/L = V
 		var/datum/antagonist/devil/devilinfo = is_devil(L)

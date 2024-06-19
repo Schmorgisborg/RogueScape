@@ -301,11 +301,11 @@
 		else
 			playsound(src, 'sound/foley/doors/lockrattle.ogg', 100)
 
-/obj/structure/closet/proc/tool_interact(obj/item/W, mob/user)//returns TRUE if attackBy call shouldnt be continued (because tool was used/closet was of wrong type), FALSE if otherwise
-	. = TRUE
+/obj/structure/closet/proc/tool_interact(obj/item/W, mob/user)//returns FALSE if attackBy call shouldnt be continued (because tool was used/closet was of wrong type)
+	. = FALSE
 	if(opened)
 		if(user.transferItemToLoc(W, drop_location())) // so we put in unlit welder too
-			return
+			return TRUE
 
 
 
