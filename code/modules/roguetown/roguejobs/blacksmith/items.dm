@@ -9,7 +9,6 @@
 /obj/item/roguestatue/gold
 	name = "gold statue"
 	icon_state = "gstatue1"
-	smeltresult = /obj/item/ingot/gold
 	sellprice = 120
 
 /obj/item/roguestatue/gold/Initialize()
@@ -29,7 +28,6 @@
 /obj/item/roguestatue/silver
 	name = "silver statue"
 	icon_state = "sstatue1"
-	smeltresult = /obj/item/ingot/silver
 	sellprice = 90
 
 /obj/item/roguestatue/silver/Initialize()
@@ -39,7 +37,6 @@
 /obj/item/roguestatue/steel
 	name = "steel statue"
 	icon_state = "ststatue1"
-	smeltresult = /obj/item/ingot/steel
 	sellprice = 60
 
 /obj/item/roguestatue/steel/Initialize()
@@ -49,7 +46,6 @@
 /obj/item/roguestatue/iron
 	name = "iron statue"
 	icon_state = "istatue1"
-	smeltresult = /obj/item/ingot/iron
 	sellprice = 40
 
 /obj/item/roguestatue/iron/Initialize()

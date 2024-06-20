@@ -86,10 +86,9 @@
 		else if(!user.transferItemToLoc(I,src))
 			to_chat(user, "<span class='warning'>[I] is stuck to my hand!</span>")
 			return TRUE
-		for(var/obj/item/B in ingredients)
-			if(B == I)
-				to_chat(user, "<span class='warning'>There's already [I] in the cauldron.</span>")
-				return TRUE
+		for(I in ingredients())
+			to_chat(user, "<span class='warning'>There's already [I] in the cauldron.</span>")
+			return TRUE
 		to_chat(user, "<span class='info'>I add [I] to [src].</span>")
 		ingredients += I
 		playsound(src, "bubbles", 100, TRUE)
