@@ -12,15 +12,19 @@
 	anchored = TRUE
 	max_integrity = 300
 	var/list/ingredients = list()
-	var/maxingredients = 2
-	var/cooking = 0
+	var/maxingredients = 3			
+	var/brewing = 0
 	var/potion_result = "bland"
+	var/brew_amount = 45
 	fueluse = 5 MINUTES
 	crossfire = FALSE
 
 	var/healthpot_weight = 0
 	var/manapot_weight = 0
 	var/antidote_weight = 0
+
+	var/strong_mod = 0
+	var/long_mod = 0
 //	var/healthpot_weight = 0
 
 /obj/machinery/light/rogue/cauldron/Initialize()
@@ -34,22 +38,21 @@
 	..()
 
 /obj/machinery/light/rogue/cauldron/examine(mob/user)
-	if(ingredients.len)
+	if(ingredients.len)//ingredients.len
 		DISABLE_BITFIELD(reagents.flags, AMOUNT_VISIBLE)
-		DISABLE_BITFIELD(reagents.flags, REFILLABLE)
 	else
 		ENABLE_BITFIELD(reagents.flags, AMOUNT_VISIBLE)
-		ENABLE_BITFIELD(reagents.flags, REFILLABLE)
 	. = ..()
 
 /obj/machinery/light/rogue/cauldron/process()
 	..()
 	if(on)
 		if(ingredients.len)
-			if(cooking < 30)
-				cooking++
+			if(brewing < 20)
+				brewing++
 //				playsound(src, "bubbles", 40, FALSE)
-			else if(cooking == 30)
+			else if(brewing == 20)
+				//ingredients convert to their potion
 				for(var/obj/item/I in ingredients)
 					switch(I.possible_potion)
 						if("healthpot")
@@ -58,24 +61,37 @@
 							manapot_weight++
 						if("antidote")
 							antidote_weight++
+
+						if("long")
+							long_mod++
+						if("strong")
+							strong_mod++
+						if("robust")
+							long_mod++
+							strong_mod++
 					qdel(I)
+				//modify the potion
+				if(strong_mod)
+
+				//select the result
 				if(healthpot_weight >= 2)
-					reagents.add_reagent(/datum/reagent/medicine/healthpot, 90)
+					reagents.add_reagent(/datum/reagent/medicine/healthpot, 45)
 					potion_result = "metallic"
 				if(manapot_weight >= 2)
-					reagents.add_reagent(/datum/reagent/medicine/manapot, 90)
+					reagents.add_reagent(/datum/reagent/medicine/manapot, 45)
 					potion_result = "sweet"
 				if(antidote_weight >= 2)
-					reagents.add_reagent(/datum/reagent/medicine/antidote, 60)
+					reagents.add_reagent(/datum/reagent/medicine/antidote, 45)
 					potion_result = "sickly sweet"
+				//handle player perception and reset for next time
 				src.visible_message("<span class='info'>The cauldron finishes boiling with a faint [potion_result] smell.</span>")
 				playsound(src, "bubbles", 100, TRUE)
 				playsound(src,'sound/misc/smelter_fin.ogg', 40, FALSE)
 				ingredients = list()
-				cooking = 31
+				brewing = 21
 
 /obj/machinery/light/rogue/cauldron/burn_out()
-	cooking = 0
+	brewing = 0
 	..()
 
 /obj/machinery/light/rogue/cauldron/attackby(obj/item/I, mob/user, params)
@@ -91,6 +107,7 @@
 			return TRUE
 		to_chat(user, "<span class='info'>I add [I] to [src].</span>")
 		ingredients += I
+		brewing = 0
 		playsound(src, "bubbles", 100, TRUE)
 		return TRUE
 	..()

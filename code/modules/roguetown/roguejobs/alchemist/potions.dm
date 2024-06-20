@@ -5,17 +5,18 @@
 	color = "#ff0000"
 	taste_description = "red"
 	overdose_threshold = 0
-	metabolization_rate = 2 * REAGENTS_METABOLISM
+	metabolization_rate = 10 * REAGENTS_METABOLISM
 	alpha = 173
 
 /datum/reagent/medicine/healthpot/on_mob_life(mob/living/carbon/M)
 	M.blood_volume = min(M.blood_volume+5, BLOOD_VOLUME_MAXIMUM)
 	M.cure_disease()
-	M.adjustBruteLoss(-3*REM, 0)
-	M.adjustFireLoss(-3*REM, 0)
-	M.adjustOxyLoss(-3, 0)
-	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -3*REM)
-	M.adjustCloneLoss(-3*REM, 0)
+	M.adjustBruteLoss(-8*REM, 0)
+	M.adjustFireLoss(-8*REM, 0)
+	M.adjustOxyLoss(-5, 0)
+	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -5*REM)
+	M.adjustCloneLoss(-5*REM, 0)
+	user.visible_message("<span class='info'>HEALTH POT doing it's stuff</span>")
 	..()
 	. = 1
 

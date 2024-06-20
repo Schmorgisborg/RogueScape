@@ -7,6 +7,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	dust_result = null
 
+//pestle recipes
 /obj/item/rogueore/gold
 	dust_result = /obj/item/alch/golddust
 
@@ -19,7 +20,18 @@
 /obj/item/ingot/iron
 	dust_result = /obj/item/alch/irondust
 
-//potions
+//dust mix
+/datum/crafting_recipe/roguetown/alch/feaudust
+	name = "feau dust"
+	result = /obj/item/alch/feaudust
+	reqs = list(/obj/item/alch/irondust = 2,
+				/obj/item/alch/golddust = 1)
+	structurecraft = /obj/structure/table/wood
+	verbage = "mixes"
+	craftsound = 'sound/foley/scribble.ogg'
+	skillcraft = null
+
+//potion ingredients
 /obj/item/natural/dirtclod
 	possible_potion = "antidote"
 
@@ -27,7 +39,13 @@
 	possible_potion = "antidote"
 
 /obj/item/alch/golddust
-	possible_potion = ""
+	name "gold dust"
+	possible_potion = "strong"
 
 /obj/item/alch/irondust
-	possible_potion = ""
+	name = "iron dust"
+	possible_potion = "long"
+
+/obj/item/alch/feaudust
+	name = "feau dust"
+	possible_potion = "robust"

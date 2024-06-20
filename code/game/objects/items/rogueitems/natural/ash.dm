@@ -4,7 +4,6 @@
 	icon_state = "ash"
 	possible_item_intents = list(/datum/intent/use)
 	w_class = WEIGHT_CLASS_TINY
-	possible_potion = "antidote"
 
 /obj/item/ash/attack(mob/living/M, mob/user)
 	testing("attack")

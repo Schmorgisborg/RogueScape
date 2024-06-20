@@ -20,3 +20,12 @@
 			qdel(S)
 		return
 	..()
+
+/datum/crafting_recipe/roguetown/cauldron
+	name = "mortar and pestle"
+	result = /obj/structure/mortarpestle
+	reqs = list(/obj/item/natural/stone = 3)
+	verbage = "crafts"
+	time = 30
+	craftsound = 'sound/foley/Building-01.ogg'
+	skillcraft = /datum/skill/craft/masonry
