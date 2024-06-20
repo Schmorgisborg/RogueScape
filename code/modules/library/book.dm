@@ -40,8 +40,6 @@
 
 /obj/item/book/examine(mob/user)
 	. = ..()
-	if(istype(src,/obj/item/book/rune/granter/))
-		return
 	. += "<a href='?src=[REF(src)];read=1'>Read</a>"
 
 /obj/item/book/Topic(href, href_list)
@@ -79,8 +77,6 @@
 	if(!user.hud_used.reads)
 		return
 	if(!user.can_read(src))
-		return
-	if(istype(src,/obj/item/book/rune/granter/spell))
 		return
 	if(in_range(user, src) || isobserver(user))
 		if(!pages.len)

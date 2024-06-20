@@ -72,7 +72,7 @@
 				change_stat("speed", -1)
 			if(AGE_MIDDLEAGED)
 				change_stat("speed", -1)
-				change_stat("perception" -1)
+				change_stat("perception", -1)
 				change_stat("endurance", 1)
 				change_stat("intelligence", 1)
 			if(AGE_OLD)
