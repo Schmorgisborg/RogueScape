@@ -51,20 +51,20 @@
 	name = "Poison Antidote"
 	description = ""
 	reagent_state = LIQUID
-	color = "00ff00"
+	color = "#00ff00"
 	taste_description = "sickly sweet"
 	metabolization_rate = REAGENTS_METABOLISM
 
 /datum/reagent/medicine/antidote/on_mob_life(mob/living/carbon/M)
-	M.adjustToxLoss(4, 0)
+	M.adjustToxLoss(-4, 0)
 
 /datum/reagent/medicine/diseasecure
 	name = "Disease Cure"
 	description = ""
 	reagent_state = LIQUID
-	color = "ffbf00"
+	color = "#ffbf00"
 	taste_description = "dirt"
-	metabolization_rate = 20 * REAGENTS_METABOLISM
+	metabolization_rate = 30 * REAGENTS_METABOLISM
 
-/datum/reagent/medicine/diseasecure
+/datum/reagent/medicine/diseasecure/on_mob_life(mob/living/carbon/M)
 	M.cure_disease()

@@ -5,8 +5,8 @@
 	dropshrink = 0
 	throwforce = 0
 	w_class = WEIGHT_CLASS_TINY
-	ingredient = TRUE
-	possible_potions = "antidote"
+	possible_potion = "antidote"
+	smeltresult = /obj/item/reagent_containers/glass/bottle/
 
 /obj/item/natural/dirtclod/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/rogueweapon/shovel))
