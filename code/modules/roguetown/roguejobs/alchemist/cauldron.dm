@@ -48,6 +48,8 @@
 				var/antidote_weight = 0
 				var/diseasecure_weight = 0
 
+				var/strengthpot_weight = 0
+
 				var/poison_weight = 0
 
 				var/strong_mod = 0
@@ -64,6 +66,9 @@
 							antidote_weight++
 						if("diseasecure")
 							diseasecure_weight++
+						//buff potions
+						if("strengthpot")
+							strengthpot_weight++
 						//poisons
 						if("poison")
 							poison_weight++
@@ -100,8 +105,11 @@
 				if(diseasecure_weight >= 2)
 					reagents.add_reagent(/datum/reagent/medicine/diseasecure, (brew_amount/2))
 					potion_result = "dirt"
+				//buff potions
+				if(strengthpot_weight >= 3)
+
 				//poisons
-				if(poison_weight >= 2)
+				if(poison_weight >= 3)
 					reagents.add_reagent(/datum/reagent/berrypoison, (brew_amount/6))
 					potion_result = "death"
 				//handle player perception and reset for next time

@@ -71,7 +71,7 @@
 	..()
 	. = 1
 
-//
+
 /datum/reagent/medicine/antidote
 	name = "Poison Antidote"
 	description = ""
@@ -94,6 +94,21 @@
 
 /datum/reagent/medicine/diseasecure/on_mob_life(mob/living/carbon/M)
 	M.cure_disease()
+
+
+//Buff potions
+/datum/reagent/medicine/strengthbuff
+	name = "Strength"
+	description = ""
+	reagent_state = LIQUID
+	color = "#00B4FF"
+	taste_description = "protein"
+	metabolization_rate = REAGENTS_METABOLISM * 100
+
+/datum/reagent/medicine/strengthbuff/on_mob_life(mob/living/carbon/M)
+	M.apply_status_effect(/datum/status_effect/buff/strengthpot)
+	return ..()
+
 
 //Poisons
 /datum/reagent/berrypoison

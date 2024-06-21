@@ -2,12 +2,17 @@
 /obj/item/alch
 	name = "dust"
 	desc = "A generic item, this shouldn't exist."
-	icon = null//'icons/roguetown/items/alch.dmi'Need icon, alch.dmi doesn't exist
-	icon_state = ""
-	w_class = WEIGHT_CLASS_NORMAL
+	icon = 'icons/roguetown/items/alch.dmi'
+	icon_state = "irondust"
+	w_class = WEIGHT_CLASS_TINY
 	dust_result = null
+	
 
 //pestle recipes
+/obj/item/seeds
+	dust_result = /obj/item/alch/seeddust
+	..()
+
 /obj/item/rogueore/gold
 	dust_result = /obj/item/alch/golddust
 	possible_potion = "manapot"
@@ -15,7 +20,7 @@
 
 /obj/item/ingot/gold
 	dust_result = /obj/item/alch/golddust
-	possible_potion = "healthpot"
+	possible_potion = "strengthpot"
 	..()
 
 /obj/item/rogueore/iron
@@ -25,13 +30,13 @@
 
 /obj/item/ingot/iron
 	dust_result = /obj/item/alch/irondust
-	possible_potion = "healthpot"
+	possible_potion = "strengthpot"
 	..()
 
 //dust mix
 /datum/crafting_recipe/roguetown/alch/feaudust
 	name = "feau dust"
-	result = /obj/item/alch/feaudust
+	result = list(/obj/item/alch/feaudust = 2)
 	reqs = list(/obj/item/alch/irondust = 2,
 				/obj/item/alch/golddust = 1)
 	structurecraft = /obj/structure/table/wood
@@ -40,6 +45,28 @@
 	skillcraft = null
 
 //potion ingredients
+/obj/item/alch/bone
+	name = "bones"
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "bone"
+	item_state = "sheet-bone"
+	singular_name = "bone"
+	desc = ""
+	force = 7
+	throwforce = 5
+	max_amount = 12
+	w_class = WEIGHT_CLASS_SMALL
+	dust_result = /obj/item/alch/bonemeal
+	possible_potion = "strength"
+//	merge_type = /obj/item/stack/sheet/bone
+
+/obj/item/alch/sinew
+	name = "sinew"
+	icon = 'icons/obj/mining.dmi'
+	desc = ""
+	icon_state = "sinew"
+	novariants = TRUE
+
 /obj/item/natural/dirtclod
 	possible_potion = "antidote"
 	..()
@@ -49,7 +76,7 @@
 	..()
 
 
-
+//ingredients generated from mortar & pestle
 /obj/item/alch/golddust
 	name = "gold dust"
 	icon_state = "golddust"
@@ -64,3 +91,13 @@
 	name = "feau dust"
 	icon_state = "feaudust"
 	possible_potion = "robust"
+
+/obj/item/alch/bonemeal
+	name = "bone meal"
+	icon_state "whitepowder"
+	possible_potion = "manapot"
+
+/obj/item/alch/seeddust
+	name = "seed dust"
+	icon_state = "seeddust"
+	possible_potion = "strengthpot"
