@@ -50,12 +50,15 @@
 
 /obj/item/alch/golddust
 	name = "gold dust"
+	icon_state = "golddust"
 	possible_potion = "strong"
 
 /obj/item/alch/irondust
 	name = "iron dust"
+	icon_state = "irondust"
 	possible_potion = "long"
 
 /obj/item/alch/feaudust
 	name = "feau dust"
+	icon_state = "feaudust"
 	possible_potion = "robust"

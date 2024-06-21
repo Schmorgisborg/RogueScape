@@ -26,13 +26,13 @@
 	. = 1
 
 
-/datum/reagent/medicine/healthpot/strong
+/datum/reagent/medicine/stronghealth
 	name = "Strong Health Potion"
 	description = "Quickly regenerates all types of damage."
 	color = "#ff0000"
 	metabolization_rate = 20 * REAGENTS_METABOLISM
 
-/datum/reagent/medicine/healthpot/strong/on_mob_life(mob/living/carbon/M)
+/datum/reagent/medicine/stronghealth/on_mob_life(mob/living/carbon/M)
 	M.blood_volume = min(M.blood_volume+5, BLOOD_VOLUME_MAXIMUM)
 	M.adjustBruteLoss(-8*REM, 0)
 	M.adjustFireLoss(-8*REM, 0)
@@ -60,13 +60,13 @@
 	. = 1
 
 
-/datum/reagent/medicine/manapot/strong
+/datum/reagent/medicine/strongmana
 	name = "Mana Potion"
 	description = "Gradually regenerates stamina."
 	color = "#0000ff"
 	metabolization_rate = 6 * REAGENTS_METABOLISM
 
-/datum/reagent/medicine/manapot/strong/on_mob_life(mob/living/carbon/M)
+/datum/reagent/medicine/strongmana/on_mob_life(mob/living/carbon/M)
 	M.rogstam_add(300)
 	..()
 	. = 1
@@ -110,12 +110,15 @@
 	return ..()
 
 
-/datum/reagent/berrypoison/strong
-	name = "Berry Poison"
+/datum/reagent/strongpoison
+	name = "Strong Berry Poison"
 	description = ""
+	reagent_state = LIQUID
 	color = "#00B4FF"
+	taste_description = "burning"
+	metabolization_rate = REAGENTS_METABOLISM
 
-/datum/reagent/berrypoison/strong/on_mob_life(mob/living/carbon/M)
+/datum/reagent/strongpoison/on_mob_life(mob/living/carbon/M)
 	M.add_nausea(20)
 	M.adjustToxLoss(12, 0)
 	return ..()
@@ -123,21 +126,21 @@
 //Potion reactions
 /datum/chemical_reaction/alch/stronghealth
 	name = "Strong Health Potion"
-	id = /datum/reagent/medicine/healthpot/strong
-	results = list(/datum/reagent/medicine/healthpot/strong = 5)
+	id = /datum/reagent/medicine/stronghealth
+	results = list(/datum/reagent/medicine/stronghealth = 5)
 	required_reagents = list(/datum/reagent/medicine/healthpot = 5, /datum/reagent/additive = 5)
 	mix_message = "oh shit health worked!"
 
 /datum/chemical_reaction/alch/strongmana
 	name = "Strong Mana Potion"
-	id = /datum/reagent/medicine/manapot/strong
-	results = list(/datum/reagent/medicine/manapot/strong = 5)
+	id = /datum/reagent/medicine/strongmana
+	results = list(/datum/reagent/medicine/strongmana = 5)
 	required_reagents = list(/datum/reagent/medicine/manapot = 5, /datum/reagent/additive = 5)
 	mix_message = "oh shit mana worked!"
 
-/datum/chemical_reaction/alch/strongberrypoison
+/datum/chemical_reaction/alch/strongpoison
 	name = "Strong Health Potion"
-	id = /datum/reagent/berrypoison/strong
-	results = list(/datum/reagent/berrypoison/strong = 5)
+	id = /datum/reagent/strongpoison
+	results = list(/datum/reagent/strongpoison = 5)
 	required_reagents = list(/datum/reagent/berrypoison = 5, /datum/reagent/additive = 5)
 	mix_message = "oh shit poison worked!"
