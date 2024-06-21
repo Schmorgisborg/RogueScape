@@ -11,7 +11,7 @@
 	color = "#ff0000"
 	taste_description = "red"
 	overdose_threshold = 0
-	metabolization_rate = 10 * REAGENTS_METABOLISM
+	metabolization_rate = REAGENTS_METABOLISM
 	alpha = 173
 
 /datum/reagent/medicine/healthpot/on_mob_life(mob/living/carbon/M)
@@ -21,7 +21,7 @@
 	M.adjustOxyLoss(-1, 0)
 	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -5*REM)
 	M.adjustCloneLoss(-2*REM, 0)
-	M.visible_message("<span class='info'>HEALTH POT doing it's stuff</span>")
+	M.visible_message("<span class='info'>HEALTH POT doing it's stuff (base meta)</span>")
 	..()
 	. = 1
 
@@ -30,7 +30,7 @@
 	name = "Strong Health Potion"
 	description = "Quickly regenerates all types of damage."
 	color = "#ff0000"
-	metabolization_rate = 20 * REAGENTS_METABOLISM
+	metabolization_rate = 2 * REAGENTS_METABOLISM
 
 /datum/reagent/medicine/stronghealth/on_mob_life(mob/living/carbon/M)
 	M.blood_volume = min(M.blood_volume+5, BLOOD_VOLUME_MAXIMUM)
@@ -39,7 +39,7 @@
 	M.adjustOxyLoss(-5, 0)
 	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -5*REM)
 	M.adjustCloneLoss(-5*REM, 0)
-	M.visible_message("<span class='info'>STRONG HEALTH POT doing it's stuff</span>")
+	M.visible_message("<span class='info'>STRONG HEALTH POT doing it's stuff (2x meta)</span>")
 	..()
 	. = 1
 
@@ -64,7 +64,7 @@
 	name = "Mana Potion"
 	description = "Gradually regenerates stamina."
 	color = "#0000ff"
-	metabolization_rate = 6 * REAGENTS_METABOLISM
+	metabolization_rate = 4 * REAGENTS_METABOLISM
 
 /datum/reagent/medicine/strongmana/on_mob_life(mob/living/carbon/M)
 	M.rogstam_add(300)
