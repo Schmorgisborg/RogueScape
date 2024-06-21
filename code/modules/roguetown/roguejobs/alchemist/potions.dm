@@ -1,3 +1,9 @@
+//Basic
+/datum/reagent/additive
+	name = "additive"
+	reagent_state = LIQUID
+
+//Potions
 /datum/reagent/medicine/healthpot
 	name = "Health Potion"
 	description = "Gradually regenerates all types of damage."
@@ -10,16 +16,34 @@
 
 /datum/reagent/medicine/healthpot/on_mob_life(mob/living/carbon/M)
 	M.blood_volume = min(M.blood_volume+5, BLOOD_VOLUME_MAXIMUM)
-	M.cure_disease()
+	M.adjustBruteLoss(-2*REM, 0)
+	M.adjustFireLoss(-2*REM, 0)
+	M.adjustOxyLoss(-1, 0)
+	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -5*REM)
+	M.adjustCloneLoss(-2*REM, 0)
+	M.visible_message("<span class='info'>HEALTH POT doing it's stuff</span>")
+	..()
+	. = 1
+
+
+/datum/reagent/medicine/healthpot/strong
+	name = "Strong Health Potion"
+	description = "Quickly regenerates all types of damage."
+	color = "#ff0000"
+	metabolization_rate = 20 * REAGENTS_METABOLISM
+
+/datum/reagent/medicine/healthpot/strong/on_mob_life(mob/living/carbon/M)
+	M.blood_volume = min(M.blood_volume+5, BLOOD_VOLUME_MAXIMUM)
 	M.adjustBruteLoss(-8*REM, 0)
 	M.adjustFireLoss(-8*REM, 0)
 	M.adjustOxyLoss(-5, 0)
 	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -5*REM)
 	M.adjustCloneLoss(-5*REM, 0)
-	user.visible_message("<span class='info'>HEALTH POT doing it's stuff</span>")
+	M.visible_message("<span class='info'>STRONG HEALTH POT doing it's stuff</span>")
 	..()
 	. = 1
 
+//
 /datum/reagent/medicine/manapot
 	name = "Mana Potion"
 	description = "Gradually regenerates stamina."
@@ -35,6 +59,43 @@
 	..()
 	. = 1
 
+
+/datum/reagent/medicine/manapot/strong
+	name = "Mana Potion"
+	description = "Gradually regenerates stamina."
+	color = "#0000ff"
+	metabolization_rate = 6 * REAGENTS_METABOLISM
+
+/datum/reagent/medicine/manapot/strong/on_mob_life(mob/living/carbon/M)
+	M.rogstam_add(300)
+	..()
+	. = 1
+
+//
+/datum/reagent/medicine/antidote
+	name = "Poison Antidote"
+	description = ""
+	reagent_state = LIQUID
+	color = "#00ff00"
+	taste_description = "sickly sweet"
+	metabolization_rate = REAGENTS_METABOLISM
+
+/datum/reagent/medicine/antidote/on_mob_life(mob/living/carbon/M)
+	M.adjustToxLoss(-4, 0)
+
+
+/datum/reagent/medicine/diseasecure
+	name = "Disease Cure"
+	description = ""
+	reagent_state = LIQUID
+	color = "#ffbf00"
+	taste_description = "dirt"
+	metabolization_rate = 30 * REAGENTS_METABOLISM
+
+/datum/reagent/medicine/diseasecure/on_mob_life(mob/living/carbon/M)
+	M.cure_disease()
+
+//Poisons
 /datum/reagent/berrypoison
 	name = "Berry Poison"
 	description = ""
@@ -48,24 +109,35 @@
 	M.adjustToxLoss(3, 0)
 	return ..()
 
-/datum/reagent/medicine/antidote
-	name = "Poison Antidote"
+
+/datum/reagent/berrypoison/strong
+	name = "Berry Poison"
 	description = ""
-	reagent_state = LIQUID
-	color = "#00ff00"
-	taste_description = "sickly sweet"
-	metabolization_rate = REAGENTS_METABOLISM
+	color = "#00B4FF"
 
-/datum/reagent/medicine/antidote/on_mob_life(mob/living/carbon/M)
-	M.adjustToxLoss(-4, 0)
+/datum/reagent/berrypoison/strong/on_mob_life(mob/living/carbon/M)
+	M.add_nausea(20)
+	M.adjustToxLoss(12, 0)
+	return ..()
 
-/datum/reagent/medicine/diseasecure
-	name = "Disease Cure"
-	description = ""
-	reagent_state = LIQUID
-	color = "#ffbf00"
-	taste_description = "dirt"
-	metabolization_rate = 30 * REAGENTS_METABOLISM
+//Potion reactions
+/datum/chemical_reaction/alch/stronghealth
+	name = "Strong Health Potion"
+	id = /datum/reagent/medicine/healthpot/strong
+	results = list(/datum/reagent/medicine/healthpot/strong = 5)
+	required_reagents = list(/datum/reagent/medicine/healthpot = 5, /datum/reagent/additive = 5)
+	mix_message = "oh shit health worked!"
 
-/datum/reagent/medicine/diseasecure/on_mob_life(mob/living/carbon/M)
-	M.cure_disease()
+/datum/chemical_reaction/alch/strongmana
+	name = "Strong Mana Potion"
+	id = /datum/reagent/medicine/manapot/strong
+	results = list(/datum/reagent/medicine/manapot/strong = 5)
+	required_reagents = list(/datum/reagent/medicine/manapot = 5, /datum/reagent/additive = 5)
+	mix_message = "oh shit mana worked!"
+
+/datum/chemical_reaction/alch/strongberrypoison
+	name = "Strong Health Potion"
+	id = /datum/reagent/berrypoison/strong
+	results = list(/datum/reagent/berrypoison/strong = 5)
+	required_reagents = list(/datum/reagent/berrypoison = 5, /datum/reagent/additive = 5)
+	mix_message = "oh shit poison worked!"

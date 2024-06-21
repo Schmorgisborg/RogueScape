@@ -4,7 +4,7 @@
 /obj/machinery/light/rogue/cauldron
 	name = "cauldron"
 	desc = ""
-	icon = 'icons/roguetown/misc/lighting.dmi'
+	icon = 'icons/roguetown/misc/alchemy.dmi'
 	icon_state = "cauldron1"
 	base_state = "cauldron"
 	density = TRUE
@@ -12,24 +12,15 @@
 	anchored = TRUE
 	max_integrity = 300
 	var/list/ingredients = list()
-	var/maxingredients = 3			
+	var/maxingredients = 3
 	var/brewing = 0
 	var/potion_result = "bland"
-	var/brew_amount = 45
+	var/brew_amount = 60
 	fueluse = 5 MINUTES
 	crossfire = FALSE
 
-	var/healthpot_weight = 0
-	var/manapot_weight = 0
-	var/antidote_weight = 0
-
-	var/strong_mod = 0
-	var/long_mod = 0
-//	var/healthpot_weight = 0
-
 /obj/machinery/light/rogue/cauldron/Initialize()
 	create_reagents(900, DRAINABLE | AMOUNT_VISIBLE | REFILLABLE)
-	icon_state = "barrel[rand(1,3)]"
 	. = ..()
 
 /obj/machinery/light/rogue/cauldron/Destroy()
@@ -52,16 +43,31 @@
 				brewing++
 //				playsound(src, "bubbles", 40, FALSE)
 			else if(brewing == 20)
+				var/healthpot_weight = 0
+				var/manapot_weight = 0
+				var/antidote_weight = 0
+				var/diseasecure_weight = 0
+
+				var/poison_weight = 0
+
+				var/strong_mod = 0
+				var/long_mod = 0
 				//ingredients convert to their potion
 				for(var/obj/item/I in ingredients)
 					switch(I.possible_potion)
+						//potions
 						if("healthpot")
 							healthpot_weight++
 						if("manapot")
 							manapot_weight++
 						if("antidote")
 							antidote_weight++
-
+						if("diseasecure")
+							diseasecure_weight++
+						//poisons
+						if("poison")
+							poison_weight++
+						//modifiers
 						if("long")
 							long_mod++
 						if("strong")
@@ -71,23 +77,39 @@
 							strong_mod++
 					qdel(I)
 				//modify the potion
+				if(long_mod)
+					brew_amount *= 1.5
 				if(strong_mod)
-
+					if("healthpot")
+						reagents.add_reagent(/datum/reagent/additive, brew_amount)
+					if("manapot")
+						reagents.add_reagent(/datum/reagent/additive, brew_amount)
+					if("poison")
+						reagents.add_reagent(/datum/reagent/additive, brew_amount/6)
 				//select the result
+				//potions
 				if(healthpot_weight >= 2)
-					reagents.add_reagent(/datum/reagent/medicine/healthpot, 45)
+					reagents.add_reagent(/datum/reagent/medicine/healthpot, brew_amount)
 					potion_result = "metallic"
 				if(manapot_weight >= 2)
-					reagents.add_reagent(/datum/reagent/medicine/manapot, 45)
+					reagents.add_reagent(/datum/reagent/medicine/manapot, brew_amount)
 					potion_result = "sweet"
 				if(antidote_weight >= 2)
-					reagents.add_reagent(/datum/reagent/medicine/antidote, 45)
+					reagents.add_reagent(/datum/reagent/medicine/antidote, (brew_amount/2))
 					potion_result = "sickly sweet"
+				if(diseasecure_weight >= 2)
+					reagents.add_reagent(/datum/reagent/medicine/diseasecure, (brew_amount/2))
+					potion_result = "dirt"
+				//poisons
+				if(poison_weight >= 2)
+					reagents.add_reagent(/datum/reagent/berrypoison, (brew_amount/6))
+					potion_result = "death"
 				//handle player perception and reset for next time
 				src.visible_message("<span class='info'>The cauldron finishes boiling with a faint [potion_result] smell.</span>")
 				playsound(src, "bubbles", 100, TRUE)
-				playsound(src,'sound/misc/smelter_fin.ogg', 40, FALSE)
+				playsound(src,'sound/misc/smelter_fin.ogg', 30, FALSE)
 				ingredients = list()
+				brew_amount = 45
 				brewing = 21
 
 /obj/machinery/light/rogue/cauldron/burn_out()
@@ -102,9 +124,11 @@
 		else if(!user.transferItemToLoc(I,src))
 			to_chat(user, "<span class='warning'>[I] is stuck to my hand!</span>")
 			return TRUE
-		for(I in ingredients())
-			to_chat(user, "<span class='warning'>There's already [I] in the cauldron.</span>")
-			return TRUE
+		for(var/x = 1, x < ingredients.len, x++)
+			var/check = ingredients[x]
+			if(I == check)
+				to_chat(user, "<span class='warning'>There's already [I] in the cauldron.</span>")
+				return TRUE
 		to_chat(user, "<span class='info'>I add [I] to [src].</span>")
 		ingredients += I
 		brewing = 0

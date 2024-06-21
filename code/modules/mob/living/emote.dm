@@ -48,7 +48,7 @@
 /mob/living/proc/check_prayer(mob/living/L,message)
 	if(!L || !message)
 		return FALSE
-	var/list/bannedwords = list("zizo","cock","dick","fuck","shit","pussy","cuck","fucker","fucked","cunt","asshole")
+	var/list/bannedwords = list("zizo","cock","dick","fuck","shit","pussy","cuck","fucker","fucked","cunt","asshole","ass","nigger","nigg","fag")
 	var/message2recognize = sanitize_hear_message(message)
 	var/found = null
 	var/mob/living/carbon/human/M = L
@@ -86,7 +86,7 @@
 /mob/living/proc/check_prayer_underworld(mob/living/L,message)
 	if(!L || !message)
 		return FALSE
-	var/list/bannedwords = list("zizo","cock","dick","fuck","shit","pussy","ass","cuck","fucker","fucked","cunt","asshole")
+	var/list/bannedwords = list("zizo","cock","dick","fuck","shit","pussy","cuck","fucker","fucked","cunt","asshole","ass","nigger","nigg","fag")
 	var/message2recognize = sanitize_hear_message(message)
 	var/mob/living/carbon/spirit/M = L
 	for(var/T in bannedwords)

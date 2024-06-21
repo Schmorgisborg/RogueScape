@@ -4,7 +4,7 @@
 /obj/structure/mortarpestle
 	name = "mortar and pestle"
 	desc = ""
-	icon = 'icons/roguetown/misc/structure.dmi'
+	icon = 'icons/roguetown/misc/alchemy.dmi'
 	icon_state = "mortarpestle"
 	density = FALSE
 	anchored = TRUE
@@ -16,8 +16,8 @@
 		user.visible_message("<span class='info'>[user] begins grinding up [I].</span>")
 		playsound(loc, 'sound/foley/scribble.ogg', 100, FALSE)
 		if(do_after(user, 10, target = src))
-			new S.dust_result(get_turf(loc))
-			qdel(S)
+			new I.dust_result(get_turf(loc))
+			qdel(I)
 		return
 	..()
 
