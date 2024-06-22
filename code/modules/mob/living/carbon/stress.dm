@@ -53,22 +53,37 @@
 			to_chat(src, "<span class='red'>I gain stress.</span>")
 		else
 			to_chat(src, "<span class='green'>I gain peace.</span>")
+		
+		switch(stress)
+			if(0)
+				if(src.has_status_effect(/datum/status_effect/moodgood))
+					src.remove_status_effect(/datum/status_effect/moodbad)
+					src.remove_status_effect(/datum/status_effect/moodvbad)
+
+					src.apply_status_effect(/datum/status_effect/moodgood)
+			if(21 to 27)
+				if(src.has_status_effect(/datum/status_effect/moodbad))
+					src.remove_status_effect(/datum/status_effect/moodvbad)
+					src.remove_status_effect(/datum/status_effect/moodgood)
+
+					src.apply_status_effect(/datum/status_effect/moodbad)
+			if(28 to 32)
+				if(src.has_status_effect(/datum/status_effect/moodvbad))
+					src.remove_status_effect(/datum/status_effect/moodgood)
+					src.remove_status_effect(/datum/status_effect/moodbad)
+
+					src.apply_status_effect(/datum/status_effect/moodvbad)
+			else
+				src.remove_status_effect(/datum/status_effect/moodgood)
+				src.remove_status_effect(/datum/status_effect/moodbad)
+				src.remove_status_effect(/datum/status_effect/moodvbad)
+
 	oldstress = stress
 	if(hud_used)
 		if(hud_used.stressies)
 			hud_used.stressies.update_icon()
 
-	src.remove_status_effect(/datum/status_effect/moodgood)
-	src.remove_status_effect(/datum/status_effect/moodbad)
-	src.remove_status_effect(/datum/status_effect/moodvbad)
-	if(!stress)
-		src.apply_status_effect(/datum/status_effect/moodgood)
-	switch(stress)
-		if(21 to 27)
-			src.apply_status_effect(/datum/status_effect/moodbad)
-		if(28 to 32)
-			src.apply_status_effect(/datum/status_effect/moodvbad)
-
+	
 /mob/living/carbon/has_stress(event)
 	var/amount
 	for(var/datum/stressevent/D in negative_stressors)

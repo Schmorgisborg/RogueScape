@@ -33,7 +33,7 @@
 	id = "druqks"
 	alert_type = /obj/screen/alert/status_effect/buff/druqks
 	effectedstats = list("endurance" = 3,"speed" = 3)
-	duration = 10 SECONDS
+	duration = 2 MINUTES
 
 /datum/status_effect/buff/druqks/on_apply()
 	. = ..()
@@ -102,7 +102,7 @@
 	id = "purest moondust"
 	alert_type = /obj/screen/alert/status_effect/buff/druqks
 	effectedstats = list("speed" = 6, "endurance" = 6)
-	duration = 2 MINUTES
+	duration = 3 MINUTES
 
 /datum/status_effect/buff/moondust_purest/nextmove_modifier()
 	return 0.5
@@ -119,7 +119,7 @@
 	id = "weed"
 	alert_type = /obj/screen/alert/status_effect/buff/weed
 	effectedstats = list("intelligence" = 2,"speed" = -2)
-	duration = 10 SECONDS
+	duration = 2 MINUTES
 
 /datum/status_effect/buff/weed/on_apply()
 	. = ..()

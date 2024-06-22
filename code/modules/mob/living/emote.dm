@@ -48,7 +48,7 @@
 /mob/living/proc/check_prayer(mob/living/L,message)
 	if(!L || !message)
 		return FALSE
-	var/list/bannedwords = list("zizo","cock","dick","fuck","shit","pussy","cuck","fucker","fucked","cunt","asshole","ass","nigger","nigg","fag")
+	var/list/bannedwords = list("zizo","nig","fag")
 	var/message2recognize = sanitize_hear_message(message)
 	var/found = null
 	var/mob/living/carbon/human/M = L
@@ -59,29 +59,30 @@
 			L.IgniteMob()
 			return FALSE
 	if(length(message2recognize) > 15)
-		if(L.has_flaw(/datum/charflaw/addiction/godfearing))
-			L.sate_addiction()
-		if(L.mob_timers[MT_PSYPRAY])
-			if(world.time < L.mob_timers[MT_PSYPRAY] + 1 MINUTES)
-				L.mob_timers[MT_PSYPRAY] = world.time
-				return FALSE
-		else
-			L.mob_timers[MT_PSYPRAY] = world.time
-		if(!findtext(message2recognize, "[M.PATRON]"))
-			to_chat(L, "<span class='warning'>I should address my God by their name, properly.")
-			return FALSE
-
 		for(var/obj/structure/fluff/psycross/S in oview(5, L))
 			found = S
 		if(!found)
 			to_chat(L, "<span class='warning'>I need a psycross.</span>")
 			return FALSE
+		if(L.mob_timers[MT_PSYPRAY])
+			if(world.time < (L.mob_timers[MT_PSYPRAY] + 30 SECONDS))
+				L.mob_timers[MT_PSYPRAY] = world.time
+				to_chat(L, "<font color='warning'>You must wait.</font>")
+				return FALSE
 		else
-			L.playsound_local(L, 'sound/misc/notice (2).ogg', 100, FALSE)
-			to_chat(L, "<font color='yellow'>I have faith my Lord hears me.</font>")
-			L.add_stress(/datum/stressevent/psyprayer)
-			return TRUE
-	else to_chat(L, "<span class='danger'>My prayer was short...</span>")
+			L.mob_timers[MT_PSYPRAY] = world.time
+		if(!findtext(message2recognize, "[M.PATRON]"))
+			return FALSE
+		else
+			if(prob(75))
+				L.playsound_local(L, 'sound/misc/notice (2).ogg', 100, FALSE)
+				to_chat(L, "<font color='yellow'>I have faith my Lord hears me.</font>")
+				if(L.has_flaw(/datum/charflaw/addiction/godfearing))
+					L.sate_addiction()
+				L.add_stress(/datum/stressevent/psyprayer)
+				return TRUE
+	else
+		return FALSE
 
 /mob/living/proc/check_prayer_underworld(mob/living/L,message)
 	if(!L || !message)
@@ -89,30 +90,34 @@
 	var/list/bannedwords = list("zizo","cock","dick","fuck","shit","pussy","cuck","fucker","fucked","cunt","asshole","ass","nigger","nigg","fag")
 	var/message2recognize = sanitize_hear_message(message)
 	var/mob/living/carbon/spirit/M = L
-	for(var/T in bannedwords)
-		var/list/turfs = list()
-		if(findtext(message2recognize, T))
-			for(var/turf/U in /area/rogue/underworld)
-				if(U.density)
-					continue
-				turfs.Add(U)
 
-			var/turf/U = safepick(turfs)
-			if(!U)
-				return
-			to_chat(L, "<font color='yellow'>INSOLENT WRETCH, YOUR STRUGGLE CONTINUES</font>")
-			L.forceMove(T)
+	if(L.mob_timers[MT_PSYPRAY])
+		if(world.time < (L.mob_timers[MT_PSYPRAY] + 30 SECONDS))
+			L.mob_timers[MT_PSYPRAY] = world.time
+			to_chat(L, "<font color='warning'>You must wait.</font>")
 			return FALSE
+	else
+		L.mob_timers[MT_PSYPRAY] = world.time
+
+	for(var/T in bannedwords)
+		if(findtext(message2recognize, T))
+			L.add_stress(/datum/stressevent/psycurse)
+			L.mob_timers[MT_PSYPRAY] = world.time + 600 MINUTES
+			to_chat(L, "<font color='red'>INSOLENT WRETCH, YOUR STRUGGLE CONTINUES</font>")
+			return FALSE
+
 	if(length(message2recognize) > 15)
 		if(findtext(message2recognize, "[M.PATRON]"))
-			L.playsound_local(L, 'sound/misc/notice (2).ogg', 100, FALSE)
-			to_chat(L, "<font color='yellow'>I, [M.PATRON], have heard your prayer and grant you favor.</font>")
-			var/obj/item/underworld/coin/C = new
-			L.put_in_active_hand(C)
-			return TRUE
+			if(prob(30))
+				L.playsound_local(L, 'sound/misc/notice (2).ogg', 100, FALSE)
+				to_chat(L, "<font color='yellow'>I, [M.PATRON], have heard your prayer and grant you favor.</font>")
+				var/obj/item/underworld/coin/C = new
+				L.put_in_active_hand(C)
+				return TRUE
 		else
-			return TRUE
-	else to_chat(L, "<span class='danger'>My prayer was kinda short...</span>")
+			return FALSE
+	else
+		return FALSE
 
 /datum/emote/living/bow
 	key = "bow"
