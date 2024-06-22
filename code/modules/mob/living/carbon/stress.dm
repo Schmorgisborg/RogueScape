@@ -56,19 +56,19 @@
 		
 		switch(stress)
 			if(0)
-				if(src.has_status_effect(/datum/status_effect/moodgood))
+				if(!src.has_status_effect(/datum/status_effect/moodgood))
 					src.remove_status_effect(/datum/status_effect/moodbad)
 					src.remove_status_effect(/datum/status_effect/moodvbad)
 
 					src.apply_status_effect(/datum/status_effect/moodgood)
 			if(21 to 27)
-				if(src.has_status_effect(/datum/status_effect/moodbad))
+				if(!src.has_status_effect(/datum/status_effect/moodbad))
 					src.remove_status_effect(/datum/status_effect/moodvbad)
 					src.remove_status_effect(/datum/status_effect/moodgood)
 
 					src.apply_status_effect(/datum/status_effect/moodbad)
 			if(28 to 32)
-				if(src.has_status_effect(/datum/status_effect/moodvbad))
+				if(!src.has_status_effect(/datum/status_effect/moodvbad))
 					src.remove_status_effect(/datum/status_effect/moodgood)
 					src.remove_status_effect(/datum/status_effect/moodbad)
 

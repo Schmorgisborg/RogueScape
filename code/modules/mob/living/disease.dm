@@ -69,7 +69,9 @@
 				return
 		disease_threshhold = DISEASE_THRESHHOLD
 
-	disease_rate = 0
+	if(disease_rate)
+		disease_rate = 0
+		testing("dr:[disease_rate], dt:[disease_threshhold]")
 
 /mob/living/carbon/proc/get_disease_rate()//Get disease rate from all limbs
 	var/dr = 0
@@ -118,7 +120,7 @@
 
 //Debuffs
 /obj/screen/alert/status_effect/debuff/disease/
-	desc = ""
+	desc = "Your blood is tainted."
 	icon_state = "disease"
 
 /datum/status_effect/debuff/disease/rattles

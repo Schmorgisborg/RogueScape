@@ -11,7 +11,7 @@
 	color = "#ff0000"
 	taste_description = "red"
 	overdose_threshold = 0
-	metabolization_rate = REAGENTS_METABOLISM
+	metabolization_rate = REAGENTS_METABOLISM * 3
 	alpha = 173
 
 /datum/reagent/medicine/healthpot/on_mob_life(mob/living/carbon/M)
@@ -30,7 +30,7 @@
 	name = "Strong Health Potion"
 	description = "Quickly regenerates all types of damage."
 	color = "#ff0000"
-	metabolization_rate = 2 * REAGENTS_METABOLISM
+	metabolization_rate = REAGENTS_METABOLISM * 6
 
 /datum/reagent/medicine/stronghealth/on_mob_life(mob/living/carbon/M)
 	M.blood_volume = min(M.blood_volume+5, BLOOD_VOLUME_MAXIMUM)
@@ -51,7 +51,7 @@
 	color = "#0000ff"
 	taste_description = "sweet mana"
 	overdose_threshold = 0
-	metabolization_rate = 2 * REAGENTS_METABOLISM
+	metabolization_rate = 4 * REAGENTS_METABOLISM
 	alpha = 173
 
 /datum/reagent/medicine/manapot/on_mob_life(mob/living/carbon/M)
@@ -61,13 +61,13 @@
 
 
 /datum/reagent/medicine/strongmana
-	name = "Mana Potion"
+	name = "Strong Mana Potion"
 	description = "Gradually regenerates stamina."
 	color = "#0000ff"
-	metabolization_rate = 4 * REAGENTS_METABOLISM
+	metabolization_rate = 8 * REAGENTS_METABOLISM
 
 /datum/reagent/medicine/strongmana/on_mob_life(mob/living/carbon/M)
-	M.rogstam_add(300)
+	M.rogstam_add(200)
 	..()
 	. = 1
 
@@ -97,16 +97,37 @@
 
 
 //Buff potions
-/datum/reagent/medicine/strengthbuff
-	name = "Strength"
+/datum/reagent/buff
 	description = ""
 	reagent_state = LIQUID
-	color = "#00B4FF"
-	taste_description = "protein"
-	metabolization_rate = REAGENTS_METABOLISM * 100
+	metabolization_rate = REAGENTS_METABOLISM
 
-/datum/reagent/medicine/strengthbuff/on_mob_life(mob/living/carbon/M)
-	M.apply_status_effect(/datum/status_effect/buff/strengthpot)
+/datum/reagent/buff/strength
+	name = "Strength"
+	color = "#00B4FF"
+	taste_description = "old meat"
+
+/datum/reagent/buff/strength/on_mob_life(mob/living/carbon/M)
+	testing("str pot in system")
+	if(M.has_status_effect(/datum/status_effect/buff/alch/strengthpot))
+		return ..()
+	if(M.reagents.has_reagent((/datum/reagent/buff/strength),5))
+		M.apply_status_effect(/datum/status_effect/buff/alch/strengthpot)
+		M.reagents.remove_reagent(/datum/reagent/buff/strength, M.reagents.get_reagent_amount(/datum/reagent/buff/strength))
+	return ..()
+
+/datum/reagent/buff/intelligence
+	name = "Intelligence"
+	color = "#00B4FF"
+	taste_description = "sweets"
+
+/datum/reagent/buff/intelligence/on_mob_life(mob/living/carbon/M)
+	testing("int pot in system")
+	if(M.has_status_effect(/datum/status_effect/buff/alch/intelligencepot))
+		return ..()
+	if(M.reagents.has_reagent((/datum/reagent/buff/intelligence),5))
+		M.apply_status_effect(/datum/status_effect/buff/alch/intelligencepot)
+		M.reagents.remove_reagent(/datum/reagent/buff/intelligence, M.reagents.get_reagent_amount(/datum/reagent/buff/intelligence))
 	return ..()
 
 

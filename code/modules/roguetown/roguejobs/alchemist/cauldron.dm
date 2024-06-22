@@ -56,6 +56,7 @@
 				var/long_mod = 0
 				//ingredients convert to their potion
 				for(var/obj/item/I in ingredients)
+					testing("[I], [I.possible_potion]")
 					switch(I.possible_potion)
 						//potions
 						if("healthpot")
@@ -85,11 +86,12 @@
 				if(long_mod)
 					brew_amount *= 1.5
 				if(strong_mod)
-					if("healthpot")
+					if(healthpot_weight >= 2)
 						reagents.add_reagent(/datum/reagent/additive, brew_amount)
-					if("manapot")
+					if(manapot_weight >= 2)
 						reagents.add_reagent(/datum/reagent/additive, brew_amount)
-					if("poison")
+
+					if(poison_weight >= 3)
 						reagents.add_reagent(/datum/reagent/additive, brew_amount/6)
 				//select the result
 				//potions
@@ -107,7 +109,8 @@
 					potion_result = "dirt"
 				//buff potions
 				if(strengthpot_weight >= 3)
-
+					reagents.add_reagent(/datum/reagent/buff/strength, (brew_amount/10))
+					potion_result = "dirt"
 				//poisons
 				if(poison_weight >= 3)
 					reagents.add_reagent(/datum/reagent/berrypoison, (brew_amount/6))
@@ -129,14 +132,12 @@
 		if(ingredients.len >= maxingredients)
 			to_chat(user, "<span class='warning'>Nothing else can fit.</span>")
 			return TRUE
-		else if(!user.transferItemToLoc(I,src))
+		if(!user.transferItemToLoc(I,src))
 			to_chat(user, "<span class='warning'>[I] is stuck to my hand!</span>")
 			return TRUE
-		for(var/x = 1, x < ingredients.len, x++)
-			var/check = ingredients[x]
-			if(I == check)
-				to_chat(user, "<span class='warning'>There's already [I] in the cauldron.</span>")
-				return TRUE
+		if(I == list2params(ingredients))
+			to_chat(user, "<span class='warning'>There's already [I] in the cauldron.</span>")
+			return TRUE
 		to_chat(user, "<span class='info'>I add [I] to [src].</span>")
 		ingredients += I
 		brewing = 0

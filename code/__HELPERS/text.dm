@@ -52,10 +52,10 @@
 
 ///returns nothing with an alert instead of the message if it contains something in the ic filter, and sanitizes normally if the name is fine. It returns nothing so it backs out of the input the same way as if you had entered nothing.
 /proc/sanitize_name(t,list/repl_chars = null)
-	var/list/antiAllen = list("zizo","cock","dick","fuck","shit","pussy","cuck","fucker","fucked","cunt","asshole","ass","nigger","nigg","fag")
+	var/list/anti_allen = list("zizo","cock","dick","fuck","shit","pussy","cuck","fucker","fucked","cunt","asshole","ass","nigger","nigg","fag")
 	var/message2recognize = sanitize_hear_message(t)
 
-	for(var/T in antiAllen)
+	for(var/T in anti_allen)
 		if(findtext(message2recognize, T))
 			alert(pick("Do better.","Not today.","Unoriginal.","HahaHAHhahaHAH"))
 			return 1

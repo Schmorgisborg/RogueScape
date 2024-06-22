@@ -3064,6 +3064,7 @@
 #include "code\modules\roguetown\roguejobs\alchemist\container.dm"
 #include "code\modules\roguetown\roguejobs\alchemist\ingredients.dm"
 #include "code\modules\roguetown\roguejobs\alchemist\mortarpestle.dm"
+#include "code\modules\roguetown\roguejobs\alchemist\potionbuffs.dm"
 #include "code\modules\roguetown\roguejobs\alchemist\potions.dm"
 #include "code\modules\roguetown\roguejobs\blacksmith\anvil.dm"
 #include "code\modules\roguetown\roguejobs\blacksmith\forge.dm"

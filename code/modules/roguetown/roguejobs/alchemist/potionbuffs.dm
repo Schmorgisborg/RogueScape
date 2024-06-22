@@ -1,26 +1,24 @@
-/datum/status_effect/buff/strengthpot
-	id = "hungryt2"
-	alert_type = /obj/screen/alert/status_effect/buff/strengthpot
+/obj/screen/alert/status_effect/buff/alch
+	desc = "Power rushes through your veins."
+	icon_state = "fortifystat"
+
+/datum/status_effect/buff/alch/strengthpot
+	id = "strpot"
+	alert_type = /obj/screen/alert/status_effect/buff/alch/strengthpot
 	effectedstats = list("strength" = 3)
-	duration = rand(18,30) SECONDS
+	duration = 10 SECONDS
 
-/obj/screen/alert/status_effect/buff/strengthpot
+/obj/screen/alert/status_effect/buff/alch/strengthpot
 	name = "Strength"
-	desc = "Power rushes through your veins."
-	icon_state = "hunger2"
 
-/datum/status_effect/buff/intelligencepot
-	id = "hungryt3"
-	alert_type = /obj/screen/alert/status_effect/buff/intelligencepot
+/datum/status_effect/buff/alch/intelligencepot
+	id = "intpot"
+	alert_type = /obj/screen/alert/status_effect/buff/alch/intelligencepot
 	effectedstats = list("intelligence" = 3)
-	duration = rand(180,300) SECONDS
+	duration = 10 SECONDS
 
-/obj/screen/alert/status_effect/buff/intelligencepot
+/obj/screen/alert/status_effect/buff/alch/intelligencepot
 	name = "Intelligence"
-	desc = "Power rushes through your veins."
-	icon_state = "hunger3"
-
-
 
 /*
 /datum/status_effect/buff/foodbuff

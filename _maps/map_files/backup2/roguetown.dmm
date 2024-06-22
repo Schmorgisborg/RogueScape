@@ -1747,7 +1747,7 @@
 "Mf" = (/obj/machinery/light/rogue/oven/south,/turf/open/floor/rogue/tile{icon_state = "tile"},/area/rogue/indoors/town/tavern)
 "Mi" = (/turf/open/floor/rogue/ruinedwood{icon_state = "wooden_floort"},/area/rogue/outdoors/town)
 "Mj" = (/obj/structure/closet/crate/chest{locked = 1; lockid = "dungeon"},/turf/open/floor/rogue/concrete,/area/rogue/under/town/basement)
-"Ml" = (/obj/structure/table/wood,/obj/item/reagent_containers/glass/mortar,/obj/item/pestle,/turf/open/floor/rogue/blocks/paving,/area/rogue/under/town/basement)
+"Ml" = (/obj/structure/table/wood,/obj/item/mortar,/obj/item/pestle,/turf/open/floor/rogue/blocks/paving,/area/rogue/under/town/basement)
 "Mm" = (/obj/structure/flora/roguetree/stump,/turf/open/floor/rogue/dirt,/area/rogue/outdoors/town)
 "Mn" = (/obj/structure/bookcase,/obj/item/book/random,/turf/open/floor/rogue/carpet,/area/rogue/indoors/town/manor)
 "Mo" = (/obj/structure/table/wood{icon_state = "largetable"; dir = 4},/obj/item/reagent_containers/glass/cup,/turf/open/floor/rogue/blocks/stonered,/area/rogue/indoors/town/manor)
