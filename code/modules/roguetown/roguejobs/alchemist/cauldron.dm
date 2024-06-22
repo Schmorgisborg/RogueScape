@@ -109,8 +109,11 @@
 					potion_result = "dirt"
 				//buff potions
 				if(strengthpot_weight >= 3)
-					reagents.add_reagent(/datum/reagent/buff/strength, (brew_amount/10))
-					potion_result = "dirt"
+					reagents.add_reagent(/datum/reagent/buff/strength, (brew_amount/4))
+					potion_result = "stew"
+				if(strengthpot_weight >= 3)
+					reagents.add_reagent(/datum/reagent/buff/strength, (brew_amount/4))
+					potion_result = "stew"
 				//poisons
 				if(poison_weight >= 3)
 					reagents.add_reagent(/datum/reagent/berrypoison, (brew_amount/6))

@@ -12,7 +12,7 @@
 	"Aasimar",
 	"Half-Elf")
 	allowed_sexes = list(MALE, FEMALE)
-	spells = list(/obj/effect/proc_holder/spell/invoked/projectile/fireball, /obj/effect/proc_holder/spell/invoked/projectile/lightningbolt, /obj/effect/proc_holder/spell/invoked/projectile/fetch)
+	spells = list(/obj/effect/proc_holder/spell/invoked/projectile/fireball, /obj/effect/proc_holder/spell/invoked/projectile/lightningbolt, /obj/effect/proc_holder/spell/invoked/arcaneheal, /obj/effect/proc_holder/spell/invoked/projectile/fetch)
 	display_order = JDO_GRANDWIZARD
 	tutorial = "You swore your fealty to the kingdom, seek the old Lord; establish a tower in this new land."
 	outfit = /datum/outfit/job/roguetown/magician

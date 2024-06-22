@@ -1,8 +1,8 @@
 
 /obj/item/reagent_containers/food/snacks/grown/rogue/sweetleaf
 	seed = /obj/item/seeds/sweetleaf
-	name = "swampweed"
-	desc = "A 'foggy' pipe weed."
+	name = "sweetleaf"
+	desc = ""
 	icon_state = "sweetleaf"
 	filling_color = "#008000"
 	bitesize_mod = 1
@@ -15,7 +15,7 @@
 	mill_result = /obj/item/reagent_containers/powder/moondust
 
 /datum/crafting_recipe/roguetown/dryleaf
-	name = "dry swampweed"
+	name = "dry sweetleaf"
 	result = /obj/item/reagent_containers/food/snacks/grown/rogue/sweetleafdry
 	reqs = list(/obj/item/reagent_containers/food/snacks/grown/rogue/sweetleaf = 1)
 	structurecraft = /obj/structure/fluff/dryingrack
@@ -25,7 +25,7 @@
 	skillcraft = null
 
 /datum/crafting_recipe/roguetown/sigsweet
-	name = "swampweed zig"
+	name = "sweetleaf zig"
 	result = /obj/item/clothing/mask/cigarette/rollie/cannabis
 	reqs = list(/obj/item/reagent_containers/food/snacks/grown/rogue/sweetleafdry = 1,
 				/obj/item/paper/scroll = 1)
@@ -36,7 +36,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/rogue/sweetleafdry
 	seed = null
-	name = "swampweed"
+	name = "sweetleaf"
 	desc = ""
 	icon_state = "sweetleafd"
 	dry = 1
@@ -50,7 +50,7 @@
 	name = "seeds"
 	desc = ""
 	species = "weed"
-	plantname = "swampweed plant"
+	plantname = "sweetleaf plant"
 	product = /obj/item/reagent_containers/food/snacks/grown/rogue/sweetleaf
 	production = 1
 	yield = 3

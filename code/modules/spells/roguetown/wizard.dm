@@ -256,3 +256,40 @@
 			playsound(get_turf(target), 'sound/magic/magic_nulled.ogg', 100)
 			qdel(src)
 			return BULLET_ACT_BLOCK
+
+/obj/effect/proc_holder/spell/invoked/arcaneheal
+	name = "Arcane Healing"
+	overlay_state = "lesserheal"
+	releasedrain = 100
+	chargedrain = 1
+	chargetime = 10
+	range = 15
+	warnie = "sydwarning"
+	movement_interrupt = FALSE
+	sound = 'sound/magic/heal.ogg'
+	associated_skill = /datum/skill/magic/arcane
+	charge_max = 8 SECONDS
+
+/obj/effect/proc_holder/spell/invoked/arcaneheal/cast(list/targets, mob/living/user)
+	if(isliving(targets[1]))
+		var/mob/living/target = targets[1]
+		if(get_dist(user, target) > 7)
+			return FALSE
+		target.visible_message("<span class='info'>An arcane energy grows around [target]!</span>", "<span class='notice'>The magicks wash over me!</span>")
+		if(iscarbon(target))
+			var/mob/living/carbon/C = target
+			var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(user.zone_selected))
+			if(affecting)
+				if(affecting.heal_damage(20, 20, 0, null, FALSE))
+					C.update_damage_overlays()
+				if(affecting.heal_wounds(50))
+					C.update_damage_overlays()
+		else
+			target.adjustBruteLoss(-15)
+			target.adjustFireLoss(-15)
+		target.adjustToxLoss(-10)
+		target.adjustOxyLoss(-10)
+		target.blood_volume += 50
+		return TRUE
+	else
+		return FALSE
