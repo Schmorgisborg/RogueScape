@@ -75,6 +75,7 @@
 						var/ft = 30
 						if(user.mind)
 							var/sl = user.mind.get_skill_level(/datum/skill/labor/fishing)
+							user.mind.adjust_experience(/datum/skill/labor/fishing, 30, FALSE)
 							if(!sl)
 								bc = 25
 							else
@@ -93,6 +94,7 @@
 										new M(user.loc)
 								else
 									new A(user.loc)
+								user.mind.adjust_experience(/datum/skill/labor/fishing, 50, FALSE)
 								playsound(src.loc, 'sound/items/Fish_out.ogg', 100, TRUE)
 							else
 								to_chat(user, "<span class='warning'>Damn, got away...</span>")
