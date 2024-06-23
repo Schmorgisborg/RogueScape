@@ -127,6 +127,8 @@
 	possible_potion = "diseasecure"
 
 /obj/item/alch/magicdust
+	name = "magicdust"
+	//icon_state = "magicdust"
 	possible_potion = "buffpot"
 
 /obj/item/alch/sinew
@@ -199,6 +201,8 @@
 	..()
 
 /obj/item/natural/dirtclod
+	possible_potion = "poison"
+	..()
 
 /obj/item/reagent_containers/food/snacks/grown/berries/poison
 	possible_potion = "poison"
@@ -247,8 +251,8 @@
 /datum/crafting_recipe/roguetown/alch/magicdust
 	name = "magic dust"
 	result = list(/obj/item/alch/magicdust)
-	reqs = list(/obj/item/alch/waterdust, /obj/item/alch/firedust,
-				/obj/item/alch/airdust, /obj/item/alch/earthdust)
+	reqs = list(/obj/item/alch/waterdust = 1, /obj/item/alch/firedust = 1,
+				/obj/item/alch/airdust = 1, /obj/item/alch/earthdust = 1)
 	structurecraft = /obj/structure/table/wood
 	verbage = "mixes"
 	craftsound = 'sound/foley/scribble.ogg'
