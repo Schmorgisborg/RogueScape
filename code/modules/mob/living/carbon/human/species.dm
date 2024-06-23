@@ -836,6 +836,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			if(!E)
 				eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eyes_missing", -BODY_LAYER)
 			else
+				if(GOBLIN in species_traits)
+					E.eye_icon_state = "gobeyes"
 				eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "[E.eye_icon_state]", -BODY_LAYER)
 			if((EYECOLOR in species_traits) && E)
 				eye_overlay.color = "#" + H.eye_color

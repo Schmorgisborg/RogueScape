@@ -648,7 +648,7 @@
 
 /datum/sprite_accessory/underwear/regmd
 	name = "Undiesg"
-	icon_state = "maledwarf_reg"
+	icon_state = "malegoblin_reg"
 	gender = MALE
 	specuse = list("sgoblin")
 

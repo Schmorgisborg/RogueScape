@@ -9,7 +9,7 @@
 	allowed_races = list("Humen",
 	"Humen",
 	"Elf",
-	"Aasimar",
+	"Goblin",
 	"Half-Elf")
 	allowed_sexes = list(MALE, FEMALE)
 	spells = list(/obj/effect/proc_holder/spell/invoked/projectile/fireball, /obj/effect/proc_holder/spell/invoked/projectile/lightningbolt, /obj/effect/proc_holder/spell/invoked/arcaneheal, /obj/effect/proc_holder/spell/invoked/projectile/fetch)

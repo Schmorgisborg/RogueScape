@@ -129,7 +129,7 @@
 #define YOUNGBEARD		19 //dwarves only
 #define STUBBLE			20
 #define OLDGREY			21
-
+#define GOBLIN			22
 
 //organ slots
 #define ORGAN_SLOT_BRAIN "brain"
