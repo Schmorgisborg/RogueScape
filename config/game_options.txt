@@ -434,7 +434,7 @@ ROUNDSTART_RACES human
 ROUNDSTART_RACES dwarf
 ROUNDSTART_RACES elf
 ROUNDSTART_RACES delf
-ROUNDSTART_RACES goblin
+ROUNDSTART_RACES sgoblin
 
 ## Races that are strictly worse than humans that could probably be turned on without balance concerns
 #ROUNDSTART_RACES lizard

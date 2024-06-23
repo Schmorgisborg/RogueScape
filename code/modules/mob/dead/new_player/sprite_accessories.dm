@@ -650,7 +650,7 @@
 	name = "Undiesg"
 	icon_state = "maledwarf_reg"
 	gender = MALE
-	specuse = list("goblin")
+	specuse = list("sgoblin")
 
 /datum/sprite_accessory/underwear/female_bikini
 	name = "Femundies"
@@ -826,6 +826,14 @@
 	name = "ElfH"
 	icon_state = "elf"
 	specuse = list("human")
+	color_src = SKINCOLOR
+	offsetti = TRUE
+
+/datum/sprite_accessory/ears/goblin //halfelfs are humens techincally
+	icon = 'icons/roguetown/mob/bodies/attachments.dmi'
+	name = "Goblin"
+	icon_state = "goblin"
+	specuse = list("goblin")
 	color_src = SKINCOLOR
 	offsetti = TRUE
 

@@ -108,9 +108,6 @@
 	damage_overlay_type = ""
 	var/raceicon = "goblin"
 
-/datum/species/goblin/check_roundstart_eligible()
-	return TRUE
-
 /datum/species/goblin/regenerate_icons(var/mob/living/carbon/human/H)
 //	H.cut_overlays()
 	H.icon_state = ""

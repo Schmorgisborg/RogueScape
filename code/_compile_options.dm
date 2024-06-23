@@ -58,6 +58,4 @@
 #define UNIT_TESTS
 #endif
 
-#ifdef TRAVISTESTING
 #define TESTING
-#endif
