@@ -1802,18 +1802,18 @@ Slots: [job.spawn_positions]</span>
 
 				if("species")
 
-					var/list/crap = list()
+					var/list/racelist = list()
 					for(var/A in GLOB.roundstart_races)
-						var/datum/species/bla = GLOB.species_list[A]
-						bla = new bla()
+						var/datum/species/nrace = GLOB.species_list[A]
+						nrace = new nrace()
 						if(user.client)
-							if(bla.patreon_req > user.client.patreonlevel())
+							if(nrace.patreon_req > user.client.patreonlevel())
 								continue
 						else
 							continue
-						crap += bla
+						racelist += nrace
 
-					var/result = input(user, "Select a race", "RogueScape") as null|anything in crap
+					var/result = input(user, "Select a race", "RogueScape") as null|anything in racelist
 
 					if(result)
 						//var/newtype = GLOB.species_list[result]

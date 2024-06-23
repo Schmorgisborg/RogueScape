@@ -609,14 +609,7 @@
 /datum/sprite_accessory/underwear
 	icon = 'icons/mob/clothing/underwear.dmi'
 	use_static = FALSE
-/*#ifdef MATURESERVER
-/datum/sprite_accessory/underwear/nude
-	name = "None"
-	icon_state = null
-	gender = NEUTER
-	use_static = TRUE
-	specuse = ALL_RACES_LIST
-#else*/
+
 /datum/sprite_accessory/underwear/regm
 	name = "Undies"
 	icon_state = "male_reg"
@@ -641,6 +634,12 @@
 	gender = MALE
 	specuse = list("elf")
 
+/datum/sprite_accessory/underwear/regme
+	name = "Undiese"
+	icon_state = "maleelf_reg"
+	gender = MALE
+	specuse = list("elfd")
+
 /datum/sprite_accessory/underwear/regmd
 	name = "Undiesd"
 	icon_state = "maledwarf_reg"
@@ -660,7 +659,6 @@
 	specuse = ALL_RACES_LIST
 	roundstart = FALSE
 
-//#endif
 ////////////////////////////
 // Undershirt Definitions //
 ////////////////////////////

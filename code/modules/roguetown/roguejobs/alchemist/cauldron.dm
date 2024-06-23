@@ -57,6 +57,7 @@
 				var/intelligence_weight = 0
 				var/constitution_weight = 0
 				var/endurance_weight = 0
+				var/speed_weight = 0
 				var/fortune_weight = 0
 
 				var/poison_weight = 0

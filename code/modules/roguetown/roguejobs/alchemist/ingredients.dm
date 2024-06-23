@@ -177,7 +177,7 @@
 	possible_potion = "endpot"
 	..()
 
-/obj/item/natural/dirtclod
+/obj/item/alch/earthdust
 	name = "earth rune dust"
 	icon_state = "earthdust"
 	possible_potion = "endpot"
@@ -198,6 +198,7 @@
 	possible_potion = "forpot"
 	..()
 
+/obj/item/natural/dirtclod
 
 /obj/item/reagent_containers/food/snacks/grown/berries/poison
 	possible_potion = "poison"

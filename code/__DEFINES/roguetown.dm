@@ -1,7 +1,7 @@
 //used in various places
-#define ALL_RACES_LIST		list("human", "dwarf", "elf", "tiefling", "aasimar")
+#define ALL_RACES_LIST		list("human", "dwarf", "elf", "elfd")
 
-#define ALL_RACES_LIST_NAMES		list("Humen", "Humen", "Half-Elf", "Elf", "Elf", "Dwarf","Dwarf","Tiefling", "Aasimar")
+#define ALL_RACES_LIST_NAMES		list("Humen", "Elf", "Dwarf", "Dark Elf", "Goblin")
 
 #define ALL_PATRON_NAMES_LIST		list("Psydon", "Saradomin", "Guthix")
 

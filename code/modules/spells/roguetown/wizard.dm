@@ -260,7 +260,7 @@
 /obj/effect/proc_holder/spell/invoked/arcaneheal
 	name = "Arcane Healing"
 	overlay_state = "lesserheal"
-	releasedrain = 100
+	releasedrain = 50
 	chargedrain = 1
 	chargetime = 10
 	range = 15

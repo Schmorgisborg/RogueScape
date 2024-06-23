@@ -99,7 +99,6 @@
 	..()
 	. = 1
 
-
 //Buff potions
 /datum/reagent/buff
 	description = ""
@@ -120,6 +119,20 @@
 		M.reagents.remove_reagent(/datum/reagent/buff/strength, M.reagents.get_reagent_amount(/datum/reagent/buff/strength))
 	return ..()
 
+/datum/reagent/buff/perception
+	name = "Perception"
+	color = "#ffff00"
+	taste_description = "sweets"
+
+/datum/reagent/buff/perception/on_mob_life(mob/living/carbon/M)
+	testing("per pot in system")
+	if(M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot))
+		return ..()
+	if(M.reagents.has_reagent((/datum/reagent/buff/perception),5))
+		M.apply_status_effect(/datum/status_effect/buff/alch/perceptionpot)
+		M.reagents.remove_reagent(/datum/reagent/buff/perception, M.reagents.get_reagent_amount(/datum/reagent/buff/perception))
+	return ..()
+
 /datum/reagent/buff/intelligence
 	name = "Intelligence"
 	color = "#00ff90"
@@ -134,18 +147,60 @@
 		M.reagents.remove_reagent(/datum/reagent/buff/intelligence, M.reagents.get_reagent_amount(/datum/reagent/buff/intelligence))
 	return ..()
 
-/datum/reagent/buff/perception
-	name = "Perception"
+/datum/reagent/buff/constitution
+	name = "Constitution"
 	color = "#ffff00"
 	taste_description = "sweets"
 
-/datum/reagent/buff/perception/on_mob_life(mob/living/carbon/M)
-	testing("per pot in system")
-	if(M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot))
+/datum/reagent/buff/constitution/on_mob_life(mob/living/carbon/M)
+	testing("con pot in system")
+	if(M.has_status_effect(/datum/status_effect/buff/alch/constitutionpot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/perception),5))
-		M.apply_status_effect(/datum/status_effect/buff/alch/perceptionpot)
-		M.reagents.remove_reagent(/datum/reagent/buff/perception, M.reagents.get_reagent_amount(/datum/reagent/buff/intelligence))
+	if(M.reagents.has_reagent((/datum/reagent/buff/constitution),5))
+		M.apply_status_effect(/datum/status_effect/buff/alch/constitutionpot)
+		M.reagents.remove_reagent(/datum/reagent/buff/constitution, M.reagents.get_reagent_amount(/datum/reagent/buff/constitution))
+	return ..()
+
+/datum/reagent/buff/endurance
+	name = "Endurance"
+	color = "#ffff00"
+	taste_description = "sweets"
+
+/datum/reagent/buff/endurance/on_mob_life(mob/living/carbon/M)
+	testing("end pot in system")
+	if(M.has_status_effect(/datum/status_effect/buff/alch/endurancepot))
+		return ..()
+	if(M.reagents.has_reagent((/datum/reagent/buff/endurance),5))
+		M.apply_status_effect(/datum/status_effect/buff/alch/endurancepot)
+		M.reagents.remove_reagent(/datum/reagent/buff/endurance, M.reagents.get_reagent_amount(/datum/reagent/buff/endurance))
+	return ..()
+
+/datum/reagent/buff/speed
+	name = "Speed"
+	color = "#ffff00"
+	taste_description = "sweets"
+
+/datum/reagent/buff/speed/on_mob_life(mob/living/carbon/M)
+	testing("spd pot in system")
+	if(M.has_status_effect(/datum/status_effect/buff/alch/speedpot))
+		return ..()
+	if(M.reagents.has_reagent((/datum/reagent/buff/speed),5))
+		M.apply_status_effect(/datum/status_effect/buff/alch/speedpot)
+		M.reagents.remove_reagent(/datum/reagent/buff/speed, M.reagents.get_reagent_amount(/datum/reagent/buff/speed))
+	return ..()
+
+/datum/reagent/buff/fortune
+	name = "Fortune"
+	color = "#ffff00"
+	taste_description = "sweets"
+
+/datum/reagent/buff/fortune/on_mob_life(mob/living/carbon/M)
+	testing("luck pot in system")
+	if(M.has_status_effect(/datum/status_effect/buff/alch/fortunepot))
+		return ..()
+	if(M.reagents.has_reagent((/datum/reagent/buff/fortune),5))
+		M.apply_status_effect(/datum/status_effect/buff/alch/fortunepot)
+		M.reagents.remove_reagent(/datum/reagent/buff/fortune, M.reagents.get_reagent_amount(/datum/reagent/buff/fortune))
 	return ..()
 
 

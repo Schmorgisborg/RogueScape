@@ -3,7 +3,7 @@
 
 /datum/species/elf/dark
 	name = "Dark Elf"
-	id = "elf"
+	id = "elfd"
 	desc = "<b><font color='olive'>I am a Dark Elf</font></b><br>\
 	<font color='teal'>Dark elves are not looked fondly on by any other race, even other elves. The women \
 	tend to be stronger than the average men. Before the war, public opinion was turning \

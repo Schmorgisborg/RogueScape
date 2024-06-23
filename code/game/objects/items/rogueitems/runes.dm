@@ -108,10 +108,9 @@
 	user.visible_message("<span class='warning'>[src] glows with a faint light!</span>")
 
 /obj/item/rune/granter/spell/onlearned(mob/user)
+	user.visible_message("<span class='warning'>[src] glows dark, and then crumbles!</span>")
+	qdel(src)
 	..()
-	if(oneuse)
-		user.visible_message("<span class='warning'>[src] glows dark, and then crumbles!</span>")
-		qdel(src)
 
 /obj/item/rune/granter/spell/fire_rune
 	spell = /obj/effect/proc_holder/spell/invoked/projectile/fireball
@@ -137,6 +136,14 @@
 	desc = "Cool to the touch."
 	remarks = list("To understand these archaic things...", "Done properly this could...", "I think I just shocked my hand...")
 
+/obj/item/rune/granter/spell/earth_rune
+	spell = /obj/effect/proc_holder/spell/invoked/projectile/fetch
+	spellname = "fetch"
+	icon_state = "earth_rune"
+	name = "earth rune"
+	desc = "Heavier than it looks."
+	remarks = list("To understand these archaic things...", "I can only pull, not push...", "My mind feels like mud...")
+
 /obj/item/rune/granter/spell/blank_rune
 	spell = null
 	spellname = "arcane magic"
@@ -144,7 +151,3 @@
 	name = "rune essence"
 	desc = "The source of magic in our world."
 	remarks = list("My head hurts...", "I'll never understand this!", "I don't want to look away...")
-
-/obj/item/rune/granter/spell/blank_rune/recoil(mob/user)
-	..()
-	qdel(src)
