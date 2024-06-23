@@ -29,7 +29,7 @@
 /datum/reagent/medicine/stronghealth
 	name = "Strong Health Potion"
 	description = "Quickly regenerates all types of damage."
-	color = "#ff0000"
+	color = "#420000"
 	metabolization_rate = REAGENTS_METABOLISM * 6
 
 /datum/reagent/medicine/stronghealth/on_mob_life(mob/living/carbon/M)
@@ -48,7 +48,7 @@
 	name = "Mana Potion"
 	description = "Gradually regenerates stamina."
 	reagent_state = LIQUID
-	color = "#0000ff"
+	color = "#000042"
 	taste_description = "sweet mana"
 	overdose_threshold = 0
 	metabolization_rate = 4 * REAGENTS_METABOLISM
@@ -82,18 +82,22 @@
 
 /datum/reagent/medicine/antidote/on_mob_life(mob/living/carbon/M)
 	M.adjustToxLoss(-4, 0)
-
+	..()
+	. = 1
 
 /datum/reagent/medicine/diseasecure
 	name = "Disease Cure"
 	description = ""
 	reagent_state = LIQUID
-	color = "#ffbf00"
+	color = "#004200"
 	taste_description = "dirt"
 	metabolization_rate = 30 * REAGENTS_METABOLISM
 
 /datum/reagent/medicine/diseasecure/on_mob_life(mob/living/carbon/M)
 	M.cure_disease()
+	M.adjustToxLoss(-6, 0)
+	..()
+	. = 1
 
 
 //Buff potions
@@ -104,7 +108,7 @@
 
 /datum/reagent/buff/strength
 	name = "Strength"
-	color = "#00B4FF"
+	color = "#ff9000"
 	taste_description = "old meat"
 
 /datum/reagent/buff/strength/on_mob_life(mob/living/carbon/M)
@@ -118,7 +122,7 @@
 
 /datum/reagent/buff/intelligence
 	name = "Intelligence"
-	color = "#00B4FF"
+	color = "#00ff90"
 	taste_description = "sweets"
 
 /datum/reagent/buff/intelligence/on_mob_life(mob/living/carbon/M)
@@ -128,6 +132,20 @@
 	if(M.reagents.has_reagent((/datum/reagent/buff/intelligence),5))
 		M.apply_status_effect(/datum/status_effect/buff/alch/intelligencepot)
 		M.reagents.remove_reagent(/datum/reagent/buff/intelligence, M.reagents.get_reagent_amount(/datum/reagent/buff/intelligence))
+	return ..()
+
+/datum/reagent/buff/perception
+	name = "Perception"
+	color = "#ffff00"
+	taste_description = "sweets"
+
+/datum/reagent/buff/perception/on_mob_life(mob/living/carbon/M)
+	testing("per pot in system")
+	if(M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot))
+		return ..()
+	if(M.reagents.has_reagent((/datum/reagent/buff/perception),5))
+		M.apply_status_effect(/datum/status_effect/buff/alch/perceptionpot)
+		M.reagents.remove_reagent(/datum/reagent/buff/perception, M.reagents.get_reagent_amount(/datum/reagent/buff/intelligence))
 	return ..()
 
 
@@ -147,10 +165,10 @@
 
 
 /datum/reagent/strongpoison
-	name = "Strong Berry Poison"
+	name = "Strong Poison"
 	description = ""
 	reagent_state = LIQUID
-	color = "#00B4FF"
+	color = "#000000"
 	taste_description = "burning"
 	metabolization_rate = REAGENTS_METABOLISM
 

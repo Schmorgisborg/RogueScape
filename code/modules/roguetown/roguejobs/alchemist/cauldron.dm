@@ -48,7 +48,9 @@
 				var/antidote_weight = 0
 				var/diseasecure_weight = 0
 
-				var/strengthpot_weight = 0
+				var/strength_weight = 0
+				var/intelligence_weight = 0
+				var/perception_weight = 0
 
 				var/poison_weight = 0
 
@@ -69,7 +71,11 @@
 							diseasecure_weight++
 						//buff potions
 						if("strengthpot")
-							strengthpot_weight++
+							strength_weight++
+						if("intelligencepot")
+							intelligence_weight++
+						if("perceptionpot")
+							perception_weight++
 						//poisons
 						if("poison")
 							poison_weight++
@@ -91,7 +97,7 @@
 					if(manapot_weight >= 2)
 						reagents.add_reagent(/datum/reagent/additive, brew_amount)
 
-					if(poison_weight >= 3)
+					if(poison_weight >= 2)
 						reagents.add_reagent(/datum/reagent/additive, brew_amount/6)
 				//select the result
 				//potions
@@ -108,14 +114,17 @@
 					reagents.add_reagent(/datum/reagent/medicine/diseasecure, (brew_amount/2))
 					potion_result = "dirt"
 				//buff potions
-				if(strengthpot_weight >= 3)
+				if(strength_weight >= 3)
 					reagents.add_reagent(/datum/reagent/buff/strength, (brew_amount/4))
 					potion_result = "stew"
-				if(strengthpot_weight >= 3)
-					reagents.add_reagent(/datum/reagent/buff/strength, (brew_amount/4))
-					potion_result = "stew"
+				if(intelligence_weight >= 3)
+					reagents.add_reagent(/datum/reagent/buff/intelligence, (brew_amount/4))
+					potion_result = "energy"
+				if(perception_weight >= 3)
+					reagents.add_reagent(/datum/reagent/buff/perception, (brew_amount/4))
+					potion_result = "burnt"
 				//poisons
-				if(poison_weight >= 3)
+				if(poison_weight >= 2)
 					reagents.add_reagent(/datum/reagent/berrypoison, (brew_amount/6))
 					potion_result = "death"
 				//handle player perception and reset for next time

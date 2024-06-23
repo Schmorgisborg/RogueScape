@@ -6,7 +6,7 @@
 	id = "strpot"
 	alert_type = /obj/screen/alert/status_effect/buff/alch/strengthpot
 	effectedstats = list("strength" = 3)
-	duration = 10 SECONDS
+	duration = 30 SECONDS
 
 /obj/screen/alert/status_effect/buff/alch/strengthpot
 	name = "Strength"
@@ -15,10 +15,19 @@
 	id = "intpot"
 	alert_type = /obj/screen/alert/status_effect/buff/alch/intelligencepot
 	effectedstats = list("intelligence" = 3)
-	duration = 10 SECONDS
+	duration = 30 SECONDS
 
 /obj/screen/alert/status_effect/buff/alch/intelligencepot
 	name = "Intelligence"
+
+/datum/status_effect/buff/alch/perceptionpot
+	id = "perpot"
+	alert_type = /obj/screen/alert/status_effect/buff/alch/perceptionpot
+	effectedstats = list("perception" = 3)
+	duration = 30 SECONDS
+
+/obj/screen/alert/status_effect/buff/alch/perceptionpot
+	name = "Perception"
 
 /*
 /datum/status_effect/buff/foodbuff

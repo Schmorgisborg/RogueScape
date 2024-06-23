@@ -58,15 +58,15 @@
 	..()
 
 /obj/item/rune/granter/spell/fire_rune
-	dust_result = firedust
+	dust_result = /obj/item/alch/firedust
 	..()
 
 /obj/item/rune/granter/spell/air_rune
-	dust_result = airdust
+	dust_result = /obj/item/alch/airdust
 	..()
 
 /obj/item/rune/granter/spell/blank_rune
-	dust_result = runedust
+	dust_result = /obj/item/alch/runedust
 	..()
 
 //potion ingredients, sorted by potion
@@ -95,7 +95,7 @@
 
 /obj/item/alch/coaldust
 	name = "coal dust"
-	//icon_state = "coaldust"
+	icon_state = "coaldust"
 	possible_potion = "antidote"
 
 /obj/item/ash
@@ -104,7 +104,7 @@
 
 /obj/item/alch/silverdust
 	name = "silver dust"
-	//icon_state = "silverdust"
+	icon_state = "silverdust"
 	possible_potion = "diseasecure"
 
 /obj/item/alch/bone
@@ -119,14 +119,18 @@
 /obj/item/alch/sinew
 	name = "sinew"
 	icon_state = "sinew"
-	drop_shrink = 0.5
+	dropshrink = 0.5
 	dust_result = /obj/item/alch/viscera
 	possible_potion = "strengthpot"
 
 /obj/item/alch/firedust
 	name = "fire rune dust"
-	//icon_state = "firedust"
+	icon_state = "runedust"
 	possible_potion = "strengthpot"
+
+/obj/item/reagent_containers/powder/flour/salt
+	possible_potion = "perceptionpot"
+	..()
 
 /obj/item/reagent_containers/powder/ozium
 	possible_potion = "perceptionpot"
@@ -134,23 +138,39 @@
 
 /obj/item/alch/tobaccodust
 	name = "tobacco dust"
-	//icon_state = "tobaccodust"
+	icon_state = "tobaccodust"
 	possible_potion = "perceptionpot"
 
 /obj/item/alch/airdust
 	name = "air rune dust"
-	//icon_state = "airdust"
+	icon_state = "runedust"
 	possible_potion = "intelligencepot"
 
 /obj/item/alch/runedust
 	name = "rune dust"
-	//icon_state = "runedust"
+	icon_state = "runedust"
 	possible_potion = "intelligencepot"
 
 obj/item/alch/sweetdust
 	name = "sweet leaf dust"
-	//icon_state = "sweetdust"
+	icon_state = "tobaccodust"
 	possible_potion = "intelligencepot"
+
+/obj/item/reagent_containers/food/snacks/grown/berries/poison
+	possible_potion = "poison"
+	..()
+
+/obj/item/seeds/berry/poison
+	possible_potion = "poison"
+	..()
+
+/obj/item/reagent_containers/food/snacks/grown/rogue/sweetleaf
+	possible_potion = "poison"
+	..()
+
+/obj/item/reagent_containers/food/snacks/grown/rogue/pipeweed
+	possible_potion = "poison"
+	..()
 
 /obj/item/reagent_containers/powder/moondust
 	..()

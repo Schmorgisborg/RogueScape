@@ -33,7 +33,7 @@
 			to_chat(user, "<span class='warning'>There's nothing to grind.</span>")
 			return
 		user.visible_message("<span class='info'>[user] begins grinding up [I].</span>")
-		playsound(loc, 'sound/foley/scribble.ogg', 100, FALSE)
+		playsound(loc, 'sound/foley/mortarpestle.ogg', 100, FALSE)
 		if(do_after(user, 10, target = src))
 			var/obj/item/N = new to_grind.dust_result(src)
 			N.loc = src.loc
