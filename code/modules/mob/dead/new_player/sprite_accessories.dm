@@ -646,6 +646,12 @@
 	gender = MALE
 	specuse = list("dwarf")
 
+/datum/sprite_accessory/underwear/regmd
+	name = "Undiesg"
+	icon_state = "maledwarf_reg"
+	gender = MALE
+	specuse = list("goblin")
+
 /datum/sprite_accessory/underwear/female_bikini
 	name = "Femundies"
 	icon_state = "female_bikini"
