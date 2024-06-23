@@ -122,7 +122,7 @@
 	verbage = "mix"
 	craftdiff = 0
 
-/datum/crafting_recipe/roguetown/spice
+/datum/crafting_recipe/roguetown/moondust
 	name = "pure moondust"
 	result = /obj/item/reagent_containers/powder/moondust_purest
 	reqs = list(/obj/item/reagent_containers/powder/moondust = 3)

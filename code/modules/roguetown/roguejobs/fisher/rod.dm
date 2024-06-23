@@ -76,10 +76,10 @@
 						if(user.mind)
 							var/sl = user.mind.get_skill_level(/datum/skill/labor/fishing)
 							if(!sl)
-								bc = 0
+								bc = 25
 							else
 								ft += (sl * 10)
-								bc += (sl * 10)
+								bc += max((sl * 25), 100)
 						if(prob(bc))
 							var/A = pickweight(baited.fishloot)
 							to_chat(user, "<span class='notice'>Something tugs the line!</span>")

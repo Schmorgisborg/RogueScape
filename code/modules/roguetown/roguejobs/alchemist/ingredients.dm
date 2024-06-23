@@ -65,6 +65,14 @@
 	dust_result = /obj/item/alch/airdust
 	..()
 
+/obj/item/rune/granter/spell/water_rune
+	dust_result = /obj/item/alch/waterdust
+	..()
+
+/obj/item/rune/granter/spell/earth_rune
+	dust_result = /obj/item/alch/earthdust
+	..()
+
 /obj/item/rune/granter/spell/blank_rune
 	dust_result = /obj/item/alch/runedust
 	..()
@@ -78,6 +86,12 @@
 
 /obj/item/natural/chaff/wheat
 	possible_potion = "healthpot"
+	..()
+
+/obj/item/alch/waterdust
+	name = "water rune dust"
+	icon_state = "waterdust"
+	possible_potion = "stronghealth"
 
 /obj/item/alch/bonemeal
 	name = "bone meal"
@@ -89,7 +103,12 @@
 	icon_state = "seeddust"
 	possible_potion = "manapot"
 
-/obj/item/natural/dirtclod
+/obj/item/alch/runedust
+	name = "rune dust"
+	icon_state = "runedust"
+	possible_potion = "strongmana"
+
+/obj/item/reagent_containers/food/snacks/grown/berries
 	possible_potion = "antidote"
 	..()
 
@@ -107,6 +126,40 @@
 	icon_state = "silverdust"
 	possible_potion = "diseasecure"
 
+/obj/item/alch/magicdust
+	possible_potion = "buffpot"
+
+/obj/item/alch/sinew
+	name = "sinew"
+	icon_state = "sinew"
+	dropshrink = 0.5
+	dust_result = /obj/item/alch/viscera
+	possible_potion = "strpot"
+
+/obj/item/alch/firedust
+	name = "fire rune dust"
+	icon_state = "runedust"
+	possible_potion = "strpot"
+
+/obj/item/reagent_containers/powder/ozium
+	possible_potion = "perpot"
+	..()
+
+/obj/item/alch/tobaccodust
+	name = "tobacco dust"
+	icon_state = "tobaccodust"
+	possible_potion = "perpot"
+
+/obj/item/alch/airdust
+	name = "air rune dust"
+	icon_state = "runedust"
+	possible_potion = "intpot"
+
+/obj/item/alch/sweetdust
+	name = "sweet leaf dust"
+	icon_state = "tobaccodust"
+	possible_potion = "intpot"
+
 /obj/item/alch/bone
 	name = "bones"
 	icon_state = "bone"
@@ -114,47 +167,37 @@
 	throwforce = 5
 	w_class = WEIGHT_CLASS_SMALL
 	dust_result = /obj/item/alch/bonemeal
-	possible_potion = "strengthpot"
+	possible_potion = "conpot"
 
-/obj/item/alch/sinew
-	name = "sinew"
-	icon_state = "sinew"
-	dropshrink = 0.5
-	dust_result = /obj/item/alch/viscera
-	possible_potion = "strengthpot"
+/obj/item/reagent_containers/food/snacks/fish
+	possible_potion = "conpot"
+	..()
 
-/obj/item/alch/firedust
-	name = "fire rune dust"
-	icon_state = "runedust"
-	possible_potion = "strengthpot"
+/obj/item/natural/worms/leeches
+	possible_potion = "endpot"
+	..()
+
+/obj/item/natural/dirtclod
+	name = "earth rune dust"
+	icon_state = "earthdust"
+	possible_potion = "endpot"
+
+/obj/item/reagent_containers/powder/moondust_purest
+	possible_potion = "spdpot"
+	..()
 
 /obj/item/reagent_containers/powder/flour/salt
-	possible_potion = "perceptionpot"
+	possible_potion = "spdpot"
 	..()
 
-/obj/item/reagent_containers/powder/ozium
-	possible_potion = "perceptionpot"
+/obj/item/reagent_containers/food/snacks/grown/apple
+	possible_potion = "forpot"
 	..()
 
-/obj/item/alch/tobaccodust
-	name = "tobacco dust"
-	icon_state = "tobaccodust"
-	possible_potion = "perceptionpot"
+/obj/item/reagent_containers/moondust
+	possible_potion = "forpot"
+	..()
 
-/obj/item/alch/airdust
-	name = "air rune dust"
-	icon_state = "runedust"
-	possible_potion = "intelligencepot"
-
-/obj/item/alch/runedust
-	name = "rune dust"
-	icon_state = "runedust"
-	possible_potion = "intelligencepot"
-
-obj/item/alch/sweetdust
-	name = "sweet leaf dust"
-	icon_state = "tobaccodust"
-	possible_potion = "intelligencepot"
 
 /obj/item/reagent_containers/food/snacks/grown/berries/poison
 	possible_potion = "poison"
@@ -170,13 +213,6 @@ obj/item/alch/sweetdust
 
 /obj/item/reagent_containers/food/snacks/grown/rogue/pipeweed
 	possible_potion = "poison"
-	..()
-
-/obj/item/reagent_containers/powder/moondust
-	..()
-
-
-/obj/item/reagent_containers/powder/moondust_purest
 	..()
 
 //Modifier ingredients
@@ -202,6 +238,16 @@ obj/item/alch/sweetdust
 				/obj/item/alch/feaudust)
 	reqs = list(/obj/item/alch/irondust = 2,
 				/obj/item/alch/golddust = 1)
+	structurecraft = /obj/structure/table/wood
+	verbage = "mixes"
+	craftsound = 'sound/foley/scribble.ogg'
+	skillcraft = null
+
+/datum/crafting_recipe/roguetown/alch/magicdust
+	name = "magic dust"
+	result = list(/obj/item/alch/magicdust)
+	reqs = list(/obj/item/alch/waterdust, /obj/item/alch/firedust,
+				/obj/item/alch/airdust, /obj/item/alch/earthdust)
 	structurecraft = /obj/structure/table/wood
 	verbage = "mixes"
 	craftsound = 'sound/foley/scribble.ogg'

@@ -28,6 +28,10 @@
 	qdel(reagents)
 	..()
 
+/obj/machinery/light/rogue/cauldron/burn_out()
+	brewing = 0
+	..()
+
 /obj/machinery/light/rogue/cauldron/examine(mob/user)
 	if(ingredients.len)//ingredients.len
 		DISABLE_BITFIELD(reagents.flags, AMOUNT_VISIBLE)
@@ -49,8 +53,11 @@
 				var/diseasecure_weight = 0
 
 				var/strength_weight = 0
-				var/intelligence_weight = 0
 				var/perception_weight = 0
+				var/intelligence_weight = 0
+				var/constitution_weight = 0
+				var/endurance_weight = 0
+				var/fortune_weight = 0
 
 				var/poison_weight = 0
 
@@ -63,19 +70,41 @@
 						//potions
 						if("healthpot")
 							healthpot_weight++
+						if("stronghealth")
+							healthpot_weight++
+							strong_mod++
 						if("manapot")
 							manapot_weight++
+						if("strongmana")
+							manapot_weight++
+							strong_mod++
 						if("antidote")
 							antidote_weight++
 						if("diseasecure")
 							diseasecure_weight++
 						//buff potions
-						if("strengthpot")
+						if("buffpot")
 							strength_weight++
-						if("intelligencepot")
-							intelligence_weight++
-						if("perceptionpot")
 							perception_weight++
+							intelligence_weight++
+							constitution_weight++
+							endurance_weight++
+							speed_weight++
+							fortune_weight++
+						if("strpot")
+							strength_weight++
+						if("perpot")
+							perception_weight++
+						if("intpot")
+							intelligence_weight++
+						if("conpot")
+							constitution_weight++
+						if("endpot")
+							endurance_weight++
+						if("spdpot")
+							speed_weight++
+						if("forpot")
+							fortune_weight++
 						//poisons
 						if("poison")
 							poison_weight++
@@ -92,9 +121,9 @@
 				if(long_mod)
 					brew_amount *= 1.5
 				if(strong_mod)
-					if(healthpot_weight >= 2)
+					if(healthpot_weight >= 3)
 						reagents.add_reagent(/datum/reagent/additive, brew_amount)
-					if(manapot_weight >= 2)
+					if(manapot_weight >= 3)
 						reagents.add_reagent(/datum/reagent/additive, brew_amount)
 
 					if(poison_weight >= 2)
@@ -117,12 +146,24 @@
 				if(strength_weight >= 3)
 					reagents.add_reagent(/datum/reagent/buff/strength, (brew_amount/4))
 					potion_result = "stew"
-				if(intelligence_weight >= 3)
-					reagents.add_reagent(/datum/reagent/buff/intelligence, (brew_amount/4))
-					potion_result = "energy"
 				if(perception_weight >= 3)
 					reagents.add_reagent(/datum/reagent/buff/perception, (brew_amount/4))
 					potion_result = "burnt"
+				if(intelligence_weight >= 3)
+					reagents.add_reagent(/datum/reagent/buff/intelligence, (brew_amount/4))
+					potion_result = "energy"
+				if(constitution_weight >= 3)
+					reagents.add_reagent(/datum/reagent/buff/constitution, (brew_amount/4))
+					potion_result = "sour"
+				if(endurance_weight >= 3)
+					reagents.add_reagent(/datum/reagent/buff/endurance, (brew_amount/4))
+					potion_result = "end?"
+				if(speed_weight >= 3)
+					reagents.add_reagent(/datum/reagent/buff/speed, (brew_amount/4))
+					potion_result = "spd?"
+				if(fortune_weight >= 3)
+					reagents.add_reagent(/datum/reagent/buff/fortune, (brew_amount/4))
+					potion_result = "fortune!"
 				//poisons
 				if(poison_weight >= 2)
 					reagents.add_reagent(/datum/reagent/berrypoison, (brew_amount/6))
@@ -134,10 +175,6 @@
 				ingredients = list()
 				brew_amount = 45
 				brewing = 21
-
-/obj/machinery/light/rogue/cauldron/burn_out()
-	brewing = 0
-	..()
 
 /obj/machinery/light/rogue/cauldron/attackby(obj/item/I, mob/user, params)
 	if(I.possible_potion)

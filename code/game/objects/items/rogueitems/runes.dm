@@ -124,7 +124,7 @@
 /obj/item/rune/granter/spell/water_rune
 	spell = /obj/effect/proc_holder/spell/invoked/arcaneheal
 	spellname = "arcaneheal"
-	//icon_state = "water_rune"
+	icon_state = "water_rune"
 	name = "water rune"
 	desc = "A bit moist."
 	remarks = list("To understand these archaic things...", "Mana flows through all living things...", "This spell will fatigue me...", "The spell should flow like water...")
