@@ -42,7 +42,6 @@
 	specstats = list("strength" = -1, "perception" = 2, "intelligence" = 0, "constitution" = -1, "endurance" = 0, "speed" = 2, "fortune" = 1)
 	specstats_f = list("strength" = -2, "perception" = 2, "intelligence" = 1, "constitution" = -2, "endurance" = 0, "speed" = 3, "fortune" = 1)
 	enflamed_icon = "widefire"
-	possible_faiths = list(FAITH_PSYDON, FAITH_ELF)
 
 /datum/species/elf/snow/check_roundstart_eligible()
 	return TRUE

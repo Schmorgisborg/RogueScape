@@ -42,7 +42,6 @@
 	specstats = list("strength" = 2, "perception" = -1, "intelligence" = -1, "constitution" = 2, "endurance" = 2, "speed" = -2, "fortune" = 0)
 	specstats_f = list("strength" = 1, "perception" = -1, "intelligence" = 0, "constitution" = 2, "endurance" = 1, "speed" = -1, "fortune" = 0)
 	enflamed_icon = "widefire"
-	possible_faiths = list(FAITH_PSYDON, FAITH_DWARF)
 
 /datum/species/dwarf/mountain/check_roundstart_eligible()
 	return TRUE
