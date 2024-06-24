@@ -18,7 +18,7 @@
 	default_features = list("mcolor" = "FFF", "ears" = "Goblin", "wings" = "None")
 	mutant_bodyparts = list("ears")
 	use_skintones = 1
-	possible_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
+	possible_ages = list(AGE_YOUNG, AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	disliked_food = NONE
 	liked_food = NONE
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
@@ -44,6 +44,8 @@
 	specstats = list("strength" = -1, "perception" = -1, "intelligence" = -1, "constitution" = -1, "endurance" = -1, "speed" = -1, "fortune" = -1)
 	specstats_f = list("strength" = -1, "perception" = -1, "intelligence" = -1, "constitution" = -1, "endurance" = -1, "speed" = -1, "fortune" = -1)
 	enflamed_icon = "widefire"
+
+
 
 /mob/living/carbon/human/sgoblin/regenerate_clothes()
 	..()
@@ -73,16 +75,43 @@
 
 /datum/species/human/sgoblin/get_hairc_list()
 	return sortList(list(
-	"black - oil" = "181a1d",
 	"black - cave" = "201616",
 	"black - rogue" = "2b201b",
 	"black - midnight" = "1d1b2b",
 
-	"brown - mud" = "362e25",
-	"brown - oats" = "584a3b",
-	"brown - grain" = "58433b",
-	"brown - soil" = "48322a"
+	"red - wine" = "b87f77",
+	"red - sunset" = "bf6821",
+	"red - blood" = "822b2b",
+
+	"green - forest" = "29674E",
+	"green - bog" = "0B1C1A",
+
+	"blue - river" = "3B5782",
+	"blue - mystic" = "272646"
 	))
+
+/datum/species/human/sgoblin/get_spec_undies_list(gender)
+	if(!GLOB.underwear_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/underwear, GLOB.underwear_list, GLOB.underwear_m, GLOB.underwear_f)
+	var/list/spec_undies = list()
+	var/datum/sprite_accessory/X
+	switch(gender)
+		if(MALE)
+			for(var/O in GLOB.underwear_m)
+				X = GLOB.underwear_list[O]
+				if(X)
+					if("sgoblin" in X.specuse)
+						if(X.roundstart)
+							spec_undies += X
+			return spec_undies
+		if(FEMALE)
+			for(var/O in GLOB.underwear_f)
+				X = GLOB.underwear_list[O]
+				if(X)
+					if("sgoblin" in X.specuse)
+						if(X.roundstart)
+							spec_undies += X
+			return spec_undies
 
 /datum/species/human/sgoblin/random_name(gender,unique,lastname)
 	var/randname

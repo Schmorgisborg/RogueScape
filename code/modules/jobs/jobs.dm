@@ -14,7 +14,8 @@ GLOBAL_LIST_INIT(bad_positions, list(
 	))
 
 GLOBAL_LIST_INIT(evil_positions, list(
-	"Skeleton"
+	"Skeleton",
+	"Goblin"
 	))
 
 

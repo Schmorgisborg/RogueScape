@@ -650,6 +650,7 @@
 	name = "Undiesg"
 	icon_state = "malegoblin_reg"
 	gender = MALE
+	specuse = list("sgoblin")
 
 /datum/sprite_accessory/underwear/female_bikini
 	name = "Femundies"
@@ -661,6 +662,7 @@
 	name = "Femgobundies"
 	icon_state = "female_gobkini"
 	gender = FEMALE
+	specuse = list("sgoblin")
 
 /datum/sprite_accessory/underwear/female_leotard
 	name = "Femleotard"
