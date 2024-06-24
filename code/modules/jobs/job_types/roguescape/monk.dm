@@ -33,6 +33,8 @@
 	var/obj/item/book/rogue/bibble/T = new()
 	l_hand = /obj/item/candle/yellow/lit
 	H.put_in_hands(T)
+	if(H.gender == FEMALE)
+		armor = /obj/item/clothing/suit/roguetown/shirt/robe/nun//REMOVE WHEN ROBES ICON DONE
 	switch(A.name)
 		if("Psydon")
 			head = /obj/item/clothing/head/roguetown/roguehood/astrata

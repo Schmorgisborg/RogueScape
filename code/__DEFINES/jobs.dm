@@ -31,6 +31,7 @@
 #define JDO_YOUNKER 3.2
 
 #define JDO_SKELETON 4
+#define JDO_GOBLIN 4.1
 
 
 #define JDO_UNUSED 10

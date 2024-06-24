@@ -1,28 +1,24 @@
 /mob/living/carbon/human/species/human/sgoblin
 	race = /datum/species/human/sgoblin
-	icon = 'icons/roguetown/mob/monster/goblins.dmi'
-	icon_state = "blank"
-	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest/goblin, /obj/item/bodypart/head/goblin, /obj/item/bodypart/l_arm/goblin,
 					 /obj/item/bodypart/r_arm/goblin, /obj/item/bodypart/r_leg/goblin, /obj/item/bodypart/l_leg/goblin)
 	rot_type = /datum/component/rot/corpse/goblin
-	var/gob_outfit = /datum/outfit/job/roguetown/npc/goblin
 	ambushable = FALSE
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
 	possible_rmb_intents = list()
 
 /datum/species/human/sgoblin
 	name = "Goblin"
-	id = "sgoblin"
+	id = "dwarf"
 	desc = "<b>Goblin</b><br>\
 	Disgusting creachers."
 	default_color = "FFFFFF"
-	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,STUBBLE,GOBLIN)
-	inherent_traits = list(TRAIT_NOMOBSWAP)
+	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,STUBBLE,OLDGREY,GOBLIN)
+	inherent_traits = list(TRAIT_GENERIC, TRAIT_TOXIMMUNE)
 	default_features = list("mcolor" = "FFF", "ears" = "Goblin", "wings" = "None")
 	mutant_bodyparts = list("ears")
 	use_skintones = 1
-	possible_ages = list(AGE_YOUNG, AGE_ADULT, AGE_MIDDLEAGED)
+	possible_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	disliked_food = NONE
 	liked_food = NONE
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
@@ -30,22 +26,38 @@
 	limbs_icon_f = 'icons/roguetown/mob/bodies/m/mg.dmi'
 	dam_icon = 'icons/roguetown/mob/bodies/dam/dam_male.dmi'
 	dam_icon_f = 'icons/roguetown/mob/bodies/dam/dam_female.dmi'
+	use_f = TRUE
+	custom_clothes = TRUE
 	soundpack_m = /datum/voicepack/goblin
 	soundpack_f = /datum/voicepack/goblin
 	no_equip = list(SLOT_SHIRT, SLOT_WEAR_MASK, SLOT_GLOVES, SLOT_SHOES, SLOT_PANTS, SLOT_S_STORE)
 	offset_features = list(OFFSET_ID = list(0,0), OFFSET_GLOVES = list(0,0), OFFSET_WRISTS = list(0,0),\
-	OFFSET_CLOAK = list(0,0), OFFSET_FACEMASK = list(0,-5), OFFSET_HEAD = list(0,-5), \
+	OFFSET_CLOAK = list(0,-5), OFFSET_FACEMASK = list(0,-5), OFFSET_HEAD = list(0,-5), \
 	OFFSET_FACE = list(0,-5), OFFSET_BELT = list(0,-5), OFFSET_BACK = list(0,-5), \
-	OFFSET_NECK = list(0,-5), OFFSET_MOUTH = list(0,-5), OFFSET_PANTS = list(0,0), \
-	OFFSET_SHIRT = list(0,0), OFFSET_ARMOR = list(0,0), OFFSET_HANDS = list(0,-4), \
+	OFFSET_NECK = list(0,-5), OFFSET_MOUTH = list(0,-5), OFFSET_PANTS = list(0,-5), \
+	OFFSET_SHIRT = list(0,-5), OFFSET_ARMOR = list(0,-1), OFFSET_HANDS = list(0,-4), \
 	OFFSET_ID_F = list(0,-5), OFFSET_GLOVES_F = list(0,-4), OFFSET_WRISTS_F = list(0,-4), OFFSET_HANDS_F = list(0,-4), \
 	OFFSET_CLOAK_F = list(0,0), OFFSET_FACEMASK_F = list(0,-5), OFFSET_HEAD_F = list(0,-5), \
 	OFFSET_FACE_F = list(0,-5), OFFSET_BELT_F = list(0,-5), OFFSET_BACK_F = list(0,-5), \
-	OFFSET_NECK_F = list(0,-5), OFFSET_MOUTH_F = list(0,-5), OFFSET_PANTS_F = list(0,0), \
-	OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES = list(0,0), OFFSET_UNDIES_F = list(-2,0))
+	OFFSET_NECK_F = list(0,-5), OFFSET_MOUTH_F = list(0,-5), OFFSET_PANTS_F = list(0,-5), \
+	OFFSET_SHIRT_F = list(0,-5), OFFSET_ARMOR_F = list(0,-1), OFFSET_UNDIES = list(0,0), OFFSET_UNDIES_F = list(0,0))
 	specstats = list("strength" = -1, "perception" = -1, "intelligence" = -1, "constitution" = -1, "endurance" = -1, "speed" = -1, "fortune" = -1)
 	specstats_f = list("strength" = -1, "perception" = -1, "intelligence" = -1, "constitution" = -1, "endurance" = -1, "speed" = -1, "fortune" = -1)
 	enflamed_icon = "widefire"
+
+/mob/living/carbon/human/sgoblin/regenerate_clothes()
+	..()
+
+	/*
+	var/obj/item/organ/eyes/eyes = src.getorganslot(ORGAN_SLOT_EYES)
+	if(eyes)
+		eyes.Remove(src,1)
+		QDEL_NULL(eyes)
+	eyes = new /obj/item/organ/eyes/night_vision/nightmare
+	eyes.Insert(src)
+
+	faction = list("goblins")*/
+
 
 /datum/species/human/sgoblin/check_roundstart_eligible()
 	return TRUE
@@ -95,70 +107,6 @@
 /datum/species/human/sgoblin/random_surname()
 	return ""
 
-/mob/living/carbon/human/species/sgoblin/after_creation()
-	..()
-	if(src.dna && src.dna.species)
-		var/obj/item/headdy = get_bodypart("head")
-		if(headdy)
-			headdy.sellprice = rand(7,40)
-	src.remove_all_languages()
-	//src.grant_language(/datum/language/orcsp)
-	var/obj/item/organ/eyes/eyes = src.getorganslot(ORGAN_SLOT_EYES)
-	if(eyes)
-		eyes.Remove(src,1)
-		QDEL_NULL(eyes)
-	eyes = new /obj/item/organ/eyes/night_vision/nightmare
-	eyes.Insert(src)
-	if(src.charflaw)
-		QDEL_NULL(src.charflaw)
-	update_body()
-	faction = list("goblins")
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOFATSTAM, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
-
 /*
-	var/loadout = rand(1,5)
-	switch(loadout)
-		if(1) //tribal spear
-			r_hand = /obj/item/rogueweapon/spear/stone
-			armor = /obj/item/clothing/suit/roguetown/armor/leather/hide/goblin
-		if(2) //tribal axe
-			r_hand = /obj/item/rogueweapon/stoneaxe
-			armor = /obj/item/clothing/suit/roguetown/armor/leather/hide/goblin
-		if(3) //tribal club
-			r_hand = /obj/item/rogueweapon/mace/woodclub
-			armor = /obj/item/clothing/suit/roguetown/armor/leather/hide/goblin
-			if(prob(10))
-				head = /obj/item/clothing/head/roguetown/helmet/leather/goblin
-		if(4) //lightly armored sword/flail/daggers
-			if(prob(50))
-				r_hand = /obj/item/rogueweapon/sword/iron
-			else
-				r_hand = /obj/item/rogueweapon/mace/spiked
-			if(prob(30))
-				l_hand = /obj/item/rogueweapon/shield/wood
-			if(prob(23))
-				r_hand = /obj/item/rogueweapon/huntingknife/stoneknife
-				l_hand = /obj/item/rogueweapon/huntingknife/stoneknife
-			armor = /obj/item/clothing/suit/roguetown/armor/leather/goblin
-			if(prob(80))
-				head = /obj/item/clothing/head/roguetown/helmet/leather/goblin
-		if(5) //heavy armored sword/flail/shields
-			if(prob(30))
-				armor = /obj/item/clothing/suit/roguetown/armor/plate/half/iron/goblin
-			else
-				armor = /obj/item/clothing/suit/roguetown/armor/leather/goblin
-			if(prob(80))
-				head = /obj/item/clothing/head/roguetown/helmet/goblin
-			else
-				head = /obj/item/clothing/head/roguetown/helmet/leather/goblin
-			if(prob(50))
-				r_hand = /obj/item/rogueweapon/sword/iron
-			else
-				r_hand = /obj/item/rogueweapon/mace/spiked
-			if(prob(20))
-				r_hand = /obj/item/rogueweapon/flail
-			l_hand = /obj/item/rogueweapon/shield/wood
+	
 		*/

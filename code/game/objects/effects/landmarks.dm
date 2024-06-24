@@ -146,6 +146,13 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 	delete_after_roundstart = FALSE
 	used = TRUE
 
+/obj/effect/landmark/start/goblin
+	name = "Goblin"
+	icon_state = "arrow"
+	jobspawn_override = list("Goblin")
+	delete_after_roundstart = FALSE
+	used = TRUE
+
 //unused
 
 /obj/effect/landmark/start/vagrantlate
