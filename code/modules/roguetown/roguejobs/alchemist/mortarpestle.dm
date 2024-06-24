@@ -36,6 +36,12 @@
 		playsound(loc, 'sound/foley/mortarpestle.ogg', 100, FALSE)
 		if(do_after(user, 10, target = src))
 			var/obj/item/N = new to_grind.dust_result(src)
+			if(istype(N,/obj/item/rogueore) || istype(N,/obj/item/ingot))
+				user.flash_fullscreen("whiteflash")
+				var/datum/effect_system/spark_spread/S = new()
+				var/turf/front = get_turf(src)
+				S.set_up(1, 1, front)
+				S.start()
 			N.loc = src.loc
 			to_grind = null
 		return

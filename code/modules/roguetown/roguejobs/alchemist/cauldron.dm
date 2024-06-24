@@ -20,7 +20,7 @@
 	crossfire = FALSE
 
 /obj/machinery/light/rogue/cauldron/Initialize()
-	create_reagents(900, DRAINABLE | AMOUNT_VISIBLE | REFILLABLE)
+	create_reagents(500, DRAINABLE | AMOUNT_VISIBLE | REFILLABLE)
 	. = ..()
 
 /obj/machinery/light/rogue/cauldron/Destroy()
@@ -43,6 +43,9 @@
 	..()
 	if(on)
 		if(ingredients.len)
+			if(!src.reagents.has_reagent(/datum/reagent/water = 20))
+				brewing--
+				playsound(src, "bubbles", 40, FALSE)
 			if(brewing < 20)
 				brewing++
 //				playsound(src, "bubbles", 40, FALSE)
@@ -185,9 +188,14 @@
 		if(!user.transferItemToLoc(I,src))
 			to_chat(user, "<span class='warning'>[I] is stuck to my hand!</span>")
 			return TRUE
-		if(I == list2params(ingredients))
-			to_chat(user, "<span class='warning'>There's already [I] in the cauldron.</span>")
-			return TRUE
+		if(ingredients.1)
+			if(I == ingredients.1)
+				to_chat(user, "<span class='warning'>There's already [I] in the cauldron.</span>")
+				return TRUE
+			if(ingredients.2)
+				if(I == ingredients.2)
+					to_chat(user, "<span class='warning'>There's already [I] in the cauldron.</span>")
+					return TRUE
 		to_chat(user, "<span class='info'>I add [I] to [src].</span>")
 		ingredients += I
 		brewing = 0
