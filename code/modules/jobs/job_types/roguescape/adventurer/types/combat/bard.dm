@@ -4,16 +4,7 @@
 	tutorial = "Bards have a near magical ability to weave music and tales, \
 	and although they're reknown for being cowardly, they tend to be very bold."
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Humen",
-	"Humen",
-	"Half-Elf",
-	"Elf",
-	"Elf",
-	"Dwarf",
-	"Dwarf",
-	"Tiefling",
-	"Aasimar"
-	)
+	allowed_races = list("Humen", "Elf", "Dwarf", "Dark Elf")
 	outfit = /datum/outfit/job/roguetown/adventurer/bard
 
 /datum/outfit/job/roguetown/adventurer/bard/pre_equip(mob/living/carbon/human/H)
@@ -56,7 +47,7 @@
 			backr = /obj/item/rogue/instrument/accord
 		if(H.dna.species.id == "elf")
 			backr = /obj/item/rogue/instrument/harp
-		if(H.dna.species.id == "tiefling")
+		if(H.dna.species.id == "delf")
 			backr = /obj/item/rogue/instrument/guitar
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	H.change_stat("perception", 1)

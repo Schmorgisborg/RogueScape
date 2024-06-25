@@ -246,7 +246,8 @@
 	structurecraft = /obj/structure/table/wood
 	verbage = "mixes"
 	craftsound = 'sound/foley/scribble.ogg'
-	skillcraft = null
+	skillcraft = /datum/skill/craft/alchemy
+	craftdiff = 0
 
 /datum/crafting_recipe/roguetown/alch/magicdust
 	name = "magic dust"
@@ -256,4 +257,5 @@
 	structurecraft = /obj/structure/table/wood
 	verbage = "mixes"
 	craftsound = 'sound/foley/scribble.ogg'
-	skillcraft = null
+	skillcraft = /datum/skill/craft/alchemy
+	craftdiff = 0

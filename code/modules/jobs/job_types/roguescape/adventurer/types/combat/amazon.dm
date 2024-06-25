@@ -3,7 +3,8 @@
 	tutorial = "Amazons are warrior-women from less civilized area of the old land."
 	allowed_sexes = list("female")
 	allowed_races = list("Humen",
-	"Dwarf")
+	"Dwarf",
+	"Dark Elf")
 	outfit = /datum/outfit/job/roguetown/adventurer/amazon
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
 	pickprob = 13

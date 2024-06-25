@@ -2,7 +2,7 @@
 	name = "Dwarf"
 	tutorial = "A miner in times before, not very talented, but strong."
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Dwarf","Dwarf")
+	allowed_races = list("Dwarf")
 	outfit = /datum/outfit/job/roguetown/adventurer/dbomb
 
 /datum/outfit/job/roguetown/adventurer/dbomb/pre_equip(mob/living/carbon/human/H)

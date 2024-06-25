@@ -1,15 +1,8 @@
 /datum/advclass/monk
 	name = "Warrior-Monk"
 	allowed_sexes = list("male", "female")
-	tutorial = "A traveling warrior-monk, unmatched in unarmed combat with otherworldly strength."
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Elf",
-	"Half-Elf",
-	"Dwarf",
-	"Aasimar"
-	)
+	tutorial = "A traveling warrior-monk, unmatched in unarmed combat with otherworldly strength and reflexes."
+	allowed_races = list("Humen", "Elf", "Dwarf")
 	outfit = /datum/outfit/job/roguetown/adventurer/monk
 	isvillager = FALSE
 	ispilgrim = FALSE
@@ -33,6 +26,8 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
+		var/datum/martial_art/resting_rous/grant = new var/datum/martial_art/resting_rous
+		grant.teach(H)
 		H.change_stat("strength", 1)
 		H.change_stat("intelligence", 1)
 		H.change_stat("endurance", 2)

@@ -4,10 +4,10 @@
 	tutorial = "You were the Lord of the last kingdom.\
 	What future will this new land spell for your people... and you?"
 	allowed_sexes = list("male")
-	allowed_races = list("Humen")
+	allowed_races = list("Humen", "Dwarf", "Elf")
 	outfit = /datum/outfit/job/roguetown/adventurer/heartfeltlord
 	maxchosen = 1
-	pickprob = 5
+	pickprob = 10
 	plevel_req = 0
 
 /datum/outfit/job/roguetown/adventurer/heartfeltlord/pre_equip(mob/living/carbon/human/H)

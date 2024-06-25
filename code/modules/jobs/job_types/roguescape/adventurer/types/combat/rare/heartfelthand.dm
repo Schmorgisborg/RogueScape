@@ -3,10 +3,10 @@
 	tutorial = "You're a well-trained swordsman, sworn to protect the King. \
 	Find him, before something else does."
 	allowed_sexes = list("male")
-	allowed_races = list("Humen")
+	allowed_races = list("Humen", "Dwarf")
 	outfit = /datum/outfit/job/roguetown/adventurer/heartfelthand
-	maxchosen = 6
-	pickprob = 100
+	maxchosen = 4
+	pickprob = 90
 	plevel_req = 0
 
 /datum/outfit/job/roguetown/adventurer/heartfelthand/pre_equip(mob/living/carbon/human/H)

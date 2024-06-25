@@ -6,7 +6,7 @@
 	allowed_sexes = list("male")
 	allowed_races = list("Humen")
 	outfit = /datum/outfit/job/roguetown/adventurer/puritan
-	maxchosen = 20
+	maxchosen = 6
 	pickprob = 11
 
 /datum/outfit/job/roguetown/adventurer/puritan/pre_equip(mob/living/carbon/human/H)

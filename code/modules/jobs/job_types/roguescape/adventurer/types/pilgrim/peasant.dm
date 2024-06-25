@@ -1,15 +1,7 @@
 /datum/advclass/peasant
 	name = "Peasant"
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Tiefling",
-	"Half-Elf",
-	"Dwarf",
-	"Dwarf",
-	"Aasimar"
-	)
+	allowed_races = list("Humen", "Elf", "Dwarf", "Dark Elf")
 	outfit = /datum/outfit/job/roguetown/adventurer/peasant
 	isvillager = TRUE
 	ispilgrim = TRUE

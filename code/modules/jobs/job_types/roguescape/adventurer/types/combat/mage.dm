@@ -2,14 +2,7 @@
 	name = "Mage"
 	tutorial = "Mages are usually grown-up apprentices of wizards. They are seeking adventure, using their arcyne knowledge to aid other adventurers."
 	allowed_sexes = list("male")
-	allowed_races = list("Humen",
-	"Humen",
-	 "Elf",
-	 "Half-Elf",
-	 "Elf",
-	 "Dark Elf",
-	 "Tiefling",
-	"Aasimar")
+	allowed_races = list("Humen", "Elf", "Dwarf", "Dark Elf")
 	outfit = /datum/outfit/job/roguetown/adventurer/mage
 
 /datum/outfit/job/roguetown/adventurer/mage/pre_equip(mob/living/carbon/human/H)
@@ -32,11 +25,10 @@
 			backl = /obj/item/storage/backpack/rogue/backpack
 			H.change_stat("intelligence", 1)
 			H.mind.adjust_skillrank(/datum/skill/magic/arcane, 3, TRUE)
-		H.change_stat("strength", -2)
+		H.change_stat("strength", -1)
 		H.change_stat("intelligence", 3)
 		H.change_stat("constitution", -2)
 		H.change_stat("endurance", -1)
-		H.change_stat("speed", -2)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/projectile/fireball)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/projectile/lightningbolt)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/projectile/fetch)

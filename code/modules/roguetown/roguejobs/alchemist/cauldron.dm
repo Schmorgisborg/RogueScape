@@ -18,8 +18,6 @@
 	var/brew_amount = 60
 	fueluse = 5 MINUTES
 	crossfire = FALSE
-	var/holder
-	var/holder2
 
 /obj/machinery/light/rogue/cauldron/Initialize()
 	create_reagents(500, DRAINABLE | AMOUNT_VISIBLE | REFILLABLE)
@@ -176,6 +174,7 @@
 					potion_result = "death"
 				//handle player perception and reset for next time
 				src.visible_message("<span class='info'>The cauldron finishes boiling with a faint [potion_result] smell.</span>")
+//give xp for /datum/skill/craft/alchemy
 				playsound(src, "bubbles", 100, TRUE)
 				playsound(src,'sound/misc/smelter_fin.ogg', 30, FALSE)
 				ingredients = list()

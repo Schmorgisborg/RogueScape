@@ -4,10 +4,7 @@
 	name = "Paladin"
 	tutorial = "A guard of the church, trained in Psydon's miracles."
 	allowed_sexes = list("male")
-	allowed_races = list("Humen",
-	"Dwarf",
-	"Tiefling",
-	"Aasimar")
+	allowed_races = list("Humen", "Dwarf")
 	outfit = /datum/outfit/job/roguetown/adventurer/templar
 	plevel_req = 0
 	maxchosen = 6

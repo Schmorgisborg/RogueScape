@@ -4,16 +4,7 @@
 	tutorial = "Who's to say what you'll find in this new land, try not to lose your \
 	head for a mere trinket."
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Half-Elf",
-	"Dark Elf",
-	"Dwarf",
-	"Dwarf",
-	"Tiefling",
-	"Aasimar"
-	)
+	allowed_races = list("Humen", "Elf", "Dark Elf", "Dwarf")
 	outfit = /datum/outfit/job/roguetown/adventurer/gravedigger
 	pickprob = 11
 
