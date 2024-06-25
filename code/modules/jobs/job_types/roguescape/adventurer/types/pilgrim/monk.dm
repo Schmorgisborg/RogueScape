@@ -26,7 +26,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-		var/datum/martial_art/resting_rous/grant = new var/datum/martial_art/resting_rous
+		var/datum/martial_art/resting_rous/grant = new /datum/martial_art/resting_rous
 		grant.teach(H)
 		H.change_stat("strength", 1)
 		H.change_stat("intelligence", 1)
