@@ -18,6 +18,8 @@
 	var/brew_amount = 60
 	fueluse = 5 MINUTES
 	crossfire = FALSE
+	var/holder
+	var/holder2
 
 /obj/machinery/light/rogue/cauldron/Initialize()
 	create_reagents(500, DRAINABLE | AMOUNT_VISIBLE | REFILLABLE)
@@ -188,14 +190,9 @@
 		if(!user.transferItemToLoc(I,src))
 			to_chat(user, "<span class='warning'>[I] is stuck to my hand!</span>")
 			return TRUE
-		if(ingredients.1)
-			if(I == ingredients.1)
-				to_chat(user, "<span class='warning'>There's already [I] in the cauldron.</span>")
-				return TRUE
-			if(ingredients.2)
-				if(I == ingredients.2)
-					to_chat(user, "<span class='warning'>There's already [I] in the cauldron.</span>")
-					return TRUE
+		
+		//duplicate ingredients return goes here
+
 		to_chat(user, "<span class='info'>I add [I] to [src].</span>")
 		ingredients += I
 		brewing = 0

@@ -102,52 +102,11 @@
 	if(tag)
 		switch(tag)
 			if("gen")
-				return list("shrink" = 0.6,
-"sx" = 7,
-"sy" = -10,
-"nx" = 6,
-"ny" = -10,
-"wx" = -11,
-"wy" = -10,
-"ex" = 0,
-"ey" = -11,
-"northabove" = 0,
-"southabove" = 1,
-"eastabove" = 1,
-"westabove" = 0,
-"nturn" = 90,
-"sturn" = -90,
-"wturn" = 0,
-"eturn" = 90,
-"nflip" = 1,
-"sflip" = 8,
-"wflip" = 8,
-"eflip" = 1)
+				return list("shrink" = 0.6,"sx" = -5,"sy" = 6,"nx" = 8,"ny" = 6,"wx" = -5,"wy" = 6,"ex" = 0,"ey" = 6,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -38,"sturn" = 37,"wturn" = 32,"eturn" = -32,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
 			if("wielded")
-				return list("shrink" = 0.8,
-"sx" = -5,
-"sy" = -13,
-"nx" = -14,
-"ny" = -13,
-"wx" = -15,
-"wy" = -13,
-"ex" = -4,
-"ey" = -13,
-"northabove" = 0,
-"southabove" = 1,
-"eastabove" = 1,
-"westabove" = 0,
-"nturn" = 135,
-"sturn" = -135,
-"wturn" = 21,
-"eturn" = 42,
-"nflip" = 0,
-"sflip" = 8,
-"wflip" = 8,
-"eflip" = 1)
+				return list("shrink" = 0.6,"sx" = 3,"sy" = -4,"nx" = 3,"ny" = -3,"wx" = -4,"wy" = -4,"ex" = 2,"ey" = -4,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 45,"sturn" = 135,"wturn" = -45,"eturn" = 45,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
-
 
 /obj/item/rogueweapon/shovel/small
 	force = 7

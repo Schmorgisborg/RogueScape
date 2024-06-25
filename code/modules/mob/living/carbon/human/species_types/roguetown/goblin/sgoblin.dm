@@ -45,11 +45,6 @@
 	specstats_f = list("strength" = -1, "perception" = -1, "intelligence" = -1, "constitution" = -1, "endurance" = -1, "speed" = -1, "fortune" = -1)
 	enflamed_icon = "widefire"
 
-
-
-/mob/living/carbon/human/sgoblin/regenerate_clothes()
-	..()
-
 	/*
 	var/obj/item/organ/eyes/eyes = src.getorganslot(ORGAN_SLOT_EYES)
 	if(eyes)
@@ -61,8 +56,6 @@
 	faction = list("goblins")*/
 
 
-/datum/species/human/sgoblin/check_roundstart_eligible()
-	return TRUE
 
 /datum/species/human/sgoblin/get_skin_list()
 	return sortList(list(
@@ -90,29 +83,6 @@
 	"blue - mystic" = "272646"
 	))
 
-/datum/species/human/sgoblin/get_spec_undies_list(gender)
-	if(!GLOB.underwear_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/underwear, GLOB.underwear_list, GLOB.underwear_m, GLOB.underwear_f)
-	var/list/spec_undies = list()
-	var/datum/sprite_accessory/X
-	switch(gender)
-		if(MALE)
-			for(var/O in GLOB.underwear_m)
-				X = GLOB.underwear_list[O]
-				if(X)
-					if("sgoblin" in X.specuse)
-						if(X.roundstart)
-							spec_undies += X
-			return spec_undies
-		if(FEMALE)
-			for(var/O in GLOB.underwear_f)
-				X = GLOB.underwear_list[O]
-				if(X)
-					if("sgoblin" in X.specuse)
-						if(X.roundstart)
-							spec_undies += X
-			return spec_undies
-
 /datum/species/human/sgoblin/random_name(gender,unique,lastname)
 	var/randname
 	if(unique)
@@ -135,7 +105,3 @@
 
 /datum/species/human/sgoblin/random_surname()
 	return ""
-
-/*
-	
-		*/
