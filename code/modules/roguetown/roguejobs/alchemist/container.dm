@@ -11,7 +11,7 @@
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH
 	obj_flags = CAN_BE_HIT
 	spillable = FALSE
-	var/closed = TRUE
+	closed = TRUE
 	reagent_flags = TRANSPARENT
 	w_class = WEIGHT_CLASS_NORMAL
 	drinksounds = list('sound/items/drink_bottle (1).ogg','sound/items/drink_bottle (2).ogg')
@@ -38,7 +38,7 @@
 
 /obj/item/reagent_containers/glass/bottle/rogue/additive
 	list_reagents = list(/datum/reagent/additive = 10)
-	
+
 /obj/item/reagent_containers/glass/bottle/rogue/healthpot
 	list_reagents = list(/datum/reagent/medicine/healthpot = 45)
 
@@ -50,7 +50,7 @@
 
 /obj/item/reagent_containers/glass/bottle/rogue/strongmanapot
 	list_reagents = list(/datum/reagent/medicine/strongmana = 45)
-	
+
 /obj/item/reagent_containers/glass/bottle/rogue/poison
 	list_reagents = list(/datum/reagent/toxin/killersice = 1)
 

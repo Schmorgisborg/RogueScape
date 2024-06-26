@@ -1,18 +1,9 @@
-//mortar and pestle
-/obj/item/alch
-	name = "dust"
-	desc = ""
-	icon = 'icons/roguetown/misc/alchemy.dmi'
-	icon_state = "irondust"
-	w_class = WEIGHT_CLASS_TINY
-	dust_result = null
-
 
 //pestle recipes
 /obj/item/seeds
 	dust_result = /obj/item/alch/seeddust
 	..()
-
+	
 /obj/item/reagent_containers/food/snacks/grown/rogue/sweetleaf
 	dust_result = /obj/item/alch/sweetdust
 	..()
@@ -90,7 +81,7 @@
 
 /obj/item/alch/waterdust
 	name = "water rune dust"
-	icon_state = "waterdust"
+	//icon_state = "waterdust"
 	possible_potion = "stronghealth"
 
 /obj/item/alch/bonemeal
@@ -131,6 +122,11 @@
 	//icon_state = "magicdust"
 	possible_potion = "buffpot"
 
+/obj/item/alch/firedust
+	name = "fire rune dust"
+	icon_state = "runedust"
+	possible_potion = "bodycomp"
+
 /obj/item/alch/sinew
 	name = "sinew"
 	icon_state = "sinew"
@@ -138,10 +134,27 @@
 	dust_result = /obj/item/alch/viscera
 	possible_potion = "strpot"
 
-/obj/item/alch/firedust
-	name = "fire rune dust"
+/obj/item/reagent_containers/powder/moondust_purest
+	possible_potion = "spdpot"
+	..()
+
+/obj/item/reagent_containers/powder/flour/salt
+	possible_potion = "spdpot"
+	..()
+
+/obj/item/alch/airdust
+	name = "air rune dust"
 	icon_state = "runedust"
-	possible_potion = "strpot"
+	possible_potion = "mindcomp"
+
+/obj/item/alch/sweetdust
+	name = "sweet leaf dust"
+	icon_state = "tobaccodust"
+	possible_potion = "intpot"
+
+/obj/item/reagent_containers/moondust
+	possible_potion = "intpot"
+	..()
 
 /obj/item/reagent_containers/powder/ozium
 	possible_potion = "perpot"
@@ -152,19 +165,15 @@
 	icon_state = "tobaccodust"
 	possible_potion = "perpot"
 
-/obj/item/alch/airdust
-	name = "air rune dust"
-	icon_state = "runedust"
-	possible_potion = "intpot"
-
-/obj/item/alch/sweetdust
-	name = "sweet leaf dust"
-	icon_state = "tobaccodust"
-	possible_potion = "intpot"
+/obj/item/alch/earthdust
+	name = "earth rune dust"
+	//icon_state = "earthdust"
+	possible_potion = "spiritcomp"
 
 /obj/item/alch/bone
-	name = "bones"
+	name = "tail bone"
 	icon_state = "bone"
+	desc = "The only bone in creachers with alchemical properties."
 	force = 7
 	throwforce = 5
 	w_class = WEIGHT_CLASS_SMALL
@@ -179,25 +188,8 @@
 	possible_potion = "endpot"
 	..()
 
-/obj/item/alch/earthdust
-	name = "earth rune dust"
-	icon_state = "earthdust"
-	possible_potion = "endpot"
-
-/obj/item/reagent_containers/powder/moondust_purest
-	possible_potion = "spdpot"
-	..()
-
-/obj/item/reagent_containers/powder/flour/salt
-	possible_potion = "spdpot"
-	..()
-
 /obj/item/reagent_containers/food/snacks/grown/apple
-	possible_potion = "forpot"
-	..()
-
-/obj/item/reagent_containers/moondust
-	possible_potion = "forpot"
+	possible_potion = "endpot"
 	..()
 
 /obj/item/natural/dirtclod

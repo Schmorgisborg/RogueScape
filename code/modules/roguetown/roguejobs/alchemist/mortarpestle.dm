@@ -45,7 +45,7 @@
 			N.loc = src.loc
 			to_grind = null
 			if(user.mind)
-				user.adjust_experience(/datum/skill/craft/alchemy, 25, FALSE)
+				user.mind.adjust_experience(/datum/skill/craft/alchemy, 25, FALSE)
 		return
 	else if(I.dust_result)
 		if(to_grind)

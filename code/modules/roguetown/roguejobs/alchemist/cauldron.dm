@@ -32,35 +32,41 @@
 	brewing = 0
 	..()
 
+/*
 /obj/machinery/light/rogue/cauldron/examine(mob/user)
 	if(ingredients.len)//ingredients.len
 		DISABLE_BITFIELD(reagents.flags, AMOUNT_VISIBLE)
 	else
 		ENABLE_BITFIELD(reagents.flags, AMOUNT_VISIBLE)
 	. = ..()
+*/
 
 /obj/machinery/light/rogue/cauldron/process()
 	..()
 	if(on)
+		
 		if(ingredients.len)
-			if(!src.reagents.has_reagent(/datum/reagent/water = 20))
-				brewing--
-				playsound(src, "bubbles", 40, FALSE)
 			if(brewing < 20)
-				brewing++
-//				playsound(src, "bubbles", 40, FALSE)
+				if(src.reagents.has_reagent(/datum/reagent/water = 20))
+					brewing++
+					if(prob(10))
+						playsound(src, "bubbles", 100, FALSE)
 			else if(brewing == 20)
 				var/healthpot_weight = 0
 				var/manapot_weight = 0
 				var/antidote_weight = 0
 				var/diseasecure_weight = 0
 
+				var/bodycomp = 0
+				var/mindcomp = 0
+				var/spiritcomp = 0
+
 				var/strength_weight = 0
+				var/speed_weight = 0
 				var/perception_weight = 0
 				var/intelligence_weight = 0
 				var/constitution_weight = 0
 				var/endurance_weight = 0
-				var/speed_weight = 0
 				var/fortune_weight = 0
 
 				var/poison_weight = 0
@@ -87,16 +93,20 @@
 						if("diseasecure")
 							diseasecure_weight++
 						//buff potions
-						if("buffpot")
+						if("bodycomp")
 							strength_weight++
+							speed_weight++
+						if("mindcomp")
 							perception_weight++
-							intelligence_weight++
+							speed_weight++
+						if("spiritcomp")
 							constitution_weight++
 							endurance_weight++
-							speed_weight++
-							fortune_weight++
+
 						if("strpot")
 							strength_weight++
+						if("spdpot")
+							speed_weight++
 						if("perpot")
 							perception_weight++
 						if("intpot")
@@ -105,8 +115,6 @@
 							constitution_weight++
 						if("endpot")
 							endurance_weight++
-						if("spdpot")
-							speed_weight++
 						if("forpot")
 							fortune_weight++
 						//poisons
@@ -121,6 +129,9 @@
 							long_mod++
 							strong_mod++
 					qdel(I)
+				if(reagents)
+					var/brew_water = reagents.get_reagent_amount(/datum/reagent/water)
+					reagents.remove_reagent(/datum/reagent/water, brew_water)
 				//modify the potion
 				if(long_mod)
 					brew_amount *= 1.5
@@ -131,7 +142,7 @@
 						reagents.add_reagent(/datum/reagent/additive, brew_amount)
 
 					if(poison_weight >= 2)
-						reagents.add_reagent(/datum/reagent/additive, brew_amount/6)
+						reagents.add_reagent(/datum/reagent/additive, brew_amount/4)
 				//select the result
 				//potions
 				if(healthpot_weight >= 2)
@@ -186,12 +197,14 @@
 		if(ingredients.len >= maxingredients)
 			to_chat(user, "<span class='warning'>Nothing else can fit.</span>")
 			return TRUE
+		for(var/obj/item/x in ingredients)
+			if(x)
+				if(I.name == x.name)
+					to_chat(user, "<span class='warning'>There's already [I] in the cauldron!</span>")
+					return TRUE
 		if(!user.transferItemToLoc(I,src))
 			to_chat(user, "<span class='warning'>[I] is stuck to my hand!</span>")
 			return TRUE
-		
-		//duplicate ingredients return goes here
-
 		to_chat(user, "<span class='info'>I add [I] to [src].</span>")
 		ingredients += I
 		brewing = 0

@@ -12,11 +12,9 @@
 		return BULLET_ACT_HIT
 	if(!(A.mobility_flags & MOBILITY_USE)) //NO UNABLE TO USE
 		return BULLET_ACT_HIT
-	if(A.dna && A.dna.check_mutation(HULK)) //NO HULK
-		return BULLET_ACT_HIT
 	if(!isturf(A.loc)) //NO MOTHERFLIPPIN MECHS!
 		return BULLET_ACT_HIT
-	A.visible_message("<span class='danger'>[A] deflects the projectile; [A.p_they()] can't be hit with ranged weapons!</span>", "<span class='danger'>I deflect the projectile!</span>")
+	A.visible_message("<span class='danger'>[A] deflects [P]!</span>", "<span class='danger'>I deflect [P]!</span>")
 	playsound(src, pick('sound/blank.ogg'), 75, TRUE)
 	P.firer = A
 	P.setAngle(rand(0, 360))//SHING
