@@ -30,7 +30,7 @@
 	name = "Strong Health Potion"
 	description = "Quickly regenerates all types of damage."
 	color = "#420000"
-	metabolization_rate = REAGENTS_METABOLISM * 6
+	metabolization_rate = REAGENTS_METABOLISM * 10
 
 /datum/reagent/medicine/stronghealth/on_mob_life(mob/living/carbon/M)
 	M.blood_volume = min(M.blood_volume+5, BLOOD_VOLUME_MAXIMUM)
@@ -51,7 +51,7 @@
 	color = "#000042"
 	taste_description = "sweet mana"
 	overdose_threshold = 0
-	metabolization_rate = 4 * REAGENTS_METABOLISM
+	metabolization_rate = REAGENTS_METABOLISM * 8
 	alpha = 173
 
 /datum/reagent/medicine/manapot/on_mob_life(mob/living/carbon/M)
@@ -64,7 +64,7 @@
 	name = "Strong Mana Potion"
 	description = "Gradually regenerates stamina."
 	color = "#0000ff"
-	metabolization_rate = 8 * REAGENTS_METABOLISM
+	metabolization_rate = REAGENTS_METABOLISM * 10
 
 /datum/reagent/medicine/strongmana/on_mob_life(mob/living/carbon/M)
 	M.rogstam_add(200)

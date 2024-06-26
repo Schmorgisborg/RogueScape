@@ -1,3 +1,10 @@
+/obj/item/alch
+	name = "dust"
+	desc = ""
+	icon = 'icons/roguetown/misc/alchemy.dmi'
+	icon_state = "irondust"
+	w_class = WEIGHT_CLASS_TINY
+	dust_result = null
 
 //pestle recipes
 /obj/item/seeds

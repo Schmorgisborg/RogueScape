@@ -948,7 +948,9 @@
 					hud_used.healthdoll.add_overlay(mutable_appearance('icons/mob/screen_gen.dmi', "[t]7"))
 			else
 				hud_used.healthdoll.icon_state = "healthdoll_DEAD"*/
-
+		if(hud_used.stressies)
+			hud_used.stressies.update_icon()
+	
 		if(hud_used.fats)
 			if(stat != DEAD)
 				. = 1

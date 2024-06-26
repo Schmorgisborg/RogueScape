@@ -241,6 +241,7 @@
 	stressies.hud = src
 	stressies.screen_loc = rogueui_stress
 	static_inventory += stressies
+	stressies.update_icon()
 
 	rmb_intent = new /obj/screen/rmbintent(owner.client)
 	rmb_intent.hud = src
