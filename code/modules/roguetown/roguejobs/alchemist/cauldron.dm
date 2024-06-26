@@ -57,10 +57,6 @@
 				var/antidote_weight = 0
 				var/diseasecure_weight = 0
 
-				var/bodycomp = 0
-				var/mindcomp = 0
-				var/spiritcomp = 0
-
 				var/strength_weight = 0
 				var/speed_weight = 0
 				var/perception_weight = 0
