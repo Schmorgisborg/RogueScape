@@ -3072,7 +3072,7 @@
 #include "code\modules\roguetown\roguejobs\artificer\_enchant.dm"
 #include "code\modules\roguetown\roguejobs\artificer\enchantment.dm"
 #include "code\modules\roguetown\roguejobs\artificer\enchants.dm"
-#include "code\modules\roguetown\roguejobs\artificer\sanctum.dm"
+#include "code\modules\roguetown\roguejobs\artificer\etcher.dm"
 #include "code\modules\roguetown\roguejobs\artificer\etcher_recipes\_etcher_recipe.dm"
 #include "code\modules\roguetown\roguejobs\artificer\etcher_recipes\armor.dm"
 #include "code\modules\roguetown\roguejobs\artificer\etcher_recipes\weapons.dm"

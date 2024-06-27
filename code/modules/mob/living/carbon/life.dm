@@ -37,6 +37,10 @@
 		if (QDELETED(src))
 			return
 
+		if(hud_used)
+			if(hud_used.stressies)
+				hud_used.stressies.update_icon()
+
 		handle_blood()
 		handle_roguebreath()
 		handle_wounds()

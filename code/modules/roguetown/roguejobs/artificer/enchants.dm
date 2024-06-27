@@ -1,3 +1,4 @@
+//lifesteal
 /datum/component/enchant/lifesteal
 	var/flat_heal // heals a constant amount every time a hit occurs
 	var/static/list/damage_heal_order = list(BRUTE, BURN, OXY)
