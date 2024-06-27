@@ -15,6 +15,9 @@
 /datum/skill/craft/blacksmithing
 	name = "Blacksmithing"
 
+/datum/skill/craft/enchantment
+	name = "Enchantment"
+
 /datum/skill/craft/carpentry
 	name = "Carpentry"
 
