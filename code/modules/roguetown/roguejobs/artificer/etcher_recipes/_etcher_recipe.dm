@@ -2,7 +2,7 @@
 	var/name
 	var/list/additional_items = list()
 	var/appro_skill = /datum/skill/craft/enchantment
-	var/req_bar
+	var/req_item
 	var/enchantment
 
 	var/needed_item
@@ -19,7 +19,7 @@
 /datum/etcher_recipe/proc/advance(mob/user)
 	if(enchant_progress == 100)
 		to_chat(user, "<span class='info'>It's ready.</span>")
-		user.visible_message("<span class='warning'>[user] strikes the [req_bar]!</span>")
+		user.visible_message("<span class='warning'>[user] strikes the [req_item]!</span>")
 		return FALSE
 	if(needed_item)
 		to_chat(user, "<span class='info'>Now it's time to add a [needed_item_text].</span>")

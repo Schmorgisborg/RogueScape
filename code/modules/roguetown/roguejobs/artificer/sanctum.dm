@@ -4,13 +4,12 @@
 	name = "etcher"
 	icon_state = "anvil"
 	var/obj/item/rogueweapon/enchanting
-	var/element
 	max_integrity = 2000
 	density = TRUE
 	damage_deflection = 25
 	climbable = TRUE
 
-/obj/machinery/etcher/attackby(obj/item/W, mob/living/user, params)
+/obj/machinery/etcher/attackby(obj/item/I, mob/living/user, params)
 	if(istype(I, /obj/item/rogueweapon) && !enchanting)//must go after hammer after we get there
 		var/obj/item/rogueweapon/W = I
 		if(W.enchantable)
@@ -65,25 +64,21 @@
 			to_chat(user, "<span class='warning'>There's nothing to enchant.</span>")
 			return
 		return
-	if(enchanting && enchanting.currecipe && enchanting.currecipe.element && istype(W, enchanting.currecipe.element))
+	if(enchanting && enchanting.currecipe && enchanting.currecipe.needed_item && istype(I, enchanting.currecipe.needed_item))
 		enchanting.currecipe.item_added(user)
-		qdel(W)
-		return
-	if(W.anvilrepair)
-		user.visible_message("<span class='info'>[user] places [W] on the anvil.</span>")
-		W.forceMove(src.loc)
+		qdel(I)
 		return
 	..()
 
 /obj/machinery/etcher/proc/choose_recipe(user)
-	if(!enchanting || enchanted)
+	if(!enchanting)
 		return
-	var/list/appro_recipe = GLOB.chanter_recipes.Copy()
+	var/list/appro_recipe = GLOB.etcher_recipes.Copy()
 	for(var/I in appro_recipe)
-		var/datum/chanter_recipe/R = I
-		if(!R.element)
+		var/datum/etcher_recipe/R = I
+		if(!R.req_item)
 			appro_recipe -= R
-		if(!istype(enchanting, R.element))
+		if(!istype(enchanting, R.req_item))
 			appro_recipe -= R
 	if(appro_recipe.len)
 		var/datum/chosen_recipe = input(user, "Choose A Creation", "Etcher") as null|anything in sortNames(appro_recipe.Copy())
@@ -115,7 +110,9 @@
 /obj/machinery/light/rogue/forge/attackby(obj/item/W, mob/living/user, params)
 	if(istype(W, /obj/item/rogueweapon) && on)
 		var/obj/item/rogueweapon/I = W
-		if(I.currecipe.progress == 100)
+		if(!I.currecipe)
+			return
+		if(I.currecipe.enchant_progress == 100)
 			I.enchantable = FALSE
 			I.enchanted = TRUE
 			I.enchantment = I.currecipe.enchantment

@@ -1,6 +1,8 @@
 /obj/item/rogueweapon
 	var/enchantable = FALSE
 	var/enchanted
+	var/enchantment
+	var/datum/etcher_recipe/currecipe
 	var/active = FALSE
 	var/cooldowny
 	var/cdtime = 1 MINUTES
@@ -43,8 +45,8 @@
 		user.visible_message("<span class='warning'>The [src] settles down.</span>")
 		user.update_inv_hands()
 	var/datum/component/enchant_holder = src.GetComponent(enchanted)
-	if(lsenchant)
-		lsenchant.RemoveComponent(enchanted)
+	if(enchant_holder)
+		enchant_holder.RemoveComponent()
 
 /obj/item/rogueweapon/update_icon()
 	..()

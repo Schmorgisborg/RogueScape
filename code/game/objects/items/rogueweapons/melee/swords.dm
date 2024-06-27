@@ -442,3 +442,4 @@
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust)
 	gripped_intents = null
 	wdefense = 6
+	enchantable = TRUE
