@@ -1,3 +1,4 @@
+//WEAPON ENCHANTMENT
 //lifesteal
 /datum/component/enchant/lifesteal
 	var/flat_heal // heals a constant amount every time a hit occurs
@@ -73,6 +74,44 @@
 /datum/component/enchant/brand/proc/do_burn(mob/living/carbon/burn_victim)
 	burn_victim.adjustFireLoss(10, 0)
 
+//SHOCK ENCHANT
+/datum/component/enchant/shock
+	var/flat_shock // deals a constant amount every time a hit occurs
+
+/datum/component/enchant/shock/Initialize(flat_burn=0)
+	if(!isitem(parent) && !ishostile(parent) && !isgun(parent))
+		return COMPONENT_INCOMPATIBLE
+	src.flat_shock = flat_shock
+
+/datum/component/enchant/shock/RegisterWithParent()
+	if(isgun(parent))
+		RegisterSignal(parent, COMSIG_PROJECTILE_ON_HIT, .proc/projectile_hit)
+	else if(isitem(parent))
+		RegisterSignal(parent, COMSIG_ITEM_AFTERATTACK, .proc/item_afterattack)
+	else if(ishostile(parent))
+		RegisterSignal(parent, COMSIG_HOSTILE_ATTACKINGTARGET, .proc/hostile_attackingtarget)
+
+/datum/component/enchant/shock/UnregisterFromParent()
+	UnregisterSignal(parent, list(COMSIG_ITEM_AFTERATTACK, COMSIG_HOSTILE_ATTACKINGTARGET, COMSIG_PROJECTILE_ON_HIT))
+
+/datum/component/enchant/shock/proc/item_afterattack(obj/item/source, atom/target, mob/user, proximity_flag, click_parameters)
+	if(!proximity_flag)
+		return
+	do_shock(target, source)
+
+/datum/component/enchant/shock/proc/hostile_attackingtarget(mob/living/simple_animal/hostile/attacker, atom/target)
+	do_shock(target)
+
+/datum/component/enchant/shock/proc/projectile_hit(atom/fired_from, atom/movable/firer, atom/target, Angle)
+	do_shock(target)
+
+/datum/component/enchant/shock/proc/do_shock(mob/living/carbon/shock_victim)
+	if(prob(5))
+		shock_victim.electrocute_act(5, src, 1)
+	else
+		shock_victim.electrocute_act(5, src, 1, SHOCK_NOSTUN)
+
+//ARMOR ENCHANTMENT
 //TRAIT_ANTIMAGIC
 /datum/component/enchant/anti_magic
 	var/magic = FALSE
