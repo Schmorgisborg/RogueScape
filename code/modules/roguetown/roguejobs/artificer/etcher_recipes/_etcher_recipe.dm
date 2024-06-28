@@ -19,11 +19,10 @@
 /datum/etcher_recipe/proc/advance(mob/user)
 	if(enchant_progress == 100)
 		to_chat(user, "<span class='info'>It's ready.</span>")
-		user.visible_message("<span class='warning'>[user] strikes the [req_item]!</span>")
+		user.visible_message("<span class='warning'>[user] finishes the [name]!</span>")
 		return FALSE
 	if(needed_item)
-		to_chat(user, "<span class='info'>Now it's time to add a [needed_item_text].</span>")
-		user.visible_message("<span class='warning'>[user] strikes the [req_item]!</span>")
+		to_chat(user, "<span class='info'>I must add a [needed_item_text] next.</span>")
 		return FALSE
 	var/moveup = 1
 	var/proab = 3
@@ -44,11 +43,11 @@
 			enchant_progress = 0
 	if(!moveup)
 		if(prob(round(proab/2)))
-			user.visible_message("<span class='warning'>[user] spoils the [req_item]!</span>")
+			user.visible_message("<span class='warning'>[user] cannot control the [name], the item is destroyed!</span>")
 			qdel(req_item)
 			return FALSE
 		else
-			user.visible_message("<span class='warning'>[user] strikes the bar!</span>")
+			user.visible_message("<span class='warning'>[user] chips the [name]!</span>")
 			return FALSE
 	else
 		if(user.mind)
@@ -57,10 +56,10 @@
 				var/amt2raise = L.STAINT/2
 				if(amt2raise > 0)
 					user.mind.adjust_experience(appro_skill, amt2raise, FALSE)
-		user.visible_message("<span class='info'>[user] strikes the [req_item]!</span>")
+		user.visible_message("<span class='info'>[user] etches the [name] in!</span>")
 		return TRUE
 
 /datum/etcher_recipe/proc/item_added(mob/user)
 	needed_item = null
-	user.visible_message("<span class='info'>[user] adds [needed_item_text]</span>")
+	user.visible_message("<span class='info'>[user] adds a [needed_item_text].</span>")
 	needed_item_text = null

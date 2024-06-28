@@ -24,7 +24,7 @@
 	wdefense = 3
 	thrown_bclass = BCLASS_CUT
 	smeltresult = /obj/item/ingot/steel
-
+	enchantable = TRUE
 
 
 /datum/intent/dagger
@@ -98,6 +98,7 @@
 	thrown_bclass = BCLASS_CHOP
 	w_class = WEIGHT_CLASS_NORMAL
 	smeltresult = null
+	enchantable = FALSE
 
 /obj/item/rogueweapon/huntingknife/cleaver/combat
 	force = 16
@@ -154,11 +155,13 @@
 	desc = ""
 	icon_state = "idagger"
 	smeltresult = null
+	enchantable = FALSE
 
 /obj/item/rogueweapon/huntingknife/idagger/steel
 	name = "dagger"
 	icon_state = "sdagger"
 	smeltresult = null
+	enchantable = TRUE
 
 /obj/item/rogueweapon/huntingknife/idagger/steel/special
 	icon_state = "sdaggeralt"
@@ -168,6 +171,7 @@
 	icon_state = "sildagger"
 	smeltresult = null
 	sellprice = 50
+	enchantable = TRUE
 
 /obj/item/rogueweapon/huntingknife/idagger/silver/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning = FALSE, bypass_equip_delay_self = FALSE)
 	. = ..()
@@ -203,3 +207,4 @@
 	max_integrity = 50
 	max_blade_int = 50
 	wdefense = 1
+	enchantable = FALSE

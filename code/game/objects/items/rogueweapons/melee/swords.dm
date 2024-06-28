@@ -27,6 +27,7 @@
 	minstr = 7
 	sellprice = 30
 	wdefense = 4
+	enchantable = TRUE
 
 /obj/item/rogueweapon/sword/Initialize()
 	. = ..()
@@ -103,6 +104,7 @@
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
 	dropshrink = 0.75
 	smeltresult = /obj/item/ingot/steel
+	enchantable = FALSE
 
 /obj/item/rogueweapon/sword/long/death
 	color = CLOTHING_BLACK
@@ -380,6 +382,7 @@
 	smeltresult = /obj/item/ingot/iron
 	max_integrity = 100
 	sellprice = 10
+	enchantable = FALSE
 
 /obj/item/rogueweapon/sword/sabre
 	name = "sabre"
@@ -393,6 +396,7 @@
 	minstr = 5
 	wdefense = 6
 	wbalance = 1
+	enchantable = TRUE
 
 /datum/intent/sword/cut/sabre
 	clickcd = 10
@@ -413,6 +417,7 @@
 	minstr = 6
 	wdefense = 7
 	wbalance = 1
+	enchantable = TRUE
 
 /datum/intent/sword/cut/rapier
 	clickcd = 10
