@@ -107,9 +107,9 @@
 
 /datum/component/enchant/shock/proc/do_shock(mob/living/carbon/shock_victim)
 	if(prob(5))
-		shock_victim.electrocute_act(5, src, 1)
+		shock_victim.electrocute_act(3, src, 1)
 	else
-		shock_victim.electrocute_act(5, src, 1, SHOCK_NOSTUN)
+		shock_victim.electrocute_act(3, src, 1, SHOCK_NOSTUN)
 
 
 

@@ -66,7 +66,7 @@
 	var/active = FALSE
 	var/cooldowny
 	var/cdtime = 1 MINUTES
-	var/activetime = 8 SECONDS
+	var/activetime = 20 SECONDS
 	var/activate_sound = 'sound/magic/antimagic.ogg'
 	var/temp_icon
 
@@ -80,7 +80,7 @@
 		if(world.time < cooldowny + cdtime)
 			to_chat(user, "<span class='warning'>Nothing happens.</span>")
 			return
-	user.visible_message("<span class='warning'>The [src] glows in [user]'s hand!</span>")
+	user.visible_message("<span class='warning'>The [src] glows on [user]'s head!</span>")
 	if(activate_sound)
 		playsound(user, activate_sound, 100, FALSE, -1)
 	cooldowny = world.time
@@ -90,7 +90,7 @@
 	activate(user)
 
 /obj/item/clothing/head/roguetown/proc/activate(mob/user)
-	user.update_inv_hands()
+	user.update_inv_head()
 	if(enchantment)
 		AddComponent(enchantment)
 	else
@@ -102,7 +102,7 @@
 	if(ismob(loc))
 		var/mob/user = loc
 		user.visible_message("<span class='warning'>The [src] settles down.</span>")
-		user.update_inv_hands()
+		user.update_inv_head()
 	var/datum/component/enchant_holder = src.GetComponent(enchantment)
 	if(enchant_holder)
 		enchant_holder.RemoveComponent()
