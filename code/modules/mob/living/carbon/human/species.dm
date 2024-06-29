@@ -131,13 +131,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 
 /proc/generate_selectable_species()
-	for(var/I in subtypesof(/datum/species))
-		var/datum/species/S = new I
-		if(S.check_roundstart_eligible())
-			GLOB.roundstart_races += S.name
-			qdel(S)
-	if(!GLOB.roundstart_races.len)
-		GLOB.roundstart_races += "human"
+	GLOB.roundstart_races = list("Humen", "Dwarf", "Elf", "Dark Elf", "Goblin")
+
 
 /datum/species/proc/check_roundstart_eligible()
 	return FALSE

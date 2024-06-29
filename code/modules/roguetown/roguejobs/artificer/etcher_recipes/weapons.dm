@@ -14,4 +14,4 @@
 	name = "shock runes"
 	req_item = /obj/item/rogueweapon
 	additional_items = list(/obj/item/rune/granter/spell/air_rune)
-	enchantment = /datum/component/enchant/brand
+	enchantment = /datum/component/enchant/shock

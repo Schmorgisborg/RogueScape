@@ -111,6 +111,8 @@
 	else
 		shock_victim.electrocute_act(5, src, 1, SHOCK_NOSTUN)
 
+
+
 //ARMOR ENCHANTMENT
 //TRAIT_ANTIMAGIC
 /datum/component/enchant/anti_magic

@@ -117,7 +117,7 @@
 			I.enchanted = TRUE
 			I.enchantment = I.currecipe.enchantment
 			I.currecipe = null
-			I.forcemove(user)
+			I.forceMove(user)
 			user.put_in_active_hand(I)
 			I.update_icon()
 			user.visible_message("<span class='info'>[user] emblazens runes upon [W].</span>")

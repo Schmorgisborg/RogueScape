@@ -25,7 +25,7 @@
 		if(disease_tracker == rtd)//No duplicate diseases
 			rtd = 0
 		disease_tracker = rtd
-
+		testing("mob #[src] rolls for disease, [rtd]")
 		switch(rtd)//Pick a disease
 			if(1)
 				apply_status_effect(/datum/status_effect/debuff/disease/rattles)
@@ -71,7 +71,6 @@
 
 	if(disease_rate)
 		disease_rate = 0
-		testing("dr:[disease_rate], dt:[disease_threshhold]")
 
 /mob/living/carbon/proc/get_disease_rate()//Get disease rate from all limbs
 	var/dr = 0
