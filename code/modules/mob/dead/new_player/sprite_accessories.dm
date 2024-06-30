@@ -278,7 +278,7 @@
 	name = "Tied Ponytail"
 	icon_state = "fhair_longstraightponytail"
 	gender = FEMALE
-	specuse = list("human", "sgoblin", "dwarf", "tiefling", "aasimar")
+	specuse = list("human", "dwarf", "tiefling", "aasimar")
 
 /datum/sprite_accessory/hair/fmess
 	name = "Messy"

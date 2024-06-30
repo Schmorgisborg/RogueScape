@@ -27,7 +27,6 @@
 /obj/item/clothing/suit/armor/reactive
 	name = "reactive armor"
 	desc = ""
-	var/active = 0
 	var/reactivearmor_cooldown_duration = 0 //cooldown specific to reactive armor
 	var/reactivearmor_cooldown = 0
 	icon_state = "reactiveoff"

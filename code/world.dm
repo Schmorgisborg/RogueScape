@@ -16,8 +16,9 @@
 	area = /area/rogue
 	view = "15x15"
 	hub = "Exadv1.spacestation13"
+	hub_password = "kMZy3U5jJHSiBQjr"
 	name = "RogueScape"
-	fps = 20
+	fps = 18
 	visibility = 1
 #ifdef FIND_REF_NO_CHECK_TICK
 	loop_checks = FALSE

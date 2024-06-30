@@ -114,7 +114,7 @@
 	testing("str pot in system")
 	if(M.has_status_effect(/datum/status_effect/buff/alch/strengthpot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/strength),2))
+	if(M.reagents.has_reagent((/datum/reagent/buff/strength),6))
 		M.apply_status_effect(/datum/status_effect/buff/alch/strengthpot)
 		M.reagents.remove_reagent(/datum/reagent/buff/strength, M.reagents.get_reagent_amount(/datum/reagent/buff/strength))
 	return ..()
@@ -128,7 +128,7 @@
 	testing("per pot in system")
 	if(M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/perception),2))
+	if(M.reagents.has_reagent((/datum/reagent/buff/perception),6))
 		M.apply_status_effect(/datum/status_effect/buff/alch/perceptionpot)
 		M.reagents.remove_reagent(/datum/reagent/buff/perception, M.reagents.get_reagent_amount(/datum/reagent/buff/perception))
 	return ..()
@@ -142,7 +142,7 @@
 	testing("int pot in system")
 	if(M.has_status_effect(/datum/status_effect/buff/alch/intelligencepot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/intelligence),2))
+	if(M.reagents.has_reagent((/datum/reagent/buff/intelligence),6))
 		M.apply_status_effect(/datum/status_effect/buff/alch/intelligencepot)
 		M.reagents.remove_reagent(/datum/reagent/buff/intelligence, M.reagents.get_reagent_amount(/datum/reagent/buff/intelligence))
 	return ..()
@@ -156,7 +156,7 @@
 	testing("con pot in system")
 	if(M.has_status_effect(/datum/status_effect/buff/alch/constitutionpot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/constitution),2))
+	if(M.reagents.has_reagent((/datum/reagent/buff/constitution),6))
 		M.apply_status_effect(/datum/status_effect/buff/alch/constitutionpot)
 		M.reagents.remove_reagent(/datum/reagent/buff/constitution, M.reagents.get_reagent_amount(/datum/reagent/buff/constitution))
 	return ..()
@@ -170,7 +170,7 @@
 	testing("end pot in system")
 	if(M.has_status_effect(/datum/status_effect/buff/alch/endurancepot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/endurance),2))
+	if(M.reagents.has_reagent((/datum/reagent/buff/endurance),6))
 		M.apply_status_effect(/datum/status_effect/buff/alch/endurancepot)
 		M.reagents.remove_reagent(/datum/reagent/buff/endurance, M.reagents.get_reagent_amount(/datum/reagent/buff/endurance))
 	return ..()
@@ -184,7 +184,7 @@
 	testing("spd pot in system")
 	if(M.has_status_effect(/datum/status_effect/buff/alch/speedpot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/speed),2))
+	if(M.reagents.has_reagent((/datum/reagent/buff/speed),6))
 		M.apply_status_effect(/datum/status_effect/buff/alch/speedpot)
 		M.reagents.remove_reagent(/datum/reagent/buff/speed, M.reagents.get_reagent_amount(/datum/reagent/buff/speed))
 	return ..()
@@ -198,7 +198,7 @@
 	testing("luck pot in system")
 	if(M.has_status_effect(/datum/status_effect/buff/alch/fortunepot))
 		return ..()
-	if(M.reagents.has_reagent((/datum/reagent/buff/fortune),2))
+	if(M.reagents.has_reagent((/datum/reagent/buff/fortune),6))
 		M.apply_status_effect(/datum/status_effect/buff/alch/fortunepot)
 		M.reagents.remove_reagent(/datum/reagent/buff/fortune, M.reagents.get_reagent_amount(/datum/reagent/buff/fortune))
 	return ..()
@@ -238,18 +238,17 @@
 	id = /datum/reagent/medicine/stronghealth
 	results = list(/datum/reagent/medicine/stronghealth = 5)
 	required_reagents = list(/datum/reagent/medicine/healthpot = 5, /datum/reagent/additive = 5)
-	mix_message = "oh shit health worked!"
-
+	mix_message = "The cauldron glows for a moment."
 /datum/chemical_reaction/alch/strongmana
 	name = "Strong Mana Potion"
 	id = /datum/reagent/medicine/strongmana
 	results = list(/datum/reagent/medicine/strongmana = 5)
 	required_reagents = list(/datum/reagent/medicine/manapot = 5, /datum/reagent/additive = 5)
-	mix_message = "oh shit mana worked!"
+	mix_message = "The cauldron glows for a moment."
 
 /datum/chemical_reaction/alch/strongpoison
 	name = "Strong Health Potion"
 	id = /datum/reagent/strongpoison
 	results = list(/datum/reagent/strongpoison = 5)
 	required_reagents = list(/datum/reagent/berrypoison = 5, /datum/reagent/additive = 5)
-	mix_message = "oh shit poison worked!"
+	mix_message = "The cauldron glows for a moment."

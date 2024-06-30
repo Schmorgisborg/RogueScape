@@ -25,12 +25,12 @@
 	enchantable = TRUE
 
 /obj/item/clothing/ring/active
-	var/active = FALSE
+	active = FALSE
 	desc = "This magic ring takes about five minutes between uses. (Right-click me to activate)"
-	var/cooldowny
-	var/cdtime
-	var/activetime
-	var/activate_sound
+	cooldowny
+	cdtime
+	activetime
+	activate_sound
 
 /obj/item/clothing/ring/active/attack_right(mob/user)
 	if(loc != user)
@@ -48,7 +48,7 @@
 	update_icon()
 	activate(user)
 
-/obj/item/clothing/ring/active/proc/activate(mob/user)
+/obj/item/clothing/ring/active/activate(mob/user)
 	user.update_inv_wear_id()
 
 /obj/item/clothing/ring/active/proc/demagicify()

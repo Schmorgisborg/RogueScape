@@ -26,7 +26,7 @@
 	hitscan = TRUE
 	movement_type = UNSTOPPABLE
 	light_color = LIGHT_COLOR_WHITE
-	damage = 15
+	damage = 20
 	damage_type = BURN
 	nodamage = FALSE
 	speed = 0.3

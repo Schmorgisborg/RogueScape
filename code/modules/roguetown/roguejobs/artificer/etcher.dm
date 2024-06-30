@@ -27,11 +27,13 @@
 		user.changeNext_move(CLICK_CD_MELEE)
 		if(enchanting)
 			if(enchanting.currecipe)
-				if(var/obj/machinery/plinth/P in oview(4,src))
+				var/obj/machinery/plinth/P = locate(/obj/machinery/plinth/) in oview(4,src)
+				if(P)
 					plinth_contents = P.plinth_item
 					if(!plinth_contents)
+						to_chat(user, "<span class='warning'>The plinth is empty.</span>")
 						return
-					if(plinth_contents == enchanting.currecipe.plinth_item)
+					if(plinth_contents.name == enchanting.currecipe.plinth_item[1].name)
 						var/used_str = user.STASTR
 						if(iscarbon(user))
 							var/mob/living/carbon/C = user
@@ -43,14 +45,17 @@
 						else
 							shake_camera(user, 1, 1)
 							playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
-						if(prob(23))
+						if(prob(20))
+							user.flash_fullscreen("whiteflash")
+							P.shock_cycle()
+						if(prob(20))
 							user.flash_fullscreen("whiteflash")
 							var/datum/effect_system/spark_spread/S = new()
 							var/turf/front = get_turf(src)
 							S.set_up(1, 1, front)
 							S.start()
 					else
-						to_chat(user, "<span class='warning'>I must have a [enchanting.currecipe.plinth_item] on my plinth.</span>")
+						to_chat(user, "<span class='warning'>I must have a [enchanting.currecipe.plinth_item[1].name] on my plinth.</span>")
 						return
 				else
 					to_chat(user, "<span class='warning'>I need a plinth.</span>")

@@ -31,5 +31,32 @@
 		I.pixel_x = 0
 		I.pixel_y = 0
 		var/mutable_appearance/M = new /mutable_appearance(I)
-		M.transform *= 0.5
+		M.transform *= 0.4
+		I.pixel_x = 0
+		M.pixel_y = 8
 		add_overlay(M)
+
+/obj/machinery/plinth/proc/shock_cycle()
+	var/closest_dist = 0
+	var/obj/machinery/etcher/closest_etcher
+	var/static/things_to_shock = /obj/machinery/etcher
+
+	for(var/A in oview(src, 5))
+		if(istype(A, /obj/machinery/etcher))
+			var/dist = get_dist(src, A)
+			var/obj/machinery/etcher/C = A
+			if(dist <= 5 && (dist < closest_dist || !closest_etcher))
+				closest_dist = dist
+				closest_etcher = C
+
+	if(closest_etcher)
+		src.Beam(closest_etcher, icon_state="lightning[rand(1,12)]", time=5, maxdistance = INFINITY)
+		var/zapdir = get_dir(src, closest_etcher)
+		if(zapdir)
+			. = zapdir
+
+
+
+//?		shock_victim.electrocute_act(20, src, 1)
+
+

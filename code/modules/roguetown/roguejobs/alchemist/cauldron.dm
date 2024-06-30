@@ -138,7 +138,7 @@
 						reagents.add_reagent(/datum/reagent/additive, brew_amount)
 
 					if(poison_weight >= 2)
-						reagents.add_reagent(/datum/reagent/additive, brew_amount/4)
+						reagents.add_reagent(/datum/reagent/additive, brew_amount/6)
 				//select the result
 				//potions
 				if(healthpot_weight >= 2)
@@ -155,25 +155,25 @@
 					potion_result = "dirt"
 				//buff potions
 				if(strength_weight >= 3)
-					reagents.add_reagent(/datum/reagent/buff/strength, (brew_amount/4))
+					reagents.add_reagent(/datum/reagent/buff/strength, (brew_amount/10))
 					potion_result = "stew"
 				if(perception_weight >= 3)
-					reagents.add_reagent(/datum/reagent/buff/perception, (brew_amount/4))
+					reagents.add_reagent(/datum/reagent/buff/perception, (brew_amount/10))
 					potion_result = "burnt"
 				if(intelligence_weight >= 3)
-					reagents.add_reagent(/datum/reagent/buff/intelligence, (brew_amount/4))
+					reagents.add_reagent(/datum/reagent/buff/intelligence, (brew_amount/10))
 					potion_result = "energy"
 				if(constitution_weight >= 3)
-					reagents.add_reagent(/datum/reagent/buff/constitution, (brew_amount/4))
+					reagents.add_reagent(/datum/reagent/buff/constitution, (brew_amount/10))
 					potion_result = "sour"
 				if(endurance_weight >= 3)
-					reagents.add_reagent(/datum/reagent/buff/endurance, (brew_amount/4))
-					potion_result = "end?"
+					reagents.add_reagent(/datum/reagent/buff/endurance, (brew_amount/10))
+					potion_result = "vinegar"
 				if(speed_weight >= 3)
-					reagents.add_reagent(/datum/reagent/buff/speed, (brew_amount/4))
-					potion_result = "spd?"
+					reagents.add_reagent(/datum/reagent/buff/speed, (brew_amount/10))
+					potion_result = "acidic"
 				if(fortune_weight >= 3)
-					reagents.add_reagent(/datum/reagent/buff/fortune, (brew_amount/4))
+					reagents.add_reagent(/datum/reagent/buff/fortune, (brew_amount/10))
 					potion_result = "fortune!"
 				//poisons
 				if(poison_weight >= 2)

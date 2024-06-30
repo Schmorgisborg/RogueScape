@@ -181,7 +181,7 @@
 	else
 		STOP_PROCESSING(SSobj, src)
 
-/obj/item/clothing/suit/space/chronos/proc/activate()
+/obj/item/clothing/suit/space/chronos/activate()
 	if(!activating && !activated && !teleporting)
 		activating = 1
 		var/mob/living/carbon/human/user = src.loc

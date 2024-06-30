@@ -306,7 +306,7 @@
 	item_state = "kindleKicks"
 	actions_types = list(/datum/action/item_action/kindleKicks)
 	var/lightCycle = 0
-	var/active = FALSE
+	active = FALSE
 
 /obj/item/clothing/shoes/kindleKicks/ui_action_click(mob/user, action)
 	if(active)
