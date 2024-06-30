@@ -2,7 +2,7 @@
 /obj/machinery/etcher
 	icon = 'icons/roguetown/misc/forge.dmi'
 	name = "etcher"
-	icon_state = "anvil"
+	icon_state = "etcher"
 	var/obj/item/rogueweapon/enchanting
 	max_integrity = 2000
 	density = TRUE
@@ -103,8 +103,7 @@
 		I.pixel_y = 0
 		var/mutable_appearance/M = new /mutable_appearance(I)
 		M.transform *= 0.5
-		M.pixel_y = 5
-		M.pixel_x = 3
+		M.pixel_y = -6
 		add_overlay(M)
 
 /obj/machinery/light/rogue/forge/attackby(obj/item/W, mob/living/user, params)

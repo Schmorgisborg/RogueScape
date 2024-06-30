@@ -602,19 +602,24 @@
 	turf_type = /turf/open/floor/rogue/naturalstone
 	above_floor = /turf/open/floor/rogue/naturalstone
 	baseturfs = list(/turf/open/floor/rogue/naturalstone)
-	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 5,/turf/closed/mineral/rogue/iron = 15,/turf/closed/mineral/rogue/coal = 25)
-	mineralChance = 23
+	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 5, /turf/closed/mineral/rogue/iron = 14,/turf/closed/mineral/rogue/coal = 22,
+		/turf/closed/mineral/rogue/silver = 4, /turf/closed/mineral/rogue/essence = 12)
+	mineralChance = 10
 
 
 /turf/closed/mineral/random/rogue/med
 	icon_state = "minrandmed"
-	mineralChance = 10
-	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 5,/turf/closed/mineral/rogue/gold = 3,/turf/closed/mineral/rogue/iron = 33,/turf/closed/mineral/rogue/coal = 14)
+	mineralChance = 20
+	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 4,/turf/closed/mineral/rogue/gold = 2,/turf/closed/mineral/rogue/iron = 23,
+		/turf/closed/mineral/rogue/coal = 10, /turf/closed/mineral/rogue/silver = 4, /turf/closed/mineral/rogue/firerune = 2, /turf/closed/mineral/rogue/waterrune = 2,
+		/turf/closed/mineral/rogue/waterrune = 2, /turf/closed/mineral/rogue/earthrune = 2, /turf/closed/mineral/rogue/essence = 4)
 
 /turf/closed/mineral/random/rogue/high
 	icon_state = "minrandhigh"
 	mineralChance = 33
-	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 5,/turf/closed/mineral/rogue/gold = 9,/turf/closed/mineral/rogue/iron = 33,/turf/closed/mineral/rogue/coal = 19)
+	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/gold = 7,/turf/closed/mineral/rogue/iron = 26,/turf/closed/mineral/rogue/coal = 15,
+		/turf/closed/mineral/rogue/firerune = 3, /turf/closed/mineral/rogue/waterrune = 3, /turf/closed/mineral/rogue/waterrune = 3,
+		/turf/closed/mineral/rogue/earthrune = 3, /turf/closed/mineral/rogue/essence = 12)
 
 
 //begin actual mineral turfs
@@ -642,6 +647,13 @@
 	icon_state = "mingold"
 	mineralType = /obj/item/rogueore/gold
 	rockType = /obj/item/natural/rock/gold
+	spreadChance = 5
+	spread = 1
+
+/turf/closed/mineral/rogue/silver
+	icon_state = "mingold"
+	mineralType = /obj/item/rogueore/silver
+	rockType = /obj/item/natural/rock/silver
 	spreadChance = 5
 	spread = 1
 
@@ -674,3 +686,39 @@
 /turf/closed/mineral/rogue/bedrock/attackby(obj/item/I, mob/user, params)
 	to_chat(user, "<span class='warning'>TOO HARD!</span>")
 	turf_integrity = max_integrity
+
+//Runes
+/turf/closed/mineral/rogue/firerune
+	icon_state = "mingold"
+	mineralType = /obj/item/rune/spell/fire_rune
+	rockType = /obj/item/natural/rock/firerune
+	spreadChance = 5
+	spread = 1
+
+/turf/closed/mineral/rogue/airrune
+	icon_state = "mingold"
+	mineralType = /obj/item/rune/spell/air_rune
+	rockType = /obj/item/natural/rock/airrune
+	spreadChance = 5
+	spread = 1
+
+/turf/closed/mineral/rogue/waterrune
+	icon_state = "mingold"
+	mineralType = /obj/item/rune/spell/water_rune
+	rockType = /obj/item/natural/rock/waterrune
+	spreadChance = 5
+	spread = 1
+
+/turf/closed/mineral/rogue/earthrune
+	icon_state = "mingold"
+	mineralType = /obj/item/rune/spell/earth_rune
+	rockType = /obj/item/natural/rock/earthrune
+	spreadChance = 5
+	spread = 1
+
+/turf/closed/mineral/rogue/essence
+	icon_state = "mingold"
+	mineralType = /obj/item/rune/spell/blank_rune
+	rockType = /obj/item/natural/rock/essence
+	spreadChance = 19
+	spread = 3

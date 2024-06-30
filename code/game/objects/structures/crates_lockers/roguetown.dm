@@ -57,6 +57,9 @@
 	if(prob(90))
 		var/I = pickweight(loot)
 		new I(src)
+		if(prob(60))
+			I = pickweight(loot)
+			new I(src)
 
 /obj/structure/closet/crate/roguecloset
 	name = "closet"

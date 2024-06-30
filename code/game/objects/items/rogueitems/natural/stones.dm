@@ -111,6 +111,9 @@
 /obj/item/natural/rock/gold
 	mineralType = /obj/item/rogueore/gold
 
+/obj/item/natural/rock/silver
+	mineralType = /obj/item/rogueore/silver
+
 /obj/item/natural/rock/iron
 	mineralType = /obj/item/rogueore/iron
 
@@ -119,3 +122,19 @@
 
 /obj/item/natural/rock/salt
 	mineralType = /obj/item/reagent_containers/powder/flour/salt
+
+//rune ore
+/obj/item/natural/rock/firerune
+	mineralType = /obj/item/rune/spell/fire_rune
+
+/obj/item/natural/rock/airrune
+	mineralType = /obj/item/rune/spell/air_rune
+
+/obj/item/natural/rock/waterrune
+	mineralType = /obj/item/rune/spell/water_rune
+
+/obj/item/natural/rock/earthrune
+	mineralType = /obj/item/rune/spell/earth_rune
+
+/obj/item/natural/rock/essence
+	mineralType = /obj/item/rune/spell/blank_rune

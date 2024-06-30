@@ -55,23 +55,23 @@
 	dust_result = /obj/item/alch/coaldust
 	..()
 
-/obj/item/rune/granter/spell/fire_rune
+/obj/item/rune/spell/fire_rune
 	dust_result = /obj/item/alch/firedust
 	..()
 
-/obj/item/rune/granter/spell/air_rune
+/obj/item/rune/spell/air_rune
 	dust_result = /obj/item/alch/airdust
 	..()
 
-/obj/item/rune/granter/spell/water_rune
+/obj/item/rune/spell/water_rune
 	dust_result = /obj/item/alch/waterdust
 	..()
 
-/obj/item/rune/granter/spell/earth_rune
+/obj/item/rune/spell/earth_rune
 	dust_result = /obj/item/alch/earthdust
 	..()
 
-/obj/item/rune/granter/spell/blank_rune
+/obj/item/rune/spell/blank_rune
 	dust_result = /obj/item/alch/runedust
 	..()
 
@@ -139,6 +139,11 @@
 	icon_state = "sinew"
 	dropshrink = 0.5
 	dust_result = /obj/item/alch/viscera
+	possible_potion = "strpot"
+
+/obj/item/alch/irondust
+	name = "iron dust"
+	icon_state = "irondust"
 	possible_potion = "strpot"
 
 /obj/item/reagent_containers/powder/moondust_purest
@@ -225,15 +230,10 @@
 	icon_state = "golddust"
 	possible_potion = "strong"
 
-/obj/item/alch/irondust
-	name = "iron dust"
-	icon_state = "irondust"
-	possible_potion = "long"
-
 /obj/item/alch/feaudust
 	name = "feau dust"
 	icon_state = "feaudust"
-	possible_potion = "robust"
+	possible_potion = "long"
 
 //dust mix crafting
 /datum/crafting_recipe/roguetown/alch/feaudust

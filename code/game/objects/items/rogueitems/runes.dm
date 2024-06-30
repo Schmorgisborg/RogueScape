@@ -1,46 +1,37 @@
-/obj/item/rune/granter
+/obj/item/rune
 	var/list/remarks = list() //things to read about while learning.
-	var/pages_to_mastery = 2 //Essentially controls how long a mob must keep the rune in his hand to actually successfully learn
+	var/pages_to_mastery = 5 //Essentially controls how long a mob must keep the rune in his hand to actually successfully learn
 	var/reading = FALSE //sanity
 	var/oneuse = TRUE //default this is true, but admins can var this to 0 if we wanna all have a pass around of the rod form rune
-	var/used = FALSE //only really matters if oneuse but it might be nice to know if someone's used it for admin investigations perhaps
 	w_class = WEIGHT_CLASS_TINY
 	icon = 'icons/roguetown/items/books.dmi'
 
-/obj/item/rune/granter/proc/turn_page(mob/user)
+/obj/item/rune/proc/turn_page(mob/user)
 	//playsound(user, pick('sound/blank.ogg'), 30, TRUE)
 	if(do_after(user,50, user))
 		return TRUE
 	return FALSE
 
-/obj/item/rune/granter/proc/recoil(mob/user)
-	to_chat(user, "<span class='notice'>It feels very light.</span>")
-	return
-
-/obj/item/rune/granter/proc/already_known(mob/user)
+/obj/item/rune/proc/already_known(mob/user)
 	return FALSE
 
-/obj/item/rune/granter/proc/on_start(mob/user)
+/obj/item/rune/proc/on_start(mob/user)
 	to_chat(user, "<span class='notice'>I start reading [name]...</span>")
 
-/obj/item/rune/granter/proc/on_stopped(mob/user)
+/obj/item/rune/proc/on_stopped(mob/user)
 	to_chat(user, "<span class='notice'>I stop reading...</span>")
 
-/obj/item/rune/granter/proc/on_finished(mob/user)
+/obj/item/rune/proc/on_finished(mob/user)
 	to_chat(user, "<span class='notice'>I finish reading [name]!</span>")
 
-/obj/item/rune/granter/proc/onlearned(mob/user)
-	used = TRUE
+/obj/item/rune/proc/onlearned(mob/user)
+	qdel(src)
 
-/obj/item/rune/granter/attack_self(mob/user)
+/obj/item/rune/attack_self(mob/user)
 	if(reading)
 		//to_chat(user, "<span class='warning'>You're already reading this!</span>")
 		return FALSE
 	if(already_known(user))
-		return FALSE
-	if(used)
-		if(oneuse)
-			recoil(user)
 		return FALSE
 	on_start(user)
 	reading = TRUE
@@ -56,40 +47,18 @@
 		reading = FALSE
 	return TRUE
 
-/*example
-/obj/item/rune/granter/action
-	var/granted_action
-	var/actionname = "catching bugs"
-
-/obj/item/rune/granter/action/already_known(mob/user)
-	if(!granted_action)
-		return TRUE
-	for(var/datum/action/A in user.actions)
-		if(A.type == granted_action)
-			to_chat(user, "<span class='warning'>I already know all about [actionname]!</span>")
-			return TRUE
-	return FALSE
-
-/obj/item/rune/granter/action/on_start(mob/user)
-	to_chat(user, "<span class='notice'>I study the rune intently, siphoning energy and the knowledge of [actionname].</span>")
-
-/obj/item/rune/granter/action/on_finished(mob/user)
-	to_chat(user, "<span class='notice'>I feel like you've got a good handle on [actionname]!</span>")
-	var/datum/action/G = new granted_action
-	G.Grant(user)
-	onlearned(user)
-*/
-
-/obj/item/rune/granter/spell
+//Spells
+/obj/item/rune/spell
 	name = "rune"
 	dropshrink = 0.3
+	pages_to_mastery = 3
 	var/spell
 	var/spellname = "no spell"
 
-/obj/item/rune/granter/spell/on_start(mob/user)
+/obj/item/rune/spell/on_start(mob/user)
 	user.visible_message("<span class='warning'>[user] begins siphoning the rune.</span>")
 
-/obj/item/rune/granter/spell/on_finished(mob/user)
+/obj/item/rune/spell/on_finished(mob/user)
 	for(var/obj/effect/proc_holder/spell/knownspell in user.mind.spell_list)
 		if(knownspell.type == spell)
 			spell = null
@@ -102,17 +71,10 @@
 	else if(user.mind.get_skill_level(/datum/skill/magic/arcane) <= 5)
 		to_chat(user, "<span class='notice'>Arcane power is emblazened in your mind!</span>")
 		user.mind.adjust_experience(/datum/skill/magic/arcane, 150, FALSE)
- 	onlearned(user)
-
-/obj/item/rune/granter/spell/recoil(mob/user)
-	user.visible_message("<span class='warning'>[src] glows with a faint light!</span>")
-
-/obj/item/rune/granter/spell/onlearned(mob/user)
-	user.visible_message("<span class='warning'>[src] glows dark, and then crumbles!</span>")
+ 	user.visible_message("<span class='warning'>[src] glows dark, and then crumbles!</span>")
 	qdel(src)
-	..()
 
-/obj/item/rune/granter/spell/fire_rune
+/obj/item/rune/spell/fire_rune
 	spell = /obj/effect/proc_holder/spell/invoked/projectile/fireball
 	spellname = "fireball"
 	icon_state = "fire_rune"
@@ -120,7 +82,7 @@
 	desc = "Warm with power."
 	remarks = list("To understand these archaic things...", "Just catching them on fire won't do...", "Accounting for crosswinds... really?", "I think I just burned my hand...")
 
-/obj/item/rune/granter/spell/water_rune
+/obj/item/rune/spell/water_rune
 	spell = /obj/effect/proc_holder/spell/invoked/arcaneheal
 	spellname = "arcaneheal"
 	icon_state = "water_rune"
@@ -128,7 +90,7 @@
 	desc = "A bit moist."
 	remarks = list("To understand these archaic things...", "Mana flows through all living things...", "This spell will fatigue me...", "The spell should flow like water...")
 
-/obj/item/rune/granter/spell/air_rune
+/obj/item/rune/spell/air_rune
 	spell = /obj/effect/proc_holder/spell/invoked/projectile/lightningbolt
 	spellname = "lightning"
 	icon_state = "air_rune"
@@ -136,7 +98,7 @@
 	desc = "Cool to the touch."
 	remarks = list("To understand these archaic things...", "Done properly this could...", "I think I just shocked my hand...")
 
-/obj/item/rune/granter/spell/earth_rune
+/obj/item/rune/spell/earth_rune
 	spell = /obj/effect/proc_holder/spell/invoked/projectile/fetch
 	spellname = "fetch"
 	icon_state = "earth_rune"
@@ -144,7 +106,7 @@
 	desc = "Heavier than it looks."
 	remarks = list("To understand these archaic things...", "I can only pull, not push...", "My mind feels like mud...")
 
-/obj/item/rune/granter/spell/blank_rune
+/obj/item/rune/spell/blank_rune
 	spell = null
 	spellname = "arcane magic"
 	icon_state = "blank_rune"

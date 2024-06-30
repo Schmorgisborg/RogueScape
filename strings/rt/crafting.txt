@@ -134,3 +134,28 @@ Dry plants at a drying rack<br>
 Swampweed and Westleach Leaf can be ground into Moondust and Ozium at a millstone<br>
 Spice is Moondust and Ozium mixed<br>
 Pure Moondust can be made from 3 piles of Moondust<br>
+<br><br>
+<h4>Alchemy:</h4><br>
+Cauldron: 2 iron bars, 4 stones, 1 small log.<br>
+Mortar & Pestle: 3 & 2 stones, respectively.<br>
+The cauldron must contain at least 20oz of water, no matter the resulting potion.<br>
+Many items can be turned into dust, using a mortar and pestle.<br>
+Feau dust acts as a boost, giving you more potion per brew.<br> 
+Feau Dust- 2 iron dust, 1 gold<br>
+Health- Viscera (ground sinew) and wheat chaff<br>
+Strong Health- Add water rune dust while brewing health<br>
+Mana- Bone meal and seed dust<br>
+Strong Mana- Add rune essence dust while brewing mana<br>
+Antidote- Sweet berries and coal dust<br>
+Disease Cure- Silver dust and ash<br>
+Fortify Strength- Sinew, iron dust, and fire rune dust<br>
+Fortify Speed- Pure moondust, salt, and fire rune dust<br>
+Fortify Perception- Ozium, tobacco dust, and air rune dust<br>
+Fortify Intelligence- Sweet leaf dust, moondust, and air rune dust<br>
+Fortify Constitution- Bone, any raw fish, and earth rune dust<br>
+Fortify Endurance- Leeches, an apple, and earth rune dust<br>
+Poison- Any two: dirt, poison berreis, raw sweetleaf, or raw pipeweed<br>
+Deadly Poison- Add gold dust during poison brewing.<br>
+<br><br>
+<h4>Enchanting:</h4><br>
+Enchanting is done on an etcher, then finished on a regular forge.<br>
