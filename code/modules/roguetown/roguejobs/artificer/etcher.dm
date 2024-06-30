@@ -4,13 +4,14 @@
 	name = "etcher"
 	icon_state = "etcher"
 	var/obj/item/rogueweapon/enchanting
+	var/obj/plinth_contents
 	max_integrity = 2000
 	density = TRUE
 	damage_deflection = 25
 	climbable = TRUE
 
 /obj/machinery/etcher/attackby(obj/item/I, mob/living/user, params)
-	if(istype(I, /obj/item/rogueweapon) && !enchanting)//must go after hammer after we get there
+	if(istype(I, /obj/item/rogueweapon) && !enchanting)
 		var/obj/item/rogueweapon/W = I
 		if(W.enchantable)
 			if(W.enchanted)
@@ -26,23 +27,34 @@
 		user.changeNext_move(CLICK_CD_MELEE)
 		if(enchanting)
 			if(enchanting.currecipe)
-				var/used_str = user.STASTR
-				if(iscarbon(user))
-					var/mob/living/carbon/C = user
-					if(C.domhand)
-						used_str = C.get_str_arms(C.used_hand)
-					C.rogfat_add(max(30 - (used_str * 3), 0))
-				if(enchanting.currecipe.advance(user))
-					playsound(src,pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
+				if(var/obj/machinery/plinth/P in oview(4,src))
+					plinth_contents = P.plinth_item
+					if(!plinth_contents)
+						return
+					if(plinth_contents == enchanting.currecipe.plinth_item)
+						var/used_str = user.STASTR
+						if(iscarbon(user))
+							var/mob/living/carbon/C = user
+							if(C.domhand)
+								used_str = C.get_str_arms(C.used_hand)
+							C.rogfat_add(max(30 - (used_str * 3), 0))
+						if(enchanting.currecipe.advance(user))
+							playsound(src,pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
+						else
+							shake_camera(user, 1, 1)
+							playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
+						if(prob(23))
+							user.flash_fullscreen("whiteflash")
+							var/datum/effect_system/spark_spread/S = new()
+							var/turf/front = get_turf(src)
+							S.set_up(1, 1, front)
+							S.start()
+					else
+						to_chat(user, "<span class='warning'>I must have a [enchanting.currecipe.plinth_item] on my plinth.</span>")
+						return
 				else
-					shake_camera(user, 1, 1)
-					playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
-				if(prob(23))
-					user.flash_fullscreen("whiteflash")
-					var/datum/effect_system/spark_spread/S = new()
-					var/turf/front = get_turf(src)
-					S.set_up(1, 1, front)
-					S.start()
+					to_chat(user, "<span class='warning'>I need a plinth.</span>")
+					return
 			else
 				if(choose_recipe(user))
 					user.flash_fullscreen("whiteflash")

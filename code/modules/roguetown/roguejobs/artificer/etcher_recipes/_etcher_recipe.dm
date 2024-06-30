@@ -1,6 +1,7 @@
 /datum/etcher_recipe
 	var/name
-	var/list/additional_items = list()
+	var/list/additional_items = list(/obj/item/alch/golddust)
+	var/plinth_item
 	var/appro_skill = /datum/skill/craft/enchantment
 	var/req_item
 	var/enchantment
@@ -41,6 +42,8 @@
 			qdel(I)
 			additional_items -= needed_item
 			enchant_progress = 0
+		else
+			//
 	if(!moveup)
 		if(prob(round(proab/2)))
 			user.visible_message("<span class='warning'>[user] cannot control the [name], the item is destroyed!</span>")

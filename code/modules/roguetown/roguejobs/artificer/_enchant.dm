@@ -58,7 +58,7 @@
 
 
 
-/obj/item/clothing/head/roguetown
+/obj/item/clothing
 	var/enchantable = FALSE
 	var/enchanted
 	var/enchantment
@@ -70,7 +70,7 @@
 	var/activate_sound = 'sound/magic/antimagic.ogg'
 	var/temp_icon
 
-/obj/item/clothing/head/roguetown/attack_right(mob/user)
+/obj/item/clothing/attack_right(mob/user)
 	if(enchantable && !enchanted)
 		..()
 		return
@@ -89,14 +89,14 @@
 	update_icon()
 	activate(user)
 
-/obj/item/clothing/head/roguetown/proc/activate(mob/user)
+/obj/item/clothing/proc/activate(mob/user)
 	user.update_inv_head()
 	if(enchantment)
 		AddComponent(enchantment)
 	else
 		user.visible_message("<span class='warning'>Something went wrong, oh no!</span>")
 
-/obj/item/clothing/head/roguetown/proc/finish()
+/obj/item/clothing/proc/finish()
 	active = FALSE
 	update_icon()
 	if(ismob(loc))
@@ -107,7 +107,7 @@
 	if(enchant_holder)
 		enchant_holder.RemoveComponent()
 
-/obj/item/clothing/head/roguetown/update_icon()
+/obj/item/clothing/update_icon()
 	..()
 	if(active)
 		icon_state = "[icon_state]active"

@@ -16,11 +16,13 @@
 	name = "silver ring"
 	icon_state = "ring_s"
 	sellprice = 33
+	enchantable = TRUE
 
 /obj/item/clothing/ring/gold
 	name = "gold ring"
 	icon_state = "ring_g"
 	sellprice = 70
+	enchantable = TRUE
 
 /obj/item/clothing/ring/active
 	var/active = FALSE
