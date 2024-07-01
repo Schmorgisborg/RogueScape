@@ -1299,9 +1299,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 					return FALSE
 				if(istype(H.wear_shirt, I.type))
 					return FALSE
-				if(I.blocksound)
-					if(I.blocksound == H.wear_shirt.blocksound)
-						return FALSE
 			if( !(I.slot_flags & ITEM_SLOT_ARMOR) )
 				return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
@@ -1375,9 +1372,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			if(H.wear_armor)
 				if(istype(H.wear_armor, I.type))
 					return FALSE
-				if(I.blocksound)
-					if(I.blocksound == H.wear_armor.blocksound)
-						return FALSE
 			if( !(I.slot_flags & ITEM_SLOT_SHIRT) )
 				return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
