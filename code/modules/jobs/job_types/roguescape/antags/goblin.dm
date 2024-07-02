@@ -1,4 +1,4 @@
-/datum/job/roguetown/goblin
+/datum/job/roguetown/sgoblin
 	title = "Goblin"
 	flag = GRAVEDIGGER
 	department_flag = PEASANTS

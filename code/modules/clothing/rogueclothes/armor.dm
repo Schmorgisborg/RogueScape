@@ -250,7 +250,7 @@
 	icon_state = "armordressalt"
 
 /obj/item/clothing/suit/roguetown/armor/gambeson
-	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
+	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	name = "gambeson"
 	desc = ""
 	icon_state = "gambeson"
@@ -273,12 +273,13 @@
 	allowed_race = list("human", "tiefling", "aasimar")
 
 /obj/item/clothing/suit/roguetown/armor/leather
+	slot_flags = ITEM_SLOT_ARMOR
 	name = "leather armor"
 	desc = ""
 	icon_state = "leather"
 //	color = "#514339"
 	body_parts_covered = CHEST|GROIN|VITALS
-	armor = list("melee" = 25, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	armor = list("melee" = 60, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT,BCLASS_BLUNT)
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
@@ -318,7 +319,7 @@
 	armor = list("melee" = 10, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT)
 	blocksound = SOFTHIT
-	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
+	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	blade_dulling = DULLING_BASHCHOP
 	body_parts_covered = CHEST|VITALS|LEGS
 	break_sound = 'sound/foley/cloth_rip.ogg'
