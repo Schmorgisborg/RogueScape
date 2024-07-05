@@ -257,7 +257,7 @@
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS|VITALS
 	armor = list("melee" = 40, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT,BCLASS_BLUNT)
-	blocksound = SOFTHIT
+	blocksound = SOFTUNDERHIT
 	blade_dulling = DULLING_BASHCHOP
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
@@ -269,6 +269,7 @@
 /obj/item/clothing/suit/roguetown/armor/gambeson/lord
 	name = "arming jacket"
 	icon_state = "dgamb"
+	blocksound = SOFTHIT
 	allowed_sex = list(MALE)
 	allowed_race = list("human", "tiefling", "aasimar")
 
