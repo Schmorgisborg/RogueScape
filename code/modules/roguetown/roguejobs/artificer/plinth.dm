@@ -8,7 +8,7 @@
 	climbable = TRUE
 
 /obj/machinery/plinth/attackby(obj/item/I, mob/living/user, params)
-	if(istype(I, /obj/item/rune) && !plinth_item)//must go after hammer after we get there
+	if(istype(I, /obj/item/rune) && !plinth_item)
 		plinth_item = I
 		plinth_item.forceMove(src)
 		update_icon()
@@ -36,27 +36,10 @@
 		M.pixel_y = 8
 		add_overlay(M)
 
-/obj/machinery/plinth/proc/shock_cycle()
-	var/closest_dist = 0
-	var/obj/machinery/etcher/closest_etcher
-	var/static/things_to_shock = /obj/machinery/etcher
+/obj/machinery/plinth/proc/shock_cycle(obj/machinery/etcher/E)
+	var/obj/projectile/P = new /obj/projectile/magic/lightning(src.loc)
+	playsound(get_turf(src), sound/blank.ogg, 50, TRUE)
 
-	for(var/A in oview(src, 5))
-		if(istype(A, /obj/machinery/etcher))
-			var/dist = get_dist(src, A)
-			var/obj/machinery/etcher/C = A
-			if(dist <= 5 && (dist < closest_dist || !closest_etcher))
-				closest_dist = dist
-				closest_etcher = C
+	var/angle = round(Get_Angle(src,E))
 
-	if(closest_etcher)
-		src.Beam(closest_etcher, icon_state="lightning[rand(1,12)]", time=5, maxdistance = INFINITY)
-		var/zapdir = get_dir(src, closest_etcher)
-		if(zapdir)
-			. = zapdir
-
-
-
-//?		shock_victim.electrocute_act(20, src, 1)
-
-
+	P.fire(angle)

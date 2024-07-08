@@ -27,7 +27,7 @@
 		user.changeNext_move(CLICK_CD_MELEE)
 		if(enchanting)
 			if(enchanting.currecipe)
-				var/obj/machinery/plinth/P = locate(/obj/machinery/plinth/) in oview(4,src)
+				var/obj/machinery/plinth/P = locate(/obj/machinery/plinth) in oview(4,src)
 				if(P)
 					plinth_contents = P.plinth_item
 					if(!plinth_contents)
@@ -47,7 +47,7 @@
 							playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
 						if(prob(20))
 							user.flash_fullscreen("whiteflash")
-							P.shock_cycle()
+							P.shock_cycle(src)
 						if(prob(20))
 							user.flash_fullscreen("whiteflash")
 							var/datum/effect_system/spark_spread/S = new()
