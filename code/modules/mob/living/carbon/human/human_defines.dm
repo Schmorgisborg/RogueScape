@@ -96,8 +96,6 @@
 	var/advsetup = 0
 	var/advpicking
 
-//	var/alignment = ALIGNMENT_TN
-
 	var/advjob = null
 	var/canseebandits = FALSE
 

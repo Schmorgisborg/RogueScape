@@ -156,6 +156,7 @@
 	icon_state = "idagger"
 	smeltresult = null
 	enchantable = FALSE
+	enchanted = FALSE
 
 /obj/item/rogueweapon/huntingknife/idagger/steel
 	name = "dagger"

@@ -30,9 +30,6 @@
 				var/obj/machinery/plinth/P = locate(/obj/machinery/plinth) in oview(4,src)
 				if(P)
 					plinth_contents = P.plinth_item
-					if(!plinth_contents)
-						to_chat(user, "<span class='warning'>The plinth is empty.</span>")
-						return
 					if(plinth_contents.name == enchanting.currecipe.plinth_item[1].name)
 						var/used_str = user.STASTR
 						if(iscarbon(user))
@@ -125,8 +122,7 @@
 
 /obj/machinery/etcher/bullet_act(obj/projectile/P)
 	if(istype(P, /obj/projectile/magic/lightning))
-		return BULLET_ACT_BLOCK
-	testing("etcher hit by projectile.")
+		P.damage = 0
 	..()
 
 /obj/machinery/light/rogue/forge/attackby(obj/item/W, mob/living/user, params)

@@ -11,12 +11,6 @@
 	var/quality_mod = 0
 	var/enchant_progress
 
-	var/datum/parent
-
-/datum/etcher_recipe/New(datum/P, ...)
-	parent = P
-	. = ..()
-
 /datum/etcher_recipe/proc/advance(mob/user)
 	if(enchant_progress == 100)
 		to_chat(user, "<span class='info'>It's ready.</span>")
@@ -43,7 +37,6 @@
 			additional_items -= needed_item
 			enchant_progress = 0
 		else
-			//
 	if(!moveup)
 		if(prob(round(proab/2)))
 			user.visible_message("<span class='warning'>[user] cannot control the [name], the item is destroyed!</span>")
