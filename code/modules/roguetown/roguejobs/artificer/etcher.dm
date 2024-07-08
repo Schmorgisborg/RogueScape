@@ -123,8 +123,11 @@
 		M.pixel_y = -6
 		add_overlay(M)
 
-/obj/machinery/etcher/bullet_act()
-	
+/obj/machinery/etcher/bullet_act(obj/projectile/P)
+	if(istype(P, /obj/projectile/magic/lightning))
+		return BULLET_ACT_BLOCK
+	testing("etcher hit by projectile.")
+	..()
 
 /obj/machinery/light/rogue/forge/attackby(obj/item/W, mob/living/user, params)
 	if(istype(W, /obj/item/rogueweapon) && on)
