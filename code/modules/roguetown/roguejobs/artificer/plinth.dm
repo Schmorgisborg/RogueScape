@@ -38,7 +38,7 @@
 
 /obj/machinery/plinth/proc/shock_cycle(obj/machinery/etcher/E)
 	var/obj/projectile/P = new /obj/projectile/magic/lightning(src.loc)
-	playsound(get_turf(src), sound/blank.ogg, 50, TRUE)
+	playsound(get_turf(src), 'sound/blank.ogg', 50, TRUE)
 
 	var/angle = round(Get_Angle(src,E))
 

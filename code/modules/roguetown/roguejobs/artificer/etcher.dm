@@ -123,6 +123,9 @@
 		M.pixel_y = -6
 		add_overlay(M)
 
+/obj/machinery/etcher/bullet_act()
+	
+
 /obj/machinery/light/rogue/forge/attackby(obj/item/W, mob/living/user, params)
 	if(istype(W, /obj/item/rogueweapon) && on)
 		var/obj/item/rogueweapon/I = W
