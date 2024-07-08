@@ -11,7 +11,7 @@
 	var/temp_icon
 
 /obj/item/rogueweapon/attack_right(mob/user)
-	if(enchantable && !enchanted)
+	if(enchantable || !enchanted)
 		..()
 		return
 	if(loc != user)
