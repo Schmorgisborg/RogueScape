@@ -24,7 +24,7 @@
 
 	var/client/C = client
 	if (C)
-		C.stopmovingup()
+		C.stopmovingup()//mackcivf proc not declared: must port from civ or remove
 		C.stopmovingdown()
 		C.stopmovingleft()
 		C.stopmovingright()
@@ -33,7 +33,6 @@
 		alert(C, message, title, "Continue")
 		. = TRUE
 	else
-		// no, this is bad
 		if (!toc1 && toc2)
 			return FALSE
 		else if (toc1 && !toc2)

@@ -1,43 +1,15 @@
+GLOBAL_LIST_INIT(kingdomlist, list("Psydonia"))
+GLOBAL_LIST_INIT(custom_civs, list("Psydonia"))
 GLOBAL_LIST_EMPTY(kingdomlist)
+GLOBAL_LIST_EMPTY(custom_civs)
 
 /mob/living/carbon/human
-	var/civilization = "none" //what civilization this person belongs to
+	var/civilization = "none"
 	var/leader = FALSE
-	//leadership (total control!), announcement, give titles, recruitment
 	var/list/kingdom_perms = list(0,0,0,0)
 	var/title = ""
-	var/religious_title = ""
 	var/announcement_cooldown = 0
-	var/list/left_kingdoms = list() //kingdom leaving cooldown (to prevent tax avoidance)
-	var/religion = "none" //what religion this person belongs to
-	var/religion_type = "none"
-	var/religion_style = "none"
-	var/religious_leader = FALSE
-	var/religious_clergy = FALSE
-
-
-/mob/New()
-	..()
-	verbs += /mob/living/carbon/human/proc/create_kingdom
-	verbs += /mob/living/carbon/human/proc/abandon_kingdom
-	verbs += /mob/living/carbon/human/proc/transfer_kingdom
-	verbs += /mob/living/carbon/human/proc/become_leader
-	verbs += /mob/proc/kingdom_list
-
-/mob/living/carbon/human/proc/make_commander()
-	verbs += /mob/living/carbon/human/proc/Commander_Announcement
-
-/mob/living/carbon/human/proc/remove_commander()
-	verbs -= /mob/living/carbon/human/proc/Commander_Announcement
-
-
-/mob/living/carbon/human/proc/make_title_changer()
-	verbs += /mob/living/carbon/human/proc/Add_Title
-	verbs += /mob/living/carbon/human/proc/Remove_Title
-
-/mob/living/carbon/human/proc/remove_title_changer()
-	verbs -= /mob/living/carbon/human/proc/Add_Title
-	verbs -= /mob/living/carbon/human/proc/Remove_Title
+	var/list/left_kingdoms = list()
 
 /////////////   kingdom   /////////////
 
@@ -66,8 +38,8 @@ GLOBAL_LIST_EMPTY(kingdomlist)
 	if (!ishuman(src))
 		return
 	var/mob/living/carbon/human/H = src
-	for(var/i = 1, i <= map.custom_kingdom_nr.len, i++)//mackcivf list needs to be redone
-		if (map.custom_kingdom_nr[i] == newname)
+	for(var/i = 1, i <= GLOB.kingdomlist.len, i++)//mackcivf list needs to be redone
+		if (GLOB.kingdomlist[i] == newname)
 			to_chat(usr, "<span class='warning'>That kingdom already exists. Choose another name.</span>")
 			return
 	if (newname != null && newname != "none")
@@ -87,22 +59,22 @@ GLOBAL_LIST_EMPTY(kingdomlist)
 		H.civilization = newname
 		H.leader = TRUE
 		H.kingdom_perms = list(1,1,1,1)
-		map.custom_kingdom_nr += newname
+		GLOB.kingdomlist += newname//mackcivf lots of ugliness here to be changed
 												//ind						mil					med			leader money	symbol	main color	backcolor, sales tax, business tax
-		var/newnamev = list("[newname]" = list(map.default_research,map.default_research,map.default_research,H,0,choosesymbol,choosecolor1,choosecolor2,10,10))
-		map.custom_civs += newnamev
+		var/newnamev = list("[newname]" = list(H,choosesymbol,choosecolor1,choosecolor2))
+		GLOB.custom_civs += newnamev
 		to_chat(usr, "<big>You are now the leader of the <b>[newname]</b> kingdom.</big>")
 		return
 	else
 		return
 
 
-/mob/living/human/proc/abandon_kingdom()
+/mob/living/carbon/human/proc/abandon_kingdom()
 	set name = "Abandon Kingdom"
 	set category = "Kingdom"
-	var/mob/living/human/U
+	var/mob/living/carbon/human/U
 
-	if (istype(src, /mob/living/human))
+	if (istype(src, /mob/living/carbon/human))
 		U = src
 	else
 		return
@@ -116,13 +88,13 @@ GLOBAL_LIST_EMPTY(kingdomlist)
 		else
 			kingdom_leaving_proc()
 
-/mob/living/human/proc/kingdom_leaving_proc()
+/mob/living/carbon/human/proc/kingdom_leaving_proc()
 	if (civilization == null || civilization == "none")
 		return FALSE
-	left_kingdoms += list(list(civilization,world.realtime+864000)) //24 hours
-	if (map.custom_civs[civilization][4] != null)
-		if (map.custom_civs[civilization][4].real_name == real_name)
-			map.custom_civs[civilization][4] = null
+	left_kingdoms += list(list(civilization,world.time+6000)) //like 10 minutes.
+	if (GLOB.custom_civs[civilization][1] != null)//mackcivf more lists of SHIT
+		if (GLOB.custom_civs[civilization][1].real_name == real_name)
+			GLOB.custom_civs[civilization][1] = null
 	civilization = "none"
 	name = replacetext(real_name,"[title] ","")
 	title = ""
@@ -132,12 +104,12 @@ GLOBAL_LIST_EMPTY(kingdomlist)
 	remove_commander()
 	return TRUE
 
-/mob/living/human/proc/transfer_kingdom()
+/mob/living/carbon/human/proc/transfer_kingdom()
 	set name = "Transfer Kingdom Leadership"
 	set category = "Kingdom"
-	var/mob/living/human/U
+	var/mob/living/carbon/human/U
 
-	if (istype(src, /mob/living/human))
+	if (istype(src, /mob/living/carbon/human))
 		U = src
 	else
 		return
@@ -145,19 +117,19 @@ GLOBAL_LIST_EMPTY(kingdomlist)
 		to_chat(usr, "You are not part of any kingdom.")
 		return
 	else
-		if (map.custom_civs[U.civilization][4] != null)
-			if (map.custom_civs[U.civilization][4].real_name == U.real_name)
+		if (GLOB.custom_civs[U.civilization][1] != null)
+			if (GLOB.custom_civs[U.civilization][1].real_name == U.real_name)
 				var/list/closemobs = list("Cancel")
-				for (var/mob/living/human/M in range(4,loc))
+				for (var/mob/living/carbon/human/M in range(4,loc))
 					if (M.civilization == U.civilization)
 						closemobs += M
 				var/choice2 = WWinput(usr, "Who to nominate as the new Leader?", "Kingdom Leadership", "Cancel", closemobs)
 				if (choice2 == "Cancel")
 					return
 				else
-					map.custom_civs[U.civilization][4] = choice2
+					GLOB.custom_civs[U.civilization][4] = choice2
 					visible_message("<big>[choice2] is the new leader of [U.civilization]!</big>")
-					var/mob/living/human/CM = choice2
+					var/mob/living/carbon/human/CM = choice2
 					CM.make_commander()
 					CM.make_title_changer()
 					CM.leader = TRUE
@@ -172,12 +144,12 @@ GLOBAL_LIST_EMPTY(kingdomlist)
 		else
 			to_chat(usr, "<span class='warning'>There is no Leader, so you can't transfer the kingdom's leadership.</span>")
 
-/mob/living/human/proc/become_leader()
+/mob/living/carbon/human/proc/become_leader()
 	set name = "Become Kingdom Leader"
 	set category = "Kingdom"
-	var/mob/living/human/U
+	var/mob/living/carbon/human/U
 
-	if (istype(src, /mob/living/human))
+	if (istype(src, /mob/living/carbon/human))
 		U = src
 	else
 		return
@@ -185,24 +157,24 @@ GLOBAL_LIST_EMPTY(kingdomlist)
 		to_chat(usr, "You are not part of any kingdom.")
 		return
 	else
-		if (map.custom_civs[U.civilization][4] != null)
+		if (GLOB.custom_civs[U.civilization][1] != null)
 			to_chat(usr, "<span class='warning'>There already is a Leader of the kingdom. He must transfer the leadership or be removed first.</span>")
 			return
-		else if (map.custom_civs[U.civilization][4] == null)
-			map.custom_civs[U.civilization][4] = U
+		else if (GLOB.custom_civs[U.civilization][1] == null)
+			GLOB.custom_civs[U.civilization][1] = U
 			visible_message("<big>[U] is now the Leader of [U.civilization]!</big>")
 			U.leader = TRUE
 			U.kingdom_perms = list(1,1,1,1)
 			U.make_title_changer()
 			make_commander()
 
-/mob/living/human/proc/Add_Title()
+/mob/living/carbon/human/proc/Add_Title()
 	set name = "Give Kingdom Title"
 	set category = "Kingdom"
-	var/mob/living/human/U
+	var/mob/living/carbon/human/U
 
-	if (istype(usr, /mob/living/human))
-		var/mob/living/human/H = usr
+	if (istype(usr, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = usr
 		if (H.civilization == "none")
 			to_chat(usr, "You are not part of any kingdom.")
 			return
@@ -213,7 +185,7 @@ GLOBAL_LIST_EMPTY(kingdomlist)
 
 			else
 				var/list/closemobs = list("Cancel")
-				for (var/mob/living/human/M in range(4,loc))
+				for (var/mob/living/carbon/human/M in range(4,loc))
 					if (M.civilization == H.civilization)
 						closemobs += M
 				var/choice2 = WWinput(usr, "Who to give a title to?", "Kingdom Title", "Cancel", closemobs)
@@ -231,13 +203,13 @@ GLOBAL_LIST_EMPTY(kingdomlist)
 						return
 
 
-/mob/living/human/proc/Remove_Title()
+/mob/living/carbon/human/proc/Remove_Title()
 	set name = "Remove Kingdom Title"
 	set category = "Kingdom"
-	var/mob/living/human/U
+	var/mob/living/carbon/human/U
 
-	if (istype(usr, /mob/living/human))
-		var/mob/living/human/H = usr
+	if (istype(usr, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = usr
 		if (H.civilization == "none")
 			to_chat(usr, "You are not part of any kingdom.")
 			return
@@ -248,7 +220,7 @@ GLOBAL_LIST_EMPTY(kingdomlist)
 
 			else
 				var/list/closemobs = list("Cancel")
-				for (var/mob/living/human/M in range(4,loc))
+				for (var/mob/living/carbon/human/M in range(4,loc))
 					if (M.civilization == H.civilization && M.title != "")
 						closemobs += M
 				var/choice2 = WWinput(usr, "Who to remove a title from?", "Kingdom Title", "Cancel", closemobs)
@@ -266,8 +238,6 @@ GLOBAL_LIST_EMPTY(kingdomlist)
 						return
 
 ////////////////POSTERS, BANNERS, ETC//////////////////////////////
-//good fucking god
-
 
 /obj/structure/banner/kingdom
 	name = "kingdom banner"
@@ -280,7 +250,7 @@ GLOBAL_LIST_EMPTY(kingdomlist)
 	var/color1 = "#000000"
 	var/color2 = "#FFFFFF"
 	flammable = TRUE
-	layer = 3.21
+	layer = ABOVE_MOB_LAYER
 
 /obj/structure/banner/kingdom/banner_a
 	bstyle = "banner_a"
@@ -300,65 +270,29 @@ GLOBAL_LIST_EMPTY(kingdomlist)
 			var/image/overc1 = image("icon" = icon, "icon_state" = "[bstyle]_2")
 			overc1.color = color2
 			overlays += overc1
-			var/image/overs = image("icon" = icon, "icon_state" = "b_[map.custom_civs[kingdom][6]]")
+			var/image/overs = image("icon" = icon, "icon_state" = "b_[GLOB.custom_civs[kingdom][2]]")
 			overs.color = color1
 			overlays += overs
 		update_icon()
 		invisibility = 0
 
+/datum/crafting_recipe/roguetown/structure/banner/kingdom
+	name = "kingdom banner"
+	result = /obj/structure/banner/kingdom/New()//mackcivf: double check how they handle actually crafting these first
+	reqs = list(/obj/item/grown/log/tree/small = 2,
+				/obj/item/natural/cloth = 2)
+	verbage = "construct"
+	craftsound = 'sound/foley/Building-01.ogg'
+	skillcraft = /datum/skill/craft/carpentry
 
-/obj/structure/banner/kingdom/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (W.sharp)
-		user.visible_message("<span class ='danger'>[user] starts ripping off \the [src]!</span>", "<span class ='danger'>You start ripping off \the [src]!</span>")
+/obj/structure/banner/kingdom/attackby(mob/user)
+	if (user.used_intent?.blade_class == BCLASS_CUT)
+		user.visible_message("<span class ='danger'>[user] starts cutting through \the [src]!</span>", "<span class ='danger'>You start cutting through \the [src]!</span>")
 		if (do_after(user, 130, src))
-			user.visible_message("<span class ='warning'>[user] rips \the [src]!</span>", "<span class = 'warning'>You rip off \the [src]!</span>")
+			user.visible_message("<span class ='warning'>[user] cuts \the [src] to ribbons!</span>", "<span class = 'warning'>You cut \the [src] to ribbons!</span>")
 			qdel(src)
 	else
 		..()
-
-/obj/structure/banner/kingdom/team
-	var/team = null
-	name = "team banner"
-	desc = "A sports team banner."
-
-/obj/structure/banner/kingdom/team/New()
-	..()
-	assign_team()
-
-/obj/structure/banner/kingdom/team/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	return
-
-/obj/structure/banner/kingdom/team/attack_hand(mob/user as mob)
-	return
-
-/obj/structure/banner/kingdom/team/proc/assign_team(new_team = null)
-	if (!new_team)
-		new_team = src.team
-	if (!new_team)
-		return
-	if (map && map.ID == MAP_FOOTBALL)
-		var/obj/map_metadata/football/FM = map
-		if (FM.team1 == src.team)
-			color1 = FM.teams[src.team][FM.team1_kit]["shirt_color"]
-			color2 = FM.teams[src.team][FM.team1_kit]["shorts_color"]
-		else if  (FM.team2 == src.team)
-			color1 = FM.teams[src.team][FM.team2_kit]["shirt_color"]
-			color2 = FM.teams[src.team][FM.team2_kit]["shorts_color"]
-		else
-			color1 = FM.teams[src.team]["main uniform"]["shirt_color"]
-			color2 = FM.teams[src.team]["main uniform"]["shorts_color"]
-		var/image/overc = image("icon" = icon, "icon_state" = "[bstyle]_1")
-		overc.color = color1
-		overlays += overc
-		var/image/overc1 = image("icon" = icon, "icon_state" = "[bstyle]_2")
-		overc1.color = color2
-		overlays += overc1
-		name = "[src.team] banner"
-		update_icon()
-
-/obj/structure/banner/kingdom/team/team1
-
-/obj/structure/banner/kingdom/team/team2
 
 /obj/item/weapon/poster/kingdom
 	name = "rolled kingdom poster"
@@ -371,7 +305,6 @@ GLOBAL_LIST_EMPTY(kingdomlist)
 	var/bstyle = "prop_lead"
 	flammable = TRUE
 	force = 0
-	flags 
 
 /obj/item/weapon/poster/kingdom/lead
 	bstyle = "prop_lead"
@@ -399,7 +332,8 @@ GLOBAL_LIST_EMPTY(kingdomlist)
 	var/color2 = "#FFFFFF"
 	var/bstyle = "prop_lead"
 	flammable = TRUE
-	layer = 3.2
+	layer = BELOW_MOB_LAYER
+
 /obj/structure/poster/kingdom/New()
 	..()
 	invisibility = 101
@@ -418,11 +352,19 @@ GLOBAL_LIST_EMPTY(kingdomlist)
 		update_icon()
 		invisibility = 0
 
-/obj/structure/poster/kingdom/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (W.sharp)
-		user.visible_message("<span class ='danger'>[user] starts ripping off \the [src]!</span>", "<span class ='danger'>You start ripping off \the [src]!</span>")
+/datum/crafting_recipe/roguetown/structure/poster/kingdom
+	name = "kingdom poster"
+	result = /obj/structure/poster/kingdom/New()//mackcivf: double check how they handle actually crafting these first
+	reqs = list(/obj/item/natural/cloth = 2)
+	verbage = "construct"
+	craftsound = 'sound/foley/Building-01.ogg'
+	skillcraft = /datum/skill/craft/carpentry
+
+/obj/structure/poster/kingdom/attackby(mob/user)//mackcivf
+	if (user.used_intent == INTENT_HELP)
+		user.visible_message("<span class ='danger'>[user] starts tearing down \the [src]!</span>", "<span class ='danger'>You start tearing down \the [src]!</span>")
 		if (do_after(user, 70, src))
-			user.visible_message("<span class ='warning'>[user] rips \the [src]!</span>", "<span class = 'warning'>You rip off \the [src]!</span>")
+			user.visible_message("<span class ='warning'>[user] tears \the [src] down!</span>", "<span class = 'warning'>You tear off \the [src] down!</span>")
 			overlays.Cut()
 			icon_state = "poster_ripped"
 			color = color2
@@ -433,26 +375,25 @@ GLOBAL_LIST_EMPTY(kingdomlist)
 /mob/proc/kingdom_list()
 	set name = "Check Kingdom List"
 	set category = "Kingdom"
-	if (map && map.civilizations)
-		map.facl = list()
-		for (var/i=1,i<=map.custom_kingdom_nr.len,i++)
-			var/nu = 0
-			map.facl += list(map.custom_kingdom_nr[i] = nu)
+//mackcivf
+	var/list/facl[]
+	for (var/i=1,i<=GLOB.kingdomlist.len,i++)//mackcivf renaming map.custom_kingdom_nr to GLOB.kingdomlist
+		var/nu = 0
+		facl += list(GLOB.kingdomlist[i] = nu)
 
-		for (var/relf in map.facl)
-			map.facl[relf] = 0
-			for (var/mob/living/human/H in world)
-				if (relf == H.civilization && H.stat != DEAD)
-					map.facl[relf] += 1
+	for (var/relf in facl)
+		facl[relf] = 0
+		for (var/mob/living/carbon/human/H in world)
+			if (relf == H.civilization && H.stat != DEAD)
+				facl[relf] += 1
 
-		var/body = "<html><head><title>Kingdom List</title></head><b>KINGDOM LIST</b><br><br>"
-		for (var/relf in map.facl)
-			if (map.facl[relf] > 0)
-				body += "<b>[relf]</b>: [map.facl[relf]] members.</br>"
-		body += {"<br>
-			</body></html>
-		"}
+	var/body = "<html><head><title>Kingdom List</title></head><b>KINGDOM LIST</b><br><br>"
+	for (var/relf in facl)
+		if (facl[relf] > 0)
+			body += "<b>[relf]</b>: [facl[relf]] members.</br>"
+	body += {"<br>
+		</body></html>
+	"}
 
-		usr << browse(body,"window=artillery_window;border=1;can_close=1;can_resize=1;can_minimize=0;titlebar=1;size=250x450")
-	else
-		return
+	//mackcivf I have no idea if this is gonna work, window popups are weird.
+	usr << browse(body,"window=kingdoms_window;border=1;can_close=1;can_resize=1;can_minimize=0;titlebar=1;size=250x450")
