@@ -37,17 +37,7 @@
 			additional_items -= needed_item
 			enchant_progress = 0
 		else
-	if(!moveup)
-		if(prob(round(proab/2)))
-			user.visible_message("<span class='warning'>[user] cannot control the [name], the item is destroyed!</span>")
-			if(parent)
-				var/obj/item/P = parent
-				qdel(P)
-			return FALSE
-		else
-			user.visible_message("<span class='warning'>[user] chips the [name]!</span>")
-			return FALSE
-	else
+	if(moveup)
 		if(user.mind)
 			if(isliving(user))
 				var/mob/living/L = user

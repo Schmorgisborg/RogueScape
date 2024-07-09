@@ -40,8 +40,18 @@
 						if(enchanting.currecipe.advance(user))
 							playsound(src,pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 						else
+							var/proab = 3
+							if(user.mind)
+								if(!user.mind.get_skill_level(/datum/skill/craft/enchantment))
+									proab = 23
 							shake_camera(user, 1, 1)
 							playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
+							if(prob(round(proab/2)))
+								user.visible_message("<span class='warning'>[user] cannot control the [enchanting.currecipe.name], the [enchanting] is destroyed!</span>")
+								qdel(enchanting)
+								update_icon()
+							else
+								user.visible_message("<span class='warning'>[user] chips the [enchanting.currecipe.name]!</span>")
 						if(prob(20))
 							user.flash_fullscreen("whiteflash")
 							P.shock_cycle(src)
