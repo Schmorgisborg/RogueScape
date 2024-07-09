@@ -1,10 +1,11 @@
-GLOBAL_LIST_INIT(kingdomlist, list("Psydonia"))
+GLOBAL_LIST_INIT(kingdomlist, list("Psydonia"))//map.custom_faction_nr
 GLOBAL_LIST_INIT(custom_civs, list("Psydonia"))
 GLOBAL_LIST_EMPTY(kingdomlist)
 GLOBAL_LIST_EMPTY(custom_civs)
 
 /mob/living/carbon/human
 	var/civilization = "none"
+	var/datum/kingdom/base_kingdom = null
 	var/leader = FALSE
 	var/list/kingdom_perms = list(0,0,0,0)
 	var/title = ""
@@ -38,7 +39,7 @@ GLOBAL_LIST_EMPTY(custom_civs)
 	if (!ishuman(src))
 		return
 	var/mob/living/carbon/human/H = src
-	for(var/i = 1, i <= GLOB.kingdomlist.len, i++)//mackcivf list needs to be redone
+	for(var/i = 1, i <= GLOB.kingdomlist.len, i++)
 		if (GLOB.kingdomlist[i] == newname)
 			to_chat(usr, "<span class='warning'>That kingdom already exists. Choose another name.</span>")
 			return
@@ -60,7 +61,6 @@ GLOBAL_LIST_EMPTY(custom_civs)
 		H.leader = TRUE
 		H.kingdom_perms = list(1,1,1,1)
 		GLOB.kingdomlist += newname//mackcivf lots of ugliness here to be changed
-												//ind						mil					med			leader money	symbol	main color	backcolor, sales tax, business tax
 		var/newnamev = list("[newname]" = list(H,choosesymbol,choosecolor1,choosecolor2))
 		GLOB.custom_civs += newnamev
 		to_chat(usr, "<big>You are now the leader of the <b>[newname]</b> kingdom.</big>")
@@ -86,12 +86,12 @@ GLOBAL_LIST_EMPTY(custom_civs)
 		if (confirmation == "Stay in kingdom")
 			return
 		else
-			kingdom_leaving_proc()
+			abandon_kingdom()
 
-/mob/living/carbon/human/proc/kingdom_leaving_proc()
+/mob/living/carbon/human/proc/abandon_kingdom()
 	if (civilization == null || civilization == "none")
 		return FALSE
-	left_kingdoms += list(list(civilization,world.time+6000)) //like 10 minutes.
+	left_kingdoms += list(list(civilization,world.time)) //like 10 minutes.
 	if (GLOB.custom_civs[civilization][1] != null)//mackcivf more lists of SHIT
 		if (GLOB.custom_civs[civilization][1].real_name == real_name)
 			GLOB.custom_civs[civilization][1] = null
@@ -375,7 +375,6 @@ GLOBAL_LIST_EMPTY(custom_civs)
 /mob/proc/kingdom_list()
 	set name = "Check Kingdom List"
 	set category = "Kingdom"
-//mackcivf
 	var/list/facl[]
 	for (var/i=1,i<=GLOB.kingdomlist.len,i++)//mackcivf renaming map.custom_kingdom_nr to GLOB.kingdomlist
 		var/nu = 0

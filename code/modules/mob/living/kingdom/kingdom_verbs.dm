@@ -25,7 +25,7 @@
 /mob/living/carbon/human/verb/recruit()
 	set category = null
 	set name = "Recruit"
-	set desc = "Invite into your faction."
+	set desc = "Invite into your kingdom."
 
 	set src in view(1)
 
@@ -46,12 +46,8 @@
 		to_chat(user, "You cannot recruit yourself.")
 		return
 
-	if (user.original_job_title != "Nomad" && !findtext(user.original_job_title,"Civilization"))
-		to_chat(user, "You can't recruit in this map.")
-		return
-
 	if (user.civilization == "none" || user.civilization == null)
-		to_chat(user, "You are not part of a faction.")
+		to_chat(user, "You are not part of a kingdom.")
 		return
 
 	if (!user.leader || user.faction_perms[4] == 0)
@@ -64,8 +60,8 @@
 
 	if (left_kingdoms.len)
 		for (var/i in left_kingdoms)
-			if (i[1]==user.civilization && i[2]>world.realtime)
-				to_chat(user, "You can't recruit [usr] since he has left your faction recently!")
+			if (i[1]==user.civilization && i[2] > (world.time + 5 MINUTES))
+				to_chat(user, "<span=danger>You can't recruit [usr], they only recently abandoned the kingdom.</span>")
 				return
 	var/answer = WWinput(src, "[usr] wants to recruit you into his faction, [user.civilization]. Will you accept?", null, "Yes", list("Yes","No"))
 	if (answer == "Yes")
