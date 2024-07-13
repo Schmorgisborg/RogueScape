@@ -239,7 +239,7 @@
 	M.adjustToxLoss(10, 0)
 
 /obj/item/reagent_containers/powder/moondust_purest
-	name = "moondust"
+	name = "pure moondust"
 	desc = ""
 	icon = 'icons/roguetown/items/produce.dmi'
 	icon_state = "moondust_purest"

@@ -30,7 +30,8 @@
 	if(!proximity)
 		return
 	if(lit)
-		A.fire_act()
+		if(!ishuman(A))
+			A.fire_act()
 
 /obj/item/candle/Crossed(H as mob|obj)
 	if(ishuman(H) || issilicon(H)) //i guess carp and shit shouldn't set them off

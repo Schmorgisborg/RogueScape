@@ -577,6 +577,25 @@ GLOBAL_VAR_INIT(mobids, 1)
 //	else
 //		to_chat(src, "You don't have a mind datum for some reason, so you can't add a note to it.")
 
+/mob/dead/new_player/verb/do_rp_prompt()
+	set name = "Lore Primer"
+	set category = "Memory"
+	var/list/dat = list()
+	dat += GLOB.roleplay_readme
+	if(dat)
+		var/datum/browser/popup = new(src, "Primer", "RougeScape:", 460, 550)
+		popup.set_content(dat.Join())
+		popup.open()
+/mob/verb/do_crafting_prompt()
+	set name = "Crafting Recipes"
+	set category = "Memory"
+	var/list/dat = list()
+	dat += GLOB.craftrecipes_readme
+	if(dat)
+		var/datum/browser/popup = new(src, "Crafting Recipes", "RougeScape:", 460, 550)
+		popup.set_content(dat.Join())
+		popup.open()
+
 /**
   * Allows you to respawn, abandoning your current mob
   *

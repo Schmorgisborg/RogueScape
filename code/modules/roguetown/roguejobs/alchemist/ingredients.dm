@@ -88,7 +88,7 @@
 
 /obj/item/alch/waterdust
 	name = "water rune dust"
-	//icon_state = "waterdust"
+	icon_state = "runedust"
 	possible_potion = "stronghealth"
 
 /obj/item/alch/bonemeal

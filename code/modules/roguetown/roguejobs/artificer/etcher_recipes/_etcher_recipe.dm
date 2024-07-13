@@ -2,6 +2,7 @@
 	var/name
 	var/list/additional_items = list(/obj/item/alch/golddust)
 	var/plinth_item
+	var/plinth_held
 	var/appro_skill = /datum/skill/craft/enchantment
 	var/req_item
 	var/enchantment
@@ -19,12 +20,12 @@
 	if(needed_item)
 		to_chat(user, "<span class='info'>I must add [needed_item_text] next.</span>")
 		return FALSE
-	var/moveup = 1
-	var/proab = 3
+	var/moveup = 5
+	var/proab = 6
 	if(user.mind)
-		moveup = moveup + (user.mind.get_skill_level(appro_skill) * 6)
+		moveup += (user.mind.get_skill_level(appro_skill) * 10)
 		if(!user.mind.get_skill_level(appro_skill))
-			proab = 23
+			proab = 24
 	if(prob(proab))
 		moveup = 0
 	enchant_progress = min(enchant_progress + moveup, 100)
@@ -37,11 +38,19 @@
 			additional_items -= needed_item
 			enchant_progress = 0
 		else
-	if(moveup)
+	if(!moveup)
+		if(prob(round(proab/2)))
+			user.visible_message("<span class='warning'>[user] cannot control the [name], [plinth_held] is destroyed!</span>")
+			enchant_progress = 0
+			return 2
+		else
+			user.visible_message("<span class='warning'>[user] chips the [name]!</span>")
+			return FALSE
+	else
 		if(user.mind)
 			if(isliving(user))
 				var/mob/living/L = user
-				var/amt2raise = L.STAINT/2
+				var/amt2raise = L.STAINT
 				if(amt2raise > 0)
 					user.mind.adjust_experience(appro_skill, amt2raise, FALSE)
 		user.visible_message("<span class='info'>[user] etches the [name]!</span>")

@@ -138,10 +138,14 @@ Pure Moondust can be made from 3 piles of Moondust<br>
 <h4>Alchemy:</h4><br>
 Cauldron: 2 iron bars, 4 stones, 1 small log.<br>
 Mortar & Pestle: 3 & 2 stones, respectively.<br>
+The Mortar & Pestle can be used to turn many items into respective dust.<br>
 The cauldron must contain at least 20oz of water, no matter the resulting potion.<br>
 Many items can be turned into dust, using a mortar and pestle.<br>
 Feau dust acts as a boost, giving you more potion per brew.<br> 
 Feau Dust- 2 iron dust, 1 gold<br>
+Glass- Smelt clod<br>
+Bottle- 2 glass<br>
+Vial- 1 glass<br>
 Health- Viscera (ground sinew) and wheat chaff<br>
 Strong Health- Add water rune dust while brewing health<br>
 Mana- Bone meal and seed dust<br>
@@ -158,4 +162,9 @@ Poison- Any two: dirt, poison berreis, raw sweetleaf, or raw pipeweed<br>
 Deadly Poison- Add gold dust during poison brewing.<br>
 <br><br>
 <h4>Enchanting:</h4><br>
-Enchanting is done on an etcher, then finished on a regular forge.<br>
+Most steel and gilded weaponry can be enchanted, as well as bows.<br>
+Enchanting is done on an etcher using a hammer, then finished on a regular forge.<br>
+A rune must be placed on a nearby plinth, and you'll need gold dust.<br>
+Magic Dust- 1 dust each of: Fire rune, water rune, air rune, and earth rune.<br>
+Etcher- 2 iron bars, 1 small log, 1 magic dust.<br>
+Plinth- 2 small logs.

@@ -574,6 +574,11 @@ so as to remain in compliance with the most up-to-date laws."
 	desc = ""
 	icon_state = "restrained"
 
+/datum/status_effect/debuff/legcuff
+	id = "legcuff"
+	alert_type = /obj/screen/alert/restrained/legcuffed
+	effectedstats = list("speed" = -10)
+
 /obj/screen/alert/restrained/Click()
 	..()
 	var/mob/living/L = usr

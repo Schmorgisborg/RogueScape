@@ -4,8 +4,7 @@
 	name = "etcher"
 	icon_state = "etcher"
 	var/obj/item/rogueweapon/enchanting
-	var/obj/plinth_contents
-	max_integrity = 2000
+	max_integrity = 500
 	density = TRUE
 	damage_deflection = 25
 	climbable = TRUE
@@ -29,40 +28,32 @@
 			if(enchanting.currecipe)
 				var/obj/machinery/plinth/P = locate(/obj/machinery/plinth) in oview(4,src)
 				if(P)
-					plinth_contents = P.plinth_item
-					if(plinth_contents.name == enchanting.currecipe.plinth_item[1].name)
-						var/used_str = user.STASTR
-						if(iscarbon(user))
-							var/mob/living/carbon/C = user
-							if(C.domhand)
-								used_str = C.get_str_arms(C.used_hand)
-							C.rogfat_add(max(30 - (used_str * 3), 0))
-						if(enchanting.currecipe.advance(user))
-							playsound(src,pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
-						else
-							var/proab = 3
-							if(user.mind)
-								if(!user.mind.get_skill_level(/datum/skill/craft/enchantment))
-									proab = 23
-							shake_camera(user, 1, 1)
-							playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
-							if(prob(round(proab/2)))
-								user.visible_message("<span class='warning'>[user] cannot control the [enchanting.currecipe.name], the [enchanting] is destroyed!</span>")
-								qdel(enchanting)
-								update_icon()
-							else
-								user.visible_message("<span class='warning'>[user] chips the [enchanting.currecipe.name]!</span>")
-						if(prob(20))
-							user.flash_fullscreen("whiteflash")
-							P.shock_cycle(src)
-						if(prob(20))
-							user.flash_fullscreen("whiteflash")
-							var/datum/effect_system/spark_spread/S = new()
-							var/turf/front = get_turf(src)
-							S.set_up(1, 1, front)
-							S.start()
+					if(P.plinth_item)
+						enchanting.currecipe.plinth_held = P.plinth_item
+						if(P.plinth_item.name == enchanting.currecipe.plinth_item[1].name)
+							if(iscarbon(user))
+								var/mob/living/carbon/C = user
+								C.rogfat_add(3)
+							switch(enchanting.currecipe.advance(user))
+								if(TRUE)
+									playsound(src,pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
+								if(FALSE)
+									shake_camera(user, 1, 1)
+									playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
+								if(2)
+									shake_camera(user, 1, 1)
+									P.shock_cycle(src)
+									P.bad_rune()
+							if(prob(40))
+								P.shock_cycle(src)
+							if(prob(20))
+								user.flash_fullscreen("whiteflash")
+								var/datum/effect_system/spark_spread/S = new()
+								var/turf/front = get_turf(src)
+								S.set_up(1, 1, front)
+								S.start()
 					else
-						to_chat(user, "<span class='warning'>I must have a [enchanting.currecipe.plinth_item[1].name] on my plinth.</span>")
+						to_chat(user, "<span class='warning'>I must place the [enchanting.currecipe.plinth_item[1].name] on my plinth.</span>")
 						return
 				else
 					to_chat(user, "<span class='warning'>I need a plinth.</span>")
@@ -151,3 +142,14 @@
 			user.visible_message("<span class='info'>[user] emblazens runes upon [W].</span>")
 			return
 	..()
+
+/datum/crafting_recipe/roguetown/etcher
+	name = "etcher"
+	result = /obj/machinery/etcher
+	reqs = list(/obj/item/ingot/iron = 2,
+				/obj/item/alch/magicdust = 1,
+				/obj/item/grown/log/tree/small = 1)
+	verbage = "crafts"
+	time = 50
+	craftsound = 'sound/foley/Building-01.ogg'
+	skillcraft = /datum/skill/craft/masonry

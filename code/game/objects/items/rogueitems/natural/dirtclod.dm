@@ -1,3 +1,29 @@
+/obj/item/natural/glass
+	name = "glass chunk"
+	desc = ""
+	icon_state = "glass"
+	dropshrink = 0.5
+	throwforce = 0
+	w_class = WEIGHT_CLASS_TINY
+
+/datum/crafting_recipe/roguetown/bottle
+	name = "etcher"
+	result = /obj/item/reagent_containers/glass/bottle
+	reqs = list(/obj/item/natural/glass = 2)
+	verbage = "creates"
+	time = 50
+	craftsound = 'sound/misc/smelter_sound.ogg'
+	skillcraft = /datum/skill/craft/crafting
+
+/datum/crafting_recipe/roguetown/vial
+	name = "etcher"
+	result = /obj/item/reagent_containers/glass/bottle/vial
+	reqs = list(/obj/item/natural/glass = 1)
+	verbage = "creates"
+	time = 50
+	craftsound = 'sound/misc/smelter_sound.ogg'
+	skillcraft = /datum/skill/craft/crafting
+
 /obj/item/natural/dirtclod
 	name = "clod"
 	desc = ""
@@ -5,7 +31,7 @@
 	dropshrink = 0
 	throwforce = 0
 	w_class = WEIGHT_CLASS_TINY
-	smeltresult = /obj/item/reagent_containers/glass/bottle/
+	smeltresult = /obj/item/natural/glass
 
 /obj/item/natural/dirtclod/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/rogueweapon/shovel))

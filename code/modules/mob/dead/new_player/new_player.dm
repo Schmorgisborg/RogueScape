@@ -344,26 +344,6 @@ GLOBAL_LIST_INIT(craftrecipes_readme, world.file2list("strings/rt/crafting.txt")
 					return
 				to_chat(src, "<span class='notice'>Vote successful.</span>")
 
-/mob/dead/new_player/verb/do_rp_prompt()
-	set name = "Lore Primer"
-	set category = "Memory"
-	var/list/dat = list()
-	dat += GLOB.roleplay_readme
-	if(dat)
-		var/datum/browser/popup = new(src, "Primer", "RougeScape:", 460, 550)
-		popup.set_content(dat.Join())
-		popup.open()
-/mob/dead/new_player/verb/do_crafting_prompt()
-	set name = "Crafting Recipes"
-	set category = "Memory"
-	var/list/dat = list()
-	dat += GLOB.craftrecipes_readme
-	if(dat)
-		var/datum/browser/popup = new(src, "Crafting Recipes", "RougeScape:", 460, 550)
-		popup.set_content(dat.Join())
-		popup.open()
-
-
 //When you cop out of the round (NB: this HAS A SLEEP FOR PLAYER INPUT IN IT)
 /mob/dead/new_player/proc/make_me_an_observer()
 	if(QDELETED(src) || !src.client)

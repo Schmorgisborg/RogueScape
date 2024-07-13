@@ -2,7 +2,7 @@
 	name = "vial"
 	desc = "A vial with a cork."
 	icon = 'icons/roguetown/items/cooking.dmi'
-	icon_state = "clear_bottle1"
+	icon_state = "clear_vial1"
 	amount_per_transfer_from_this = 15
 	possible_transfer_amounts = list(15)
 	volume = 15

@@ -41,3 +41,19 @@
 	P.damage = 50
 	var/angle = round(Get_Angle(src,E))
 	P.fire(angle)
+
+/obj/machinery/plinth/proc/bad_rune()
+	var/obj/item/I = plinth_item
+	I.loc = src.loc
+	plinth_item = null
+	qdel(I)
+	update_icon()
+
+/datum/crafting_recipe/roguetown/plinth
+	name = "etcher"
+	result = /obj/machinery/plinth
+	reqs = list(/obj/item/grown/log/tree/small = 2)
+	verbage = "crafts"
+	time = 50
+	craftsound = 'sound/foley/Building-01.ogg'
+	skillcraft = /datum/skill/craft/masonry

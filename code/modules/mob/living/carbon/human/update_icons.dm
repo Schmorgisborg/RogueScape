@@ -1430,11 +1430,11 @@ There are several things that need to be remembered:
 
 /mob/living/carbon/human/update_inv_legcuffed()
 	remove_overlay(LEGCUFF_LAYER)
-	clear_alert("legcuffed")
+	src.remove_status_effect(/datum/status_effect/debuff/legcuff)
 	if(legcuffed)
 		overlays_standing[LEGCUFF_LAYER] = mutable_appearance('icons/roguetown/mob/bodies/cuffed.dmi', "[legcuffed.name]down", -LEGCUFF_LAYER)
 		apply_overlay(LEGCUFF_LAYER)
-		throw_alert("legcuffed", /obj/screen/alert/restrained/legcuffed, new_master = src.legcuffed)
+		src.apply_status_effect(/datum/status_effect/debuff/legcuff)
 
 /proc/wear_female_version(t_color, icon, layer, type)
 	var/index = t_color
