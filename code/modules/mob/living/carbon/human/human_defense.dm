@@ -33,10 +33,23 @@
 					if(C.obj_integrity <= 0)
 						continue
 				var/val = C.armor.getRating(d_type)
-				if(val > 0)
-					if(val > protection)
-						protection = val
-						used = C
+				var/armorworn = src.get_item_by_slot(SLOT_ARMOR)
+				var/shirtworn = src.get_item_by_slot(SLOT_SHIRT)
+				if(bp == armorworn)
+					if(val > 0)
+						if(val > protection)
+							protection = val
+							used = armorworn
+				else if(bp == shirtworn && wear_armor.obj_integrity <= 0 || armorworn == null)
+					if(val > 0)
+						if(val > protection)
+							protection = val
+							used = shirtworn
+				else if(!istype(bp, wear_armor) && !istype(bp, wear_shirt))
+					if(val > 0)
+						if(val > protection)
+							protection = val
+							used = C
 	if(used)
 		if(!blade_dulling)
 			blade_dulling = BCLASS_BLUNT

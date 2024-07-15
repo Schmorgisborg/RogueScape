@@ -212,111 +212,85 @@
 	icon_state = "eyekey"
 	lockid = "porta"
 
+
 //custom key
 /obj/item/roguekey/custom
 	name = "unknown key"
-	desc = "A custom key designed by a blacksmith."
+	desc = ""
 	icon_state = "brownkey"
 
-/obj/item/roguekey/custom/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/rogueweapon/hammer))
-		var/input = (input(user, "Name the key.", "", "") as text) 
-		if(input)
-			name = name + " key"
-			to_chat(user, "<span class='notice'>You rename the key to [name].</span>")
-
 //custom key blank
-/obj/item/customblank //i'd prefer not to make a seperate item for this honestly
+/obj/item/customblank
 	name = "blank key"
-	desc = "A key without its teeth carved in."
+	desc = "To set an ID, use this inhand or on a lock."
 	icon = 'icons/roguetown/items/keys.dmi'
 	icon_state = "brownkey"
 	w_class = WEIGHT_CLASS_TINY
 	dropshrink = 0.75
 	var/lockhash = 0
 
-/obj/item/customblank/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/rogueweapon/hammer))
-		var/input = input(user, "What would you like to set the key ID to?", "", 0) as num
+/obj/item/customblank/attack_self(mob/living/user)
+	if(!lockhash)
+		var/ninput = (input(user, "Set a name for the key.", "", "") as text) 
+		if(!ninput)
+			return
+		name = name + " key"
+		
+		var/input = input(user, "Set an ID for the key.", "", 0) as num
 		input = max(0, input)
-		to_chat(user, "<span class='notice'>You set the key ID to [input].</span>")
-		lockhash = 10000 + input //having custom lock ids start at 10000 leaves it outside the range that opens normal doors, so you can't make a key that randomly unlocks existing key ids like the church
+		if(!input)
+			return
+		to_chat(user, "<span class='notice'>The [name] key is set to [input].</span>")
+		lockhash = 10000 + input //same deal as the customkey
 
-/obj/item/customblank/attack_right(mob/user)
-	if(istype(user.get_active_held_item(), /obj/item/roguekey))
-		var/obj/item/roguekey/held = user.get_active_held_item()
-		src.lockhash = held.lockhash
-		to_chat(user, "<span class='notice'>You trace the teeth from [held] to [src].</span>")
-	else if(istype(user.get_active_held_item(), /obj/item/customlock))
-		var/obj/item/customlock/held = user.get_active_held_item()
-		src.lockhash = held.lockhash
-		to_chat(user, "<span class='notice'>You fine-tune [src] to the lock's internals.</span>")
-	else if(istype(user.get_active_held_item(), /obj/item/rogueweapon/hammer) && src.lockhash != 0)
 		var/obj/item/roguekey/custom/F = new (get_turf(src))
 		F.lockhash = src.lockhash
-		to_chat(user, "<span class='notice'>You finish [F].</span>")
+		F.name = src.name
 		qdel(src)
-
 
 //custom lock unfinished
 /obj/item/customlock
 	name = "unfinished lock"
-	desc = "A lock without its pins set."
+	desc = "To set an ID, use this inhand."
 	icon = 'icons/roguetown/items/keys.dmi'
 	icon_state = "lock"
 	w_class = WEIGHT_CLASS_SMALL
 	dropshrink = 0.75
 	var/lockhash = 0
+	var/holdname = ""
+
+/obj/item/customlock/attack_self(mob/living/user)
+	holdname = input(user, "What would you like to name this?", "", "") as text
+
+	var/input = input(user, "Set the lock ID.", "", 0) as num
+	input = max(0, input)
+	if(!input)
+		return
+	
+	to_chat(user, "<span class='notice'>You set the lock ID to [input].</span>")
+	lockhash = 10000 + input
+
+	var/obj/item/customlock/finished/F = new (get_turf(src))
+	F.lockhash = src.lockhash
+	qdel(src)
 
 /obj/item/customlock/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/rogueweapon/hammer))
-		var/input = input(user, "What would you like to set the lock ID to?", "", 0) as num
-		input = max(0, input)
-		to_chat(user, "<span class='notice'>You set the lock ID to [input].</span>")
-		lockhash = 10000 + input //same deal as the customkey
-	else if(istype(I, /obj/item/roguekey))
-		var/obj/item/roguekey/ID = I
-		if(ID.lockhash == src.lockhash)
-			to_chat(user, "<span class='notice'>[I] twists cleanly in [src].</span>")
-		else
-			to_chat(user, "<span class='warning'>[I] jams in [src],</span>")
-	else if(istype(I, /obj/item/customblank))
-		var/obj/item/customblank/ID = I
-		if(ID.lockhash == src.lockhash)
-			to_chat(user, "<span class='notice'>[I] twists cleanly in [src].</span>") //this makes no sense since the teeth aren't formed yet but i want people to be able to check whether the locks theyre making actually fit
-		else
-			to_chat(user, "<span class='warning'>[I] jams in [src].</span>")
-
-/obj/item/customlock/attack_right(mob/user)
-	if(istype(user.get_active_held_item(), /obj/item/roguekey))//i need to figure out how to avoid these massive if/then trees, this sucks
-		var/obj/item/roguekey/held = user.get_active_held_item()
+	if(istype(I, /obj/item/roguekey))
+		var/obj/item/roguekey/held = I
 		src.lockhash = held.lockhash
 		to_chat(user, "<span class='notice'>You align the lock's internals to [held].</span>") //locks for non-custom keys
-	else if(istype(user.get_active_held_item(), /obj/item/customblank))
-		var/obj/item/customblank/held = user.get_active_held_item()
-		src.lockhash = held.lockhash
-		to_chat(user, "<span class='notice'>You align the lock's internals to [held].</span>")
-	else if(istype(user.get_active_held_item(), /obj/item/rogueweapon/hammer) && src.lockhash != 0)
+
 		var/obj/item/customlock/finished/F = new (get_turf(src))
 		F.lockhash = src.lockhash
-		to_chat(user, "<span class='notice'>You finish [F].</span>")
 		qdel(src)
+
+	else if(istype(I, /obj/item/customblank))
+		to_chat(user, "<span class='warning'>You must first set the ID on one.</span>")
 
 //finished lock
 /obj/item/customlock/finished
 	name = "lock"
-	desc = "A finished lock."
-	var/holdname = ""
-
-/obj/item/customlock/finished/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/rogueweapon/hammer))
-		src.holdname = input(user, "What would you like to name this?", "", "") as text
-		if(holdname)
-			to_chat(user, "<span class='notice'>You label the [name] with [holdname].</span>")
-	else
-		..()
-
-/obj/item/customlock/finished/attack_right(mob/user)//does nothing. probably better ways to do this but whatever
+	desc = "Use this on a door, chest, or closet."
 
 /obj/item/customlock/finished/attack_obj(obj/structure/K, mob/living/user)
 	if(istype(K, /obj/structure/closet))
@@ -341,3 +315,14 @@
 				KE.name = src.holdname
 			to_chat(user, "<span class='notice'>You add [src] to [K].</span>")
 			qdel(src)
+
+/obj/item/customlock/finished/attackby(obj/item/I, mob/user, params)
+	if(istype(I, /obj/item/customblank))
+		var/ninput = (input(user, "Set a name for the key.", "", "") as text) 
+		if(!ninput)
+			return
+
+		var/obj/item/roguekey/custom/F = new (get_turf(src))
+		F.lockhash = src.lockhash
+		F.name = name + " key"
+		qdel(src)
