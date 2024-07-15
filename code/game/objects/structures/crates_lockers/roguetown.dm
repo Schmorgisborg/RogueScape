@@ -127,3 +127,58 @@
 	base_icon_state = "drawer5"
 	dir = SOUTH
 	pixel_y = 16
+
+/obj/structure/closet/crate/chest/alchbox/PopulateContents()
+	var/pick = rand(1,8)
+	var/list/loot[]
+	switch(pick)
+		if(1)//Mana
+			loot = list(/obj/item/alch/bonemeal,
+						/obj/item/alch/seeddust)
+		if(2)//Strength
+			loot = list(/obj/item/alch/sinew,
+						/obj/item/alch/irondust,
+						/obj/item/alch/firedust)
+		if(3)//Con
+			loot = list(/obj/item/reagent_containers/food/snacks/fish,
+						/obj/item/alch/bone,
+						/obj/item/alch/earthdust)
+		if(4)//Strong health
+			loot = list(/obj/item/alch/viscera,
+						/obj/item/natural/chaff/wheat,
+						/obj/item/alch/waterdust)
+		if(5)//Int
+			loot = list(/obj/item/reagent_containers/moondust,
+						/obj/item/alch/sweetdust,
+						/obj/item/alch/airdust)
+		if(6)//Poison
+			loot = list(/obj/item/reagent_containers/food/snacks/grown/berries/poison,
+						/obj/item/reagent_containers/food/snacks/grown/rogue/sweetleaf,
+						/obj/item/alch/golddust)
+		if(7 to 8)//Bottles and vials
+			loot = list(/obj/item/reagent_containers/glass/bottle/vial,
+						/obj/item/reagent_containers/glass/bottle/vial,
+						/obj/item/reagent_containers/glass/bottle/vial,
+						/obj/item/reagent_containers/glass/bottle/vial,
+						/obj/item/reagent_containers/glass/bottle,
+						/obj/item/reagent_containers/glass/bottle)
+	var/I
+	for(I in loot)
+		new I(src)
+
+
+/obj/structure/closet/crate/chest/enchbox/PopulateContents()
+	var/list/loot = list(/obj/item/rune/spell/fire_rune=10,
+						/obj/item/rune/spell/water_rune=10,
+						/obj/item/rune/spell/air_rune=10,
+						/obj/item/rune/spell/earth_rune=10,
+						/obj/item/alch/golddust=10)
+	var/I = pickweight(loot)
+	new I(src)
+	if(istype(I, /obj/item/alch/golddust) && prob(50))
+		new I(src)
+	if(prob(80))
+		I = pickweight(loot)
+		new I(src)
+		if(istype(I, /obj/item/alch/golddust) && prob(50))
+			new I(src)

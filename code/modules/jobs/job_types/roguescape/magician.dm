@@ -7,10 +7,7 @@
 	spawn_positions = 3
 
 	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Goblin",
-	"Half-Elf")
+	"Elf")
 	allowed_sexes = list(MALE, FEMALE)
 	spells = list(/obj/effect/proc_holder/spell/invoked/projectile/fireball, /obj/effect/proc_holder/spell/invoked/projectile/lightningbolt, /obj/effect/proc_holder/spell/invoked/arcaneheal, /obj/effect/proc_holder/spell/invoked/projectile/fetch)
 	display_order = JDO_GRANDWIZARD

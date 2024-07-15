@@ -45,17 +45,22 @@
 	specstats_f = list("strength" = -1, "perception" = -1, "intelligence" = -1, "constitution" = -1, "endurance" = -1, "speed" = -1, "fortune" = -1)
 	enflamed_icon = "widefire"
 
-	/*
-	var/obj/item/organ/eyes/eyes = src.getorganslot(ORGAN_SLOT_EYES)
-	if(eyes)
-		eyes.Remove(src,1)
-		QDEL_NULL(eyes)
-	eyes = new /obj/item/organ/eyes/night_vision/nightmare
-	eyes.Insert(src)
+/datum/species/human/sgoblin/on_species_gain(mob/living/carbon/C, datum/species/old_species)
+	..()
+	RegisterSignal(C, COMSIG_MOB_SAY, .proc/handle_speech)
+	C.remove_language(/datum/language/common)
+	C.grant_language(/datum/language/hellspeak)
 
-	faction = list("goblins")*/
+/datum/species/human/sgoblin/after_creation(mob/living/carbon/C)
+	..()
+	C.remove_language(/datum/language/common)
+	C.grant_language(/datum/language/hellspeak)
+	to_chat(C, "<span class='info'>I can speak Infernal with ,h before my speech.</span>")
 
-
+/datum/species/human/sgoblin/on_species_loss(mob/living/carbon/C)
+	. = ..()
+	UnregisterSignal(C, COMSIG_MOB_SAY)
+	C.remove_language(/datum/language/hellspeak)
 
 /datum/species/human/sgoblin/get_skin_list()
 	return sortList(list(
@@ -64,7 +69,6 @@
 	"skin3" = "CA9920",
 	"skin4" = "6E8A74"
 	))
-
 
 /datum/species/human/sgoblin/get_hairc_list()
 	return sortList(list(
