@@ -12,6 +12,9 @@ GLOBAL_LIST_EMPTY(custom_civs)
 	var/announcement_cooldown = 0
 	var/list/left_kingdoms = list()
 
+	var/skip_kingdom_huds = TRUE
+	var/list/hud_list[200]
+
 /////////////   kingdom   /////////////
 
 /mob/living/carbon/human/proc/create_kingdom()
@@ -60,7 +63,7 @@ GLOBAL_LIST_EMPTY(custom_civs)
 		H.civilization = newname
 		H.leader = TRUE
 		H.kingdom_perms = list(1,1,1,1)
-		GLOB.kingdomlist += newname//mackcivf lots of ugliness here to be changed
+		GLOB.kingdomlist += newname
 		var/newnamev = list("[newname]" = list(H,choosesymbol,choosecolor1,choosecolor2))
 		GLOB.custom_civs += newnamev
 		to_chat(usr, "<big>You are now the leader of the <b>[newname]</b> kingdom.</big>")
@@ -91,8 +94,8 @@ GLOBAL_LIST_EMPTY(custom_civs)
 /mob/living/carbon/human/proc/abandon_kingdom()
 	if (civilization == null || civilization == "none")
 		return FALSE
-	left_kingdoms += list(list(civilization,world.time)) //like 10 minutes.
-	if (GLOB.custom_civs[civilization][1] != null)//mackcivf more lists of SHIT
+	left_kingdoms += list(list(civilization,world.time))
+	if (GLOB.custom_civs[civilization][1] != null)
 		if (GLOB.custom_civs[civilization][1].real_name == real_name)
 			GLOB.custom_civs[civilization][1] = null
 	civilization = "none"
