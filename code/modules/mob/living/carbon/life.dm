@@ -90,7 +90,11 @@
 			tiredness = min(tiredness + 1, 100)
 
 		handle_brain_damage()
-
+		
+		handle_hud_list()
+		if(base_kingdom)//mackcivf
+			faction_hud_users |= src
+			process_faction_hud(src)
 	else
 		. = ..()
 
