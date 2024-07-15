@@ -166,7 +166,6 @@
 	for(I in loot)
 		new I(src)
 
-
 /obj/structure/closet/crate/chest/enchbox/PopulateContents()
 	var/list/loot = list(/obj/item/rune/spell/fire_rune=10,
 						/obj/item/rune/spell/water_rune=10,
@@ -175,10 +174,9 @@
 						/obj/item/alch/golddust=10)
 	var/I = pickweight(loot)
 	new I(src)
-	if(istype(I, /obj/item/alch/golddust) && prob(50))
+	if(prob(25))
+		I = /obj/item/alch/golddust
 		new I(src)
-	if(prob(80))
+	if(prob(70))
 		I = pickweight(loot)
 		new I(src)
-		if(istype(I, /obj/item/alch/golddust) && prob(50))
-			new I(src)

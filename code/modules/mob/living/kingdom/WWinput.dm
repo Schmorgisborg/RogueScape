@@ -23,11 +23,6 @@
 			client = client:client
 
 	var/client/C = client
-	if (C)
-		C.stopmovingup()//mackcivf proc not declared: must port from civ or remove
-		C.stopmovingdown()
-		C.stopmovingleft()
-		C.stopmovingright()
 
 	if (!toc1 && !toc2)
 		alert(C, message, title, "Continue")

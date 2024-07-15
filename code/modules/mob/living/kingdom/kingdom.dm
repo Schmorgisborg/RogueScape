@@ -1,19 +1,12 @@
-GLOBAL_LIST_INIT(kingdomlist, list("Psydonia"))//map.custom_faction_nr
-GLOBAL_LIST_INIT(custom_civs, list("Psydonia"))
-GLOBAL_LIST_EMPTY(kingdomlist)
-GLOBAL_LIST_EMPTY(custom_civs)
-
-/mob/living/carbon/human
+/mob/living/carbon
 	var/civilization = "none"
-	var/datum/kingdom/base_kingdom = null
+	var/base_kingdom = null
 	var/leader = FALSE
-	var/list/kingdom_perms = list(0,0,0,0)
 	var/title = ""
 	var/announcement_cooldown = 0
+	var/list/kingdom_perms = list(0,0,0,0)
 	var/list/left_kingdoms = list()
-
 	var/skip_kingdom_huds = TRUE
-	var/list/hud_list[200]
 
 /////////////   kingdom   /////////////
 
@@ -63,7 +56,7 @@ GLOBAL_LIST_EMPTY(custom_civs)
 		H.civilization = newname
 		H.leader = TRUE
 		H.kingdom_perms = list(1,1,1,1)
-		GLOB.kingdomlist += newname
+		GLOB.kingdomlist += newname//mackcivf lots of ugliness here to be changed
 		var/newnamev = list("[newname]" = list(H,choosesymbol,choosecolor1,choosecolor2))
 		GLOB.custom_civs += newnamev
 		to_chat(usr, "<big>You are now the leader of the <b>[newname]</b> kingdom.</big>")
@@ -89,13 +82,13 @@ GLOBAL_LIST_EMPTY(custom_civs)
 		if (confirmation == "Stay in kingdom")
 			return
 		else
-			abandon_kingdom()
+			abandon_kingdom_proc()
 
-/mob/living/carbon/human/proc/abandon_kingdom()
+/mob/living/carbon/human/proc/abandon_kingdom_proc()
 	if (civilization == null || civilization == "none")
 		return FALSE
-	left_kingdoms += list(list(civilization,world.time))
-	if (GLOB.custom_civs[civilization][1] != null)
+	left_kingdoms += list(list(civilization,world.time)) //like 10 minutes.
+	if (GLOB.custom_civs[civilization][1] != null)//mackcivf more lists of SHIT
 		if (GLOB.custom_civs[civilization][1].real_name == real_name)
 			GLOB.custom_civs[civilization][1] = null
 	civilization = "none"
@@ -244,7 +237,7 @@ GLOBAL_LIST_EMPTY(custom_civs)
 
 /obj/structure/banner/kingdom
 	name = "kingdom banner"
-	icon = 'icons/obj/banners.dmi'
+	icon = 'icons/roguetown/misc/banners.dmi'
 	icon_state = "banner_a"
 	desc = "A white banner."
 	var/bstyle = "banner_a"
@@ -252,7 +245,7 @@ GLOBAL_LIST_EMPTY(custom_civs)
 	var/symbol = "cross"
 	var/color1 = "#000000"
 	var/color2 = "#FFFFFF"
-	flammable = TRUE
+	resistance_flags = FLAMMABLE
 	layer = ABOVE_MOB_LAYER
 
 /obj/structure/banner/kingdom/banner_a
@@ -263,7 +256,7 @@ GLOBAL_LIST_EMPTY(custom_civs)
 	..()
 	invisibility = 101
 	spawn(10)
-		if (kingdom != "none" && map)
+		if (kingdom != "none")
 			name = "[kingdom]'s banner"
 			desc = "This is a [kingdom] banner."
 			icon_state = bstyle
@@ -281,7 +274,7 @@ GLOBAL_LIST_EMPTY(custom_civs)
 
 /datum/crafting_recipe/roguetown/structure/banner/kingdom
 	name = "kingdom banner"
-	result = /obj/structure/banner/kingdom/New()//mackcivf: double check how they handle actually crafting these first
+	result = list(/obj/structure/poster/kingdom/New)
 	reqs = list(/obj/item/grown/log/tree/small = 2,
 				/obj/item/natural/cloth = 2)
 	verbage = "construct"
@@ -299,14 +292,14 @@ GLOBAL_LIST_EMPTY(custom_civs)
 
 /obj/item/weapon/poster/kingdom
 	name = "rolled kingdom poster"
-	icon = 'icons/obj/banners.dmi'
+	icon = 'icons/roguetown/misc/banners.dmi'
 	icon_state = "poster_rolled"
 	desc = "A rolled poster."
 	var/kingdom = "none"
 	var/color1 = "#000000"
 	var/color2 = "#FFFFFF"
 	var/bstyle = "prop_lead"
-	flammable = TRUE
+	resistance_flags = FLAMMABLE
 	force = 0
 
 /obj/item/weapon/poster/kingdom/lead
@@ -327,14 +320,14 @@ GLOBAL_LIST_EMPTY(custom_civs)
 
 /obj/structure/poster/kingdom
 	name = "kingdom propaganda poster"
-	icon = 'icons/obj/banners.dmi'
+	icon = 'icons/roguetown/misc/banners.dmi'
 	icon_state = "prop_lead"
 	desc = "A blank poster."
 	var/kingdom = "none"
 	var/color1 = "#000000"
 	var/color2 = "#FFFFFF"
 	var/bstyle = "prop_lead"
-	flammable = TRUE
+	resistance_flags = FLAMMABLE
 	layer = BELOW_MOB_LAYER
 
 /obj/structure/poster/kingdom/New()
@@ -357,7 +350,7 @@ GLOBAL_LIST_EMPTY(custom_civs)
 
 /datum/crafting_recipe/roguetown/structure/poster/kingdom
 	name = "kingdom poster"
-	result = /obj/structure/poster/kingdom/New()//mackcivf: double check how they handle actually crafting these first
+	result = list(/obj/structure/poster/kingdom)
 	reqs = list(/obj/item/natural/cloth = 2)
 	verbage = "construct"
 	craftsound = 'sound/foley/Building-01.ogg'

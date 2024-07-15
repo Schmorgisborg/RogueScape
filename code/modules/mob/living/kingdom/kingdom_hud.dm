@@ -1,4 +1,4 @@
-/mob/living/carbon/proc/process_faction_hud(var/mob/M, var/mob/Alt)
+/mob/living/carbon/proc/process_kingdom_hud(var/mob/M, var/mob/Alt)
 
 	if (!can_process_hud(M))
 		return
@@ -7,27 +7,18 @@
 
 	var/mob/living/carbon/human/viewer = M
 
-	testing("[viewer] processing faction huds.")
+	testing("[viewer] processing kingdom huds.")
 
-	var/datum/arranged_hud_process/P = arrange_hud_process(M, Alt, faction_hud_users)
+	var/datum/arranged_hud_process/P = arrange_hud_process(M, Alt, GLOB.kingdom_hud_users)
 	for (var/mob/living/carbon/human/perp in P.Mob.in_view(P.Turf))
 		if(!perp)
 			continue
 
-		var/shared_job_check = FALSE
-
-		if (viewer == perp)
-			shared_job_check = TRUE
-		if (istype(src, /mob/living/carbon/human))
-			if ((viewer.civilization == perp.civilization) && !perp.civilization == "none")
-				shared_job_check = TRUE
-			else
-				shared_job_check = FALSE
-
-		var/image/holderf = perp.hud_list[BASE_FACTION]//mackcivf icon effort needed
-		holderf.icon = 'icons/mob/hud_1713.dmi'
+		var/image/holderf = perp.hud_list[BASE_FACTION]
+		holderf.icon = 'icons/roguetown/misc/kingdompip.dmi'
 		holderf.plane = HUD_PLANE
 		holderf.icon_state = ""
+
 		if (viewer == perp)
 			holderf.icon_state = "civp" //player hud
 		else if (perp.civilization == "none")
@@ -71,13 +62,12 @@
 
 /mob/observer/eye/in_view(var/turf/T)
 	var/list/viewed = new
-	for (var/mob/living/human/H in mob_list)
+	for (var/mob/living/carbon/human/H in GLOB.mob_list)
 		if (get_dist(H, T) <= 7)
 			viewed += H
 	return viewed
 
-
-/mob/living/carbon/human/proc/handle_hud_list()
+/mob/living/carbon/proc/handle_hud_list()
 	if(stat == DEAD)
 		hud_list[BASE_FACTION].icon_state = ""
 		hud_list[BASE_FACTION].overlays.Cut()
@@ -94,7 +84,7 @@
 			hud_list[FACTION_TO_ENEMIES] = holder
 
 			var/image/holder2 = hud_list[BASE_FACTION]
-			holder2.icon = 'icons/mob/hud_1713.dmi'
+			holder2.icon = 'icons/roguetown/misc/kingdompip.dmi'
 			holder2.plane = HUD_PLANE
 
 			holder2.overlays.Cut()
