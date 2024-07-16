@@ -74,8 +74,7 @@
 		hud_list[FACTION_TO_ENEMIES].icon_state = ""
 		hud_list[FACTION_TO_ENEMIES].overlays.Cut()
 
-	if(skip_kingdom_huds && stat != DEAD)
-		skip_kingdom_huds = FALSE
+	if(stat != DEAD)
 
 		if (base_kingdom)
 			var/image/holder = hud_list[FACTION_TO_ENEMIES]

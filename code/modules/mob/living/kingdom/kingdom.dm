@@ -56,7 +56,7 @@
 		H.civilization = newname
 		H.leader = TRUE
 		H.kingdom_perms = list(1,1,1,1)
-		GLOB.kingdomlist += newname//mackcivf lots of ugliness here to be changed
+		GLOB.kingdomlist += newname
 		var/newnamev = list("[newname]" = list(H,choosesymbol,choosecolor1,choosecolor2))
 		GLOB.custom_civs += newnamev
 		to_chat(usr, "<big>You are now the leader of the <b>[newname]</b> kingdom.</big>")
@@ -269,10 +269,10 @@
 			var/image/overs = image("icon" = icon, "icon_state" = "b_[GLOB.custom_civs[kingdom][2]]")
 			overs.color = color1
 			overlays += overs
-		update_icon()
-		invisibility = 0
+	update_icon()
+	invisibility = 0
 
-/datum/crafting_recipe/roguetown/structure/banner/kingdom
+/datum/crafting_recipe/roguetown/kingdom/banner
 	name = "kingdom banner"
 	result = list(/obj/structure/poster/kingdom/New)
 	reqs = list(/obj/item/grown/log/tree/small = 2,
@@ -313,16 +313,15 @@
 
 /obj/item/weapon/poster/kingdom/New()
 	..()
-	spawn(10)
-		if (kingdom != "none")
-			name = "rolled [kingdom]'s poster"
-			desc = "This is a rolled [kingdom] propaganda poster. Ready to deploy."
+	if (kingdom != "none")
+		name = "rolled [kingdom]'s poster"
+		desc = "This is a rolled [kingdom] flier. Ready to deploy."
 
 /obj/structure/poster/kingdom
-	name = "kingdom propaganda poster"
+	name = "kingdom flier"
 	icon = 'icons/roguetown/misc/banners.dmi'
 	icon_state = "prop_lead"
-	desc = "A blank poster."
+	desc = "A blank flier."
 	var/kingdom = "none"
 	var/color1 = "#000000"
 	var/color2 = "#FFFFFF"
@@ -336,7 +335,7 @@
 	spawn(10)
 		if (kingdom != "none")
 			name = "[kingdom]'s poster"
-			desc = "This is a [kingdom] propaganda poster."
+			desc = "This is a [kingdom] flier."
 			var/image/overc = image("icon" = icon, "icon_state" = "[bstyle]_c1")
 			overc.color = color1
 			overlays += overc
@@ -345,12 +344,12 @@
 			overlays += overc1
 			var/image/overs = image("icon" = icon, "icon_state" = "[bstyle]_base")
 			overlays += overs
-		update_icon()
-		invisibility = 0
+	update_icon()
+	invisibility = 0
 
-/datum/crafting_recipe/roguetown/structure/poster/kingdom
+/datum/crafting_recipe/roguetown/kingdom/poster
 	name = "kingdom poster"
-	result = list(/obj/structure/poster/kingdom)
+	result = list(/obj/item/weapon/poster/kingdom)
 	reqs = list(/obj/item/natural/cloth = 2)
 	verbage = "construct"
 	craftsound = 'sound/foley/Building-01.ogg'
@@ -367,28 +366,3 @@
 			update_icon()
 	else
 		..()
-
-/mob/proc/kingdom_list()
-	set name = "Check Kingdom List"
-	set category = "Kingdom"
-	var/list/facl[]
-	for (var/i=1,i<=GLOB.kingdomlist.len,i++)//mackcivf renaming map.custom_kingdom_nr to GLOB.kingdomlist
-		var/nu = 0
-		facl += list(GLOB.kingdomlist[i] = nu)
-
-	for (var/relf in facl)
-		facl[relf] = 0
-		for (var/mob/living/carbon/human/H in world)
-			if (relf == H.civilization && H.stat != DEAD)
-				facl[relf] += 1
-
-	var/body = "<html><head><title>Kingdom List</title></head><b>KINGDOM LIST</b><br><br>"
-	for (var/relf in facl)
-		if (facl[relf] > 0)
-			body += "<b>[relf]</b>: [facl[relf]] members.</br>"
-	body += {"<br>
-		</body></html>
-	"}
-
-	//mackcivf I have no idea if this is gonna work, window popups are weird.
-	usr << browse(body,"window=kingdoms_window;border=1;can_close=1;can_resize=1;can_minimize=0;titlebar=1;size=250x450")

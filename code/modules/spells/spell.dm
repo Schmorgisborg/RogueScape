@@ -216,10 +216,10 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 		if(!ranged_ability_user.check_armor_skill())
 			newdrain += 40
 		testing("[releasedrain] newdrain [newdrain]")
-		if(newdrain > 0)
+		if(newdrain > 0.3)
 			return newdrain
 		else
-			return 0.1
+			return 0.3
 	return releasedrain
 
 

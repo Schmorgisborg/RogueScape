@@ -230,7 +230,7 @@
 	for(var/obj/structure/fluff/psycross/S in oview(5, user))
 		found = S
 	if(!found)
-		to_chat(user, "<span class='warning'>I need a holy cross.</span>")
+		to_chat(user, "<span class='warning'>I need a psycross.</span>")
 		return FALSE
 	else
 		return TRUE
@@ -358,22 +358,21 @@
 			break
 		to_chat(P, "[itemstorestore]")
 	if(capturedsoul)
-		spawn(1200)
+		spawn(300)
 			to_chat(user, "The soul returns to the underworld.")
 			to_chat(capturedsoul, "You feel yourself being pulled back to the underworld.")
 			for(var/obj/effect/landmark/underworld/A in world)
 				capturedsoul.loc = A.loc
 				capturedsoul.invisibility = initial(capturedsoul.invisibility)
 				for(var/I in itemstorestore)
-					if(I == "token")
-						var/obj/item/underworld/coin/C = new
-						capturedsoul.put_in_hands(C)
+					var/obj/item/underworld/coin/C = new
+					capturedsoul.put_in_hands(C)
 					if(I == "lamp")
 						var/obj/item/flashlight/lantern/shrunken/L = new
 						capturedsoul.put_in_hands(L)
 			user.remove_language(/datum/language_holder/abyssal)
 		to_chat(user, "<font color='blue'>I feel a cold chill run down my spine, a presence has arrived.</font>")	
-		capturedsoul.Paralyze(1200)
+		capturedsoul.Paralyze(280)
 	else return
 
 
@@ -415,5 +414,37 @@
 
 /obj/effect/proc_holder/spell/targeted/beasttame/cast(list/targets,mob/user = usr)
 	visible_message("<FONT COLOR='green'>[usr] soothes the beastblood with Guthix's whisper.</FONT><BR>")
-	for(var/mob/living/simple_animal/hostile/retaliate/B in oview(2))
+	for(var/mob/living/simple_animal/hostile/retaliate/B in oview(3))
 		B.aggressive = 0
+
+
+/obj/effect/proc_holder/spell/targeted/beastsummon
+	name = "Summon Beast"
+	range = 7
+	overlay_state = "tamebeast"
+	releasedrain = 100
+	charge_max = 300
+	max_targets = 0
+	cast_without_targets = TRUE
+	no_early_release = TRUE
+	movement_interrupt = TRUE
+	sound = 'sound/magic/churn.ogg'
+	associated_skill = /datum/skill/magic/holy
+	invocation_type = "none"
+	miracle = TRUE
+
+/obj/effect/proc_holder/spell/targeted/beastsummon/cast(list/targets,mob/user = usr)
+	var/list/summons = list(/mob/living/simple_animal/hostile/retaliate/rogue/goat=5,
+							/mob/living/simple_animal/hostile/retaliate/rogue/goat=5,
+							/mob/living/simple_animal/hostile/retaliate/rogue/wolf=20,
+							/mob/living/simple_animal/hostile/retaliate/rogue/bigrat=30,
+							/mob/living/simple_animal/hostile/retaliate/rogue/saiga=10)
+	if(isturf(targets[1]))
+		var/mob/summontype = new pickweight(summons)
+		var/mob/living/simple_animal/hostile/S = summontype
+		S.attack_same = FALSE
+		S.del_on_deaggro = 300 SECONDS
+		visible_message("<FONT COLOR='red'>[usr] uses Guthix's power to summon a wild beast!</FONT><BR>")
+	else
+		target.visible_message("<span class='warning'>Something is blocking my creation.</span>")
+		return FALSE

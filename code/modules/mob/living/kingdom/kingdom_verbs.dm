@@ -21,6 +21,29 @@
 	verbs -= /mob/living/carbon/human/proc/Add_Title
 	verbs -= /mob/living/carbon/human/proc/Remove_Title
 
+/mob/proc/kingdom_list()
+	set name = "Check Kingdom List"
+	set category = "Kingdom"
+	var/list/facl[]
+	for (var/i=1,i<=GLOB.kingdomlist.len,i++)
+		var/nu = 0
+		facl += list(GLOB.kingdomlist[i] = nu)
+
+	for (var/relf in facl)
+		facl[relf] = 0
+		for (var/mob/living/carbon/human/H in world)
+			if (relf == H.civilization && H.stat != DEAD)
+				facl[relf] += 1
+
+	var/body = "<html><head><title>Kingdom List</title></head><b>KINGDOM LIST</b><br><br>"
+	for (var/relf in facl)
+		if (facl[relf] > 0)
+			body += "<b>[relf]</b>: [facl[relf]] members.</br>"
+	body += {"<br>
+		</body></html>
+	"}
+
+	usr << browse(body,"window=kingdoms_window;border=1;can_close=1;can_resize=1;can_minimize=0;titlebar=1;size=250x450")
 
 /mob/living/carbon/human/verb/recruit()
 	set category = "Kingdom"
