@@ -50,7 +50,7 @@
 	set name = "Recruit"
 	set desc = "Invite into your kingdom."
 
-	set src in view(1)
+	set src in oview(1)
 
 	var/mob/living/carbon/human/user
 
@@ -75,6 +75,10 @@
 
 	if (!user.leader || user.kingdom_perms[4] == 0)
 		to_chat(user, "You don't have the permissions to recruit.")
+		return
+
+	if (user.civilization == src.civilization)
+		to_chat(user, "They are already a member of your kingdom.")
 		return
 
 	if (!istype(src) || src.incapacitated() || src.client == null)
@@ -105,7 +109,7 @@
 	set name = "Kingdom Perms"
 	set desc = "Change the kingdom permissions of this person."
 
-	set src in view(1)
+	set src in oview(1)
 
 	var/mob/living/carbon/human/user
 

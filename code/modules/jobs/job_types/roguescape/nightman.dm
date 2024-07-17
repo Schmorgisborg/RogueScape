@@ -43,7 +43,5 @@
 	if(H.dna?.species)
 		if(H.dna.species.id == "human")
 			H.dna.species.soundpack_m = new /datum/voicepack/male/zeth()
-		if(H.dna.species.id == "elf")
-			armor = /obj/item/clothing/suit/roguetown/armor/leather/vest/sailor
-		if(H.dna.species.id == "dwarf")
+		if(H.dna.species.id == "elf" || "dwarf" || "delf")
 			armor = /obj/item/clothing/suit/roguetown/armor/leather/vest/sailor

@@ -11,6 +11,7 @@
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 	chargedloop = /datum/looping_sound/invokeholy
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	miracle = TRUE
 
 /obj/effect/proc_holder/spell/invoked/shepherd/cast(list/targets, mob/living/user)
@@ -30,23 +31,7 @@
 			return TRUE
 	return FALSE
 
-// removal of old systems
-/*/datum/devotion/cleric_holder/proc/grant_spells_priest(mob/living/carbon/human/H)
-	var/datum/patrongods/A = H.PATRON
-	var/spelllist = list(A.t0, A.t1, A.t2, A.t3)
-	for(var/C in spelllist)
-		H.mind.AddSpell(new C)
-	level = CLERIC_T3
-	update_devotion(300, 900)
 
-/datum/devotion/cleric_holder/proc/grant_spells(mob/living/carbon/human/H)
-	var/datum/patrongods/A = H.PATRON
-	var/spelllist = list(A.t0, A.t1)
-	level = CLERIC_T1
-	for(var/C in spelllist)
-		H.mind.AddSpell(new C) 
-*/
-// General
 /obj/effect/proc_holder/spell/invoked/heal/lesser
 	name = "Lesser Miracle"
 	overlay_state = "lesserheal"
@@ -83,11 +68,13 @@
 					C.update_damage_overlays()
 				if(affecting.heal_wounds(50))
 					C.update_damage_overlays()
+				C.adjustBruteLoss(-3)
+				C.adjustFireLoss(-3)
 		else
-			target.adjustBruteLoss(-5)
-			target.adjustFireLoss(-5)
-		target.adjustToxLoss(-5)
-		target.adjustOxyLoss(-5)
+			target.adjustBruteLoss(-10)
+			target.adjustFireLoss(-10)
+		target.adjustToxLoss(-15)
+		target.adjustOxyLoss(-15)
 		target.blood_volume += 25
 		return TRUE
 	else
@@ -134,6 +121,8 @@
 					C.update_damage_overlays()
 				if(affecting.heal_wounds(50))
 					C.update_damage_overlays()
+				C.adjustBruteLoss(-5)
+				C.adjustFireLoss(-5)
 		else
 			target.adjustBruteLoss(-50)
 			target.adjustFireLoss(-50)
@@ -186,6 +175,7 @@
 	no_early_release = TRUE
 	movement_interrupt = TRUE
 	chargedloop = /datum/looping_sound/invokeholy
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	sound = 'sound/magic/revive.ogg'
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
@@ -247,6 +237,7 @@
 	cast_without_targets = TRUE
 	sound = 'sound/magic/churn.ogg'
 	associated_skill = /datum/skill/magic/holy
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	invocation = "Saradomin grant thee passage forth and spare the trials of the forgotten."
 	invocation_type = "whisper" //can be none, whisper, emote and shout
 	miracle = TRUE
@@ -276,6 +267,7 @@
 	cast_without_targets = TRUE
 	sound = 'sound/magic/churn.ogg'
 	associated_skill = /datum/skill/magic/holy
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	invocation = "Saradomin protect us!"
 	invocation_type = "shout" //can be none, whisper, emote and shout
 	miracle = TRUE
@@ -327,6 +319,7 @@
 	cast_without_targets = TRUE
 	sound = 'sound/magic/churn.ogg'
 	associated_skill = /datum/skill/magic/holy
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	invocation = "She-Below brooks thee respite, be heard, wanderer."
 	invocation_type = "whisper" //can be none, whisper, emote and shout
 	miracle = TRUE
@@ -371,7 +364,7 @@
 						var/obj/item/flashlight/lantern/shrunken/L = new
 						capturedsoul.put_in_hands(L)
 			user.remove_language(/datum/language_holder/abyssal)
-		to_chat(user, "<font color='blue'>I feel a cold chill run down my spine, a presence has arrived.</font>")	
+		to_chat(user, "<font color='blue'>I feel a cold chill run down my spine, a presence has arrived.</font>")
 		capturedsoul.Paralyze(280)
 	else return
 
@@ -388,6 +381,7 @@
 	cast_without_targets = TRUE
 	sound = 'sound/magic/churn.ogg'
 	associated_skill = /datum/skill/magic/holy
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	invocation = "Guthix commands thee, be fruitful!"
 	invocation_type = "shout" //can be none, whisper, emote and shout
 	miracle = TRUE
@@ -408,6 +402,7 @@
 	cast_without_targets = TRUE
 	sound = 'sound/magic/churn.ogg'
 	associated_skill = /datum/skill/magic/holy
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	invocation = "Be still and calm, brotherbeast."
 	invocation_type = "whisper" //can be none, whisper, emote and shout
 	miracle = TRUE
@@ -418,33 +413,34 @@
 		B.aggressive = 0
 
 
-/obj/effect/proc_holder/spell/targeted/beastsummon
+/obj/effect/proc_holder/spell/invoked/beastsummon
 	name = "Summon Beast"
 	range = 7
 	overlay_state = "tamebeast"
-	releasedrain = 100
+	releasedrain = 1000
 	charge_max = 300
-	max_targets = 0
 	cast_without_targets = TRUE
 	no_early_release = TRUE
 	movement_interrupt = TRUE
 	sound = 'sound/magic/churn.ogg'
 	associated_skill = /datum/skill/magic/holy
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	invocation_type = "none"
 	miracle = TRUE
 
-/obj/effect/proc_holder/spell/targeted/beastsummon/cast(list/targets,mob/user = usr)
+/obj/effect/proc_holder/spell/invoked/beastsummon/cast(list/targets,mob/user = usr)
 	var/list/summons = list(/mob/living/simple_animal/hostile/retaliate/rogue/goat=5,
 							/mob/living/simple_animal/hostile/retaliate/rogue/goat=5,
 							/mob/living/simple_animal/hostile/retaliate/rogue/wolf=20,
 							/mob/living/simple_animal/hostile/retaliate/rogue/bigrat=30,
 							/mob/living/simple_animal/hostile/retaliate/rogue/saiga=10)
+	var/summon = pickweight(summons)
 	if(isturf(targets[1]))
-		var/mob/summontype = new pickweight(summons)
+		var/mob/summontype = new summon(targets[1])
 		var/mob/living/simple_animal/hostile/S = summontype
 		S.attack_same = FALSE
 		S.del_on_deaggro = 300 SECONDS
 		visible_message("<FONT COLOR='red'>[usr] uses Guthix's power to summon a wild beast!</FONT><BR>")
 	else
-		target.visible_message("<span class='warning'>Something is blocking my creation.</span>")
+		to_chat(usr, "<span class='warning'>Something is blocking my creation.</span>")
 		return FALSE
