@@ -34,7 +34,7 @@
 
 /obj/effect/proc_holder/spell/invoked/heal/lesser
 	name = "Lesser Miracle"
-	overlay_state = "lesserheal"
+	overlay_state = "bigpsy"
 	releasedrain = 30
 	chargedrain = 0
 	chargetime = 0
@@ -416,7 +416,7 @@
 /obj/effect/proc_holder/spell/invoked/beastsummon
 	name = "Summon Beast"
 	range = 7
-	overlay_state = "tamebeast"
+	overlay_state = "dendor"
 	releasedrain = 1000
 	charge_max = 300
 	cast_without_targets = TRUE

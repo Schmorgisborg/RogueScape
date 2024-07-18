@@ -48,6 +48,12 @@
 	H.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
 	H.update_a_intents()
 	H.setToxLoss(0, 0)
+
+	H.ExtinguishMob()
+	H.fire_stacks = 0
+	H.cure_disease()
+	H.revive(full_heal = FALSE)
+
 	H.aggressive=1
 	H.mode = AI_IDLE
 	if(H.mind)
@@ -66,6 +72,7 @@
 	H.mob_biotypes = MOB_UNDEAD
 	H.update_body()
 	H.faction = list("undead")
+	H.civilization = list("none")
 	ADD_TRAIT(H, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_NOFATSTAM, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_NOLIMBDISABLE, TRAIT_GENERIC)
@@ -77,13 +84,12 @@
 	ADD_TRAIT(H, TRAIT_CHUNKYFINGERS, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_NOSLEEP, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_BASHDOORS, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_SHOCKIMMUNE, TRAIT_GENERIC)
 	H.verbs |= /mob/living/carbon/human/proc/zombie_seek
 	for(var/X in H.bodyparts)
 		var/obj/item/bodypart/BP = X
 		BP.update_disabled()
 //	H.STASTR = rand(12,18)
-	H.STASPD = rand(5,7)
+	H.STASPD = rand(3,7)
 	H.STAINT = 1
 
 
@@ -127,7 +133,7 @@
 		H.update_sight()
 		H.clear_alert("not_enough_oxy")
 		H.reload_fullscreen()
-		H.add_client_colour(/datum/client_colour/monochrome)
+		//H.add_client_colour(/datum/client_colour/monochrome)
 		revived = TRUE //so we can die for real later
 		transform_zombie()
 		if(H.stat == DEAD)

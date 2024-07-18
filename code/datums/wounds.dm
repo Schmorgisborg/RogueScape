@@ -128,17 +128,15 @@
 				if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 					dam += 30
 		if(prob(round(max(dam / 3, 1), 1)))
-			for(var/datum/wound/artery/A in simple_wounds)
-//				if(bclass == BCLASS_STAB || bclass == BCLASS_PICK)
-//					death()
-//					return TRUE
-				return FALSE
 			playsound(src, pick('sound/combat/crit.ogg'), 100, FALSE)
-			src.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [src]!</span>"
-			add_wound(/datum/wound/artery)
-//			if(bclass == BCLASS_STAB || bclass == BCLASS_PICK)
-//				death()
-//				return TRUE
+			if(prob(20))
+				if(zone_precise == BODY_ZONE_PRECISE_STOMACH)
+					if(bclass == BCLASS_CUT || bclass == BCLASS_CHOP)
+						spill_organs()
+						src.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [src]'s organs spill out!</span>"
+			else
+				src.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [src]!</span>"
+				add_wound(/datum/wound/artery)
 
 /datum/wound
 	var/name = "wound"

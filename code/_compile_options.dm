@@ -2,7 +2,7 @@
 #define ALLOWPLAY
 
 //Mack, respawn/restart vote timer
-#define RESPAWNTIME (3 MINUTES)
+#define RESPAWNTIME (5 SECONDS)
 #define INITIAL_ROUND_TIMER (90 MINUTES)
 #define ROUND_EXTENSION_TIME (15 MINUTES)
 
@@ -44,12 +44,6 @@
 #error Your version of BYOND is too out-of-date to compile this project. Go to https://secure.byond.com/download and update.
 #error You need version 513 or higher
 #endif
-
-//Additional code for the above flags.
-#ifdef TESTING
-#warn compiling in TESTING mode. testing() debug messages will be visible.
-#endif
-
 #ifdef GC_FAILURE_HARD_LOOKUP
 #define FIND_REF_NO_CHECK_TICK
 #endif

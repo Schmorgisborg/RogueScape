@@ -128,6 +128,9 @@
 		INVOKE_ASYNC(is_devil(src), /datum/antagonist/devil.proc/beginResurrectionCheck, src)
 
 /mob/living/carbon/human/proc/zombie_check()
+	var/obj/item/bodypart/head = src.get_bodypart(BODY_ZONE_HEAD)
+	if(!head)
+		return
 	if(mind && ckey)
 		if(mind.has_antag_datum(/datum/antagonist/vampirelord))
 			return
@@ -137,8 +140,14 @@
 			return
 		if(mind.has_antag_datum(/datum/antagonist/skeleton))
 			return
-		mind.add_antag_datum(/datum/antagonist/zombie)
-		qdel(cleric)
+/*		spawn(120)
+		switch(alert("Would you like to come back as a zombie?",,"Yes","No"))
+			if("Yes")
+				mind.add_antag_datum(/datum/antagonist/zombie)
+				verbs -= /client/proc/descend
+				qdel(cleric)
+			if("No")
+				return*/
 
 /mob/living/carbon/human/gib(no_brain, no_organs, no_bodyparts, safe_gib = FALSE)
 	for(var/mob/living/carbon/human/CA in viewers(7, src))

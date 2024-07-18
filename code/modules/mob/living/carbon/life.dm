@@ -91,10 +91,6 @@
 
 		handle_brain_damage()
 
-		handle_hud_list()
-		if(base_kingdom)
-			GLOB.kingdom_hud_users |= src
-			process_kingdom_hud(src)
 	else
 		. = ..()
 
