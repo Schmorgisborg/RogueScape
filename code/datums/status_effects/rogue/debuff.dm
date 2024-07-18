@@ -7,7 +7,7 @@
 	id = "hungryt1"
 	alert_type = /obj/screen/alert/status_effect/debuff/hungryt1
 	effectedstats = list("strength" = -1, "constitution" = -1)
-	duration = 100
+	duration = 90 MINUTES
 
 /obj/screen/alert/status_effect/debuff/hungryt1
 	name = "Hungry"
@@ -18,7 +18,7 @@
 	id = "hungryt2"
 	alert_type = /obj/screen/alert/status_effect/debuff/hungryt2
 	effectedstats = list("strength" = -3, "constitution" = -2, "endurance" = -1)
-	duration = 100
+	duration = 90 MINUTES
 
 /obj/screen/alert/status_effect/debuff/hungryt2
 	name = "Hungry"
@@ -29,7 +29,7 @@
 	id = "hungryt3"
 	alert_type = /obj/screen/alert/status_effect/debuff/hungryt3
 	effectedstats = list("strength" = -6, "constitution" = -3, "endurance" = -2)
-	duration = 100
+	duration = 90 MINUTES
 
 /obj/screen/alert/status_effect/debuff/hungryt3
 	name = "Hungry"
@@ -42,7 +42,7 @@
 	id = "thirsty"
 	alert_type = /obj/screen/alert/status_effect/debuff/thirstyt1
 	effectedstats = list("endurance" = -1)
-	duration = 100
+	duration = 90 MINUTES
 
 /obj/screen/alert/status_effect/debuff/thirstyt1
 	name = "Thirsty"
@@ -53,7 +53,7 @@
 	id = "thirsty"
 	alert_type = /obj/screen/alert/status_effect/debuff/thirstyt2
 	effectedstats = list("speed" = -1, "endurance" = -2)
-	duration = 100
+	duration = 90 MINUTES
 
 /obj/screen/alert/status_effect/debuff/thirstyt2
 	name = "Thirsty"
@@ -64,7 +64,7 @@
 	id = "thirsty"
 	alert_type = /obj/screen/alert/status_effect/debuff/thirstyt3
 	effectedstats = list("strength" = -1, "speed" = -4, "endurance" = -4)
-	duration = 100
+	duration = 90 MINUTES
 
 /obj/screen/alert/status_effect/debuff/thirstyt3
 	name = "Thirsty"

@@ -183,7 +183,7 @@ SUBSYSTEM_DEF(vote)
 					if(H.stat != DEAD || H.mind.has_antag_datum(/datum/antagonist/skeleton))
 						vote_power += 3
 					if(H.job)
-						var/list/list_of_powerful = list("Grand Wizard")
+						var/list/list_of_powerful = list("Master Wizard")
 						if(H.job in list_of_powerful)
 							vote_power += 0
 				choices[choices[vote]] += vote_power //check this

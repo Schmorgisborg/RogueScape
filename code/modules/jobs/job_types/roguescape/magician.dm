@@ -1,5 +1,5 @@
 /datum/job/roguetown/magician
-	title = "Grand Wizard"
+	title = "Master Wizard"
 	flag = ADVENTURER
 	department_flag = SERFS
 	faction = "Kingdom"

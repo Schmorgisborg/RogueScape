@@ -107,9 +107,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 	icon_state = "arrow"
 	jobspawn_override = list("Monk","Guard","Artificer",)
 /obj/effect/landmark/start/magician
-	name = "Grand Wizard"
+	name = "Master Wizard"
 	icon_state = "arrow"
-	jobspawn_override = list("Grand Wizard")
+	jobspawn_override = list("Master Wizard")
 	delete_after_roundstart = FALSE
 /obj/effect/landmark/start/monk
 	name = "Monk"

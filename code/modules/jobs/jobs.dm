@@ -1,5 +1,5 @@
 GLOBAL_LIST_INIT(good_positions, list(
-	"Grand Wizard",
+	"Master Wizard",
 	"Artificer",
 	"Guard",
 	"Monk",

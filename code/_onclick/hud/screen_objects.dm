@@ -1700,7 +1700,7 @@
 		if(H.has_status_effect(/datum/status_effect/buff/druqks))
 			state2use = "stress0old"
 		if(H.InFullCritical())
-			state2use = "stresscrit"
+			state2use = "stress18old"
 		if(H.mind)
 			if(H.mind.has_antag_datum(/datum/antagonist/zombie) || H.mind.special_role == "skeleton")
 				state2use = "stress18old"
