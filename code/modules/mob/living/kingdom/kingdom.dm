@@ -22,10 +22,16 @@
 	if (U.civilization != "none")
 		to_chat(src, "<span class='warning'>You are already in a kingdom. Abandon it first.</span>")
 		return
+	else if(src.left_kingdoms.len)
+		for (var/i in left_kingdoms)
+			if (i[1]==user.civilization && i[2] > (world.time + 5 MINUTES))
+				to_chat(user, "<span=danger>You can't create a kingdom, you just recently abandoned [i[1]].</span>")
+				return
 	else
 		var/choosename = input(src, "Choose a name for the kingdom:") as text|null
 		if (choosename != null && choosename != "")
 			if(create_kingdom_pr(choosename))
+				add_basic_kingdom_verbs()
 				make_commander()
 				make_title_changer()
 
@@ -50,6 +56,10 @@
 		choosecolor2 = WWinput(H, "Choose the secondary/background color:", "Color" , "#FFFFFF", "color")
 		if (choosecolor2 == null || choosecolor2 == "")
 			return
+		for(var/i = 1, i <= GLOB.custom_civs.len, i++)//color comparison, civ13f
+			if (GLOB.custom_civs[i][1] == choosecolor1 && GLOB.custom_civs[i][2] == choosecolor2)
+				to_chat(usr, "<span class='warning'>Another kingdom has the same color scheme.</span>")
+				return
 
 		H.civilization = newname
 		var/datum/atom_hud/hud = GLOB.huds[DATA_HUD_KINGDOM]
@@ -89,8 +99,8 @@
 /mob/living/carbon/human/proc/abandon_kingdom_proc()
 	if (civilization == null || civilization == "none")
 		return FALSE
-	left_kingdoms += list(list(civilization,world.time)) //like 10 minutes.
-	if (GLOB.custom_civs[civilization][1] != null)//mackcivf more lists of SHIT
+	left_kingdoms += list(list(civilization,world.time))
+	if (GLOB.custom_civs[civilization][1] != null)
 		if (GLOB.custom_civs[civilization][1].real_name == real_name)
 			GLOB.custom_civs[civilization][1] = null
 	civilization = "none"
@@ -101,6 +111,7 @@
 	leader = FALSE
 	kingdom_perms = list(0,0,0,0)
 	src << "You left your kingdom."
+	remove_basic_kingdom_verbs()
 	remove_commander()
 	remove_title_changer()
 	king_hud_set_status()

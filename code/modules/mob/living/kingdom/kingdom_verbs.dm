@@ -1,10 +1,17 @@
 /mob/New()
 	..()
 	verbs += /mob/living/carbon/human/proc/create_kingdom
+	verbs += /mob/proc/kingdom_list
+
+/mob/living/carbon/human/proc/add_basic_kingdom_verbs()
 	verbs += /mob/living/carbon/human/proc/abandon_kingdom
 	verbs += /mob/living/carbon/human/proc/transfer_kingdom
 	verbs += /mob/living/carbon/human/proc/become_leader
-	verbs += /mob/proc/kingdom_list
+
+/mob/living/carbon/human/proc/remove_basic_kingdom_verbs()
+	verbs -= /mob/living/carbon/human/proc/abandon_kingdom
+	verbs -= /mob/living/carbon/human/proc/transfer_kingdom
+	verbs -= /mob/living/carbon/human/proc/become_leader
 
 /mob/living/carbon/human/proc/make_commander()
 	verbs += /mob/living/carbon/proc/king_declare
@@ -100,6 +107,7 @@
 			var/datum/atom_hud/H = GLOB.huds[DATA_HUD_KINGDOM]
 			H.add_hud_to(src)
 			king_hud_set_status()
+			add_basic_kingdom_verbs()
 		return
 	else if (answer == "No")
 		to_chat(usr, "[src] has rejected your offer.")
