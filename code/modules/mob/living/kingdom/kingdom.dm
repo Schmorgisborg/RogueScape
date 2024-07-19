@@ -1,6 +1,5 @@
 /mob/living/carbon
 	var/civilization = "none"
-	var/base_kingdom = null
 	var/leader = FALSE
 	var/title = ""
 	var/announcement_cooldown = 0
@@ -26,10 +25,9 @@
 	else
 		var/choosename = input(src, "Choose a name for the kingdom:") as text|null
 		if (choosename != null && choosename != "")
-			create_kingdom_pr(choosename)
-			make_commander()
-			make_title_changer()
-			return
+			if(create_kingdom_pr(choosename))
+				make_commander()
+				make_title_changer()
 
 /mob/living/carbon/human/proc/create_kingdom_pr(var/newname = "none")
 	if (!ishuman(src))
@@ -43,7 +41,7 @@
 		var/choosecolor1 = "#000000"
 		var/choosecolor2 = "#FFFFFF"
 		var/choosesymbol = "star"
-		choosesymbol = WWinput(src, "Choose a symbol for the new kingdom:", "Kingdom Creation", "Cancel", list("Cancel","star","sun","moon","cross","big cross","saltire"))
+		choosesymbol = WWinput(src, "Choose a symbol for the new kingdom:", "Kingdom Creation", "Cancel", list("Cancel","psy","star","sun","moon","cross","big cross","saltire"))
 		if (choosesymbol == "Cancel")
 			return
 		choosecolor1 = WWinput(H, "Choose main/symbol color:", "Color" , "#000000", "color")
@@ -54,13 +52,15 @@
 			return
 
 		H.civilization = newname
+		var/datum/atom_hud/hud = GLOB.huds[DATA_HUD_KINGDOM]
+		hud.add_hud_to(H)
 		H.leader = TRUE
 		H.kingdom_perms = list(1,1,1,1)
 		GLOB.kingdomlist += newname
 		var/newnamev = list("[newname]" = list(H,choosesymbol,choosecolor1,choosecolor2))
 		GLOB.custom_civs += newnamev
 		to_chat(usr, "<big>You are now the leader of the <b>[newname]</b> kingdom.</big>")
-		return
+		return 1
 	else
 		return
 
@@ -92,12 +92,16 @@
 		if (GLOB.custom_civs[civilization][1].real_name == real_name)
 			GLOB.custom_civs[civilization][1] = null
 	civilization = "none"
+	var/datum/atom_hud/H = GLOB.huds[DATA_HUD_KINGDOM]
+	H.remove_hud_from(src)
 	name = replacetext(real_name,"[title] ","")
 	title = ""
 	leader = FALSE
 	kingdom_perms = list(0,0,0,0)
 	src << "You left your kingdom."
 	remove_commander()
+	remove_title_changer()
+	king_hud_set_status()
 	return TRUE
 
 /mob/living/carbon/human/proc/transfer_kingdom()

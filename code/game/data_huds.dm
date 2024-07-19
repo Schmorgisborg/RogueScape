@@ -39,6 +39,9 @@
 /datum/atom_hud/data/human/medical/basic/proc/update_suit_sensors(mob/living/carbon/H)
 	check_sensors(H) ? add_to_hud(H) : remove_from_hud(H)
 
+/datum/atom_hud/data/human/kingdom
+	hud_icons = list(KING_HUD)
+
 /datum/atom_hud/data/human/medical/advanced
 
 /datum/atom_hud/data/human/security

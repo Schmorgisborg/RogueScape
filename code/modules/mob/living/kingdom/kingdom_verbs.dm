@@ -97,6 +97,8 @@
 		src.abandon_kingdom_proc()
 		spawn(1)
 			src.civilization = user.civilization
+			var/datum/atom_hud/H = GLOB.huds[DATA_HUD_KINGDOM]
+			H.add_hud_to(src)
 		return
 	else if (answer == "No")
 		to_chat(usr, "[src] has rejected your offer.")

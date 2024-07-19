@@ -4,7 +4,3 @@ GLOBAL_LIST_INIT(kingdom_hud_users, list())
 
 #define isclient(A) istype(A, /client)
 #define isdatum(A) istype(A, /datum)
-
-#define FACTION_TO_ENEMIES 11
-#define BASE_FACTION 14
-#define SQUAD_FACTION 15

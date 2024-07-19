@@ -1,3 +1,44 @@
+/mob/living/carbon/proc/king_hud_set_status()
+	var/image/holder = hud_list[KING_HUD]
+	var/icon/I = icon(icon, icon_state, dir)
+	holder.pixel_y = I.Height() - world.icon_size
+	if(civilization == "none" || civilization == "" || !civilization)
+		holder.icon_state = ""
+		holder.overlays.Cut()
+	else
+		if(civilization == "Psydonia")
+			holder.icon_state = "psydonia"
+			update_icon()
+		else
+			holder.icon_state = "base"
+			holder.color = GLOB.custom_civs[civilization][4]
+			var/image/overc = image("icon" = GLOB.custom_civs[civilization][2])
+			overc.color = GLOB.custom_civs[civilization][3]
+			holder.overlays += overc
+			update_icon()
+	
+	holder.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+
+
+/*
+/obj/structure/poster/kingdom/New()
+	..()
+	invisibility = 101
+	spawn(10)
+		if (kingdom != "none")
+			name = "[kingdom]'s poster"
+			desc = "This is a [kingdom] flier."
+			var/image/overc = image("icon" = icon, "icon_state" = "[bstyle]_c1")
+			overc.color = color1
+			overlays += overc
+			var/image/overc1 = image("icon" = icon, "icon_state" = "[bstyle]_c2")
+			overc1.color = color2
+			overlays += overc1
+			var/image/overs = image("icon" = icon, "icon_state" = "[bstyle]_base")
+			overlays += overs
+	update_icon()
+	invisibility = 0
+
 /mob/living/carbon/proc/process_kingdom_hud(var/mob/M, var/mob/Alt)
 
 	if (!can_process_hud(M))
@@ -22,7 +63,7 @@
 		if (viewer == perp)
 			holderf.icon_state = "civp" //player hud
 		else if (perp.civilization == "none")
-			holderf.icon_state = "" //nomads are yellow
+			holderf.icon_state = "" //none for wanderers
 		else if (perp.civilization == viewer.civilization && viewer.civilization != "none" && perp.leader == FALSE)
 			holderf.icon_state = "civp" //same faction is green
 		else if (perp.civilization == viewer.civilization && viewer.civilization != "none" && perp.leader == TRUE)
@@ -76,7 +117,7 @@
 
 	if(stat != DEAD)
 
-		if (base_kingdom)
+		if(civilization != "none")
 			var/image/holder = hud_list[FACTION_TO_ENEMIES]
 			holder.icon = null
 			holder.icon_state = null
@@ -89,3 +130,4 @@
 			holder2.overlays.Cut()
 
 			hud_list[BASE_FACTION] = holder2
+*/

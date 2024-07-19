@@ -29,7 +29,8 @@ GLOBAL_LIST_INIT(huds, list(
 	ANTAG_HUD_OBSESSED = new/datum/atom_hud/antag/hidden(),
 	ANTAG_HUD_FUGITIVE = new/datum/atom_hud/antag(),
 
-	ROGUE_HUD_MARRIED = new/datum/atom_hud/antag()
+	ROGUE_HUD_MARRIED = new/datum/atom_hud/antag(),
+	DATA_HUD_KINGDOM = new/datum/atom_hud/data/human/kingdom()
 	))
 
 /datum/atom_hud

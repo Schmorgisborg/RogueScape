@@ -7,6 +7,8 @@
 		real_name = name
 	var/datum/atom_hud/data/human/medical/advanced/medhud = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
 	medhud.add_to_hud(src)
+	var/datum/atom_hud/data/human/kingdom/bliphud = GLOB.huds[DATA_HUD_KINGDOM]
+	bliphud.add_to_hud(src)
 	for(var/datum/atom_hud/data/diagnostic/diag_hud in GLOB.huds)
 		diag_hud.add_to_hud(src)
 	faction += "[REF(src)]"
@@ -19,6 +21,10 @@
 /mob/living/proc/prepare_data_huds()
 	med_hud_set_health()
 	med_hud_set_status()
+
+/mob/living/carbon/prepare_data_huds()
+	..()
+	king_hud_set_status()
 
 /mob/living/Destroy()
 	if(LAZYLEN(status_effects))

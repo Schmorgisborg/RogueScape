@@ -44,6 +44,7 @@
 #define DIAG_LAUNCHPAD_HUD "22"
 //for antag huds. these are used at the /mob level
 #define ANTAG_HUD		"23"
+#define KING_HUD		"30"
 
 //by default everything in the hud_list of an atom is an image
 //a value in hud_list with one of these will change that behavior
@@ -80,6 +81,7 @@
 
 //rogue
 #define ROGUE_HUD_MARRIED	25
+#define DATA_HUD_KINGDOM 26
 
 // Notification action types
 #define NOTIFY_JUMP "jump"
