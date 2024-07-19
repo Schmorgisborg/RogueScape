@@ -1,6 +1,7 @@
 /mob/living/carbon/proc/king_hud_set_status()
 	var/image/holder = hud_list[KING_HUD]
 	var/icon/I = icon(icon, icon_state, dir)
+	holder.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	holder.pixel_y = I.Height() - world.icon_size
 	if(civilization == "none" || civilization == "" || !civilization)
 		holder.icon_state = ""
@@ -15,10 +16,9 @@
 			var/image/overc = image("icon" = GLOB.custom_civs[civilization][2])
 			overc.color = GLOB.custom_civs[civilization][3]
 			holder.overlays += overc
+			var/image/overc1 = image("icon" = GLOB.custom_civs[civilization][2], "icon_state" = "[GLOB.custom_civs[civilization][2]]_1")
+			holder.overlays += overc1
 			update_icon()
-	
-	holder.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-
 
 /*
 /obj/structure/poster/kingdom/New()

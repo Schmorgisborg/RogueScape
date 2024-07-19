@@ -1008,7 +1008,6 @@
 //	update_tod_hud()
 	update_spd()
 	med_hud_set_status()
-	king_hud_set_status()
 
 //called when we get cuffed/uncuffed
 /mob/living/carbon/proc/update_handcuffed()

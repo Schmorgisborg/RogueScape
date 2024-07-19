@@ -70,7 +70,7 @@
 				else
 					. = list("<span class='info'>ø ------------ ø\nThis is <EM>[used_name]</EM>, the [race_name] [used_title].")
 		else
-			. = list("<span class='info'>ø ------------ ø\nThis is the [race_name], [title] <EM>[used_name]</EM>.")
+			. = list("<span class='info'>ø ------------ ø\nThis is the [race_name], <EM>[used_name]</EM>.")
 
 
 		if(ishuman(user))

@@ -99,6 +99,7 @@
 			src.civilization = user.civilization
 			var/datum/atom_hud/H = GLOB.huds[DATA_HUD_KINGDOM]
 			H.add_hud_to(src)
+			king_hud_set_status()
 		return
 	else if (answer == "No")
 		to_chat(usr, "[src] has rejected your offer.")

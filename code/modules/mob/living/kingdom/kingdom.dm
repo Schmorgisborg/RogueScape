@@ -54,11 +54,13 @@
 		H.civilization = newname
 		var/datum/atom_hud/hud = GLOB.huds[DATA_HUD_KINGDOM]
 		hud.add_hud_to(H)
+
 		H.leader = TRUE
 		H.kingdom_perms = list(1,1,1,1)
 		GLOB.kingdomlist += newname
 		var/newnamev = list("[newname]" = list(H,choosesymbol,choosecolor1,choosecolor2))
 		GLOB.custom_civs += newnamev
+		king_hud_set_status()
 		to_chat(usr, "<big>You are now the leader of the <b>[newname]</b> kingdom.</big>")
 		return 1
 	else
@@ -252,10 +254,6 @@
 	resistance_flags = FLAMMABLE
 	layer = ABOVE_MOB_LAYER
 
-/obj/structure/banner/kingdom/banner_a
-	bstyle = "banner_a"
-/obj/structure/banner/kingdom/banner_b
-	bstyle = "banner_b"
 /obj/structure/banner/kingdom/New()
 	..()
 	invisibility = 101
@@ -275,15 +273,6 @@
 			overlays += overs
 	update_icon()
 	invisibility = 0
-
-/datum/crafting_recipe/roguetown/kingdom/banner
-	name = "kingdom banner"
-	result = list(/obj/structure/poster/kingdom/New)
-	reqs = list(/obj/item/grown/log/tree/small = 2,
-				/obj/item/natural/cloth = 2)
-	verbage = "construct"
-	craftsound = 'sound/foley/Building-01.ogg'
-	skillcraft = /datum/skill/craft/carpentry
 
 /obj/structure/banner/kingdom/attackby(mob/user)
 	if (user.used_intent?.blade_class == BCLASS_CUT)
@@ -305,15 +294,6 @@
 	var/bstyle = "prop_lead"
 	resistance_flags = FLAMMABLE
 	force = 0
-
-/obj/item/weapon/poster/kingdom/lead
-	bstyle = "prop_lead"
-/obj/item/weapon/poster/kingdom/work
-	bstyle = "prop_work"
-/obj/item/weapon/poster/kingdom/mil1
-	bstyle = "prop_mil1"
-/obj/item/weapon/poster/kingdom/mil2
-	bstyle = "prop_mil2"
 
 /obj/item/weapon/poster/kingdom/New()
 	..()
@@ -351,14 +331,6 @@
 	update_icon()
 	invisibility = 0
 
-/datum/crafting_recipe/roguetown/kingdom/poster
-	name = "kingdom poster"
-	result = list(/obj/item/weapon/poster/kingdom)
-	reqs = list(/obj/item/natural/cloth = 2)
-	verbage = "construct"
-	craftsound = 'sound/foley/Building-01.ogg'
-	skillcraft = /datum/skill/craft/carpentry
-
 /obj/structure/poster/kingdom/attackby(mob/user)//mackcivf
 	if (user.used_intent == INTENT_HELP)
 		user.visible_message("<span class ='danger'>[user] starts tearing down \the [src]!</span>", "<span class ='danger'>You start tearing down \the [src]!</span>")
@@ -370,3 +342,21 @@
 			update_icon()
 	else
 		..()
+
+/datum/crafting_recipe/roguetown/kingdom/poster
+	name = "kingdom poster"
+	result = list(/obj/item/weapon/poster/kingdom)
+	reqs = list(/obj/item/natural/cloth = 2)
+	verbage = "construct"
+	craftsound = 'sound/foley/Building-01.ogg'
+	skillcraft = /datum/skill/craft/carpentry
+
+
+/datum/crafting_recipe/roguetown/kingdom/banner
+	name = "kingdom banner"
+	result = list(/obj/structure/banner/kingdom)
+	reqs = list(/obj/item/grown/log/tree/small = 2,
+				/obj/item/natural/cloth = 2)
+	verbage = "construct"
+	craftsound = 'sound/foley/Building-01.ogg'
+	skillcraft = /datum/skill/craft/carpentry
