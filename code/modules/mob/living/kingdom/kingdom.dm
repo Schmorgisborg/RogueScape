@@ -24,8 +24,8 @@
 		return
 	else if(src.left_kingdoms.len)
 		for (var/i in left_kingdoms)
-			if (i[1]==user.civilization && i[2] > (world.time + 5 MINUTES))
-				to_chat(user, "<span=danger>You can't create a kingdom, you just recently abandoned [i[1]].</span>")
+			if (i[1]==U.civilization && i[2] > (world.time + 5 MINUTES))
+				to_chat(U, "<span=danger>You can't create a kingdom, you just recently abandoned [i[1]].</span>")
 				return
 	else
 		var/choosename = input(src, "Choose a name for the kingdom:") as text|null
@@ -295,32 +295,46 @@
 		..()
 
 /obj/item/weapon/poster/kingdom
-	name = "rolled kingdom poster"
+	name = "blank flier"
 	icon = 'icons/roguetown/misc/banners.dmi'
 	icon_state = "poster_rolled"
-	desc = "A rolled poster."
+	desc = "An empty flier, use it inhand to set it."
 	var/kingdom = "none"
 	var/color1 = "#000000"
 	var/color2 = "#FFFFFF"
-	var/bstyle = "prop_lead"
+	var/bstyle = ""
+	var/newdesc = ""
 	resistance_flags = FLAMMABLE
 	force = 0
 
-/obj/item/weapon/poster/kingdom/New()
-	..()
-	if (kingdom != "none")
-		name = "rolled [kingdom]'s poster"
+/obj/item/weapon/poster/kingdom/attack_self(mob/living/carbon/user)
+	. = ..()
+	if (user.civilization != "none")
+		kingdom = user.civilization
+		color1 = GLOB.custom_civs[kingdom][3]
+		color2 = GLOB.custom_civs[kingdom][4]
+		bstyle = GLOB.custom_civs[kingdom][2]
+		name = "rolled [kingdom]'s flier"
 		desc = "This is a rolled [kingdom] flier. Ready to deploy."
+		newdesc = input(src, "Set a description for the flier: ") as text|null
+		if(length(newdesc) > 64)
+			to_chat(user,"<span class ='warning'>Sorry, maximum of 64 characters.</span>")
+			newdesc = "A flier for [kingdom]."
+		else if(newdesc == "")
+			newdesc = "A flier for [kingdom]."
+	else
+		to_chat(user,"<span class ='warning'>You have no kingdom to display.</span>")
+
 
 /obj/structure/poster/kingdom
 	name = "kingdom flier"
 	icon = 'icons/roguetown/misc/banners.dmi'
-	icon_state = "prop_lead"
+	icon_state = "flier"
 	desc = "A blank flier."
 	var/kingdom = "none"
 	var/color1 = "#000000"
 	var/color2 = "#FFFFFF"
-	var/bstyle = "prop_lead"
+	var/bstyle = "psy"
 	resistance_flags = FLAMMABLE
 	layer = BELOW_MOB_LAYER
 
@@ -329,33 +343,34 @@
 	invisibility = 101
 	spawn(10)
 		if (kingdom != "none")
-			name = "[kingdom]'s poster"
+			name = "[kingdom]'s flier"
 			desc = "This is a [kingdom] flier."
-			var/image/overc = image("icon" = icon, "icon_state" = "[bstyle]_c1")
-			overc.color = color1
+			var/image/overc = image("icon" = icon, "icon_state" = "flier_base")
+			overc.color = color2
 			overlays += overc
-			var/image/overc1 = image("icon" = icon, "icon_state" = "[bstyle]_c2")
-			overc1.color = color2
+			var/image/overc1 = image("icon" = icon, "icon_state" = "[bstyle]_c1")
+			overc1.color = color1
 			overlays += overc1
-			var/image/overs = image("icon" = icon, "icon_state" = "[bstyle]_base")
-			overlays += overs
 	update_icon()
 	invisibility = 0
 
 /obj/structure/poster/kingdom/attackby(mob/user)//mackcivf
-	if (user.used_intent == INTENT_HELP)
-		user.visible_message("<span class ='danger'>[user] starts tearing down \the [src]!</span>", "<span class ='danger'>You start tearing down \the [src]!</span>")
-		if (do_after(user, 70, src))
-			user.visible_message("<span class ='warning'>[user] tears \the [src] down!</span>", "<span class = 'warning'>You tear off \the [src] down!</span>")
-			overlays.Cut()
-			icon_state = "poster_ripped"
-			color = color2
-			update_icon()
+	if (user.used_intent.type == INTENT_HARM)
+		if(icon_state == "poster_ripped")
+			qdel(src)
+		else
+			user.visible_message("<span class ='danger'>[user] starts tearing down \the [src]!</span>", "<span class ='danger'>You start tearing down \the [src]!</span>")
+			if (do_after(user, 70, src))
+				user.visible_message("<span class ='warning'>[user] tears \the [src] down!</span>", "<span class = 'warning'>You tear off \the [src] down!</span>")
+				overlays.Cut()
+				icon_state = "poster_ripped"
+				color = color2
+				update_icon()
 	else
 		..()
 
 /datum/crafting_recipe/roguetown/kingdom/poster
-	name = "kingdom poster"
+	name = "kingdom flier"
 	result = list(/obj/item/weapon/poster/kingdom)
 	reqs = list(/obj/item/natural/cloth = 2)
 	verbage = "construct"

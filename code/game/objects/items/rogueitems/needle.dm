@@ -79,7 +79,7 @@
 	if(!sewable || !sewable.len)
 		to_chat(user, "<span class='warning'>There aren't any wounds large enough to sew.</span>")
 		return
-	var/datum/wound/W = input(user, "Which wound?", "Roguetown", name) as null|anything in sortList(sewable)
+	var/datum/wound/W = input(user, "Which wound?", "Roguescape", name) as null|anything in sortList(sewable)
 	if(!W)
 		return
 	if(!W || !W.can_sew)

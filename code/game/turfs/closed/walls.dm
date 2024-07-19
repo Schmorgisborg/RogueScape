@@ -174,6 +174,25 @@
 
 	var/turf/T = user.loc	//get user's location for delay checks
 
+	//Kingdom code
+	if (istype(W, /obj/item/weapon/poster/kingdom))
+		var/obj/item/weapon/poster/kingdom/F = W
+		if(F.kingdom == (null||"none"))
+			F.attack_self()
+			/*to_chat(user, "<span class='warning'>This flier is blank, use it inhand.</span>")
+			return*/
+		to_chat(user, "<span class='warning'>You start placing the [F.kingdom] flier on the [src]...</span>")
+		if (do_after(user, 70, src))
+			visible_message("[user] places the [F.kingdom] flier on the [src].")
+			var/obj/structure/poster/kingdom/RP = new/obj/structure/poster/kingdom(get_turf(src))
+			RP.kingdom = F.kingdom
+			RP.bstyle = F.bstyle
+			RP.color1 = F.color1
+			RP.color2 = F.color2
+			W.forceMove(src)
+			qdel(W)
+			return
+
 	//the istype cascade has been spread among various procs for easy overriding
 	if(try_clean(W, user, T) || try_wallmount(W, user, T) || try_decon(W, user, T))
 		return

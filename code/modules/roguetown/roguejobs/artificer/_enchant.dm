@@ -29,6 +29,25 @@
 	update_icon()
 	activate(user)
 
+/obj/item/rogueweapon/wield(mob/user)
+	if(enchantable || !enchanted)
+		..()
+		return
+	if(loc != user)
+		return
+	if(cooldowny)
+		if(world.time < cooldowny + cdtime)
+			..()
+			return
+	user.visible_message("<span class='warning'>The [src] glows in [user]'s hand!</span>")
+	if(activate_sound)
+		playsound(user, activate_sound, 100, FALSE, -1)
+	cooldowny = world.time
+	addtimer(CALLBACK(src, .proc/finish), activetime)
+	active = TRUE
+	update_icon()
+	activate(user)
+
 /obj/item/rogueweapon/proc/activate(mob/user)
 	user.update_inv_hands()
 	if(enchantment)

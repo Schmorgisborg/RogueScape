@@ -8,7 +8,7 @@
 	var/config_filename = "_maps/boxstation.json"
 	var/defaulted = TRUE  // set to FALSE by LoadConfig() succeeding
 	// Config from maps.txt
-	var/config_max_users = 0
+	var/config_max_users = 30
 	var/config_min_users = 0
 	var/voteweight = 1
 	var/votable = FALSE
