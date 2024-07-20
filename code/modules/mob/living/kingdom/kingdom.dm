@@ -255,35 +255,43 @@
 /obj/structure/banner/kingdom
 	name = "kingdom banner"
 	icon = 'icons/roguetown/misc/banners.dmi'
-	icon_state = "banner_a"
-	desc = "A white banner."
-	var/bstyle = "banner_a"
+	icon_state = "banner_b"
+	desc = "A plain banner, click to set it to your kingdom's heraldry."
+	var/bstyle = "banner_b"
 	var/kingdom = "none"
-	var/symbol = "cross"
+	var/symbol = ""
 	var/color1 = "#000000"
 	var/color2 = "#FFFFFF"
 	resistance_flags = FLAMMABLE
 	layer = ABOVE_MOB_LAYER
 
-/obj/structure/banner/kingdom/New()
-	..()
-	invisibility = 101
-	spawn(10)
-		if (kingdom != "none")
-			name = "[kingdom]'s banner"
-			desc = "This is a [kingdom] banner."
-			icon_state = bstyle
-			var/image/overc = image("icon" = icon, "icon_state" = "[bstyle]_1")
-			overc.color = color1
-			overlays += overc
-			var/image/overc1 = image("icon" = icon, "icon_state" = "[bstyle]_2")
-			overc1.color = color2
-			overlays += overc1
-			var/image/overs = image("icon" = icon, "icon_state" = "b_[GLOB.custom_civs[kingdom][2]]")
-			overs.color = color1
-			overlays += overs
-	update_icon()
-	invisibility = 0
+/obj/structure/banner/kingdom/attack_hand(mob/user, params)
+	if(src.symbol == "")
+		var/mob/living/carbon/human/U
+		if (istype(user, /mob/living/carbon/human))
+			U = user
+			if(U.civilization != (null || "none"))
+				kingdom = U.civilization
+				color1 = GLOB.custom_civs[kingdom][3]
+				color2 = GLOB.custom_civs[kingdom][4]
+				symbol = GLOB.custom_civs[kingdom][2]
+
+				name = "[kingdom]'s banner"
+				desc = "This is a [kingdom] banner."
+				icon_state = bstyle
+				var/image/overc = image("icon" = icon, "icon_state" = "[bstyle]_1")
+				overc.color = color1
+				overlays += overc
+				var/image/overc1 = image("icon" = icon, "icon_state" = "[bstyle]_2")
+				overc1.color = color2
+				overlays += overc1
+				var/image/overs = image("icon" = icon, "icon_state" = "b_[symbol]")
+				overs.color = color1
+				overlays += overs
+
+				update_icon()
+	else
+		..()
 
 /obj/structure/banner/kingdom/attackby(mob/user)
 	if (user.used_intent?.blade_class == BCLASS_CUT)
