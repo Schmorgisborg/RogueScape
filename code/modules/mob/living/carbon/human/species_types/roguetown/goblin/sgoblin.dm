@@ -1,5 +1,5 @@
-/mob/living/carbon/human/species/human/sgoblin
-	race = /datum/species/human/sgoblin
+/mob/living/carbon/human/species/sgoblin
+	race = /datum/species/sgoblin
 	bodyparts = list(/obj/item/bodypart/chest/goblin, /obj/item/bodypart/head/goblin, /obj/item/bodypart/l_arm/goblin,
 					 /obj/item/bodypart/r_arm/goblin, /obj/item/bodypart/r_leg/goblin, /obj/item/bodypart/l_leg/goblin)
 	rot_type = /datum/component/rot/corpse/goblin
@@ -7,7 +7,7 @@
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
 	possible_rmb_intents = list()
 
-/datum/species/human/sgoblin
+/datum/species/sgoblin
 	name = "Goblin"
 	id = "dwarf"
 	desc = "<b>Goblin</b><br>\
@@ -45,24 +45,22 @@
 	specstats_f = list("strength" = -1, "perception" = -1, "intelligence" = -1, "constitution" = -1, "endurance" = -1, "speed" = -1, "fortune" = -1)
 	enflamed_icon = "widefire"
 
-/datum/species/human/sgoblin/on_species_gain(mob/living/carbon/C, datum/species/old_species)
+/datum/species/sgoblin/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
 	RegisterSignal(C, COMSIG_MOB_SAY, .proc/handle_speech)
-	C.remove_language(/datum/language/common)
 	C.grant_language(/datum/language/hellspeak)
 
-/datum/species/human/sgoblin/after_creation(mob/living/carbon/C)
+/datum/species/sgoblin/after_creation(mob/living/carbon/C)
 	..()
-	C.remove_language(/datum/language/common)
 	C.grant_language(/datum/language/hellspeak)
 	to_chat(C, "<span class='info'>I can speak Infernal with ,h before my speech.</span>")
 
-/datum/species/human/sgoblin/on_species_loss(mob/living/carbon/C)
+/datum/species/sgoblin/on_species_loss(mob/living/carbon/C)
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/hellspeak)
 
-/datum/species/human/sgoblin/get_skin_list()
+/datum/species/sgoblin/get_skin_list()
 	return sortList(list(
 	"skin1" = "698F3A",
 	"skin2" = "5B6950",
@@ -70,7 +68,7 @@
 	"skin4" = "6E8A74"
 	))
 
-/datum/species/human/sgoblin/get_hairc_list()
+/datum/species/sgoblin/get_hairc_list()
 	return sortList(list(
 	"black - cave" = "201616",
 	"black - rogue" = "2b201b",
@@ -87,7 +85,7 @@
 	"blue - mystic" = "272646"
 	))
 
-/datum/species/human/sgoblin/random_name(gender,unique,lastname)
+/datum/species/sgoblin/random_name(gender,unique,lastname)
 	var/randname
 	if(unique)
 		if(gender == MALE)
@@ -107,5 +105,5 @@
 			randname = pick( world.file2list("strings/rt/names/other/tieff.txt") )
 	return randname
 
-/datum/species/human/sgoblin/random_surname()
+/datum/species/sgoblin/random_surname()
 	return ""

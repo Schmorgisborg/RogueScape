@@ -71,7 +71,7 @@
 		var/newnamev = list("[newname]" = list(H,choosesymbol,choosecolor1,choosecolor2))
 		GLOB.custom_civs += newnamev
 		king_hud_set_status()
-		to_chat(usr, "<big>You are now the leader of the <b>[newname]</b> kingdom.</big>")
+		to_chat(usr, "<big>You are now the king of the <b>[newname]</b> kingdom.</big>")
 		return 1
 	else
 		return
@@ -136,12 +136,12 @@
 				for (var/mob/living/carbon/human/M in range(4,loc))
 					if (M.civilization == U.civilization)
 						closemobs += M
-				var/choice2 = WWinput(usr, "Who to nominate as the new Leader?", "Kingdom Leadership", "Cancel", closemobs)
+				var/choice2 = WWinput(usr, "Who to nominate as the new King?", "Kingdom Leadership", "Cancel", closemobs)
 				if (choice2 == "Cancel")
 					return
 				else
 					GLOB.custom_civs[U.civilization][4] = choice2
-					visible_message("<big>[choice2] is the new leader of [U.civilization]!</big>")
+					visible_message("<big>[choice2] is the new king of [U.civilization]!</big>")
 					var/mob/living/carbon/human/CM = choice2
 					CM.make_commander()
 					CM.make_title_changer()
@@ -152,13 +152,13 @@
 					U.remove_title_changer()
 					U.remove_commander()
 			else
-				to_chat(usr, "<span class='warning'>You are not the Leader, so you can't transfer the kingdom's leadership.</span>")
+				to_chat(usr, "<span class='warning'>You are not the King, so you can't transfer the kingdom's nobility.</span>")
 				return
 		else
-			to_chat(usr, "<span class='warning'>There is no Leader, so you can't transfer the kingdom's leadership.</span>")
+			to_chat(usr, "<span class='warning'>There is no King, so you can't transfer the kingdom's nobility.</span>")
 
 /mob/living/carbon/human/proc/become_leader()
-	set name = "Become Kingdom Leader"
+	set name = "Become King"
 	set category = "Kingdom"
 	var/mob/living/carbon/human/U
 
@@ -171,11 +171,11 @@
 		return
 	else
 		if (GLOB.custom_civs[U.civilization][1] != null)
-			to_chat(usr, "<span class='warning'>There already is a Leader of the kingdom. He must transfer the leadership or be removed first.</span>")
+			to_chat(usr, "<span class='warning'>There already is a King. They must transfer the nobility or be removed first.</span>")
 			return
 		else if (GLOB.custom_civs[U.civilization][1] == null)
 			GLOB.custom_civs[U.civilization][1] = U
-			visible_message("<big>[U] is now the Leader of [U.civilization]!</big>")
+			visible_message("<big>[U] is now the King of [U.civilization]!</big>")
 			U.leader = TRUE
 			U.kingdom_perms = list(1,1,1,1)
 			U.make_title_changer()

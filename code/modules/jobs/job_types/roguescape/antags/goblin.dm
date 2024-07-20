@@ -1,5 +1,6 @@
 /datum/job/roguetown/sgoblin
-	title = "Goblin"
+	title = "Tribesman"
+	f_title = "Tribeswoman"
 	flag = GRAVEDIGGER
 	department_flag = PEASANTS
 	faction = "Goblin"
@@ -24,7 +25,6 @@
 			M.mind.special_role = "Goblin"
 			M.mind.assigned_role = "Goblin"
 
-		H.remove_all_languages()
 		H.cmode_music = 'sound/music/combatbandit.ogg'
 
 		var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
