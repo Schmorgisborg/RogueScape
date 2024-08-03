@@ -146,6 +146,7 @@ Feau Dust- 2 iron dust, 1 gold<br>
 Glass- Smelt clod<br>
 Bottle- 2 glass<br>
 Vial- 1 glass<br>
+
 Health- Viscera (ground sinew) and wheat chaff<br>
 Strong Health- Add water rune dust while brewing health<br>
 Mana- Bone meal and seed dust<br>
@@ -158,8 +159,9 @@ Fortify Perception- Ozium, tobacco dust, and air rune dust<br>
 Fortify Intelligence- Sweet leaf dust, moondust, and air rune dust<br>
 Fortify Constitution- Bone, any raw fish, and earth rune dust<br>
 Fortify Endurance- Leeches, an apple, and earth rune dust<br>
-Poison- Any two: dirt, poison berreis, raw sweetleaf, or raw pipeweed<br>
+Poison- Any two: dirt, poison berries, raw sweetleaf, or raw pipeweed<br>
 Deadly Poison- Add gold dust during poison brewing.<br>
+
 <br><br>
 <h4>Enchanting:</h4><br>
 Most steel and gilded weaponry can be enchanted, as well as bows.<br>

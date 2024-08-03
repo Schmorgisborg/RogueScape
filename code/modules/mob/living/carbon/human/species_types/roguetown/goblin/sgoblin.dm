@@ -74,8 +74,6 @@
 	"black - rogue" = "2b201b",
 	"black - midnight" = "1d1b2b",
 
-	"red - wine" = "b87f77",
-	"red - sunset" = "bf6821",
 	"red - blood" = "822b2b",
 
 	"green - forest" = "29674E",
@@ -90,19 +88,19 @@
 	if(unique)
 		if(gender == MALE)
 			for(var/i in 1 to 10)
-				randname = pick( world.file2list("strings/rt/names/other/tiefm.txt") )
+				randname = pick( world.file2list("strings/rt/names/other/goblinm.txt") )
 				if(!findname(randname))
 					break
 		if(gender == FEMALE)
 			for(var/i in 1 to 10)
-				randname = pick( world.file2list("strings/rt/names/other/tieff.txt") )
+				randname = pick( world.file2list("strings/rt/names/other/goblinf.txt") )
 				if(!findname(randname))
 					break
 	else
 		if(gender == MALE)
-			randname = pick( world.file2list("strings/rt/names/other/tiefm.txt") )
+			randname = pick( world.file2list("strings/rt/names/other/goblinm.txt") )
 		if(gender == FEMALE)
-			randname = pick( world.file2list("strings/rt/names/other/tieff.txt") )
+			randname = pick( world.file2list("strings/rt/names/other/goblinf.txt") )
 	return randname
 
 /datum/species/sgoblin/random_surname()

@@ -149,7 +149,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 /obj/effect/landmark/start/goblin
 	name = "Tribesman"
 	icon_state = "arrow"
-	jobspawn_override = list("Tribesman")
+	jobspawn_override = list("Tribesman","Tribeswoman")
 	delete_after_roundstart = FALSE
 	used = TRUE
 

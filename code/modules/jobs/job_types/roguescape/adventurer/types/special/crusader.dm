@@ -56,7 +56,7 @@
 				head = /obj/item/clothing/head/roguetown/helmet/heavy/crusader/t
 				armor = /obj/item/clothing/cloak/stabard/crusader/t
 				cloak = /obj/item/clothing/cloak/raincloak/furcloak
-				neck = /obj/item/clothing/neck/roguetown/psicross
+				neck = /obj/item/clothing/neck/roguetown/psicross/s
 				beltr = /obj/item/rogueweapon/sword/sabre
 				belt = /obj/item/storage/belt/rogue/leather/plaquesilver
 

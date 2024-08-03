@@ -45,15 +45,15 @@
 	switch(loadout)
 		if(1) //tribal spear
 			r_hand = /obj/item/rogueweapon/spear/stone
-			armor = /obj/item/clothing/suit/roguetown/armor/leather/hide/goblin
+			armor = /obj/item/clothing/suit/roguetown/armor/leather/hide
 		if(2) //tribal axe
 			r_hand = /obj/item/rogueweapon/stoneaxe
-			armor = /obj/item/clothing/suit/roguetown/armor/leather/hide/goblin
+			armor = /obj/item/clothing/suit/roguetown/armor/leather/hide
 		if(3) //tribal club
 			r_hand = /obj/item/rogueweapon/mace/woodclub
-			armor = /obj/item/clothing/suit/roguetown/armor/leather/hide/goblin
+			armor = /obj/item/clothing/suit/roguetown/armor/leather/hide
 			if(prob(10))
-				head = /obj/item/clothing/head/roguetown/helmet/leather/goblin
+				head = /obj/item/clothing/head/roguetown/helmet/leather
 		if(4) //lightly armored sword/flail/daggers
 			if(prob(50))
 				r_hand = /obj/item/rogueweapon/sword/iron
@@ -64,18 +64,18 @@
 			if(prob(23))
 				r_hand = /obj/item/rogueweapon/huntingknife/stoneknife
 				l_hand = /obj/item/rogueweapon/huntingknife/stoneknife
-			armor = /obj/item/clothing/suit/roguetown/armor/leather/goblin
+			armor = /obj/item/clothing/suit/roguetown/armor/leather
 			if(prob(80))
-				head = /obj/item/clothing/head/roguetown/helmet/leather/goblin
+				head = /obj/item/clothing/head/roguetown/helmet/leather
 		if(5) //heavy armored sword/flail/shields
 			if(prob(30))
-				armor = /obj/item/clothing/suit/roguetown/armor/plate/half/iron/goblin
+				armor = /obj/item/clothing/suit/roguetown/armor/plate/half/iron
 			else
-				armor = /obj/item/clothing/suit/roguetown/armor/leather/goblin
+				armor = /obj/item/clothing/suit/roguetown/armor/leather
 			if(prob(80))
-				head = /obj/item/clothing/head/roguetown/helmet/goblin
+				head = /obj/item/clothing/head/roguetown/helmet
 			else
-				head = /obj/item/clothing/head/roguetown/helmet/leather/goblin
+				head = /obj/item/clothing/head/roguetown/helmet/leather
 			if(prob(50))
 				r_hand = /obj/item/rogueweapon/sword/iron
 			else

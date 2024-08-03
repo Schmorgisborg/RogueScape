@@ -602,24 +602,24 @@
 	turf_type = /turf/open/floor/rogue/naturalstone
 	above_floor = /turf/open/floor/rogue/naturalstone
 	baseturfs = list(/turf/open/floor/rogue/naturalstone)
-	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 5, /turf/closed/mineral/rogue/iron = 14,/turf/closed/mineral/rogue/coal = 22,
-		/turf/closed/mineral/rogue/silver = 4, /turf/closed/mineral/rogue/essence = 12)
-	mineralChance = 10
+	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 10, /turf/closed/mineral/rogue/iron = 20,/turf/closed/mineral/rogue/coal = 10,
+		/turf/closed/mineral/rogue/silver = 5, /turf/closed/mineral/rogue/essence = 10)
+	mineralChance = 20
 
 
 /turf/closed/mineral/random/rogue/med
 	icon_state = "minrandmed"
-	mineralChance = 20
-	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 4,/turf/closed/mineral/rogue/gold = 2,/turf/closed/mineral/rogue/iron = 23,
-		/turf/closed/mineral/rogue/coal = 10, /turf/closed/mineral/rogue/silver = 4, /turf/closed/mineral/rogue/firerune = 2, /turf/closed/mineral/rogue/waterrune = 2,
-		/turf/closed/mineral/rogue/waterrune = 2, /turf/closed/mineral/rogue/earthrune = 2, /turf/closed/mineral/rogue/essence = 4)
+	mineralChance = 40
+	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 10,/turf/closed/mineral/rogue/gold = 5,/turf/closed/mineral/rogue/iron = 23,
+		/turf/closed/mineral/rogue/coal = 10, /turf/closed/mineral/rogue/silver = 5, /turf/closed/mineral/rogue/firerune = 3, /turf/closed/mineral/rogue/waterrune = 3,
+		/turf/closed/mineral/rogue/waterrune = 3, /turf/closed/mineral/rogue/earthrune = 3, /turf/closed/mineral/rogue/essence = 10)
 
 /turf/closed/mineral/random/rogue/high
 	icon_state = "minrandhigh"
-	mineralChance = 33
-	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/gold = 7,/turf/closed/mineral/rogue/iron = 26,/turf/closed/mineral/rogue/coal = 15,
-		/turf/closed/mineral/rogue/firerune = 3, /turf/closed/mineral/rogue/waterrune = 3, /turf/closed/mineral/rogue/waterrune = 3,
-		/turf/closed/mineral/rogue/earthrune = 3, /turf/closed/mineral/rogue/essence = 12)
+	mineralChance = 60
+	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/gold = 10, /turf/closed/mineral/rogue/silver = 15, /turf/closed/mineral/rogue/iron = 25,
+		/turf/closed/mineral/rogue/firerune = 5, /turf/closed/mineral/rogue/waterrune = 5, /turf/closed/mineral/rogue/waterrune = 5,
+		/turf/closed/mineral/rogue/earthrune = 5, /turf/closed/mineral/rogue/essence = 15, /turf/closed/mineral/rogue/coal = 15)
 
 
 //begin actual mineral turfs

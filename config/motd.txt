@@ -1,4 +1,6 @@
 <center>* * *</center>
 <center>* RogueWorld inspired survival. *</center>
 <center>*  RogueScape Community Hub: <a href='?src=\ref[src];action=discord'>Discord</a>  *</center>
+<center>* Adventurer is for experienced individuals. *</center>\
+<center>* Guard, artificer, monk are much easier. *</center>
 <center>* * *</center>
