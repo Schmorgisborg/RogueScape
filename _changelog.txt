@@ -3,58 +3,141 @@ MACK'S CHANGELOG
 changed psycross sprites back.
 changed title screen.
 bunked round start time to bypass king/merchant checks.
-
-4/2
 changed lore text of dwarves, elves, humen.
 washed away enigma, we are now RogueScape.
-
-4/3
 beginning detailed* notes and official changelog, everything previous is roughly drafted.
-fixed pitch of emotes through /code/datums/emotes.dm, pitch is stored at "var/cont", set to 20000 now.
-
-4/4
-leaving date markers in the form of [x/x], just like this log
-more text changes throughout thecode
-altered addictions to ramp in stress, affected some stress levels to make it tougher.
+fixed pitch of emotes.
+stress reworked.
 work in the global_lists.dm and preferences_savefile.dm, fixing character flaw selection.
 
 4/5
 complete restructure of jobs.
 -mage, guard, mason, acolyte, adventurer, and pilgrim remain.
-added lampterns to most roles.
+added a chance to spawn with a lamptern.
 clothed the adventurer/pilgrim character preview in the lobby.
-changed map to rogueworld.
-deleted spawn points in bandit/vampire mansion.
-disabled villian selection.
+major map rehaul.
+vampire mansion is now for the nightman.
+disabled villian selection, roles will fill this void.
 fixed travel tiles, and placed some in the main rogueworld.dmm map
 fixed the lobby screen
 reduced amount of save slot to 4, and fixed not saving/displaying character flaws and patron.
 grand wizards now have knife fighting and a dagger on spawn.
 
-4/6
+4/9
 more rework of the flaws system.
 setup lore framework.
 changed stress icons back to old ones.
-
-4/7
 removed devotion
 recreated monk job
 work on stress: addiction ramps up, etc.
-
-4/8
 revamped combat
 thorns are no longer a weapon
 critical hits are much less deadly, stab wounds are much less likely to outright kill
 bleed is much slower
 major roles rebalancing, renames, etc
 added dark elves
-
-4/9
-general clean up
 added darkelf lore
 straightened up race stats, less lame now
 
-5/1
 got tired of updating changlog
 Added skeletons
 Fixed mood
+
+At this point, my changelogs were mostly kept with github.
+Past here is what I'm adding as of today.
+I began on this 4/1, when the code was initially leaked.
+Further down is an overview of current changes from what the game was during Ray's hosting.
+
+Gamemode/Map redone:
+	The vision is shifted from the town to the wilderness, with only a small village being provided.
+	There's a major emphasis on exploration, as time goes on I'm adding more things to find, and loot boxes are much more lucrative.
+	There are now 5 areas:
+		Sherwoods:
+			*Many roles spawn here
+			*There's a small village with many amenities and shops
+			*Safe from ambushes during the day time.
+			*West side of the map.
+		Bog:
+			*Goblins spawn at a cave here.
+			*Venemous beespiders can spawn in an ambush here.
+			*South side of the map.
+		Mount Decapitation:
+			*Nobody spawns here, and it's easy to get isolated and lost here.
+			*Higher ambush chance than other places.
+			*North side of the map.
+		Nightman's Manor:
+			*Nightman, grabber, and younker spawn here.
+			*Far North side of the map.
+		Wyrld:
+			*Adventurers and pilgrims have a high chance to spawn here.
+			*Dangerous, full of traps and monsters.
+			*Many treasures await the player.
+			*Central to the other areas.
+
+Many systems added/revamped:
+	Client:
+		*crafting recipe added to memory tab of lobby
+		*quick guides for alchemy and enchanting added to memory tab too
+		*very basic lore, allowing the players to mold the world to their desire
+
+	Roles:
+		*No role is "essential" for gameplay purposes.
+		*The village is unowned, and keys can be found for the various doors.
+		*Adventurer tends to spawn farther from the village.
+
+	Combat:
+		*silver weapons can be crafted, but are very brittle
+		*bleed is much slower
+		*critical hits are less effective
+		*unarmed is viable, and if you have bracers you can parry
+		*warrior monks, an adventurer class, has the ability to reflect all projectiles
+		*fire is not as deadly
+
+	Spells:
+		*greater fireball has been removed
+		*arcane heal has been added to mages, to heal yourself and others
+		*runes can be found in loot boxes or while mining, these teach you various spells- and are used in enchanting and alchemy
+
+	Miracles
+		*miracles are based on your patron
+			**If you're familiar with the previous gods: Psydon encompasses many of them, Saradomin parallels Necra & Noc, Guthix parallels Dendor, and Zamorak is a pure evil force of nature.
+		*every monk has some form of healing
+		*healing spells cure disease
+
+	Disease:
+		*disease adds another layer of difficulty to survival.
+		*any wound that causes you to bleed adds to your disease rate.
+		*wounds can be treated through miracles, rest, or ashes.
+		*when enough disease builds up in your character, you'll contract a disease.
+		*these diseases have a major impact on your stats, varying depending on the disease.
+		*diseases are difficult to remove, requiring a blessing from a monk or a cure disease potion.
+
+	Mood:
+		*stress has a major impact on your character's ability to learn/fight
+		*character flaw will tank your mood, and cause heart attacks, if untended
+
+	Alchemy:
+		*quick guide in memory tab
+		*cauldrons are used to create various potions
+		*mortar and pestles can break down certain items
+		*many new potions, for boosting stats and curing disease, have been added
+
+	Enchanting:
+		*quick guide in memory tab
+		*Many steel and silver weapons can be enchanted.
+		*Enchantments provide various enhancements to your weapon.
+
+	Kingdoms:
+		*ported from civ13
+		*An icon appears above your character for easy identification
+
+	Antagonists:
+		*Villian selection removed, and is no longer random.
+		*The various antagonists can be accessed by setting your patron to "Zamorak"
+		*Skeletons added
+		*Goblins added
+
+	Patron:
+		*Loosely represents your character's alignment.
+		*Descriptions of all patron's appear upon selection.
+		*Many roles are dependant on your patron.
