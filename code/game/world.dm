@@ -339,7 +339,7 @@ GLOBAL_VAR(restart_counter)
 	s += "<center><a href=\"https://discord.gg/S3tSfjQVJx\">"
 #ifdef MATURESERVER
 	s += "<big><b>ROGUESCAPE</b></big></a><br>"
-	s += "<b>Fantasy Survival Roleplay</b></center><br>"
+	s += "<b>RogueWorld inspired survival.</b></center><br>"
 #else
 	s += "<big><b>RogueWorld</b></big></a><br>"
 	s += "<b>Fantasy Survival Game</b></center><br>"

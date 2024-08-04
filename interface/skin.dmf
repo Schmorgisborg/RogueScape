@@ -183,7 +183,7 @@ window "popupwindow"
 window "preferences_window"
 	elem "preferences_window"
 		type = MAIN
-		pos = 281,0
+		pos = 291,0
 		size = 700x530
 		anchor1 = -1,-1
 		anchor2 = -1,-1
@@ -195,13 +195,16 @@ window "preferences_window"
 		can-resize = false
 		icon = 'icons\\tg_32.png'
 		outer-size = 716x569
+		outer-pos = 291,0
 		inner-size = 700x530
+		inner-pos = 8,31
+		screen-size = 1920x1032
 	elem "preferences_browser"
 		type = BROWSER
 		pos = 0,0
 		size = 700x530
 		anchor1 = 0,0
-		anchor2 = 75,100
+		anchor2 = 100,100
 		background-color = none
 		saved-params = ""
 	elem "character_preview_map"

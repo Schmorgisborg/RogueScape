@@ -109,6 +109,7 @@
 
 	var/buried = FALSE // Whether the body is buried or not.
 	var/funeral = FALSE // Whether the body has received rites or not.
+	var/sinner = FALSE //Murder, cursed, etc.
 
 	var/cleric = null // Used for cleric_holder for priests
 

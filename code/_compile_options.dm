@@ -52,4 +52,4 @@
 #define UNIT_TESTS
 #endif
 
-#define TESTING
+//#define TESTING

@@ -3,22 +3,26 @@
 	set name = "Journey to the Underworld"
 	set category = "Afterlife"
 
-	if(world.time > mob.mob_timers["lastdied"] + RESPAWNTIME)
+	if(world.time > mob.mob_timers["lastdied"])//MACKRESPAWN    + RESPAWNTIME
 		switch(alert("Answer Saradomin's call?",,"Yes","No"))
 			if("Yes")
 				verbs -= /client/proc/descend
 				if(istype(mob, /mob/living/carbon/human))
 					var/mob/living/carbon/human/D = mob
-					if(D.buried && D.funeral)
+					if(D.sinner)
+						if(D.buried && D.funeral)
+							usr << "<span class='warning'>Hidden in dirt and blessings, you escape Saradomin's judgement.</span>"
+							D.returntolobby()
+							return
+						usr << "<span class='warning'>You have been judged for your actions.</span>"
+						for(var/obj/effect/landmark/underworld/A in world)
+							var/mob/living/carbon/spirit/O = new /mob/living/carbon/spirit(A.loc)
+							O.livingname = mob.name
+							O.ckey = ckey
+							O.PATRON = prefs.selected_patron
+							SSdroning.area_entered(get_area(O), O.client)
+					else
 						D.returntolobby()
-						return
-				for(var/obj/effect/landmark/underworld/A in world)
-					var/mob/living/carbon/spirit/O = new /mob/living/carbon/spirit(A.loc)
-					O.livingname = mob.name
-					O.ckey = ckey
-					O.PATRON = prefs.selected_patron
-					SSdroning.area_entered(get_area(O), O.client)
-				verbs -= /client/proc/descend
 			if("No")
 				usr << "You have second thoughts."
 	else

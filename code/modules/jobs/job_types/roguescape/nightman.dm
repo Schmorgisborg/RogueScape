@@ -11,7 +11,7 @@
 	"Dark Elf"
 	)
 
-	tutorial = "A low life, somehow already well established in Wyrld. He peddles drugs, harrasses folks, and there's darker stories yet."
+	tutorial = "A low life, somehow already well established in Wyrld."
 	allowed_patrons = list("Psydon", "Saradomin", "Guthix", "Zamorak")
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	outfit = /datum/outfit/job/roguetown/nightman

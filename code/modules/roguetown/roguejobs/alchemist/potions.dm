@@ -21,7 +21,6 @@
 	M.adjustOxyLoss(-1, 0)
 	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -5*REM)
 	M.adjustCloneLoss(-2*REM, 0)
-	M.visible_message("<span class='info'>HEALTH POT doing it's stuff (base meta)</span>")
 	..()
 	. = 1
 
@@ -39,7 +38,6 @@
 	M.adjustOxyLoss(-5, 0)
 	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -5*REM)
 	M.adjustCloneLoss(-5*REM, 0)
-	M.visible_message("<span class='info'>STRONG HEALTH POT doing it's stuff (2x meta)</span>")
 	..()
 	. = 1
 
