@@ -141,3 +141,7 @@ Many systems added/revamped:
 		*Loosely represents your character's alignment.
 		*Descriptions of all patron's appear upon selection.
 		*Many roles are dependant on your patron.
+
+	Drugs:
+		*Ozium, spice, etc. can all be crafted, with recipes listed under the memory tab.
+		*Most recipes involve using a millstone to break down sweetleaf/smokeweed.
