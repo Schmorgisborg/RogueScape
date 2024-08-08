@@ -53,7 +53,6 @@
 /datum/species/sgoblin/after_creation(mob/living/carbon/C)
 	..()
 	C.grant_language(/datum/language/hellspeak)
-	to_chat(C, "<span class='info'>I can speak Infernal with ,h before my speech.</span>")
 
 /datum/species/sgoblin/on_species_loss(mob/living/carbon/C)
 	. = ..()

@@ -40,6 +40,15 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 		H.change_stat("strength", 1)
 		H.change_stat("intelligence", -1)
+
+		var/datum/atom_hud/K = GLOB.huds[DATA_HUD_KINGDOM]
+		K.add_hud_to(H)
+		H.civilization = "Night Manor"
+		H.kingdom_perms = list(1,1,1,1)
+		king_hud_set_status()
+		add_basic_kingdom_verbs()
+		make_commander()
+		make_title_changer()
 	if(H.dna?.species)
 		if(H.dna.species.id == "human")
 			H.dna.species.soundpack_m = new /datum/voicepack/male/zeth()

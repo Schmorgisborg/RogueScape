@@ -3,9 +3,8 @@
 	var/leader = FALSE
 	var/title = ""
 	var/announcement_cooldown = 0
-	var/list/kingdom_perms = list(0,0,0,0)
+	var/list/kingdom_perms = list(0,0,0,0)	//leadership, announcements, titles, recruitment
 	var/list/left_kingdoms = list()
-	var/skip_kingdom_huds = TRUE
 
 /////////////   kingdom   /////////////
 

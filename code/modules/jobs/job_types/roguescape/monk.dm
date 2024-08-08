@@ -87,3 +87,10 @@
 		H.change_stat("intelligence", 1)
 		H.change_stat("endurance", rand(0,1))
 		H.change_stat("perception", rand(-1,0))
+
+		var/datum/atom_hud/K = GLOB.huds[DATA_HUD_KINGDOM]
+		K.add_hud_to(H)
+		H.civilization = "Psydonia"
+		H.kingdom_perms = list(0,0,0,1)
+		king_hud_set_status()
+		add_basic_kingdom_verbs()

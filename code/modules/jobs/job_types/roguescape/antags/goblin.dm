@@ -83,3 +83,10 @@
 			if(prob(20))
 				r_hand = /obj/item/rogueweapon/flail
 			l_hand = /obj/item/rogueweapon/shield/wood
+	if(H.mind)
+		var/datum/atom_hud/K = GLOB.huds[DATA_HUD_KINGDOM]
+		K.add_hud_to(H)
+		H.civilization = "Creachers"
+		H.kingdom_perms = list(0,0,0,0)
+		king_hud_set_status()
+		make_kingdomless()

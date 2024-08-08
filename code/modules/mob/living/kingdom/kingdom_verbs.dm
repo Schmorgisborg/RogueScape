@@ -28,6 +28,10 @@
 	verbs -= /mob/living/carbon/human/proc/Add_Title
 	verbs -= /mob/living/carbon/human/proc/Remove_Title
 
+/mob/living/carbon/human/proc/make_kingdomless()
+	verbs -= /mob/living/carbon/human/proc/create_kingdom
+	verbs -= /mob/proc/kingdom_list
+
 /mob/proc/kingdom_list()
 	set name = "Check Kingdom List"
 	set category = "Kingdom"
@@ -102,7 +106,7 @@
 		to_chat(usr, ("[src] accepts your offer. They are now part of [user.civilization]."))
 		to_chat(src, ("You accept [usr]'s offer. You are now part of [user.civilization]."))
 		src.abandon_kingdom_proc()
-		spawn(1)
+		spawn(5)
 			src.civilization = user.civilization
 			var/datum/atom_hud/H = GLOB.huds[DATA_HUD_KINGDOM]
 			H.add_hud_to(src)

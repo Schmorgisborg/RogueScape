@@ -40,6 +40,7 @@
 		for(var/obj/item/bodypart/B in H.bodyparts)
 			B.skeletonize()
 		H.remove_all_languages()
+		H.grant_language(/datum/language/hellspeak)
 		H.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
 		H.update_a_intents()
 		H.cmode_music = 'sound/music/combatbandit.ogg'
@@ -96,3 +97,10 @@
 	H.STASPD = rand(7,10)
 	H.STAINT = 1
 	H.STACON = 3
+	if(H.mind)
+		var/datum/atom_hud/K = GLOB.huds[DATA_HUD_KINGDOM]
+		K.add_hud_to(H)
+		H.civilization = "Creachers"
+		H.kingdom_perms = list(0,0,0,0)
+		king_hud_set_status()
+		make_kingdomless()

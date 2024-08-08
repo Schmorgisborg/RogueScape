@@ -64,6 +64,14 @@
 		H.change_stat("perception", 2)
 		H.change_stat("endurance", 2)
 		H.change_stat("speed", rand(1,2))
+
+		var/datum/atom_hud/K = GLOB.huds[DATA_HUD_KINGDOM]
+		K.add_hud_to(H)
+		H.civilization = "Psydonia"
+		H.kingdom_perms = list(0,0,0,1)
+		king_hud_set_status()
+		add_basic_kingdom_verbs()
+	
 	if(H.gender == FEMALE)
 		var/acceptable = list("Tomboy", "Bob", "Curly Short")
 		if(!(H.hairstyle in acceptable))
