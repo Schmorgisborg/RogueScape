@@ -525,19 +525,23 @@
 		alpha = 255
 		return
 	var/turf/T = get_turf(src)
-	if(!T)
-		alpha = 255
-		return
 	var/light_amount = T.get_lumcount()
 	var/used_time = 50
-	if(reset)
-		alpha = 255
 	if(mind)
 		used_time = max(used_time - (mind.get_skill_level(/datum/skill/misc/sneaking) * 8), 0)
-	if(light_amount < 0.15 && m_intent == MOVE_INTENT_SNEAK)
-		animate(src, alpha = 0,time = used_time)
+
+	if(sneaking)
+		if((stat > SOFT_CRIT) || IsSleeping() || (world.time < mob_timers[MT_FOUNDSNEAK] + 15 SECONDS) || !T || reset || (m_intent != MOVE_INTENT_SNEAK) || light_amount >= sneak_light)
+			used_time = round(clamp((50 - (used_time*1.75)), 5, 50),1)
+			animate(src, alpha = initial(alpha), time =	used_time) //sneak skill makes you reveal slower but not as drastic as disappearing speed
+			spawn(used_time) regenerate_icons()
+			sneaking = FALSE
+			return
 	else
-		alpha = 255
+		if(light_amount < sneak_light && m_intent == MOVE_INTENT_SNEAK)
+			animate(src, alpha = 0, time = used_time)
+			spawn(used_time + 5) regenerate_icons()
+			sneaking = TRUE
 	return
 
 

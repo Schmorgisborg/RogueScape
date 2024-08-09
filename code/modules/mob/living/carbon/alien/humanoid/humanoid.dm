@@ -15,7 +15,7 @@
 	var/pounce_cooldown_time = 30
 	var/custom_pixel_x_offset = 0 //for admin fuckery.
 	var/custom_pixel_y_offset = 0
-	var/sneaking = 0 //For sneaky-sneaky mode and appropriate slowdown
+	var/asneaking = 0 //For sneaky-sneaky mode and appropriate slowdown
 	var/drooling = 0 //For Neruotoxic spit overlays
 	deathsound = 'sound/blank.ogg'
 	bodyparts = list(/obj/item/bodypart/chest/alien, /obj/item/bodypart/head/alien, /obj/item/bodypart/l_arm/alien,
@@ -111,6 +111,6 @@
 
 
 /mob/living/carbon/alien/humanoid/check_breath(datum/gas_mixture/breath)
-	if(breath && breath.total_moles() > 0 && !sneaking)
+	if(breath && breath.total_moles() > 0 && !asneaking)
 		playsound(get_turf(src), pick('sound/blank.ogg'), 50, FALSE, -5)
 	..()

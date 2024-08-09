@@ -2459,7 +2459,6 @@
 #include "code\modules\mob\living\carbon\spirit\update_icons.dm"
 #include "code\modules\mob\living\kingdom\_kingdom.dm"
 #include "code\modules\mob\living\kingdom\kingdom.dm"
-#include "code\modules\mob\living\kingdom\kingdom_hud.dm"
 #include "code\modules\mob\living\kingdom\kingdom_verbs.dm"
 #include "code\modules\mob\living\kingdom\WWinput.dm"
 #include "code\modules\mob\living\silicon\damage_procs.dm"

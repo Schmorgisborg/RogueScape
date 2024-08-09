@@ -44,13 +44,13 @@
 				head = /obj/item/clothing/head/roguetown/wizhat
 				armor = /obj/item/clothing/suit/roguetown/shirt/robe/wizard
 				H.dna.species.soundpack_m = new /datum/voicepack/male/wizard()
-		
+
 		var/datum/atom_hud/K = GLOB.huds[DATA_HUD_KINGDOM]
 		K.add_hud_to(H)
 		H.civilization = "Psydonia"
 		H.kingdom_perms = list(0,1,0,1)
-		king_hud_set_status()
-		add_basic_kingdom_verbs()
+		H.king_hud_set_status()
+		H.add_basic_kingdom_verbs()
 
 	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)

@@ -40,6 +40,7 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 	..()
 	if(L)
 		var/mob/living/carbon/human/H = L
+		H.add_basic_kingdom_verbs()
 		H.advsetup = 1
 		H.invisibility = INVISIBILITY_MAXIMUM
 		H.become_blind("advsetup")

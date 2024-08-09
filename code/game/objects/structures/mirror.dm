@@ -71,7 +71,7 @@
 							should_update = TRUE
 					if("skin")
 						var/listy = H.dna.species.get_skin_list()
-						var/new_s_tone = input(user, "Choose your character's skin tone:", "Sun")  as null|anything in listy
+						var/new_s_tone = input(user, "Choose your character's skin tone:", "Flesh Gradient")  as null|anything in listy
 						if(new_s_tone)
 							H.skin_tone = listy[new_s_tone]
 							should_update = TRUE
@@ -81,7 +81,7 @@
 						for(var/datum/sprite_accessory/X in spec_detail)
 							detaillist += X.name
 						var/new_detail
-						new_detail = input(user, "Choose your character's detail:", "Make me unique")  as null|anything in detaillist //don't ask
+						new_detail = input(user, "Choose your character's detail:", "Character Preference")  as null|anything in detaillist //don't ask
 						if(new_detail)
 							H.detail = new_detail
 							should_update = TRUE

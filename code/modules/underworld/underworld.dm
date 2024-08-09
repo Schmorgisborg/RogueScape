@@ -3,35 +3,35 @@
 	set name = "Journey to the Underworld"
 	set category = "Afterlife"
 
-	if(world.time > mob.mob_timers["lastdied"])//MACKRESPAWN    + RESPAWNTIME
+	if(world.time > mob.mob_timers["lastdied"] + RESPAWNTIME)
 		switch(alert("Answer Saradomin's call?",,"Yes","No"))
 			if("Yes")
-				verbs -= /client/proc/descend
 				if(istype(mob, /mob/living/carbon/human))
 					var/mob/living/carbon/human/D = mob
 					if(D.sinner)
 						if(D.buried && D.funeral)
-							usr << "<span class='warning'>Hidden in dirt and blessings, you escape Saradomin's judgement.</span>"
+							to_chat(usr, "<span class='warning'>Hidden in dirt and blessings, you escape Saradomin's judgement.</span>")
 							D.returntolobby()
 							return
-						usr << "<span class='warning'>You have been judged for your actions.</span>"
+						to_chat(usr, "<span class='warning'>You have been judged for your actions.</span>")
 						for(var/obj/effect/landmark/underworld/A in world)
 							var/mob/living/carbon/spirit/O = new /mob/living/carbon/spirit(A.loc)
 							O.livingname = mob.name
 							O.ckey = ckey
 							O.PATRON = prefs.selected_patron
 							SSdroning.area_entered(get_area(O), O.client)
-					else
-						D.returntolobby()
+						return
+				to_chat(usr, "<span class='info'>Saradomin sends along your way.</span>")
+				returntolobby()
 			if("No")
-				usr << "You have second thoughts."
+				to_chat(usr, "You have second thoughts.")
 	else
 		var/ttime = round((mob.mob_timers["lastdied"] + RESPAWNTIME - world.time) / 10)
 		var/list/cling = list("My connection to the world is still too strong.",\
 		"I'm not ready to leave...", "I'm not ready to travel with Charon.",\
 		"Don't make me leave!", "No... Not yet!", "Please, don't make me go yet...",\
 		"The shores are calling me but I cannot go...","My soul isn't ready yet...")
-		usr << "<span class='warning'>[pick(cling)] ([ttime])</span>"
+		to_chat(usr, "<span class='warning'>[pick(cling)] ([ttime])</span>")
 
 /mob/verb/returntolobby()
 	set name = "{RETURN TO LOBBY}"
@@ -160,8 +160,6 @@
 	set_light(5, 30, LIGHT_COLOR_BLUE)
 
 /obj/structure/underworld/carriage/attack_hand(mob/living/carbon/spirit/user)
-	//TEST SERVER BYPASS
-	user.paid = "Yes"
 	if(user.paid)
 		switch(alert("Are you ready to be judged?",,"Yes","No"))
 			if("Yes")

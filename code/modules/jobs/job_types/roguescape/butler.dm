@@ -38,8 +38,8 @@
 		K.add_hud_to(H)
 		H.civilization = "Night Manor"
 		H.kingdom_perms = list(0,0,0,0)
-		king_hud_set_status()
-		add_basic_kingdom_verbs()
+		H.king_hud_set_status()
+		H.add_basic_kingdom_verbs()
 	belt = /obj/item/storage/belt/rogue/leather
 	if(prob(50))
 		beltl = /obj/item/flashlight/flare/torch/lantern

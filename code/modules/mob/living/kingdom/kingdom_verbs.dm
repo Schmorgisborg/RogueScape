@@ -15,10 +15,13 @@
 
 /mob/living/carbon/human/proc/make_commander()
 	verbs += /mob/living/carbon/proc/king_declare
+	verbs -= /mob/living/carbon/human/proc/create_kingdom
+	verbs -= /mob/living/carbon/human/proc/become_leader
 
 /mob/living/carbon/human/proc/remove_commander()
 	verbs -= /mob/living/carbon/proc/king_declare
-
+	verbs += /mob/living/carbon/human/proc/create_kingdom
+	verbs += /mob/living/carbon/human/proc/become_leader
 
 /mob/living/carbon/human/proc/make_title_changer()
 	verbs += /mob/living/carbon/human/proc/Add_Title
@@ -218,6 +221,10 @@
 	set name = "Kingdom Announcement"
 	set desc = "Announce to everyone in your kingdom."
 	if (stat != DEAD)
+		if(world.time < announcement_cooldown)
+			var/declaretimeout = (announcement_cooldown - world.time)/10	//time in seconds
+			to_chat(src, "<span class='danger'>You can't make an annoucement for [declaretimeout] seconds!</span>")
+			return
 		var/messaget = "Announcement"
 		var/message = input("Global message to send:", "IC Announcement", null, null)
 		if (message && message != "")
@@ -227,7 +234,7 @@
 			if (civilization == M.civilization && civilization != "none" && world.time > announcement_cooldown)
 				messaget = "[name] announces:"
 				to_chat(M, "<big><span class=notice><b>[messaget]</b></big><p style='text-indent: 50px'>[message]</p></span>", 2)
-		announcement_cooldown = world.time+1800//civ13f
+		announcement_cooldown = world.time+5 MINUTES//civ13f
 		log_admin("Kingdom Announcement: [key_name(usr)] - [messaget] : [message]")
 	else
 		to_chat(src, "<span class='danger'>You can't make an annoucement while you're dead!</span>")

@@ -26,6 +26,9 @@
 
 	var/mobility_flags = MOBILITY_FLAGS_DEFAULT
 
+	var/sneaking = FALSE	//Is mob sneaking?
+	var/sneak_light = 0.15	//Light level to disperse sneak invisibilit
+
 	var/resting = FALSE
 	var/wallpressed = FALSE
 

@@ -102,5 +102,5 @@
 		K.add_hud_to(H)
 		H.civilization = "Creachers"
 		H.kingdom_perms = list(0,0,0,0)
-		king_hud_set_status()
-		make_kingdomless()
+		H.king_hud_set_status()
+		H.make_kingdomless()

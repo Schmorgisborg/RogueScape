@@ -68,7 +68,7 @@
 				H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/heal/lesser)
 				H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/heal)
 				H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/revive)
-			if("Guthix")			
+			if("Guthix")
 				H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/blesscrop)
 				H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/beasttame)
 				H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/beastsummon)
@@ -92,5 +92,5 @@
 		K.add_hud_to(H)
 		H.civilization = "Psydonia"
 		H.kingdom_perms = list(0,0,0,1)
-		king_hud_set_status()
-		add_basic_kingdom_verbs()
+		H.king_hud_set_status()
+		H.add_basic_kingdom_verbs()

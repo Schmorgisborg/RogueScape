@@ -67,7 +67,7 @@
 		H.leader = TRUE
 		H.kingdom_perms = list(1,1,1,1)
 		GLOB.kingdomlist += newname
-		var/newnamev = list("[newname]" = list(H,choosesymbol,choosecolor1,choosecolor2))
+		var/newnamev = list("[newname]" = list(newname,choosesymbol,choosecolor1,choosecolor2,H))
 		GLOB.custom_civs += newnamev
 		king_hud_set_status()
 		to_chat(usr, "<big>You are now the king of the <b>[newname]</b> kingdom.</big>")
@@ -99,9 +99,9 @@
 	if (civilization == null || civilization == "none")
 		return FALSE
 	left_kingdoms += list(list(civilization,world.time))
-	if (GLOB.custom_civs[civilization][1] != null)
-		if (GLOB.custom_civs[civilization][1].real_name == real_name)
-			GLOB.custom_civs[civilization][1] = null
+	if (GLOB.custom_civs[civilization][5] != null)
+		if (GLOB.custom_civs[civilization][5].real_name == real_name)
+			GLOB.custom_civs[civilization][5] = null
 	civilization = "none"
 	var/datum/atom_hud/H = GLOB.huds[DATA_HUD_KINGDOM]
 	H.remove_hud_from(src)
@@ -129,12 +129,14 @@
 		to_chat(usr, "You are not part of any kingdom.")
 		return
 	else
-		if (GLOB.custom_civs[U.civilization][1] != null)
-			if (GLOB.custom_civs[U.civilization][1].real_name == U.real_name)
+		if (GLOB.custom_civs[U.civilization][5] != null)
+			if (GLOB.custom_civs[U.civilization][5].real_name == U.real_name)
 				var/list/closemobs = list("Cancel")
-				for (var/mob/living/carbon/human/M in range(4,loc))
+				for (var/mob/living/carbon/human/M in oview(4))
 					if (M.civilization == U.civilization)
 						closemobs += M
+				if(!closemobs)
+					return
 				var/choice2 = WWinput(usr, "Who to nominate as the new King?", "Kingdom Leadership", "Cancel", closemobs)
 				if (choice2 == "Cancel")
 					return
@@ -169,15 +171,15 @@
 		to_chat(usr, "You are not part of any kingdom.")
 		return
 	else
-		if (GLOB.custom_civs[U.civilization][1] != null)
+		if (GLOB.custom_civs[U.civilization][5] != null)
 			to_chat(usr, "<span class='warning'>There already is a King. They must transfer the nobility or be removed first.</span>")
 			return
-		else if (GLOB.custom_civs[U.civilization][1] == null)
-			GLOB.custom_civs[U.civilization][1] = U
+		else if (GLOB.custom_civs[U.civilization][5] == null)
+			GLOB.custom_civs[U.civilization][5] = U
 			visible_message("<big>[U] is now the King of [U.civilization]!</big>")
 			U.leader = TRUE
 			U.kingdom_perms = list(1,1,1,1)
-			U.make_title_changer()
+			make_title_changer()
 			make_commander()
 
 /mob/living/carbon/human/proc/Add_Title()
@@ -197,7 +199,7 @@
 
 			else
 				var/list/closemobs = list("Cancel")
-				for (var/mob/living/carbon/human/M in range(4,loc))
+				for (var/mob/living/carbon/human/M in oview(4))
 					if (M.civilization == H.civilization)
 						closemobs += M
 				var/choice2 = WWinput(usr, "Who to give a title to?", "Kingdom Title", "Cancel", closemobs)
@@ -210,7 +212,6 @@
 						return
 					else
 						U.title = inp
-						U.name = "[U.title] [U.name]"
 						to_chat(src, "[src] is now a [U.title].")
 						return
 
@@ -232,7 +233,7 @@
 
 			else
 				var/list/closemobs = list("Cancel")
-				for (var/mob/living/carbon/human/M in range(4,loc))
+				for (var/mob/living/carbon/human/M in oview(4))
 					if (M.civilization == H.civilization && M.title != "")
 						closemobs += M
 				var/choice2 = WWinput(usr, "Who to remove a title from?", "Kingdom Title", "Cancel", closemobs)

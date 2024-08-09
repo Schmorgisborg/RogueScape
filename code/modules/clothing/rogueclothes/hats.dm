@@ -498,6 +498,7 @@
 	anvilrepair = null
 	sewrepair = TRUE
 	blocksound = SOFTHIT
+	smeltresult = null
 
 /obj/item/clothing/head/roguetown/wizhat
 	name = "wizard hat"
