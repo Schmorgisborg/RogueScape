@@ -2,9 +2,9 @@
 #define ALLOWPLAY
 
 //Mack, respawn/restart vote timer
-#define RESPAWNTIME (1 SECONDS)
-#define INITIAL_ROUND_TIMER (4800 MINUTES)
-#define ROUND_EXTENSION_TIME (120 MINUTES)
+#define RESPAWNTIME (30 SECONDS)
+#define INITIAL_ROUND_TIMER (48 HOURS)
+#define ROUND_EXTENSION_TIME (1 HOURS)
 
 //#define MODE_RESTART
 //comment out if you want to restart the server instead of shutting down
@@ -52,4 +52,4 @@
 #define UNIT_TESTS
 #endif
 
-#define TESTING
+//#define TESTING

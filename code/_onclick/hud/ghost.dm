@@ -29,7 +29,8 @@
 	nomouseover = FALSE
 
 /obj/screen/ghost/orbit/rogue/Click(location, control, params)
-
+	var/client/G = usr
+	G.descend()
 
 /obj/screen/ghost/reenter_corpse
 	name = "Reenter corpse"

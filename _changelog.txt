@@ -43,8 +43,7 @@ got tired of updating changlog
 Added skeletons
 Fixed mood
 
-At this point, my changelogs were mostly kept with github.
-Past here is what I'm adding as of today.
+Previously I haven't documented all of my changes except in very rough notes.
 I began on this 4/1, when the code was initially leaked.
 Further down is an overview of current changes from what the game was during Ray's hosting.
 
@@ -62,7 +61,7 @@ Gamemode/Map redone:
 			*Venemous beespiders can spawn in an ambush here.
 			*South side of the map.
 		Mount Decapitation:
-			*Nobody spawns here, and it's easy to get isolated and lost here.
+			*Skeletons spawns here, and it's easy to get isolated and lost here.
 			*Higher ambush chance than other places.
 			*North side of the map.
 		Nightman's Manor:
@@ -70,7 +69,7 @@ Gamemode/Map redone:
 			*Far North side of the map.
 		Wyrld:
 			*Adventurers and pilgrims have a high chance to spawn here.
-			*Dangerous, full of traps and monsters.
+			*Dangerous; full of dungeons, traps, and monsters.
 			*Many treasures await the player.
 			*Central to the other areas.
 
@@ -79,12 +78,10 @@ Many systems added/revamped:
 		*crafting recipe added to memory tab of lobby
 		*quick guides for alchemy and enchanting added to memory tab too
 		*very basic lore, allowing the players to mold the world to their desire
-
 	Roles:
 		*No role is "essential" for gameplay purposes.
 		*The village is unowned, and keys can be found for the various doors.
 		*Adventurer tends to spawn farther from the village.
-
 	Combat:
 		*silver weapons can be crafted, but are very brittle
 		*bleed is much slower
@@ -92,18 +89,15 @@ Many systems added/revamped:
 		*unarmed is viable, and if you have bracers you can parry
 		*warrior monks, an adventurer class, has the ability to reflect all projectiles
 		*fire is not as deadly
-
 	Spells:
 		*greater fireball has been removed
 		*arcane heal has been added to mages, to heal yourself and others
 		*runes can be found in loot boxes or while mining, these teach you various spells- and are used in enchanting and alchemy
-
 	Miracles
 		*miracles are based on your patron
 			**If you're familiar with the previous gods: Psydon encompasses many of them, Saradomin parallels Necra & Noc, Guthix parallels Dendor, and Zamorak is a pure evil force of nature.
 		*every monk has some form of healing
 		*healing spells cure disease
-
 	Disease:
 		*disease adds another layer of difficulty to survival.
 		*any wound that causes you to bleed adds to your disease rate.
@@ -111,7 +105,6 @@ Many systems added/revamped:
 		*when enough disease builds up in your character, you'll contract a disease.
 		*these diseases have a major impact on your stats, varying depending on the disease.
 		*diseases are difficult to remove, requiring a blessing from a monk or a cure disease potion.
-
 	Mood:
 		*stress has a major impact on your character's ability to learn/fight
 		*character flaw will tank your mood, and cause heart attacks, if untended
@@ -121,27 +114,29 @@ Many systems added/revamped:
 		*cauldrons are used to create various potions
 		*mortar and pestles can break down certain items
 		*many new potions, for boosting stats and curing disease, have been added
-
 	Enchanting:
 		*quick guide in memory tab
 		*Many steel and silver weapons can be enchanted.
 		*Enchantments provide various enhancements to your weapon.
-
 	Kingdoms:
 		*ported from civ13
 		*An icon appears above your character for easy identification
-
+		*Locks and keys can be smithed and added to doors, to encourage player colonies.
 	Antagonists:
 		*Villian selection removed, and is no longer random.
 		*The various antagonists can be accessed by setting your patron to "Zamorak"
 		*Skeletons added
 		*Goblins added
-
 	Patron:
 		*Loosely represents your character's alignment.
 		*Descriptions of all patron's appear upon selection.
 		*Many roles are dependant on your patron.
-
 	Drugs:
 		*Ozium, spice, etc. can all be crafted, with recipes listed under the memory tab.
 		*Most recipes involve using a millstone to break down sweetleaf/smokeweed.
+
+I have doubtlessly forgot or purposefully failed to mention many changes.
+
+For now, I'm in the long process of cleaning the game up and polishing this as a foundation.
+During that, I will be adding the hotfixes and QOL updates from other codebases.
+In the future, I will add new Zamorak (antag) classes, and then gamemodes.

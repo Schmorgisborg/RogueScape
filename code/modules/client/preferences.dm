@@ -1824,9 +1824,13 @@ Slots: [job.spawn_positions]</span>
 							features["mcolor"] = pref_species.default_color
 						real_name = pref_species.random_name(gender,1)
 						ResetJobs()
+						if(result == ("Goblin"||"Dark Elf"))
+							selected_patron = new /datum/patrongods/zamorak()
+						else
+							selected_patron = new /datum/patrongods/psydon()
 						if(pref_species.desc)
 							to_chat(user, "[pref_species.desc]")
-						to_chat(user, "<font color='red'>Classes reset.</font>")
+						to_chat(user, "<font color='red'>Classes and patron reset.</font>")
 						random_character(gender)
 						accessory = "Nothing"
 						if(age == AGE_YOUNG)

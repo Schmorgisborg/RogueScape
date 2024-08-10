@@ -78,6 +78,7 @@
 
 
 /obj/item/clothing
+	..()
 	var/enchantable = FALSE
 	var/enchanted
 	var/enchantment
@@ -90,7 +91,7 @@
 	var/temp_icon
 
 /obj/item/clothing/attack_right(mob/user)
-	if(enchantable && !enchanted)
+	if(enchantable || !enchanted)
 		..()
 		return
 	if(loc != user)

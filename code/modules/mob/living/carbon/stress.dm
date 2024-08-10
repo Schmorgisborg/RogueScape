@@ -255,7 +255,7 @@
 	desc = "<span class='red'>I've failed to craft something.</span>"
 */
 /datum/stressevent/miasmagas
-	timer = 10 SECONDS
+	timer = 2 MINUTES
 	stressadd = 6
 	desc = "<span class='red'>Smells like death here.</span>"
 
@@ -270,7 +270,7 @@
 	desc = "<span class='red'>I'm hungry.</span>"
 
 /datum/stressevent/starving
-	timer = 20 MINUTES
+	timer = 60 MINUTES
 	stressadd = 16
 	desc = "<span class='red'>I'm starving.</span>"
 
@@ -285,7 +285,7 @@
 	desc = "<span class='red'>I'm thirsty.</span>"
 
 /datum/stressevent/parched
-	timer = 20 MINUTES
+	timer = 60 MINUTES
 	stressadd = 15
 	desc = "<span class='red'>I'm going to die of thirst.</span>"
 
@@ -414,9 +414,9 @@
 	desc = "<span class='red'>They are plotting against me in evil tongues..</span>"
 
 /datum/stressevent/coldhead
-	timer = 60 SECONDS
+	timer = 120 SECONDS
 	stressadd = 2
-	desc = "<span class='red'>My head is cold and ugly.</span>"
+	desc = "<span class='red'>I'm cold and wet.</span>"
 
 /datum/stressevent/sleeptime
 	stressadd = 4

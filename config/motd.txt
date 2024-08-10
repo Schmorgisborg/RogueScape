@@ -1,6 +1,7 @@
 <center>* * *</center>
 <center>* RogueWorld inspired survival. *</center>
-<center>*  RogueScape Community Hub: <a href='?src=\ref[src];action=discord'>Discord</a>  *</center>
-<center>* Adventurer is for experienced individuals. *</center>\
+<center>* RogueScape Community <a href='?src=\ref[src];action=discord'>Discord</a>  *</center>
+<center>* Adventurer is for experienced individuals. *</center>
 <center>* Guard, artificer, monk are much easier. *</center>
+<center>* Look in your memory tab and use CTRL+F for crafting recipes. *</center>
 <center>* * *</center>
